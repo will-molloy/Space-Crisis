@@ -91,7 +91,7 @@ namespace UnityStandardAssets._2D
             RaycastHit2D hit;
 
             hit = Physics2D.Raycast(transform.position, Vector2.down, 1.8f, m_WhatIsGround);
-            Debug.Log("Hit " + hit);
+            //Debug.Log("Hit " + hit);
 
             //Debug.DrawRay(transform.position, Vector2.down, Color.green);
 
@@ -117,7 +117,7 @@ namespace UnityStandardAssets._2D
 
         private void updateGroundState(bool b)
         {
-            Debug.Log(b);
+            //Debug.Log(b);
             m_Grounded = b;
             m_Anim.SetBool("Ground", b);
         }

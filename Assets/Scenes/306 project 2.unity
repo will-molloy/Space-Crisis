@@ -2161,6 +2161,34 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11407310, guid: fe7717b32e6870c42b2361f5f20c3006, type: 2}
+      propertyPath: m_WhatIsGround.m_Bits
+      value: 4096
+      objectReference: {fileID: 0}
+    - target: {fileID: 11407310, guid: fe7717b32e6870c42b2361f5f20c3006, type: 2}
+      propertyPath: m_AirControl
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11407310, guid: fe7717b32e6870c42b2361f5f20c3006, type: 2}
+      propertyPath: m_JumpForce
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5813878, guid: fe7717b32e6870c42b2361f5f20c3006, type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 8705a8b11ebe34d4c923980e723498ac, type: 2}
+    - target: {fileID: 6125962, guid: fe7717b32e6870c42b2361f5f20c3006, type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 8705a8b11ebe34d4c923980e723498ac, type: 2}
+    - target: {fileID: 122976, guid: fe7717b32e6870c42b2361f5f20c3006, type: 2}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 9542996, guid: fe7717b32e6870c42b2361f5f20c3006, type: 2}
+      propertyPath: m_UpdateMode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fe7717b32e6870c42b2361f5f20c3006, type: 2}
   m_IsPrefabParent: 0
@@ -2243,7 +2271,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1401216451}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 8705a8b11ebe34d4c923980e723498ac, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
