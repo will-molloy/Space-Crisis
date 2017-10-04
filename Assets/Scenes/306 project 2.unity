@@ -368,6 +368,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 277397827}
   - 61: {fileID: 277397826}
+  - 251: {fileID: 277397828}
   m_Layer: 12
   m_Name: Platforme2
   m_TagString: Untagged
@@ -385,7 +386,7 @@ BoxCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_Offset: {x: 3.35, y: -0.99}
   serializedVersion: 2
   m_Size: {x: 14.67, y: 1}
@@ -405,6 +406,23 @@ Transform:
   - {fileID: 1823824939}
   m_Father: {fileID: 0}
   m_RootOrder: 10
+--- !u!251 &277397828
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 277397825}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseOneWay: 0
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &318509070
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,6 +620,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 588134147}
   - 61: {fileID: 588134146}
+  - 251: {fileID: 588134148}
   m_Layer: 12
   m_Name: Platforme1
   m_TagString: Untagged
@@ -619,7 +638,7 @@ BoxCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_Offset: {x: 3.35, y: -0.99}
   serializedVersion: 2
   m_Size: {x: 14.67, y: 1}
@@ -639,6 +658,23 @@ Transform:
   - {fileID: 1876675408}
   m_Father: {fileID: 0}
   m_RootOrder: 9
+--- !u!251 &588134148
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 588134145}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseOneWay: 0
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &626874941
 GameObject:
   m_ObjectHideFlags: 0
@@ -1143,7 +1179,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 764772134}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -7.5}
+  m_LocalPosition: {x: 0, y: 0.5, z: -7.5}
   m_LocalScale: {x: 0.8333333, y: 0.8333333, z: 0.8333333}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -1557,6 +1593,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1045191211}
   - 61: {fileID: 1045191210}
+  - 251: {fileID: 1045191212}
   m_Layer: 12
   m_Name: Platforme4
   m_TagString: Untagged
@@ -1574,7 +1611,7 @@ BoxCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_Offset: {x: 4.98, y: -1}
   serializedVersion: 2
   m_Size: {x: 17.8, y: 1}
@@ -1594,6 +1631,23 @@ Transform:
   - {fileID: 1330037242}
   m_Father: {fileID: 0}
   m_RootOrder: 12
+--- !u!251 &1045191212
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1045191209}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseOneWay: 0
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &1107521625
 GameObject:
   m_ObjectHideFlags: 0
@@ -2171,7 +2225,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11407310, guid: fe7717b32e6870c42b2361f5f20c3006, type: 2}
       propertyPath: m_JumpForce
-      value: 1000
+      value: 800
       objectReference: {fileID: 0}
     - target: {fileID: 5813878, guid: fe7717b32e6870c42b2361f5f20c3006, type: 2}
       propertyPath: m_Material
@@ -2188,6 +2242,10 @@ Prefab:
     - target: {fileID: 9542996, guid: fe7717b32e6870c42b2361f5f20c3006, type: 2}
       propertyPath: m_UpdateMode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11407310, guid: fe7717b32e6870c42b2361f5f20c3006, type: 2}
+      propertyPath: m_MaxSpeed
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fe7717b32e6870c42b2361f5f20c3006, type: 2}
@@ -2820,6 +2878,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1808555401}
   - 61: {fileID: 1808555400}
+  - 251: {fileID: 1808555402}
   m_Layer: 12
   m_Name: Platforme3
   m_TagString: Untagged
@@ -2837,7 +2896,7 @@ BoxCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_Offset: {x: 6.37, y: -0.99}
   serializedVersion: 2
   m_Size: {x: 14.9, y: 1}
@@ -2857,6 +2916,23 @@ Transform:
   - {fileID: 318509071}
   m_Father: {fileID: 0}
   m_RootOrder: 11
+--- !u!251 &1808555402
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1808555399}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseOneWay: 0
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &1823824938
 GameObject:
   m_ObjectHideFlags: 0
