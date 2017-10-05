@@ -33,7 +33,10 @@ public class DialogueManager : MonoBehaviour {
             diaglogActive = false;
             currentLine = 0;
         }
-        dText.text = dialogLines[currentLine];
+
+        if (dialogLines.Length > 0) {
+            dText.text = dialogLines[currentLine];
+        }
     }
 
     public void showBox(string source, string dialogue) {

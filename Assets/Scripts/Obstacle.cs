@@ -14,7 +14,6 @@ public class Obstacle : MonoBehaviour {
 	void Update(){
 		if(attacked){
 			life.TakeDamage ();
-			life.UpdateHearts();
 		}
 		attacked = false;
 	}
@@ -23,7 +22,6 @@ public class Obstacle : MonoBehaviour {
 		if (other.transform.parent.gameObject.CompareTag ("Team")) {
 			life = other.transform.parent.gameObject.GetComponent<LifeSystem>();
 			life.TakeDamage ();
-			life.UpdateHearts();
 			attacked = true;
 		}
 	}
