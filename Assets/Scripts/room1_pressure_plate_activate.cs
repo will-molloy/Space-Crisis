@@ -18,7 +18,7 @@ public class room1_pressure_plate_activate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        Debug.Log("Colliders " + colliders.Count);
     }
 
     void OnCollisionEnter2D(Collision2D col)
