@@ -25,7 +25,7 @@ public class SimplePlatformController : MonoBehaviour {
 	void Update () {
 		grounded = Physics2D.Linecast (transform.position, groundCheck.position, 1 << LayerMask.NameToLayer ("Ground")); //Check if grounded. Linecast checks if it hits anything and returns a boolean
 		//1 << LayerMask.NameToLayer ("Ground") is saying that the only layer we are casting against here is the ground layer
-		if (Input.GetButtonDown ("Jump") && grounded) {
+		if (Input.GetKeyDown (KeyCode.UpArrow) && grounded) {
 			jump = true;
 		}
 	}
