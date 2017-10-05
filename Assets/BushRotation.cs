@@ -31,7 +31,7 @@ public class BushRotation : MonoBehaviour
         {
             transform.Rotate(0, 0, translation);
         }
-        else if (!activated && getRotation() >= LOWER_ANGLE && transform.rotation.eulerAngles.z <= UPPER_ANGLE + TOLERANCE)
+        else if (!activated && getRotation() >= LOWER_ANGLE)
         {
             transform.Rotate(0, 0, -1 * translation);
         }
