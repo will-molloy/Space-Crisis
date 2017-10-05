@@ -14,14 +14,17 @@ public class Obstacle : MonoBehaviour {
 	void Update(){
 		if(attacked){
 			life.TakeDamage ();
+			life.UpdateHearts();
 		}
 		attacked = false;
 	}
 
 	void OnTriggerEnter2D (Collider2D other){
-		if (other.gameObject.CompareTag ("Player")) {
-			life = other.gameObject.GetComponent<LifeSystem>();
-
+		if (other.transform.parent.gameObject.CompareTag ("Team")) {
+			life = other.transform.parent.gameObject.GetComponent<LifeSystem>();
+			life.TakeDamage ();
+			life.UpdateHearts();
+			attacked = true;
 		}
 	}
 }
