@@ -9,9 +9,12 @@ public class LifeSystem : MonoBehaviour {
 	public int maxHeart = 3;
 	public int healthPerHeart = 1;
 
+	bool isDead = false;
+
 	public Image[] imgs;
 	public Sprite[] healthSprites;
 
+	Animator anim;  
 
 	void Start () {
 		CheckHealthAmount();
@@ -50,10 +53,18 @@ public class LifeSystem : MonoBehaviour {
 		}
 	}
 
-	public void TakeDamage(int amount){
-		currentHearts += amount;
+	public void TakeDamage(){
+		currentHearts -=1;
 		currentHearts = Mathf.Clamp (currentHearts, 0, startHearts * healthPerHeart);
 		UpdateHearts ();
 
+		if (currentHearts == 0) {
+			death ();
+		}
+
+	}
+
+	void death(){
+		isDead = true;
 	}
 }
