@@ -64,6 +64,11 @@ namespace UnityStandardAssets._2D
             m_Anim.SetFloat("VelocityVertical", m_Rigidbody2D.velocity.y);
         }
 
+		void onCollisionEnter(Collision c) {
+			if (c.gameObject.tag == "Player")
+				Physics.IgnoreCollision (c.gameObject.GetComponent<Collider>(), c.collider);
+		}
+
         void OnCollisionStay2D(Collision2D collider)
         {
             /*
