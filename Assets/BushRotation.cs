@@ -10,7 +10,7 @@ public class BushRotation : MonoBehaviour
     private const int TOLERANCE = 5;
     private const int ROTATION_SPEED = 300;
     private const int UPPER_ANGLE = 230;
-    private const int LOWER_ANGLE = 140;
+    private const int LOWER_ANGLE = 130;
 
     // Use this for initialization
     void Start()
