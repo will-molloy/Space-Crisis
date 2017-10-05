@@ -64,6 +64,11 @@ namespace UnityStandardAssets._2D
             m_Anim.SetFloat("VelocityVertical", m_Rigidbody2D.velocity.y);
         }
 
+		void onCollisionEnter(Collision c) {
+			if (c.gameObject.tag == "Player")
+				Physics.IgnoreCollision (c.gameObject.GetComponent<Collider>(), c.collider);
+		}
+
         void OnCollisionStay2D(Collision2D collider)
         {
             /*
@@ -91,7 +96,7 @@ namespace UnityStandardAssets._2D
             RaycastHit2D hit;
 
             hit = Physics2D.Raycast(transform.position, Vector2.down, 1.8f, m_WhatIsGround);
-            Debug.Log("Hit " + hit);
+            //Debug.Log("Hit " + hit);
 
             //Debug.DrawRay(transform.position, Vector2.down, Color.green);
 
@@ -117,7 +122,7 @@ namespace UnityStandardAssets._2D
 
         private void updateGroundState(bool b)
         {
-            Debug.Log(b);
+            //Debug.Log(b);
             m_Grounded = b;
             m_Anim.SetBool("Ground", b);
         }
