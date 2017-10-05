@@ -19,6 +19,13 @@ public class room1_pressure_plate_activate : MonoBehaviour
     void Update()
     {
         Debug.Log("Colliders " + colliders.Count);
+        if (colliders.Count == 0)
+        {
+            bush.setActivation(false);
+        } else
+        {
+            bush.setActivation(true);
+        }
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -26,7 +33,6 @@ public class room1_pressure_plate_activate : MonoBehaviour
         if (col.gameObject.tag.Equals("Player") || col.gameObject.name.Equals("Box"))
         {
             colliders.Add(col.gameObject);
-            bush.setActivation(true);
         }
 
     }
@@ -36,10 +42,6 @@ public class room1_pressure_plate_activate : MonoBehaviour
         if (col.gameObject.tag.Equals("Player") || col.gameObject.name.Equals("Box"))
         {
             colliders.Remove(col.gameObject);
-            if (colliders.Count == 0)
-            {
-                bush.setActivation(false);
-            }
         }
     }
 
