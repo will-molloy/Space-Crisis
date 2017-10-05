@@ -21,6 +21,10 @@ public class LifeSystem : MonoBehaviour {
 		UpdateHearts ();
 	}
 
+	void Update(){
+
+	}
+
 	void CheckHealthAmount () {
 		for (int i = 0; i < maxHeart; i++) {
 			if (startHearts <= i) {
@@ -58,13 +62,7 @@ public class LifeSystem : MonoBehaviour {
 		currentHearts = Mathf.Clamp (currentHearts, 0, startHearts * healthPerHeart);
 		UpdateHearts ();
 
-		if (currentHearts == 0) {
-			death ();
-		}
-
 	}
 
-	void death(){
-		isDead = true;
-	}
+
 }
