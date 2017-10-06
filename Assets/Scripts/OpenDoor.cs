@@ -22,7 +22,7 @@ public class OpenDoor : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                Application.LoadLevel(1);
+                Application.LoadLevel(2);
             }
         }
     }
