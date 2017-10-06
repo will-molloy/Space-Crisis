@@ -43,8 +43,6 @@ namespace UnityStandardAssets._2D
         private void FixedUpdate()
         {
             bool hit = Physics2D.OverlapCircle(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
-            Debug.Log(m_GroundCheck.position);
-            Debug.Log(m_WhatIsGround.value);
             updateGroundState(hit);
 
             // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground

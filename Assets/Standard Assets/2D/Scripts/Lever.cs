@@ -9,7 +9,7 @@ public class Lever : MonoBehaviour {
     private bool isRunning = false;
 
     public int timeInFrames;
-    public List<GameObject> thingsToConrol = new List<GameObject>();
+    public List<PlateScript> thingsToConrol = new List<PlateScript>();
 
     private bool facing = false;
    
@@ -63,9 +63,11 @@ public class Lever : MonoBehaviour {
         isRunning = true;
         remainingFrames = timeInFrames;
  
-        foreach(GameObject obj in thingsToConrol)
+        foreach(PlateScript obj in thingsToConrol)
         {
-            
+            obj.setAnimationTime(this.timeInFrames);
+            obj.start();
+
         }
 
     }
