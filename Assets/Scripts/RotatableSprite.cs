@@ -21,7 +21,7 @@ public class RotatableSprite : MonoBehaviour
     void Update()
     {
         translation = Time.deltaTime * rotationSpeed;
-        if (activated && transform.rotation.eulerAngles.z <= upperAngle)
+        if (activated && getRotation() <= upperAngle)
         {
             transform.Rotate(0, 0, translation);
         }
