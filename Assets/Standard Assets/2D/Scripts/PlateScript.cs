@@ -6,7 +6,6 @@ public class PlateScript : MonoBehaviour {
     public int translationAmount;
     public Vector3 translationDirection;
     private int animationTimeInFrames;
-    private bool isAtStart = true;
     private bool isRunning = false;
 
     public void setAnimationTime(int t)
@@ -14,8 +13,16 @@ public class PlateScript : MonoBehaviour {
         animationTimeInFrames = t;
     }
 
+    public void reverseDirection()
+    {
+        Debug.Log("REV DIR");
+        translationDirection.x = -translationDirection.x;
+        translationDirection.y = -translationDirection.y;
+    }
+
     public void start()
     {
+        Debug.Log(translationDirection);
         isRunning = true;
     }
 
@@ -31,8 +38,9 @@ public class PlateScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update() {
-        Debug.Log(isRunning);
+        //Debug.Log(isRunning);
         if (!isRunning) return;
-        transform.Translate(translationDirection * (1f / animationTimeInFrames));
+        //transform.position = Vector3.Lerp(transform.position, translationDirection, 300 * Time.deltaTime);
+        transform.Translate(translationDirection * ((float)translationAmount / animationTimeInFrames));
     }
 }

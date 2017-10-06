@@ -382,6 +382,24 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3f10dff5418bf174f911d795f5a08e98, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &143573469 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 105544, guid: 76880895459a25043a6da71895dca5ef, type: 2}
+  m_PrefabInternal: {fileID: 1169692518}
+--- !u!114 &143573471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 143573469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3d7b34a3bb2d4e4b926e7e729d3d410, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpKey: Jump2
+  horizontalKey: Horizontal2
+  ctrlKey: 0
 --- !u!1 &231462600
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,6 +1011,14 @@ Prefab:
     - target: {fileID: 11420440, guid: 07c568b41672352488337e3d3bdfd93d, type: 2}
       propertyPath: m_MaxSpeed
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 11456570, guid: 07c568b41672352488337e3d3bdfd93d, type: 2}
+      propertyPath: jumpKey
+      value: Jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 11456570, guid: 07c568b41672352488337e3d3bdfd93d, type: 2}
+      propertyPath: horizontalKey
+      value: Horizontal
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11447900, guid: 07c568b41672352488337e3d3bdfd93d, type: 2}
@@ -2659,7 +2685,8 @@ Prefab:
       propertyPath: m_AirControl
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11430702, guid: 76880895459a25043a6da71895dca5ef, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 76880895459a25043a6da71895dca5ef, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1199420029
