@@ -8,7 +8,8 @@ public class LifeSystem : MonoBehaviour {
 	public int currentHearts = 3;
 	public int maxHeart = 3;
 	public int healthPerHeart = 1;
-
+	GameObject[] players;
+	GameObject[] spawnPoints;
 	bool isDead = false;
 
 	public Image[] imgs;
@@ -19,6 +20,8 @@ public class LifeSystem : MonoBehaviour {
 	void Start () {
 		CheckHealthAmount();
 		UpdateHearts ();
+		players = GameObject.FindGameObjectsWithTag ("Player");
+		spawnPoints = GameObject.FindGameObjectsWithTag ("Position");
 	}
 
 	void Update(){
@@ -35,7 +38,7 @@ public class LifeSystem : MonoBehaviour {
 		}
 	}
 
-	void UpdateHearts(){
+	public void UpdateHearts(){
 		bool empty = false;
 		int i = 0;
 
@@ -62,7 +65,12 @@ public class LifeSystem : MonoBehaviour {
 		currentHearts = Mathf.Clamp (currentHearts, 0, startHearts * healthPerHeart);
 		UpdateHearts ();
 
+		if (currentHearts == 0) {
+			//Game Over Screen to be Implemented...
+		} else {
+			for (int i = 0; i < 2; i++) {
+				players[i].transform.position = spawnPoints[i].transform.position;
+			}
+		}
 	}
-
-
 }
