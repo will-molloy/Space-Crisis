@@ -1,0 +1,143 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &-1445438656
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 412540}
+  m_Layer: 0
+  m_Name: Water2D_Edged
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &412540
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: -1445438656}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 0}
+  m_IsPrefabParent: 1
+--- !u!114 &1030212518
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d308ec24a253f046918f7dc6165e27b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drawDebugShapes: 1
+  size: {x: 21, y: 3}
+  segments: 14
+  softness: 0
+  speedMultiplier: 2.2
+  accelerationMultiplier: 2.9
+  waveHeight: 0.35
+  randomness: 0.716
+  vertexCount: 15
+  softVertexCount: 15
+  softFacesPerSegment: 1
+  softSegments: 14
+  lowerLimit: -1
+  upperLimit: 1
+  vertices:
+  - {x: -10.5, y: 1.5, z: 0}
+  - {x: -10.5, y: -1.5, z: 0}
+  - {x: -9, y: 1.5, z: 0}
+  - {x: -9, y: -1.5, z: 0}
+  - {x: -7.5, y: 1.5, z: 0}
+  - {x: -7.5, y: -1.5, z: 0}
+  - {x: -6, y: 1.5, z: 0}
+  - {x: -6, y: -1.5, z: 0}
+  - {x: -4.5, y: 1.5, z: 0}
+  - {x: -4.5, y: -1.5, z: 0}
+  - {x: -3, y: 1.5, z: 0}
+  - {x: -3, y: -1.5, z: 0}
+  - {x: -1.5, y: 1.5, z: 0}
+  - {x: -1.5, y: -1.5, z: 0}
+  - {x: 0, y: 1.5, z: 0}
+  - {x: 0, y: -1.5, z: 0}
+  - {x: 1.5, y: 1.5, z: 0}
+  - {x: 1.5, y: -1.5, z: 0}
+  - {x: 3, y: 1.5, z: 0}
+  - {x: 3, y: -1.5, z: 0}
+  - {x: 4.5, y: 1.5, z: 0}
+  - {x: 4.5, y: -1.5, z: 0}
+  - {x: 6, y: 1.5, z: 0}
+  - {x: 6, y: -1.5, z: 0}
+  - {x: 7.5, y: 1.5, z: 0}
+  - {x: 7.5, y: -1.5, z: 0}
+  - {x: 9, y: 1.5, z: 0}
+  - {x: 9, y: -1.5, z: 0}
+  - {x: 10.5, y: 1.5, z: 0}
+  - {x: 10.5, y: -1.5, z: 0}
+  vertexTransforms:
+  - position: 1.5
+    velocity: 0.7023921
+    acceleration: 1.4270382
+  - position: 1.5
+    velocity: 0.5377787
+    acceleration: -0.39695522
+  - position: 1.5
+    velocity: 0.56379515
+    acceleration: -1.7157226
+  - position: 1.5
+    velocity: 0.90637285
+    acceleration: -1.6504517
+  - position: 1.5
+    velocity: 0.6083034
+    acceleration: -1.4202332
+  - position: 1.5
+    velocity: -0.42719772
+    acceleration: -1.6561992
+  - position: 1.5
+    velocity: -0.65997803
+    acceleration: -1.0571966
+  - position: 1.5
+    velocity: -0.21522646
+    acceleration: 1.555459
+  - position: 1.5
+    velocity: 0.44820055
+    acceleration: -1.4130332
+  - position: 1.5
+    velocity: 0.7940164
+    acceleration: -0.846337
+  - position: 1.5
+    velocity: 0.32600257
+    acceleration: 0.4364339
+  - position: 1.5
+    velocity: -0.17813255
+    acceleration: 0.8664893
+  - position: 1.5
+    velocity: 0.70531344
+    acceleration: -1.3237807
+  - position: 1.5
+    velocity: 0.26745397
+    acceleration: -0.6285966
+  - position: 1.5
+    velocity: 0.5210311
+    acceleration: 1.4222918
