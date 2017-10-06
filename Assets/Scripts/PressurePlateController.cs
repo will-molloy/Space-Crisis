@@ -6,13 +6,13 @@ public class PressurePlateController : MonoBehaviour {
 
     internal ArrayList colliders;
     public GameObject theThingToActivate;
-    private RotatableSprite bush;
+    private RotatableSprite rotatableSprite;
 
     // Use this for initialization
     void Start () {
         colliders = new ArrayList();
-        bush = (RotatableSprite)theThingToActivate.GetComponent(typeof(RotatableSprite));
-        Debug.Log(bush);
+        rotatableSprite = (RotatableSprite)theThingToActivate.GetComponent(typeof(RotatableSprite));
+        Debug.Log(rotatableSprite);
     }
 
     // Update is called once per frame
@@ -20,11 +20,11 @@ public class PressurePlateController : MonoBehaviour {
         Debug.Log("Colliders " + colliders.Count);
         if (colliders.Count == 0)
         {
-            bush.setActivation(false);
+            rotatableSprite.setActivation(false);
         }
         else
         {
-            bush.setActivation(true);
+            rotatableSprite.setActivation(true);
         }
     }
 }
