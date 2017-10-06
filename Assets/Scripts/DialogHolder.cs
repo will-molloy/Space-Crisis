@@ -31,7 +31,7 @@ public class DialogHolder : MonoBehaviour
     void Update()
     {
 
-        if (dMan.currentLine == lineToBreak)
+        if (dMan.currentLine == lineToBreak && lineToBreak != 0)
         {
             moveOn = true;
             //!!! needs to check if user has the item in their inventory!!!!!

@@ -9,15 +9,15 @@ public class DialogueManager : MonoBehaviour
 
     public Text sText;
     public Text dText;
-    public bool isFrozen = false;
+    private bool isFrozen = false;
 
     public bool diaglogActive;
 
     public string[] dialogLines;
     public int currentLine;
 
-    public Rigidbody2D[] playerBody;
-    public Vector2[] linearBackups;
+    private Rigidbody2D[] playerBody;
+    private Vector2[] linearBackups;
 
     // Use this for initialization
     void Start()

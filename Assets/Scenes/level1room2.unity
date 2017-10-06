@@ -3342,12 +3342,9 @@ MonoBehaviour:
   dBox: {fileID: 1100007505}
   sText: {fileID: 1616999612}
   dText: {fileID: 1702720623}
-  isFrozen: 0
   diaglogActive: 0
   dialogLines: []
   currentLine: 0
-  playerBody: []
-  linearBackups: []
 --- !u!1 &722026199
 GameObject:
   m_ObjectHideFlags: 0
@@ -7481,11 +7478,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 66fe2da2077f94183ae003dde85a8b1a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 8
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 66fe2da2077f94183ae003dde85a8b1a, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 66fe2da2077f94183ae003dde85a8b1a, type: 2}
       propertyPath: m_LocalPosition.z
@@ -7509,7 +7506,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 66fe2da2077f94183ae003dde85a8b1a, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 100006, guid: 66fe2da2077f94183ae003dde85a8b1a, type: 2}
       propertyPath: m_Name
@@ -7565,10 +7562,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue: 
-  textFile: {fileID: 4900000, guid: a96cd400f93664d48b286210c76e7f85, type: 3}
+  textFile: {fileID: 4900000, guid: afec7a09030c91d47b16d32c3f2e8fdf, type: 3}
   textLines: []
-  lineToBreak: 4
-  autoDialog: 1
+  lineToBreak: 0
+  autoDialog: 0
 --- !u!61 &1649283287
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7583,6 +7580,22 @@ BoxCollider2D:
   m_Offset: {x: -0.1, y: 0.3}
   serializedVersion: 2
   m_Size: {x: 1.7, y: 1.2}
+--- !u!114 &1649283288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1649283285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9eb0a38051010646a97e13e205c2443, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue: 
+  textFile: {fileID: 4900000, guid: 594e5e91d40a9c1488ab9c9fe8009866, type: 3}
+  textLines: []
+  lineToBreak: 0
+  autoDialog: 0
 --- !u!1 &1702720621
 GameObject:
   m_ObjectHideFlags: 0
