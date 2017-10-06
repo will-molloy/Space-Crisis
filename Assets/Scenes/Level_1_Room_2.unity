@@ -479,7 +479,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 423668, guid: aeda6d5b489dc344e9c0cc46bbc9077b, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 21216536, guid: aeda6d5b489dc344e9c0cc46bbc9077b, type: 2}
       propertyPath: m_SortingOrder
@@ -507,7 +507,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11439710, guid: aeda6d5b489dc344e9c0cc46bbc9077b, type: 2}
       propertyPath: LOWER_ANGLE
-      value: 150
+      value: 145
       objectReference: {fileID: 0}
     - target: {fileID: 21216536, guid: aeda6d5b489dc344e9c0cc46bbc9077b, type: 2}
       propertyPath: m_Enabled
@@ -532,6 +532,10 @@ Prefab:
     - target: {fileID: 423668, guid: aeda6d5b489dc344e9c0cc46bbc9077b, type: 2}
       propertyPath: m_LocalScale.y
       value: 1.0082556
+      objectReference: {fileID: 0}
+    - target: {fileID: 11439710, guid: aeda6d5b489dc344e9c0cc46bbc9077b, type: 2}
+      propertyPath: UPPER_ANGLE
+      value: 230
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aeda6d5b489dc344e9c0cc46bbc9077b, type: 2}
@@ -1620,6 +1624,10 @@ Prefab:
       propertyPath: m_Name
       value: pressure-plate (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 11466322, guid: feb86c4556f810245bf37a738d6eed86, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: feb86c4556f810245bf37a738d6eed86, type: 2}
   m_IsPrefabParent: 0
@@ -1841,6 +1849,10 @@ Prefab:
     - target: {fileID: 472434, guid: aeda6d5b489dc344e9c0cc46bbc9077b, type: 2}
       propertyPath: m_LocalScale.y
       value: 2.0000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 11439710, guid: aeda6d5b489dc344e9c0cc46bbc9077b, type: 2}
+      propertyPath: UPPER_ANGLE
+      value: 230
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aeda6d5b489dc344e9c0cc46bbc9077b, type: 2}
@@ -2179,7 +2191,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
 --- !u!1 &507677744
 GameObject:
   m_ObjectHideFlags: 0

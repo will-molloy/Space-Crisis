@@ -4,7 +4,7 @@ using System.Collections;
 public class BushRotation : MonoBehaviour
 {
 
-    private static bool activated = false;
+    private bool activated = false;
 
     private float translation;
     private const int ROTATION_SPEED = 300;

@@ -13,14 +13,12 @@ namespace UnityStandardAssets._2D
 
 		private void Awake()
 		{
-			Debug.Log("AWAKE");
 			m_Character = GetComponent<PlatformerCharacter2D>();
 		}
 
 
 		private void Update()
 		{
-			Debug.Log("UPDATE");
 			if (!m_Jump)
 			{
 				// Read the jump input in Update so button presses aren't missed.
