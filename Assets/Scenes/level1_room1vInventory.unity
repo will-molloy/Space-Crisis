@@ -1647,6 +1647,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1030475646}
+  - 61: {fileID: 1030475648}
   - 114: {fileID: 1030475647}
   m_Layer: 0
   m_Name: Spikes
@@ -1682,6 +1683,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0adb193696373444bdc29dd53965220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!61 &1030475648
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1030475645}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 6, y: -3}
+  serializedVersion: 2
+  m_Size: {x: 12, y: 1}
 --- !u!1 &1045191209
 GameObject:
   m_ObjectHideFlags: 0
@@ -1848,9 +1863,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 1080679607}
   - 114: {fileID: 1080679608}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Team
-  m_TagString: Untagged
+  m_TagString: Team
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
