@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlateScript : MonoBehaviour {
 
-    public int translationAmount;
+    public double translationAmount;
     public Vector3 translationDirection;
     private int animationTimeInFrames;
     private bool isRunning = false;
