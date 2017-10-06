@@ -6,12 +6,12 @@ public class PressurePlateController : MonoBehaviour {
 
     internal ArrayList colliders;
     public GameObject theThingToActivate;
-    private BushRotation bush;
+    private RotatableSprite bush;
 
     // Use this for initialization
     void Start () {
         colliders = new ArrayList();
-        bush = (BushRotation)theThingToActivate.GetComponent(typeof(BushRotation));
+        bush = (RotatableSprite)theThingToActivate.GetComponent(typeof(RotatableSprite));
         Debug.Log(bush);
     }
 
