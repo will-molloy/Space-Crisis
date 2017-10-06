@@ -173,7 +173,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1977658774}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.000061034996, y: -4.5}
@@ -1787,7 +1787,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1977658774}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 374.15, y: -46}
@@ -2504,7 +2504,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1977658774}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -374.14993, y: 38}
@@ -2658,6 +2658,18 @@ Prefab:
     - target: {fileID: 11428584, guid: 76880895459a25043a6da71895dca5ef, type: 2}
       propertyPath: m_AirControl
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 21266860, guid: 76880895459a25043a6da71895dca5ef, type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 21266860, guid: 76880895459a25043a6da71895dca5ef, type: 2}
+      propertyPath: m_Color.g
+      value: 0.7920892
+      objectReference: {fileID: 0}
+    - target: {fileID: 21266860, guid: 76880895459a25043a6da71895dca5ef, type: 2}
+      propertyPath: m_Color.b
+      value: 0.63235295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 76880895459a25043a6da71895dca5ef, type: 2}
@@ -4877,6 +4889,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 787147527}
   - {fileID: 8345871}
   - {fileID: 863460478}
   - {fileID: 1154535622}
@@ -5083,9 +5096,12 @@ MonoBehaviour:
   dBox: {fileID: 1977658773}
   sText: {fileID: 1154535623}
   dText: {fileID: 8345872}
+  isFrozen: 0
   diaglogActive: 0
   dialogLines: []
   currentLine: 0
+  playerBody: []
+  linearBackups: []
 --- !u!1 &2081683893
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,25 +2,41 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class DialogueManager : MonoBehaviour {
+public class DialogueManager : MonoBehaviour
+{
 
     public GameObject dBox;
+
     public Text sText;
     public Text dText;
+    public bool isFrozen = false;
 
     public bool diaglogActive;
 
     public string[] dialogLines;
     public int currentLine;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (diaglogActive && Input.GetKeyDown(KeyCode.Space)) {
+    public Rigidbody2D[] playerBody;
+    public Vector2[] linearBackups;
+
+    // Use this for initialization
+    void Start()
+    {
+
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        playerBody = new Rigidbody2D[2];
+        linearBackups = new Vector2[2];
+
+        playerBody[0] = players[0].GetComponent<Rigidbody2D>();
+        playerBody[1] = players[1].GetComponent<Rigidbody2D>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (diaglogActive && Input.GetKeyDown(KeyCode.Space))
+        {
             //dBox.SetActive(false);
             //diaglogActive = false;
 
@@ -28,22 +44,27 @@ public class DialogueManager : MonoBehaviour {
 
         }
 
-        if (currentLine >= dialogLines.Length) {
-            dBox.SetActive(false);
-            diaglogActive = false;
+        if (currentLine >= dialogLines.Length)
+        {
+            closeDialogue();
             currentLine = 0;
         }
 
-        if (dialogLines.Length > 0) {
+        if (dialogLines.Length > 0)
+        {
             dText.text = dialogLines[currentLine];
         }
     }
 
-    public void showBox(string source, string dialogue) {
+    public void showBox(string source, string dialogue)
+    {
+
         diaglogActive = true;
         dBox.SetActive(true);
         sText.text = source;
         dText.text = dialogue;
+
+
     }
 
     public void showDialogue(string source)
@@ -51,11 +72,46 @@ public class DialogueManager : MonoBehaviour {
         diaglogActive = true;
         dBox.SetActive(true);
         sText.text = source;
+
+        if (!isFrozen)
+        {
+            freezePlayer();
+            isFrozen = true;
+        }
     }
 
-    public void closeDialogue() {
+    public void closeDialogue()
+    {
+        if (isFrozen)
+        {
+            unfreezePlayer();
+            isFrozen = false;
+        }
         diaglogActive = false;
         dBox.SetActive(false);
+
+    }
+
+    private void freezePlayer()
+    {
+        linearBackups[0] = playerBody[0].velocity;
+
+        linearBackups[1] = playerBody[1].velocity;
+        
+        playerBody[0].velocity = Vector2.zero;
+        playerBody[1].velocity = Vector2.zero;
+
+        playerBody[0].constraints = RigidbodyConstraints2D.FreezeAll;
+        playerBody[1].constraints = RigidbodyConstraints2D.FreezeAll;
+    }
+
+    private void unfreezePlayer()
+    {
+        playerBody[0].constraints = RigidbodyConstraints2D.None;
+        playerBody[0].velocity = linearBackups[0];
+
+        playerBody[1].constraints = RigidbodyConstraints2D.None;
+        playerBody[1].velocity = linearBackups[1];
     }
 
 }
