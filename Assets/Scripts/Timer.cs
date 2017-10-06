@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour { 
 
-	public float timer = 0; 
+	static public float timer = 0; 
 	public Text timerText; 
 	public bool paused = false;
 
