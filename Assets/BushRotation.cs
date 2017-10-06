@@ -7,10 +7,11 @@ public class BushRotation : MonoBehaviour
     private static bool activated = false;
 
     private float translation;
-    private const int TOLERANCE = 5;
     private const int ROTATION_SPEED = 300;
-    private const int UPPER_ANGLE = 230;
-    private const int LOWER_ANGLE = 130;
+    public int UPPER_ANGLE;
+    public int LOWER_ANGLE;
+
+
 
     // Use this for initialization
     void Start()
@@ -24,8 +25,6 @@ public class BushRotation : MonoBehaviour
     {
         translation = Time.deltaTime * ROTATION_SPEED;
 
-        GameObject pivit = GameObject.Find("bush-log-rotation-point");
-        HingeJoint2D bush = (HingeJoint2D)pivit.GetComponent(typeof(HingeJoint2D));
 
         if (activated && transform.rotation.eulerAngles.z <= UPPER_ANGLE)
         {

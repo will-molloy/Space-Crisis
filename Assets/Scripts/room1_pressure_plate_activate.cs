@@ -7,12 +7,14 @@ public class room1_pressure_plate_activate : MonoBehaviour
     private static ArrayList colliders;
     private BushRotation bush;
 
+    public GameObject theThingToActivate;
+
     // Use this for initialization
     void Start()
     {
         colliders = new ArrayList();
-        GameObject pivit = GameObject.Find("bush-log-rotation-point");
-        bush = (BushRotation)pivit.GetComponent(typeof(BushRotation));
+        bush = (BushRotation)theThingToActivate.GetComponent(typeof(BushRotation));
+        Debug.Log(bush);
     }
 
     // Update is called once per frame
