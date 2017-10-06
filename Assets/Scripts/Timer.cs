@@ -1,4 +1,4 @@
-﻿﻿using UnityEngine; 
+﻿using UnityEngine; 
 using System.Collections; 
 using UnityEngine.UI; 
 
@@ -6,6 +6,7 @@ public class Timer : MonoBehaviour {
 
 	public float timer = 0; 
 	public Text timerText; 
+	public bool paused = false;
 
 	// Use this for initialization 
 	void Start () { 
@@ -14,8 +15,9 @@ public class Timer : MonoBehaviour {
 
 	// Update is called once per frame 
 	void Update () { 
-		timer += Time.deltaTime; 
-
+		if (!paused) {
+			timer += Time.deltaTime; 
+		}
 		int seconds = (int)(timer % 60); 
 		int minutes = (int)(timer / 60); 
 
@@ -23,4 +25,12 @@ public class Timer : MonoBehaviour {
 
 		timerText.text = timerString; 
 	} 
+
+	public void Pause(){
+		paused = true;
+	}
+
+	public void Resume(){
+		paused = false;
+	}
 } 
