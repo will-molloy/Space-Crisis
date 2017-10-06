@@ -15,7 +15,7 @@ public class SpawnItem : MonoBehaviour {
 
 	void Spawn() {
 		for (int i = 0; i < Spawns.Length; i++) {
-			int item = Random.Range (0,Spawns.Length);
+			int item = Random.Range (0,items.Length);
 			Instantiate (items[item], Spawns [i].position, Quaternion.identity);
 		}
 	}
