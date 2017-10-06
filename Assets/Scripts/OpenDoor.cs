@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
 public class OpenDoor : MonoBehaviour {
@@ -18,12 +19,8 @@ public class OpenDoor : MonoBehaviour {
         if (colliders.Count != 2)
         {
             //do nothing
-        } else
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                Application.LoadLevel(2);
-            }
+        } else {
+                SceneManager.LoadScene("level1room2");
         }
     }
 
