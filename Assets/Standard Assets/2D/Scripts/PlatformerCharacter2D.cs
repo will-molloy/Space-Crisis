@@ -17,6 +17,7 @@ namespace UnityStandardAssets._2D
         public LayerMask m_WhatIsGround;                                    // A mask determining what is ground to the character
         [SerializeField]
         private Transform m_GroundCheck;
+        public LayerMask m_LeverLayer;
 
         const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
         private bool m_Grounded;            // Whether or not the player is grounded.
@@ -25,6 +26,8 @@ namespace UnityStandardAssets._2D
         private Animator m_Anim;            // Reference to the player's animator component.
         private Rigidbody2D m_Rigidbody2D;
         private bool m_FacingRight = true;  // For determining which way the player is currently facing.
+
+
 
         private void Awake()
         {
@@ -40,29 +43,30 @@ namespace UnityStandardAssets._2D
         private void FixedUpdate()
         {
             bool hit = Physics2D.OverlapCircle(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
-            Debug.Log(m_GroundCheck.position);
-            Debug.Log(m_WhatIsGround.value);
             updateGroundState(hit);
 
             // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
             // This can be done using layers instead but Sample Assets will not overwrite your project settings.
-            /*
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
+            
+            
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, 2f, m_LeverLayer);
             for (int i = 0; i < colliders.Length; i++)
             {
-                if (colliders[i].gameObject != gameObject)
-                {
-                    updateGroundState(true);
                 
-                }
             }
-            */
+            
+            
 
             //CheckIfGrounded();
 
             // Set the vertical animation
             m_Anim.SetFloat("VelocityVertical", m_Rigidbody2D.velocity.y);
         }
+
+		void onCollisionEnter(Collision c) {
+			if (c.gameObject.tag == "Player")
+				Physics.IgnoreCollision (c.gameObject.GetComponent<Collider>(), c.collider);
+		}
 
         void OnCollisionStay2D(Collision2D collider)
         {
@@ -91,7 +95,7 @@ namespace UnityStandardAssets._2D
             RaycastHit2D hit;
 
             hit = Physics2D.Raycast(transform.position, Vector2.down, 1.8f, m_WhatIsGround);
-            Debug.Log("Hit " + hit);
+            //Debug.Log("Hit " + hit);
 
             //Debug.DrawRay(transform.position, Vector2.down, Color.green);
 
@@ -117,7 +121,7 @@ namespace UnityStandardAssets._2D
 
         private void updateGroundState(bool b)
         {
-            Debug.Log(b);
+            //Debug.Log(b);
             m_Grounded = b;
             m_Anim.SetBool("Ground", b);
         }
