@@ -2687,19 +2687,9 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11430702, guid: 76880895459a25043a6da71895dca5ef, type: 2}
-    - target: {fileID: 21266860, guid: 76880895459a25043a6da71895dca5ef, type: 2}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 21266860, guid: 76880895459a25043a6da71895dca5ef, type: 2}
-      propertyPath: m_Color.g
-      value: 0.7920892
-      objectReference: {fileID: 0}
-    - target: {fileID: 21266860, guid: 76880895459a25043a6da71895dca5ef, type: 2}
-      propertyPath: m_Color.b
-      value: 0.63235295
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: 76880895459a25043a6da71895dca5ef, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1199420029
@@ -4730,10 +4720,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1840495905}
---- !u!4 &1870855219 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 400006, guid: 66fe2da2077f94183ae003dde85a8b1a, type: 2}
-  m_PrefabInternal: {fileID: 1272944298}
 --- !u!1 &1876675407
 GameObject:
   m_ObjectHideFlags: 0
@@ -4852,66 +4838,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 17
---- !u!1 &1918383577
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1918383578}
-  - 61: {fileID: 1918383579}
-  - 114: {fileID: 1918383580}
-  m_Layer: 10
-  m_Name: Alien 1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1918383578
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1918383577}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 1870855219}
-  m_RootOrder: 2
---- !u!61 &1918383579
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1918383577}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: -0.18, y: 0.6}
-  serializedVersion: 2
-  m_Size: {x: 3, y: 1.62}
---- !u!114 &1918383580
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1918383577}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9eb0a38051010646a97e13e205c2443, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogue: Who the fuck are you??????
-  textFile: {fileID: 0}
-  textLines: []
-  lineToBreak: 0
-  autoDialog: 0
 --- !u!1 &1964091593
 GameObject:
   m_ObjectHideFlags: 0
