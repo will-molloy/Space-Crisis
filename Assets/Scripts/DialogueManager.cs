@@ -59,6 +59,7 @@ public class DialogueManager : MonoBehaviour
     public void showBox(string source, string dialogue)
     {
 
+        
         diaglogActive = true;
         dBox.SetActive(true);
         sText.text = source;
@@ -69,26 +70,28 @@ public class DialogueManager : MonoBehaviour
 
     public void showDialogue(string source)
     {
+        if (!isFrozen)
+        {
+            isFrozen = true;
+           // freezePlayer();
+        }
+
         diaglogActive = true;
         dBox.SetActive(true);
         sText.text = source;
 
-        if (!isFrozen)
-        {
-            freezePlayer();
-            isFrozen = true;
-        }
     }
 
     public void closeDialogue()
     {
-        if (isFrozen)
-        {
-            unfreezePlayer();
-            isFrozen = false;
-        }
         diaglogActive = false;
         dBox.SetActive(false);
+
+        if (isFrozen)
+        {
+            isFrozen = false;
+           // unfreezePlayer();
+        }
 
     }
 

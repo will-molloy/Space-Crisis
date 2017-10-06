@@ -11,8 +11,8 @@ public class DialogHolder : MonoBehaviour
     public string[] textLines;
     public int lineToBreak;
     // public Item item to check
-
-    public bool moveOn;
+    public bool autoDialog;
+    private bool moveOn;
     //needs to link to inventory 
 
     // Use this for initialization
@@ -63,6 +63,29 @@ public class DialogHolder : MonoBehaviour
 
             }
         }
+    }
+
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            if (autoDialog)
+            {
+
+                //dMan.showBox(this.gameObject.name , dialogue);
+                // show dialogue
+                if (!dMan.diaglogActive && !moveOn)
+                {
+                    dMan.dialogLines = textLines;
+                    dMan.currentLine = 0;
+                    dMan.showDialogue(this.gameObject.name);
+                }
+
+            }
+        }
+
+
     }
 
 }
