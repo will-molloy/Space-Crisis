@@ -53,4 +53,9 @@ public class DialogueManager : MonoBehaviour {
         sText.text = source;
     }
 
+    public void closeDialogue() {
+        diaglogActive = false;
+        dBox.SetActive(false);
+    }
+
 }
