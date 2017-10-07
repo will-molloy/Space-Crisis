@@ -5,12 +5,14 @@ public class PressurePlate : MonoBehaviour
 {
     public PressurePlateController parent;
     public float distToSink;
+    public int animationTimeInFrames;
 
     private List<GameObject> localColliders;
     private float upperY;
     private float lowerY;
     private bool isInAnimation;
     private Vector2 movementDirection;
+    private float translation;
 
     // Use this for initialization
     void Start()
@@ -18,6 +20,7 @@ public class PressurePlate : MonoBehaviour
         localColliders = new List<GameObject>();
         upperY = getYPos();
         lowerY = upperY - distToSink;
+        translation = distToSink / animationTimeInFrames;
     }
 
     // Update is called once per frame
@@ -25,8 +28,9 @@ public class PressurePlate : MonoBehaviour
     {
         Debug.Log(name + " y:" + transform.position.y + " colliders:" + localColliders.Count);
         if (!isInAnimation) return;
-        transform.Translate(movementDirection * distToSink);
-        localColliders.ForEach(gameObject => gameObject.transform.Translate(movementDirection * distToSink));
+
+        transform.Translate(movementDirection * translation);
+        localColliders.ForEach(gameObject => gameObject.transform.Translate(movementDirection * translation));
 
         isInAnimation = getYPos() < upperY && getYPos() > lowerY;
     }
