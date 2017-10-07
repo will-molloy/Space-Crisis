@@ -14,7 +14,6 @@ public class OpenDoor : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Colliders " + colliders.Count);
         if (colliders.Count != 2)
         {
             //do nothing

@@ -29,7 +29,6 @@ public class RotatableSprite : MonoBehaviour
         {
             transform.Rotate(0, 0, -1 * translation);
         }
-        Debug.Log("rotation: " + getRotation());
     }
 
     public void setActivation(bool active)
