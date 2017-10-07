@@ -54,8 +54,7 @@ public class DialogueManager : MonoBehaviour
 
         if (dialogLines.Length > 0)
         {
-            dText.text = "WHATATAA";
-           // dText.text = dialogLines[currentLine];
+            dText.text = dialogLines[currentLine];
         }
     }
 
@@ -65,7 +64,7 @@ public class DialogueManager : MonoBehaviour
         
         diaglogActive = true;
         dBox.SetActive(true);
-        sText.text = source;
+      //  sText.text = source;
         dText.text = dialogue;
 
 
@@ -81,7 +80,7 @@ public class DialogueManager : MonoBehaviour
 
         diaglogActive = true;
         dBox.SetActive(true);
-        sText.text = source;
+      //  sText.text = source;
 
     }
 
@@ -123,4 +122,6 @@ public class DialogueManager : MonoBehaviour
     public void setActiveNPC(GameObject NPC) {
         activeNPC = NPC;
     }
+
+    
 }
