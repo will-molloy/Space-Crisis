@@ -3873,6 +3873,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 1314535556}
+  distToSink: 0
+  animationTimeInFrames: 0
 --- !u!212 &817487401
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5292,6 +5294,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 1840316393}
+  distToSink: 0
+  animationTimeInFrames: 0
 --- !u!212 &1175842209
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5336,6 +5340,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 41
+--- !u!1001 &1178956415
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 417340, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -16.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 417340, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 417340, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 417340, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 417340, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 417340, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 417340, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 417340, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
+      propertyPath: m_RootOrder
+      value: 42
+      objectReference: {fileID: 0}
+    - target: {fileID: 112224, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
+      propertyPath: m_Name
+      value: DoorToRoom3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11455370, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
+      propertyPath: sceneToLoad
+      value: level1room3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1188425476
 GameObject:
   m_ObjectHideFlags: 0
@@ -6329,6 +6383,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 563254459}
+  distToSink: 0
+  animationTimeInFrames: 0
 --- !u!212 &1411585422
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6373,6 +6429,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 39
+--- !u!1001 &1416982829
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 417340, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -17.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 417340, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 10.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 417340, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 417340, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 417340, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 417340, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 417340, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 417340, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
+      propertyPath: m_RootOrder
+      value: 43
+      objectReference: {fileID: 0}
+    - target: {fileID: 112224, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
+      propertyPath: m_Name
+      value: DoorToRoom1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11455370, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
+      propertyPath: sceneToLoad
+      value: level1room1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1427103611
 GameObject:
   m_ObjectHideFlags: 0

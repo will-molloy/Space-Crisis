@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class OpenDoor : MonoBehaviour
 {
-    public string sceneToload;
+    public string sceneToLoad;
     private List<GameObject> colliders;
 
     // Use this for initialization
@@ -18,7 +18,7 @@ public class OpenDoor : MonoBehaviour
     {
         if (colliders.Count == 2 && Input.GetKeyDown(KeyCode.Space))
         {
-            SceneManager.LoadScene(sceneToload);
+            SceneManager.LoadScene(sceneToLoad);
         }
     }
 
