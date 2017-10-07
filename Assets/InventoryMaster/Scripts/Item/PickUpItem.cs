@@ -4,16 +4,28 @@ public class PickUpItem : MonoBehaviour
 {
     public Item item;
     private Inventory _inventory;
-    private GameObject _player;
+    private GameObject _player1;
+	private GameObject _player2;
     // Use this for initialization
 
     void Start()
     {
-        _player = GameObject.FindGameObjectWithTag("Player");
-		if (_player != null) {
-			Debug.Log("Item collided with the player!------------------------------------------------------->");
-			_inventory = _player.GetComponent<PlayerInventory> ().inventory.GetComponent<Inventory> ();
+
+		foreach(GameObject Obj in GameObject.FindGameObjectsWithTag("Player"))
+		{
+			if(Obj.name == "Astronaut")
+			{
+				_player1 = Obj;
+
+
+			} else if(Obj.name == "Astronaut_2") {
+				_player2 = Obj;
+			}
+
 		}
+			
+        if (_player1 != null)
+            _inventory = _player1.GetComponent<PlayerInventory>().inventory.GetComponent<Inventory>();
     }
 
     // Update is called once per frame
@@ -21,10 +33,10 @@ public class PickUpItem : MonoBehaviour
     {
         if (_inventory != null && Input.GetKeyDown(KeyCode.E))
         {
-			Debug.Log("Item collided with the player!------------------------------------------------------->");
-            float distance = Vector3.Distance(this.gameObject.transform.position, _player.transform.position);
+            float distance1 = Vector3.Distance(this.gameObject.transform.position, _player1.transform.position);
+			float distance2 = Vector3.Distance(this.gameObject.transform.position, _player2.transform.position);
 
-            if (distance <= 3)
+			if (distance1 <= 3 || distance2 <= 3)
             {
                 bool check = _inventory.checkIfItemAllreadyExist(item.itemID, item.itemValue);
                 if (check)

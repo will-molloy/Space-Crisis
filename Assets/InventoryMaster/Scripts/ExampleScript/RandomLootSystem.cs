@@ -23,20 +23,25 @@ public class RandomLootSystem : MonoBehaviour
 
             Terrain terrain = Terrain.activeTerrain;
 
-            float x = Random.Range(5, terrain.terrainData.size.x - 5);
-            float z = Random.Range(5, terrain.terrainData.size.z - 5);
+			if(terrain != null){
+				
+				float x = Random.Range(5, terrain.terrainData.size.x - 5);
+				float z = Random.Range(5, terrain.terrainData.size.z - 5);
 
 
-            if (inventoryItemList.itemList[randomNumber].itemModel == null)
-                counter--;
-            else
-            {
-                GameObject randomLootItem = (GameObject)Instantiate(inventoryItemList.itemList[randomNumber].itemModel);
-                PickUpItem item = randomLootItem.AddComponent<PickUpItem>();
-                item.item = inventoryItemList.itemList[randomNumber];
+				if (inventoryItemList.itemList[randomNumber].itemModel == null)
+					counter--;
+				else
+				{
+					GameObject randomLootItem = (GameObject)Instantiate(inventoryItemList.itemList[randomNumber].itemModel);
+					PickUpItem item = randomLootItem.AddComponent<PickUpItem>();
+					item.item = inventoryItemList.itemList[randomNumber];
 
-                randomLootItem.transform.localPosition = new Vector3(x, 0, z);
-            }
+					randomLootItem.transform.localPosition = new Vector3(x, 0, z);
+				}
+
+			}
+
         }
 
     }

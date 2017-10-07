@@ -18,8 +18,20 @@ public class ConsumeItem : MonoBehaviour, IPointerDownHandler
         item = GetComponent<ItemOnObject>().item;
         if (GameObject.FindGameObjectWithTag("Tooltip") != null)
             tooltip = GameObject.FindGameObjectWithTag("Tooltip").GetComponent<Tooltip>();
-        if (GameObject.FindGameObjectWithTag("EquipmentSystem") != null)
-            eS = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>().characterSystem.GetComponent<EquipmentSystem>();
+		if (GameObject.FindGameObjectWithTag ("EquipmentSystem") != null) {
+			
+			foreach(GameObject Obj in GameObject.FindGameObjectsWithTag("Player"))
+			{
+				if(Obj.name == "Astronaut")
+				{
+					eS = Obj.GetComponent<PlayerInventory>().characterSystem.GetComponent<EquipmentSystem>();
+
+
+				}
+
+			}
+				
+		}
 
         if (GameObject.FindGameObjectWithTag("MainInventory") != null)
             mainInventory = GameObject.FindGameObjectWithTag("MainInventory");
