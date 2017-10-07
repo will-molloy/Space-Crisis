@@ -20,6 +20,7 @@ public class LifeSystem : MonoBehaviour {
 	void Start () {
 		CheckHealthAmount();
 		UpdateHearts ();
+
 		players = GameObject.FindGameObjectsWithTag ("Player");
 		spawnPoints = GameObject.FindGameObjectsWithTag ("Position");
 	}
@@ -63,10 +64,16 @@ public class LifeSystem : MonoBehaviour {
 
 		if (currentHearts == 0) {
 			isDead = true;
+
 		} else {
 			for (int i = 0; i < 2; i++) {
 				players[i].transform.position = spawnPoints[i].transform.position;
 			}
 		}
 	}
+
+	public void ResetHearts(){
+		currentHearts = 3;
+	}
+		
 }

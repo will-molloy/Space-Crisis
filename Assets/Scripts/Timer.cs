@@ -10,20 +10,21 @@ public class Timer : MonoBehaviour {
 
 	// Use this for initialization 
 	void Start () { 
-		timerText = GetComponent<Text> (); 
+		timerText = GetComponent<Text> ();
 	} 
 
 	// Update is called once per frame 
 	void Update () { 
 		if (!paused) {
 			timer += Time.deltaTime; 
-		}
+		
 		int seconds = (int)(timer % 60); 
 		int minutes = (int)(timer / 60); 
 
 		string timerString = string.Format ("{0:0}:{1:00}", minutes, seconds); 
 
 		timerText.text = timerString; 
+		}
 	} 
 
 	public void Pause(){
@@ -32,5 +33,9 @@ public class Timer : MonoBehaviour {
 
 	public void Resume(){
 		paused = false;
+	}
+
+	public void Reset(){
+		timer = 0;
 	}
 } 
