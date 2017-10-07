@@ -9,8 +9,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 455466}
   - 212: {fileID: 21233782}
-  - 114: {fileID: 11477000}
-  - 114: {fileID: 11428060}
+  - 136: {fileID: 13638394}
+  - 114: {fileID: 11497436}
   m_Layer: 0
   m_Name: FruitRed
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11428060
+--- !u!114 &11497436
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -39,32 +39,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 178698}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed4199993900847a59faef4bf6c15089, type: 3}
+  m_Script: {fileID: 11500000, guid: 3e40da20480416e4fb3c934c04d1c637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InstructionBoxSkin: {fileID: 0}
-  ButtonToPress: 101
-  PickUpDistance: 1.7
---- !u!114 &11477000
-MonoBehaviour:
+  amountOfLoot: 10
+  counter: 0
+--- !u!136 &13638394
+CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 178698}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aecccfc1d7050954283835360098ab5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemIcon: {fileID: 2800000, guid: a7f5d7a5c6765cd459a05338b0177198, type: 3}
-  canGet: 1
-  itemType: 
-  stackable: 1
-  maxStack: 20
-  stack: 1
-  isEquipment: 0
-  isAlsoWeapon: 0
-  equippedWeaponVersion: {fileID: 0}
+  m_Radius: 1.28
+  m_Height: 2.56
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &21233782
 SpriteRenderer:
   m_ObjectHideFlags: 1

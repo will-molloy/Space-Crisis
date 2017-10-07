@@ -10,8 +10,10 @@ public class PickUpItem : MonoBehaviour
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
-        if (_player != null)
-            _inventory = _player.GetComponent<PlayerInventory>().inventory.GetComponent<Inventory>();
+		if (_player != null) {
+			Debug.Log("Item collided with the player!------------------------------------------------------->");
+			_inventory = _player.GetComponent<PlayerInventory> ().inventory.GetComponent<Inventory> ();
+		}
     }
 
     // Update is called once per frame
@@ -19,6 +21,7 @@ public class PickUpItem : MonoBehaviour
     {
         if (_inventory != null && Input.GetKeyDown(KeyCode.E))
         {
+			Debug.Log("Item collided with the player!------------------------------------------------------->");
             float distance = Vector3.Distance(this.gameObject.transform.position, _player.transform.position);
 
             if (distance <= 3)
