@@ -16,7 +16,7 @@ public class OpenDoor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (colliders.Count == 2 && Input.GetKeyDown(KeyCode.Space))
+        if (colliders.Count == 2)
         {
             SceneManager.LoadScene(sceneToLoad);
         }

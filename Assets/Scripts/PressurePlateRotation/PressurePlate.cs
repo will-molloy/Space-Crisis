@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class PressurePlate : MonoBehaviour
 {
     public PressurePlateController parent;
-    public float distToSink = (float)0.2;
+    public float distToSink = 0.2f;
     public int animationTimeInFrames = 10;
 
     private List<GameObject> localColliders;
