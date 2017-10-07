@@ -7,36 +7,28 @@ public class DialogHolder : MonoBehaviour
     public string dialogue;
     private DialogueManager dMan;
 
-    public TextAsset textFile;
-    public string[] textLines;
-    public int lineToBreak;
     // public Item item to check
-    public bool autoDialog;
-    private bool moveOn;
     //needs to link to inventory 
+
+    public DialogDetail triggeredDialog;
+    public DialogDetail norminalDialog;
+
 
     // Use this for initialization
     void Start()
     {
-        moveOn = false;
         dMan = FindObjectOfType<DialogueManager>();
-
-        if (textFile != null)
-        {
-            textLines = textFile.text.Split('\n');
-        }
+        triggeredDialog = new DialogDetail();
+        triggeredDialog.source = "AAAAAAAAAAAAAAAAAAA";
+        triggeredDialog.lines = new string[] { "A", " B", "c" };
+        norminalDialog = new DialogDetail();
+        norminalDialog.lines = new string[] { "z", " x", "y" };
+        norminalDialog.source = "BBBBBBBBBBB";
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (dMan.currentLine == lineToBreak)
-        {
-            moveOn = true;
-            //!!! needs to check if user has the item in their inventory!!!!!
-            dMan.closeDialogue();
-        }
     }
 
     void OnTriggerStay2D(Collider2D other)
@@ -45,22 +37,7 @@ public class DialogHolder : MonoBehaviour
         {
             if (Input.GetKeyUp(KeyCode.Space))
             {
-
-                //dMan.showBox(this.gameObject.name , dialogue);
-                // show dialogue
-                if (!dMan.diaglogActive && !moveOn)
-                {
-                    dMan.dialogLines = textLines;
-                    dMan.currentLine = 0;
-                    dMan.showDialogue(this.gameObject.name);
-                }
-
-                if (!dMan.diaglogActive && moveOn)
-                {
-                    dMan.currentLine = lineToBreak + 1; // line5 corresponds to the text file content
-                    dMan.showDialogue(this.gameObject.name);
-                }
-
+                dMan.startDialogueOf(norminalDialog);
             }
         }
     }
@@ -68,24 +45,10 @@ public class DialogHolder : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && norminalDialog != null)
         {
-            if (autoDialog)
-            {
-
-                //dMan.showBox(this.gameObject.name , dialogue);
-                // show dialogue
-                if (!dMan.diaglogActive && !moveOn)
-                {
-                    dMan.dialogLines = textLines;
-                    dMan.currentLine = 0;
-                    dMan.showDialogue(this.gameObject.name);
-                }
-
-            }
+                dMan.startDialogueOf(triggeredDialog);
         }
-
-
     }
 
 }
