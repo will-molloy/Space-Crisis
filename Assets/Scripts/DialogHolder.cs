@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class DialogHolder : MonoBehaviour
 {
     public GameObject[] dBoxes;
     private int boxIndex = 0;
-   // public TextAsset[] textAssets;
+    // public TextAsset[] textAssets;
 
     public string dialogue;
     private DialogueManager dMan;
@@ -21,7 +22,8 @@ public class DialogHolder : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        textFile = dBoxes[0].GetComponent<TextHolder>().textFile;
+        textFile = dBoxes[boxIndex].GetComponent<TextHolder>().textFile;
+
         moveOn = false;
         dMan = FindObjectOfType<DialogueManager>();
 
@@ -42,12 +44,45 @@ public class DialogHolder : MonoBehaviour
             dMan.closeDialogue();
         }
 
-       
+        // check if should move on to next dialogue box
+        if (dMan.currentLine >= textLines.Length)
+        {    // end of this box's file asset
+            if (boxIndex < dBoxes.Length - 1)
+            {
+                boxIndex++;
+                textFile = dBoxes[boxIndex].GetComponent<TextHolder>().textFile;
+                if (textFile != null)
+                {
+                    textLines = textFile.text.Split('\n');
+                }
+
+                dMan.dBox = dBoxes[boxIndex];
+                Text[] txt = dBoxes[boxIndex].GetComponents<Text>();
+                for (int i = 0; i < txt.Length; i++)
+                {
+                    if (txt[i].name.Equals("Dialogue"))
+                    { // ! important to name dialogue text on UI 'Dialogue'
+
+                        dMan.dText = txt[i];
+                        break;
+                    }
+                }
+                //dMan.dText.text = "ahah";
+                dMan.dialogLines = textLines;
+                dMan.currentLine = 0;
+                if (!dMan.diaglogActive)
+                {
+
+                    dMan.showDialogue(this.gameObject.name);
+                }
+            }
+        }
+
     }
 
     void OnTriggerStay2D(Collider2D other)
     {
-       // dMan.setActiveNPC(this.gameObject);
+        // dMan.setActiveNPC(this.gameObject);
         if (other.gameObject.CompareTag("Player"))
         {
             if (Input.GetKeyUp(KeyCode.Space))

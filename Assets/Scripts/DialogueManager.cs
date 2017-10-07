@@ -49,7 +49,7 @@ public class DialogueManager : MonoBehaviour
         if (currentLine >= dialogLines.Length)
         {
             closeDialogue();
-            currentLine = 0;
+            //currentLine = 0;
         }
 
         if (dialogLines.Length > 0)
