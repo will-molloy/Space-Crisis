@@ -47,7 +47,7 @@ public class ConsumeItem : MonoBehaviour, IPointerDownHandler
             if (eS != null)
                 itemTypeOfSlot = eS.itemTypeOfSlots;
 
-            if (data.button == PointerEventData.InputButton.Right)
+            /*if (data.button == PointerEventData.InputButton.Right)
             {
                 //item from craft system to inventory
                 if (transform.parent.GetComponent<CraftResultSlot>() != null)
@@ -181,7 +181,7 @@ public class ConsumeItem : MonoBehaviour, IPointerDownHandler
 
                 }
                 
-            }
+            }*/
             
 
         }

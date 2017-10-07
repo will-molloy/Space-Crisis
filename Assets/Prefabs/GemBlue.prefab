@@ -9,8 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 477742}
   - 212: {fileID: 21293314}
-  - 114: {fileID: 11497036}
-  - 114: {fileID: 11442294}
+  - 136: {fileID: 13653972}
   m_Layer: 0
   m_Name: GemBlue
   m_TagString: Untagged
@@ -31,40 +30,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11442294
-MonoBehaviour:
+--- !u!136 &13653972
+CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 134438}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed4199993900847a59faef4bf6c15089, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InstructionBoxSkin: {fileID: 0}
-  ButtonToPress: 101
-  PickUpDistance: 1.7
---- !u!114 &11497036
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 134438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aecccfc1d7050954283835360098ab5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemIcon: {fileID: 2800000, guid: 4e1fa431fcd2e4a4aa20ef1430ec6bbe, type: 3}
-  canGet: 1
-  itemType: 
-  stackable: 0
-  maxStack: 20
-  stack: 1
-  isEquipment: 0
-  isAlsoWeapon: 0
-  equippedWeaponVersion: {fileID: 0}
+  m_Radius: 1.28
+  m_Height: 2.56
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &21293314
 SpriteRenderer:
   m_ObjectHideFlags: 1
