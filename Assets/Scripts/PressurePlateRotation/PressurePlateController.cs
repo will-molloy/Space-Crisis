@@ -17,7 +17,6 @@ public class PressurePlateController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        Debug.Log("Colliders " + colliders.Count);
         if (colliders.Count == 0)
         {
             rotatableSprite.setActivation(false);
