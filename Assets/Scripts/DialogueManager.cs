@@ -24,7 +24,7 @@ public class DialogueManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        dText.enabled = false;
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
         playerBody = new Rigidbody2D[2];
@@ -43,7 +43,12 @@ public class DialogueManager : MonoBehaviour
             //diaglogActive = false;
 
             currentLine++;
-
+           
+        }
+        if (dialogLines.Length > 0 && currentLine < dialogLines.Length)
+        {
+            
+            dText.text = dialogLines[currentLine];
         }
 
         if (currentLine >= dialogLines.Length)
@@ -52,10 +57,7 @@ public class DialogueManager : MonoBehaviour
             //currentLine = 0;
         }
 
-        if (dialogLines.Length > 0)
-        {
-            dText.text = dialogLines[currentLine];
-        }
+     
     }
 
     public void showBox(string source, string dialogue)
@@ -66,7 +68,7 @@ public class DialogueManager : MonoBehaviour
         dBox.SetActive(true);
       //  sText.text = source;
         dText.text = dialogue;
-
+        dText.enabled = true;
 
     }
 
@@ -77,7 +79,7 @@ public class DialogueManager : MonoBehaviour
             isFrozen = true;
            // freezePlayer();
         }
-
+        dText.enabled = true;
         diaglogActive = true;
         dBox.SetActive(true);
       //  sText.text = source;
@@ -86,6 +88,7 @@ public class DialogueManager : MonoBehaviour
 
     public void closeDialogue()
     {
+        dText.enabled = false;
         diaglogActive = false;
         dBox.SetActive(false);
 

@@ -57,17 +57,7 @@ public class DialogHolder : MonoBehaviour
                 }
 
                 dMan.dBox = dBoxes[boxIndex];
-                Text[] txt = dBoxes[boxIndex].GetComponents<Text>();
-                for (int i = 0; i < txt.Length; i++)
-                {
-                    if (txt[i].name.Equals("Dialogue"))
-                    { // ! important to name dialogue text on UI 'Dialogue'
-
-                        dMan.dText = txt[i];
-                        break;
-                    }
-                }
-                //dMan.dText.text = "ahah";
+               
                 dMan.dialogLines = textLines;
                 dMan.currentLine = 0;
                 if (!dMan.diaglogActive)
