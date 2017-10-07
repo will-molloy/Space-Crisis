@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class LifeSystem : MonoBehaviour {
 
 	public int startHearts = 3;
-	public int currentHearts = 3;
+	public static int currentHearts = 3;
 	public int maxHeart = 3;
 	public int healthPerHeart = 1;
 	GameObject[] players;
