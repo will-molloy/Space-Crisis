@@ -1,11 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DialogHolder : MonoBehaviour
+public class DialogueHolderTwo : MonoBehaviour
 {
-    public GameObject[] dBoxes;
-    private int boxIndex = 0;
-    public TextAsset[] textAssets;
 
     public string dialogue;
     private DialogueManager dMan;
@@ -44,7 +41,6 @@ public class DialogHolder : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        dMan.setActiveNPC(this.gameObject);
         if (other.gameObject.CompareTag("Player"))
         {
             if (Input.GetKeyUp(KeyCode.Space))

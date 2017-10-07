@@ -19,6 +19,8 @@ public class DialogueManager : MonoBehaviour
     private Rigidbody2D[] playerBody;
     private Vector2[] linearBackups;
 
+    public GameObject activeNPC;
+
     // Use this for initialization
     void Start()
     {
@@ -52,7 +54,8 @@ public class DialogueManager : MonoBehaviour
 
         if (dialogLines.Length > 0)
         {
-            dText.text = dialogLines[currentLine];
+            dText.text = "WHATATAA";
+           // dText.text = dialogLines[currentLine];
         }
     }
 
@@ -117,4 +120,7 @@ public class DialogueManager : MonoBehaviour
         playerBody[1].velocity = linearBackups[1];
     }
 
+    public void setActiveNPC(GameObject NPC) {
+        activeNPC = NPC;
+    }
 }
