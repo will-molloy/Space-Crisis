@@ -7,7 +7,7 @@ public class DialogueManager : MonoBehaviour
 
     public GameObject dBox;
 
-    public Text sText;
+    private Text sText;
     public Text dText;
     private bool isFrozen = false;
 
@@ -82,6 +82,15 @@ public class DialogueManager : MonoBehaviour
         dText.enabled = true;
         diaglogActive = true;
         dBox.SetActive(true);
+
+        // enable button if any
+        Button[] btns = dBox.GetComponents<Button>();
+        for (int i = 0; i < btns.Length; i++) {
+            Debug.Log(" length : " + btns.Length);
+            btns[i].enabled = true;
+            btns[i].interactable = true;
+        }
+
       //  sText.text = source;
 
     }

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using System.Collections.Generic;
+
 
 public class GameController {
 
@@ -8,7 +10,7 @@ public class GameController {
 
     private int lastScene;
 
-    private System.Object[] savedObjects = new System.Object[100];
+    private Dictionary<int, object> savedObjects = new Dictionary<int, object>();
    
     private GameController()
     {
@@ -34,12 +36,13 @@ public class GameController {
         return lastScene;
     }
 
-    public void SetSavedObjectFor(int of, System.Object obj)
+    public void SetSavedObjectFor(int of, object obj)
     {
+        
         savedObjects[of] = obj;
     }
 
-    public System.Object GetSavedObjectFor(int of)
+    public object GetSavedObjectFor(int of)
     {
         return savedObjects[of];
     }

@@ -1,73 +1,61 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
+using System;
 
 public class DialogHolder : MonoBehaviour
 {
-    public GameObject[] dBoxes;
-    private int boxIndex = 0;
+    //public GameObject[] dBoxes;
+    public List<GameObject> dBoxes;
+    public int boxIndex = 0;
     // public TextAsset[] textAssets;
 
     public string dialogue;
     private DialogueManager dMan;
 
-    private TextAsset textFile;
     public string[] textLines;
     public int lineToBreak;
     // public Item item to check
     public bool autoDialog;
     private bool moveOn;
+    private bool showDecisionBox;
+
     //needs to link to inventory 
 
     // Use this for initialization
     void Start()
     {
-        textFile = dBoxes[boxIndex].GetComponent<TextHolder>().textFile;
-
         moveOn = false;
         dMan = FindObjectOfType<DialogueManager>();
-
-        if (textFile != null)
-        {
-            textLines = textFile.text.Split('\n');
-        }
+        
+        textLines = dBoxes[boxIndex].GetComponent<TextHolder>().getTextLines();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (dMan.currentLine == lineToBreak && lineToBreak != 0)
+        if (dMan.activeNPC == this.gameObject) // only update dialogue if the current active NPC holds this dialogue
         {
-            moveOn = true;
-            //!!! needs to check if user has the item in their inventory!!!!!
-            dMan.closeDialogue();
-        }
-
-        // check if should move on to next dialogue box
-        if (dMan.currentLine >= textLines.Length)
-        {    // end of this box's file asset
-            if (boxIndex < dBoxes.Length - 1)
+            if (dMan.currentLine == lineToBreak && lineToBreak != 0)
             {
-                boxIndex++;
-                textFile = dBoxes[boxIndex].GetComponent<TextHolder>().textFile;
-                if (textFile != null)
-                {
-                    textLines = textFile.text.Split('\n');
-                }
+                moveOn = true;
+                //!!! needs to check if user has the item in their inventory!!!!!
+                dMan.closeDialogue();
+            }
 
-                dMan.dBox = dBoxes[boxIndex];
+            // check if should move on to next dialogue box
+            if (dMan.currentLine >= textLines.Length)
+            {    // end of this box's file asset
+                if (boxIndex < dBoxes.Count - 1)
+                {
+                    boxIndex++;
+
+                    setAndShowDialogue(dBoxes[boxIndex]);
+                }
                
-                dMan.dialogLines = textLines;
-                dMan.currentLine = 0;
-                if (!dMan.diaglogActive)
-                {
-
-                    dMan.showDialogue(this.gameObject.name);
-                }
             }
         }
-
     }
 
     void OnTriggerStay2D(Collider2D other)
@@ -82,9 +70,7 @@ public class DialogHolder : MonoBehaviour
                 // show dialogue
                 if (!dMan.diaglogActive && !moveOn)
                 {
-                    dMan.dialogLines = textLines;
-                    dMan.currentLine = 0;
-                    dMan.showDialogue(this.gameObject.name);
+                    setAndShowDialogue(dBoxes[boxIndex]);
                 }
 
                 if (!dMan.diaglogActive && moveOn)
@@ -102,6 +88,7 @@ public class DialogHolder : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            dMan.setActiveNPC(this.gameObject);
             if (autoDialog)
             {
 
@@ -109,15 +96,31 @@ public class DialogHolder : MonoBehaviour
                 // show dialogue
                 if (!dMan.diaglogActive && !moveOn)
                 {
-                    dMan.dialogLines = textLines;
-                    dMan.currentLine = 0;
-                    dMan.showDialogue(this.gameObject.name);
+                    setAndShowDialogue(dBoxes[boxIndex]);
                 }
 
             }
         }
+    }
 
+    public void setAndShowDialogue(GameObject box)
+    {
+        if (dMan.diaglogActive)
+        {
+            dMan.closeDialogue();
+        }
+
+        textLines = box.GetComponent<TextHolder>().getTextLines();
+
+        dMan.dBox = box;
+
+        dMan.dialogLines = textLines;
+        dMan.currentLine = 0;
+        
+        dMan.showDialogue(this.gameObject.name);
 
     }
+
+
 
 }

@@ -12,16 +12,24 @@ public class TextHolder : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
-        if (textFile != null)
-        {
-            textLines = textFile.text.Split('\n');
-        }
+    
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    public string[] getTextLines() { 
+  
+        if (textFile != null)
+        {
+           textLines = textFile.text.Split('\n');
+        }
+        else {
+            textLines = this.GetComponent<TextHolder>().textLines;
+        }
+        return textLines;
     }
 }
