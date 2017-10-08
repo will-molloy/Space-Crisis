@@ -3,9 +3,9 @@ using System.Collections;
 
 public class SpawnItem : MonoBehaviour {
 
-	public Transform[] Spawns;
-
-	public GameObject[] items;
+	public Transform[] _spawns;
+	static ItemDataBaseList inventoryItemList;
+	public int[] _itemRange;
 
 	// Use this for initialization
 	void Start () {
@@ -14,9 +14,22 @@ public class SpawnItem : MonoBehaviour {
 	}
 
 	void Spawn() {
-		for (int i = 0; i < Spawns.Length; i++) {
-			int item = Random.Range (0,Spawns.Length);
-			Instantiate (items[item], Spawns [i].position, Quaternion.identity);
+
+		inventoryItemList = (ItemDataBaseList)Resources.Load("ItemDatabase");
+
+		for (int i = 0; i < _spawns.Length; i++) {
+			int randomNumber = Random.Range (0,_itemRange.Length);
+
+			if (!(inventoryItemList.itemList[_itemRange[randomNumber]].itemModel == null)) {
+
+				Debug.Log ("Item " + _itemRange[randomNumber] + " picked!");
+				GameObject randomLootItem = (GameObject)Instantiate(inventoryItemList.itemList[_itemRange[randomNumber]].itemModel);
+				PickUpItem item = randomLootItem.AddComponent<PickUpItem>();
+				item.item = inventoryItemList.itemList[_itemRange[randomNumber]];
+
+				randomLootItem.transform.localPosition = _spawns [i].position;
+			}
+				
 		}
 	}
 
