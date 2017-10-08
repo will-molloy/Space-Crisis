@@ -4,7 +4,7 @@ using System.Collections;
 public class TextHolder : MonoBehaviour
 {
     public TextAsset textFile;
-    public string[] textLines;
+    private string[] textLines;
     public int lineToBreak;
     // public Item item to check
     public bool autoDialog;
@@ -26,5 +26,18 @@ public class TextHolder : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public string[] getTextLines() { 
+    
+        if (textFile != null)
+        {
+            textLines = textFile.text.Split('\n');
+        }
+        else {
+            textLines = this.GetComponent<TextHolder>().textLines;
+        }
+
+        return textLines;
     }
 }

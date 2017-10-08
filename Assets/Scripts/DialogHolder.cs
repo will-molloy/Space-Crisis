@@ -13,8 +13,7 @@ public class DialogHolder : MonoBehaviour
 
     public string dialogue;
     private DialogueManager dMan;
-
-    private TextAsset textFile;
+    
     public string[] textLines;
     public int lineToBreak;
     // public Item item to check
@@ -25,15 +24,12 @@ public class DialogHolder : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        textFile = dBoxes[boxIndex].GetComponent<TextHolder>().textFile;
 
         moveOn = false;
         dMan = FindObjectOfType<DialogueManager>();
 
-        if (textFile != null)
-        {
-            textLines = textFile.text.Split('\n');
-        }
+            textLines = dBoxes[boxIndex].GetComponent<TextHolder>().getTextLines();
+        
     }
 
     // Update is called once per frame
@@ -53,11 +49,9 @@ public class DialogHolder : MonoBehaviour
             if (boxIndex < dBoxes.Count - 1)
             {
                 boxIndex++;
-                textFile = dBoxes[boxIndex].GetComponent<TextHolder>().textFile;
-                if (textFile != null)
-                {
-                    textLines = textFile.text.Split('\n');
-                }
+              
+                    textLines = dBoxes[boxIndex].GetComponent<TextHolder>().getTextLines();
+                
 
                 setDialogue();
             }
@@ -119,13 +113,8 @@ public class DialogHolder : MonoBehaviour
 
     private void setDialogue()
     {
-
-
-        textFile = dBoxes[boxIndex].GetComponent<TextHolder>().textFile;
-        if (textFile != null)
-        {
-            textLines = textFile.text.Split('\n');
-        }
+            textLines = dBoxes[boxIndex].GetComponent<TextHolder>().getTextLines();
+        
 
         dMan.dBox = dBoxes[boxIndex];
 
@@ -134,7 +123,6 @@ public class DialogHolder : MonoBehaviour
        
             dMan.showDialogue(this.gameObject.name);
         
-       
     }
 
 }
