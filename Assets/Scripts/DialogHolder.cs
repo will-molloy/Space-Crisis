@@ -35,29 +35,30 @@ public class DialogHolder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (dMan.currentLine == lineToBreak && lineToBreak != 0)
+        if (dMan.activeNPC == this.gameObject) // only update dialogue if the current active NPC holds this dialogue
         {
-            moveOn = true;
-            //!!! needs to check if user has the item in their inventory!!!!!
-            dMan.closeDialogue();
-        }
-
-        // check if should move on to next dialogue box
-        if (dMan.currentLine >= textLines.Length)
-        {    // end of this box's file asset
-            if (boxIndex < dBoxes.Count - 1)
+            if (dMan.currentLine == lineToBreak && lineToBreak != 0)
             {
-                boxIndex++;
-
-                setAndShowDialogue(dBoxes[boxIndex]);
-            }
-            else
-            {
+                moveOn = true;
+                //!!! needs to check if user has the item in their inventory!!!!!
                 dMan.closeDialogue();
             }
-        }
 
+            // check if should move on to next dialogue box
+            if (dMan.currentLine >= textLines.Length)
+            {    // end of this box's file asset
+                if (boxIndex < dBoxes.Count - 1)
+                {
+                    boxIndex++;
+
+                    setAndShowDialogue(dBoxes[boxIndex]);
+                }
+                else
+                {
+                    dMan.closeDialogue();
+                }
+            }
+        }
     }
 
     void OnTriggerStay2D(Collider2D other)
@@ -90,6 +91,7 @@ public class DialogHolder : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            dMan.setActiveNPC(this.gameObject);
             if (autoDialog)
             {
 
