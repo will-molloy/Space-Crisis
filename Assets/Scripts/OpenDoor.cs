@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class OpenDoor : MonoBehaviour
 {
     public string sceneToLoad;
+    public int nextSceneId;
     private List<GameObject> colliders;
 
     // Use this for initialization
@@ -18,6 +19,7 @@ public class OpenDoor : MonoBehaviour
     {
         if (colliders.Count == 2)
         {
+
             SceneManager.LoadScene(sceneToLoad);
         }
     }
