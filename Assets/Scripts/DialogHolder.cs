@@ -19,17 +19,17 @@ public class DialogHolder : MonoBehaviour
     // public Item item to check
     public bool autoDialog;
     private bool moveOn;
+    private bool showDecisionBox;
+
     //needs to link to inventory 
 
     // Use this for initialization
     void Start()
     {
-
         moveOn = false;
         dMan = FindObjectOfType<DialogueManager>();
-
+        
         textLines = dBoxes[boxIndex].GetComponent<TextHolder>().getTextLines();
-
     }
 
     // Update is called once per frame
@@ -53,10 +53,7 @@ public class DialogHolder : MonoBehaviour
 
                     setAndShowDialogue(dBoxes[boxIndex]);
                 }
-                else
-                {
-                    dMan.closeDialogue();
-                }
+               
             }
         }
     }
