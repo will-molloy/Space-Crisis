@@ -9,20 +9,22 @@ public class DialogueManager : MonoBehaviour
 
     public Text sText;
     public Text dText;
-    public bool isFrozen = false;
+    private bool isFrozen = false;
 
     public bool diaglogActive;
 
     public string[] dialogLines;
     public int currentLine;
 
-    public Rigidbody2D[] playerBody;
-    public Vector2[] linearBackups;
+    private Rigidbody2D[] playerBody;
+    private Vector2[] linearBackups;
+
+    public GameObject activeNPC;
 
     // Use this for initialization
     void Start()
     {
-
+        dText.enabled = false;
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
         playerBody = new Rigidbody2D[2];
@@ -41,19 +43,21 @@ public class DialogueManager : MonoBehaviour
             //diaglogActive = false;
 
             currentLine++;
-
+           
+        }
+        if (dialogLines.Length > 0 && currentLine < dialogLines.Length)
+        {
+            
+            dText.text = dialogLines[currentLine];
         }
 
         if (currentLine >= dialogLines.Length)
         {
             closeDialogue();
-            currentLine = 0;
+            //currentLine = 0;
         }
 
-        if (dialogLines.Length > 0)
-        {
-            dText.text = dialogLines[currentLine];
-        }
+     
     }
 
     public void showBox(string source, string dialogue)
@@ -62,9 +66,9 @@ public class DialogueManager : MonoBehaviour
         
         diaglogActive = true;
         dBox.SetActive(true);
-        sText.text = source;
+      //  sText.text = source;
         dText.text = dialogue;
-
+        dText.enabled = true;
 
     }
 
@@ -75,15 +79,16 @@ public class DialogueManager : MonoBehaviour
             isFrozen = true;
            // freezePlayer();
         }
-
+        dText.enabled = true;
         diaglogActive = true;
         dBox.SetActive(true);
-        sText.text = source;
+      //  sText.text = source;
 
     }
 
     public void closeDialogue()
     {
+        dText.enabled = false;
         diaglogActive = false;
         dBox.SetActive(false);
 
@@ -117,4 +122,9 @@ public class DialogueManager : MonoBehaviour
         playerBody[1].velocity = linearBackups[1];
     }
 
+    public void setActiveNPC(GameObject NPC) {
+        activeNPC = NPC;
+    }
+
+    
 }

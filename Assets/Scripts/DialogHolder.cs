@@ -1,13 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class DialogHolder : MonoBehaviour
 {
+    public GameObject[] dBoxes;
+    private int boxIndex = 0;
+    // public TextAsset[] textAssets;
 
     public string dialogue;
     private DialogueManager dMan;
 
-    public TextAsset textFile;
+    private TextAsset textFile;
     public string[] textLines;
     public int lineToBreak;
     // public Item item to check
@@ -18,6 +22,8 @@ public class DialogHolder : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        textFile = dBoxes[boxIndex].GetComponent<TextHolder>().textFile;
+
         moveOn = false;
         dMan = FindObjectOfType<DialogueManager>();
 
@@ -31,16 +37,42 @@ public class DialogHolder : MonoBehaviour
     void Update()
     {
 
-        if (dMan.currentLine == lineToBreak)
+        if (dMan.currentLine == lineToBreak && lineToBreak != 0)
         {
             moveOn = true;
             //!!! needs to check if user has the item in their inventory!!!!!
             dMan.closeDialogue();
         }
+
+        // check if should move on to next dialogue box
+        if (dMan.currentLine >= textLines.Length)
+        {    // end of this box's file asset
+            if (boxIndex < dBoxes.Length - 1)
+            {
+                boxIndex++;
+                textFile = dBoxes[boxIndex].GetComponent<TextHolder>().textFile;
+                if (textFile != null)
+                {
+                    textLines = textFile.text.Split('\n');
+                }
+
+                dMan.dBox = dBoxes[boxIndex];
+               
+                dMan.dialogLines = textLines;
+                dMan.currentLine = 0;
+                if (!dMan.diaglogActive)
+                {
+
+                    dMan.showDialogue(this.gameObject.name);
+                }
+            }
+        }
+
     }
 
     void OnTriggerStay2D(Collider2D other)
     {
+        // dMan.setActiveNPC(this.gameObject);
         if (other.gameObject.CompareTag("Player"))
         {
             if (Input.GetKeyUp(KeyCode.Space))

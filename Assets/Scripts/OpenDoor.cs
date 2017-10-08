@@ -1,26 +1,24 @@
 ﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
-public class OpenDoor : MonoBehaviour {
+public class OpenDoor : MonoBehaviour
+{
+    public string sceneToLoad;
+    private List<GameObject> colliders;
 
-    private static ArrayList colliders;
     // Use this for initialization
     void Start()
     {
-        colliders = new ArrayList();
+        colliders = new List<GameObject>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Colliders " + colliders.Count);
-        if (colliders.Count != 2)
+        if (colliders.Count == 2)
         {
-            //do nothing
-        } else {
-                SceneManager.LoadScene("level1room2");
+            SceneManager.LoadScene(sceneToLoad);
         }
     }
 
@@ -39,5 +37,4 @@ public class OpenDoor : MonoBehaviour {
             colliders.Remove(other.gameObject);
         }
     }
-
 }

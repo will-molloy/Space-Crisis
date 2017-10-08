@@ -63,25 +63,13 @@ namespace UnityStandardAssets._2D
             m_Anim.SetFloat("VelocityVertical", m_Rigidbody2D.velocity.y);
         }
 
-		void onCollisionEnter(Collision c) {
-			if (c.gameObject.tag == "Player")
-				Physics.IgnoreCollision (c.gameObject.GetComponent<Collider>(), c.collider);
-		}
-
-        void OnCollisionStay2D(Collision2D collider)
+        void OnCollisionEnter(Collision c)
         {
-            /*
-            Debug.Log(collider);
-            Debug.Log(collider.gameObject.layer);
-            Debug.Log(m_WhatIsGround.value);
-            if (collider.gameObject.layer == m_WhatIsGround)
-            {
-                m_Grounded = true;
-                m_Anim.SetBool("Ground", m_Grounded);
-            }
-            */
-            //CheckIfGrounded();
+            if (c.gameObject.tag == "Player")
+                Physics.IgnoreCollision(c.gameObject.GetComponent<Collider>(), c.collider);
+
         }
+
 
         void OnCollisionExit2D(Collision2D collider)
         {
