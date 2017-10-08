@@ -4,7 +4,7 @@ using System.Collections;
 public class TextHolder : MonoBehaviour
 {
     public TextAsset textFile;
-    private string[] textLines;
+    public string[] textLines;
     public int lineToBreak;
     // public Item item to check
     public bool autoDialog;

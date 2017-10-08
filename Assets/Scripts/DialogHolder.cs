@@ -8,12 +8,12 @@ public class DialogHolder : MonoBehaviour
 {
     //public GameObject[] dBoxes;
     public List<GameObject> dBoxes;
-    private int boxIndex = 0;
+    public int boxIndex = 0;
     // public TextAsset[] textAssets;
 
     public string dialogue;
     private DialogueManager dMan;
-    
+
     public string[] textLines;
     public int lineToBreak;
     // public Item item to check
@@ -28,8 +28,8 @@ public class DialogHolder : MonoBehaviour
         moveOn = false;
         dMan = FindObjectOfType<DialogueManager>();
 
-            textLines = dBoxes[boxIndex].GetComponent<TextHolder>().getTextLines();
-        
+        textLines = dBoxes[boxIndex].GetComponent<TextHolder>().getTextLines();
+
     }
 
     // Update is called once per frame
@@ -49,14 +49,13 @@ public class DialogHolder : MonoBehaviour
             if (boxIndex < dBoxes.Count - 1)
             {
                 boxIndex++;
-              
-                    textLines = dBoxes[boxIndex].GetComponent<TextHolder>().getTextLines();
-                
 
-                setDialogue();
+                setAndShowDialogue();
             }
-        }
-        else { 
+            else
+            {
+                dMan.closeDialogue();
+            }
         }
 
     }
@@ -73,7 +72,7 @@ public class DialogHolder : MonoBehaviour
                 // show dialogue
                 if (!dMan.diaglogActive && !moveOn)
                 {
-                    setDialogue();
+                    setAndShowDialogue();
                 }
 
                 if (!dMan.diaglogActive && moveOn)
@@ -98,31 +97,36 @@ public class DialogHolder : MonoBehaviour
                 // show dialogue
                 if (!dMan.diaglogActive && !moveOn)
                 {
-                    setDialogue();
+                    setAndShowDialogue();
                 }
 
             }
         }
     }
 
-    public void addNextBox(GameObject nextBox) {
+    public void addNextBox(GameObject nextBox)
+    {
         dBoxes.Add(nextBox);
         boxIndex = dBoxes.Count - 1; // use latest added box
-        setDialogue();
+        setAndShowDialogue();
     }
 
-    private void setDialogue()
+    private void setAndShowDialogue()
     {
-            textLines = dBoxes[boxIndex].GetComponent<TextHolder>().getTextLines();
-        
+        if (dMan.diaglogActive)
+        {
+            dMan.closeDialogue();
+        }
 
+        textLines = dBoxes[boxIndex].GetComponent<TextHolder>().getTextLines();
+        
         dMan.dBox = dBoxes[boxIndex];
 
         dMan.dialogLines = textLines;
         dMan.currentLine = 0;
-       
-            dMan.showDialogue(this.gameObject.name);
         
+        dMan.showDialogue(this.gameObject.name);
+
     }
 
 }
