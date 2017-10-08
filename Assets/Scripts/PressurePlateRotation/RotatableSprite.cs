@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class RotatableSprite : MonoBehaviour
 {
@@ -7,13 +6,12 @@ public class RotatableSprite : MonoBehaviour
     public int lowerAngle;
     public int upperAngle;
 
-    private bool activated = false;
+    private bool activated;
     private float translation;
 
     // Use this for initialization
     void Start()
     {
-
 
     }
 
