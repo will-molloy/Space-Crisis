@@ -21,7 +21,6 @@ public class GameOverManager : MonoBehaviour {
 		if (life.isDead) {
 			Debug.Log ("death");
 			anim.SetTrigger ("GameOver");
-			life.ResetHearts ();
 			timer.Pause ();
 			timer.Reset ();
 		}

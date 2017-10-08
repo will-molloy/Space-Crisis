@@ -38,38 +38,38 @@ public class LifeSystem : MonoBehaviour {
 	public void UpdateHearts(){
 		bool empty = false;
 		int i = 0;
-
-		foreach (Image img in imgs) {
-			if (empty) {
-				img.sprite = healthSprites [0];
-			} else {
-				i++;
-				if (currentHearts>i) {
-					img.sprite = healthSprites [1];
+		if (!isDead) {
+			foreach (Image img in imgs) {
+				if (empty) {
+					img.sprite = healthSprites [0];
 				} else {
-					int currentHealth = (int)(healthPerHeart-(healthPerHeart*i-currentHearts));
-					int healthPerImage = healthPerHeart / (healthSprites.Length - 1);
-					int imageIndex = currentHealth / healthPerImage;
-					img.sprite = healthSprites [imageIndex];
-					empty = true;
+					i++;
+					if (currentHearts > i) {
+						img.sprite = healthSprites [1];
+					} else {
+						int currentHealth = (int)(healthPerHeart - (healthPerHeart * i - currentHearts));
+						int healthPerImage = healthPerHeart / (healthSprites.Length - 1);
+						int imageIndex = currentHealth / healthPerImage;
+						img.sprite = healthSprites [imageIndex];
+						empty = true;
+					}
 				}
 			}
 		}
 	}
 
 	public void TakeDamage(){
-		currentHearts -=1;
-		currentHearts = Mathf.Clamp (currentHearts, 0, startHearts * healthPerHeart);
-		UpdateHearts ();
+			currentHearts -= 1;
+			currentHearts = Mathf.Clamp (currentHearts, 0, startHearts * healthPerHeart);
+			UpdateHearts ();
 
-		if (currentHearts == 0) {
-			isDead = true;
-
-		} else {
-			for (int i = 0; i < 2; i++) {
-				players[i].transform.position = spawnPoints[i].transform.position;
+			if (currentHearts == 0) {
+				isDead = true;
+			} else {
+				for (int i = 0; i < 2; i++) {
+					players [i].transform.position = spawnPoints [i].transform.position;
+				}
 			}
-		}
 	}
 
 	public void ResetHearts(){
