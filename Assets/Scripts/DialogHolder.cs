@@ -50,7 +50,7 @@ public class DialogHolder : MonoBehaviour
             {
                 boxIndex++;
 
-                setAndShowDialogue();
+                setAndShowDialogue(dBoxes[boxIndex]);
             }
             else
             {
@@ -72,7 +72,7 @@ public class DialogHolder : MonoBehaviour
                 // show dialogue
                 if (!dMan.diaglogActive && !moveOn)
                 {
-                    setAndShowDialogue();
+                    setAndShowDialogue(dBoxes[boxIndex]);
                 }
 
                 if (!dMan.diaglogActive && moveOn)
@@ -97,30 +97,23 @@ public class DialogHolder : MonoBehaviour
                 // show dialogue
                 if (!dMan.diaglogActive && !moveOn)
                 {
-                    setAndShowDialogue();
+                    setAndShowDialogue(dBoxes[boxIndex]);
                 }
 
             }
         }
     }
 
-    public void addNextBox(GameObject nextBox)
-    {
-        dBoxes.Add(nextBox);
-        boxIndex = dBoxes.Count - 1; // use latest added box
-        setAndShowDialogue();
-    }
-
-    private void setAndShowDialogue()
+    public void setAndShowDialogue(GameObject box)
     {
         if (dMan.diaglogActive)
         {
             dMan.closeDialogue();
         }
 
-        textLines = dBoxes[boxIndex].GetComponent<TextHolder>().getTextLines();
-        
-        dMan.dBox = dBoxes[boxIndex];
+        textLines = box.GetComponent<TextHolder>().getTextLines();
+
+        dMan.dBox = box;
 
         dMan.dialogLines = textLines;
         dMan.currentLine = 0;
@@ -128,5 +121,7 @@ public class DialogHolder : MonoBehaviour
         dMan.showDialogue(this.gameObject.name);
 
     }
+
+
 
 }
