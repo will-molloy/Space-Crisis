@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
+using System;
 
 public class DialogHolder : MonoBehaviour
 {
-    public GameObject[] dBoxes;
+    //public GameObject[] dBoxes;
+    public List<GameObject> dBoxes;
     private int boxIndex = 0;
     // public TextAsset[] textAssets;
 
@@ -47,7 +50,7 @@ public class DialogHolder : MonoBehaviour
         // check if should move on to next dialogue box
         if (dMan.currentLine >= textLines.Length)
         {    // end of this box's file asset
-            if (boxIndex < dBoxes.Length - 1)
+            if (boxIndex < dBoxes.Count - 1)
             {
                 boxIndex++;
                 textFile = dBoxes[boxIndex].GetComponent<TextHolder>().textFile;
@@ -56,16 +59,10 @@ public class DialogHolder : MonoBehaviour
                     textLines = textFile.text.Split('\n');
                 }
 
-                dMan.dBox = dBoxes[boxIndex];
-               
-                dMan.dialogLines = textLines;
-                dMan.currentLine = 0;
-                if (!dMan.diaglogActive)
-                {
-
-                    dMan.showDialogue(this.gameObject.name);
-                }
+                setDialogue();
             }
+        }
+        else { 
         }
 
     }
@@ -82,9 +79,7 @@ public class DialogHolder : MonoBehaviour
                 // show dialogue
                 if (!dMan.diaglogActive && !moveOn)
                 {
-                    dMan.dialogLines = textLines;
-                    dMan.currentLine = 0;
-                    dMan.showDialogue(this.gameObject.name);
+                    setDialogue();
                 }
 
                 if (!dMan.diaglogActive && moveOn)
@@ -109,15 +104,37 @@ public class DialogHolder : MonoBehaviour
                 // show dialogue
                 if (!dMan.diaglogActive && !moveOn)
                 {
-                    dMan.dialogLines = textLines;
-                    dMan.currentLine = 0;
-                    dMan.showDialogue(this.gameObject.name);
+                    setDialogue();
                 }
 
             }
         }
+    }
+
+    public void addNextBox(GameObject nextBox) {
+        dBoxes.Add(nextBox);
+        boxIndex = dBoxes.Count - 1; // use latest added box
+        setDialogue();
+    }
+
+    private void setDialogue()
+    {
 
 
+        textFile = dBoxes[boxIndex].GetComponent<TextHolder>().textFile;
+        if (textFile != null)
+        {
+            textLines = textFile.text.Split('\n');
+        }
+
+        dMan.dBox = dBoxes[boxIndex];
+
+        dMan.dialogLines = textLines;
+        dMan.currentLine = 0;
+       
+            dMan.showDialogue(this.gameObject.name);
+        
+       
     }
 
 }

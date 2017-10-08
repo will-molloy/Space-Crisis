@@ -7,7 +7,7 @@ public class DialogueManager : MonoBehaviour
 
     public GameObject dBox;
 
-    public Text sText;
+    private Text sText;
     public Text dText;
     private bool isFrozen = false;
 

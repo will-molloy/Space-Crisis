@@ -17,6 +17,9 @@ public class TextHolder : MonoBehaviour
         {
             textLines = textFile.text.Split('\n');
         }
+        else {
+            textLines = this.GetComponent<TextHolder>().textLines;
+        }
     }
 
     // Update is called once per frame
