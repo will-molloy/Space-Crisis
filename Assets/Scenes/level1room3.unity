@@ -1295,7 +1295,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Me
+  m_Text: Alien name
 --- !u!222 &168346746
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1365,7 +1365,7 @@ Transform:
   - {fileID: 247853908}
   - {fileID: 1324745996}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 9
 --- !u!1 &236772199
 GameObject:
   m_ObjectHideFlags: 0
@@ -1749,7 +1749,6 @@ MonoBehaviour:
   dBoxes:
   - {fileID: 1210389137}
   - {fileID: 2008459573}
-  - {fileID: 705960430}
   boxIndex: 0
   dialogue: 
   textLines: []
@@ -2798,7 +2797,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 46
+  m_RootOrder: 47
 --- !u!114 &633675016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5524,7 +5523,7 @@ RectTransform:
   m_RootOrder: 7
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 57.2, y: -223.9}
+  m_AnchoredPosition: {x: 57.19998, y: -223.90002}
   m_SizeDelta: {x: 986.6, y: 47.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1482511660
@@ -6376,7 +6375,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 66fe2da2077f94183ae003dde85a8b1a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -669.11
+      value: -639.58
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 66fe2da2077f94183ae003dde85a8b1a, type: 2}
       propertyPath: m_LocalPosition.y
@@ -6444,6 +6443,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 66fe2da2077f94183ae003dde85a8b1a, type: 2}
       propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 66fe2da2077f94183ae003dde85a8b1a, type: 2}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
@@ -7691,9 +7694,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d9978c09b46f1b41860434cf8ee94ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textFile: {fileID: 0}
-  textLines:
-  - '......'
+  textFile: {fileID: 4900000, guid: 95f7e333cb3e5ec4fae7540ec665c225, type: 3}
+  textLines: []
   lineToBreak: 0
   autoDialog: 0
 --- !u!114 &2008459575
