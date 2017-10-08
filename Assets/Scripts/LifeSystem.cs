@@ -4,13 +4,13 @@ using UnityEngine.UI;
 
 public class LifeSystem : MonoBehaviour {
 
-	public int startHearts = 3;
-	public int currentHearts = 3;
-	public int maxHeart = 3;
-	public int healthPerHeart = 1;
+	 int startHearts = 3;
+	public static int currentHearts = 3;
+	 int maxHeart = 3;
+	 int healthPerHeart = 1;
 	GameObject[] players;
 	GameObject[] spawnPoints;
-	bool isDead = false;
+	public bool isDead = false;
 
 	public Image[] imgs;
 	public Sprite[] healthSprites;
@@ -20,12 +20,9 @@ public class LifeSystem : MonoBehaviour {
 	void Start () {
 		CheckHealthAmount();
 		UpdateHearts ();
+
 		players = GameObject.FindGameObjectsWithTag ("Player");
 		spawnPoints = GameObject.FindGameObjectsWithTag ("Position");
-	}
-
-	void Update(){
-
 	}
 
 	void CheckHealthAmount () {
@@ -66,11 +63,17 @@ public class LifeSystem : MonoBehaviour {
 		UpdateHearts ();
 
 		if (currentHearts == 0) {
-			//Game Over Screen to be Implemented...
+			isDead = true;
+
 		} else {
 			for (int i = 0; i < 2; i++) {
 				players[i].transform.position = spawnPoints[i].transform.position;
 			}
 		}
 	}
+
+	public void ResetHearts(){
+		currentHearts = 3;
+	}
+		
 }
