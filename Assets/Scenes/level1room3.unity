@@ -732,7 +732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc85de87ed0aca94083cc6d7f6417a2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  translationAmount: 8
+  translationAmount: 3
   translationDirection: {x: 0, y: 1, z: 0}
 --- !u!212 &158057256
 SpriteRenderer:
@@ -1881,19 +1881,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 407272, guid: 8c8680a1f76df6a44972ab5f187f64a6, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 10.38
+      value: 7.68
       objectReference: {fileID: 0}
     - target: {fileID: 407272, guid: 8c8680a1f76df6a44972ab5f187f64a6, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 16.99
+      value: -12.13
       objectReference: {fileID: 0}
     - target: {fileID: 462414, guid: 8c8680a1f76df6a44972ab5f187f64a6, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 22.13
+      value: 3.75
       objectReference: {fileID: 0}
     - target: {fileID: 462414, guid: 8c8680a1f76df6a44972ab5f187f64a6, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.08
+      value: 10.7
       objectReference: {fileID: 0}
     - target: {fileID: 11439730, guid: 8c8680a1f76df6a44972ab5f187f64a6, type: 2}
       propertyPath: jumpKey
@@ -3284,7 +3284,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1649949265}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.65, y: 5.61, z: 0}
+  m_LocalPosition: {x: -12.65, y: 6.05, z: 0}
   m_LocalScale: {x: 2, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -3532,6 +3532,7 @@ GameObject:
   - 4: {fileID: 1752713567}
   - 212: {fileID: 1752713566}
   - 114: {fileID: 1752713565}
+  - 58: {fileID: 1752713568}
   m_Layer: 0
   m_Name: leverGreen
   m_TagString: Untagged
@@ -3599,6 +3600,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 32
+--- !u!58 &1752713568
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1752713564}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.2
 --- !u!1 &1781927108
 GameObject:
   m_ObjectHideFlags: 0
@@ -4086,8 +4101,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc85de87ed0aca94083cc6d7f6417a2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  translationAmount: 8
-  translationDirection: {x: 0, y: 1, z: 0}
+  translationAmount: 5
+  translationDirection: {x: 0, y: -1, z: 0}
 --- !u!212 &1918206190
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4125,7 +4140,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1918206188}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071067}
-  m_LocalPosition: {x: 5.15, y: 0, z: 0}
+  m_LocalPosition: {x: 4.95, y: 0, z: 0}
   m_LocalScale: {x: 1.25, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_Children: []
