@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class PressurePlate : MonoBehaviour
 {
     public PressurePlateController parent;
-    public float distToSink = (float)0.2;
+    public float distToSink = 0.2f;
     public int animationTimeInFrames = 10;
 
     private List<GameObject> localColliders;
@@ -18,7 +18,7 @@ public class PressurePlate : MonoBehaviour
     void Start()
     {
         localColliders = new List<GameObject>();
-        upperY = getYPos();
+        upperY = GetYPos();
         lowerY = upperY - distToSink;
         translation = distToSink / animationTimeInFrames;
     }
@@ -32,33 +32,38 @@ public class PressurePlate : MonoBehaviour
         transform.Translate(movementDirection * translation);
         localColliders.ForEach(gameObject => gameObject.transform.Translate(movementDirection * translation));
 
-        isInAnimation = getYPos() < upperY && getYPos() > lowerY;
+        isInAnimation = GetYPos() < upperY && GetYPos() > lowerY;
     }
 
-    private float getYPos()
+    private float GetYPos()
     {
         return transform.position.y;
     }
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag.Equals("Player") || col.gameObject.name.Equals("Box"))
+        if (IsValidCollider(col))
         {
             localColliders.Add(col.gameObject);
             parent.colliders.Add(col.gameObject);
         }
-        isInAnimation = getYPos() > lowerY;
+        isInAnimation = GetYPos() > lowerY;
         if (isInAnimation) movementDirection = Vector2.down;
     }
 
     void OnCollisionExit2D(Collision2D col)
     {
-        if (col.gameObject.tag.Equals("Player") || col.gameObject.name.Equals("Box"))
+        if (IsValidCollider(col))
         {
             localColliders.Remove(col.gameObject);
             parent.colliders.Remove(col.gameObject);
         }
-        isInAnimation = localColliders.Count == 0 && getYPos() < upperY;
+        isInAnimation = localColliders.Count == 0 && GetYPos() < upperY;
         if (isInAnimation) movementDirection = Vector2.up;
+    }
+
+    private bool IsValidCollider(Collision2D col)
+    {
+        return col.gameObject.tag.Equals("Player") || col.gameObject.tag.Equals("Box");
     }
 }
