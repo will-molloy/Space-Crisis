@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class GameController {
 
     private static GameController instance;
 
     private int lastScene;
+
+    private System.Object[] savedObjects = new System.Object[100];
    
     private GameController()
     {
@@ -29,6 +32,16 @@ public class GameController {
     public int GetLastScene()
     {   
         return lastScene;
+    }
+
+    public void SetSavedObjectFor(int of, System.Object obj)
+    {
+        savedObjects[of] = obj;
+    }
+
+    public System.Object GetSavedObjectFor(int of)
+    {
+        return savedObjects[of];
     }
 
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class ScenePersistance : MonoBehaviour {
 
@@ -9,16 +10,18 @@ public class ScenePersistance : MonoBehaviour {
     private Transform loc;
     void Awake()
     {
-        Debug.Log("THE THING AWAKENS!");
-        Debug.Log("LAST SCENCE ID " + GameController.GetInstance().GetLastScene());
         if (GameController.GetInstance().GetLastScene() > ofScene)
         {
-            Debug.Log("TRIHARD TRIHARD");
             p1 = GameObject.Find("Astronaut");
             p2 = GameObject.Find("Astronaut_2");
             loc = GameObject.Find("PositionBack").transform;
             p1.transform.position = loc.position;
             p2.transform.position = loc.position;
+
+            PSV p = (PSV)GameController.GetInstance().GetSavedObjectFor(ofScene);
+            if ( p != null ) {
+                GameObject.Find("Box").transform.position = p.boxPos;
+            }
         }
 
         GameController.GetInstance().SetLastScene(ofScene);
@@ -31,6 +34,14 @@ public class ScenePersistance : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+        PSV p = new PSV();
+        Vector3 tmp = GameObject.Find("Box").transform.position;
+        p.boxPos = new Vector3(tmp.x, tmp.y, tmp.z);
+        GameController.GetInstance().SetSavedObjectFor(ofScene, p);
 	}
+
+    private class PSV
+    {
+        public Vector3 boxPos;
+    }
 }
