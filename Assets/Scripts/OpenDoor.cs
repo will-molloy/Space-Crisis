@@ -26,7 +26,7 @@ public class OpenDoor : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (IsValidCollider(other))
         {
             colliders.Add(other.gameObject);
         }
@@ -34,9 +34,14 @@ public class OpenDoor : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (IsValidCollider(other))
         {
             colliders.Remove(other.gameObject);
         }
+    }
+
+    private bool IsValidCollider(Collider2D col)
+    {
+        return col.gameObject.CompareTag("Player");
     }
 }
