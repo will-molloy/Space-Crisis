@@ -10,6 +10,7 @@ public class GameOverManager : MonoBehaviour {
 	GameObject team;
 	Timer timer;
 
+
 	void Awake () {
 		anim = GetComponent <Animator> ();
 		team = GameObject.FindGameObjectWithTag("Team");
