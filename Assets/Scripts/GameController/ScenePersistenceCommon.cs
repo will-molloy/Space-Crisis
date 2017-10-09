@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 abstract public class ScenePersistenceCommon : MonoBehaviour {
 
-    public int ofScene;
+    protected int ofScene;
     private bool condition;
     private GameObject p1, p2;
     private Transform loc;

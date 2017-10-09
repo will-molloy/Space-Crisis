@@ -15,7 +15,6 @@ public class PlateScript : MonoBehaviour {
 
     public void reverseDirection()
     {
-        Debug.Log("REV DIR");
         translationDirection.x = -translationDirection.x;
         translationDirection.y = -translationDirection.y;
     }

@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
-public class ScenePersistance : ScenePersistenceCommon {
+public class ScenePersistance_Room1 : ScenePersistenceCommon {
 
     public void Awake()
     {
+        ofScene = 0;
         base.Awake();
     }
 
