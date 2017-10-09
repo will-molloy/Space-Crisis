@@ -965,7 +965,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 287266649}
-  - 114: {fileID: 287266648}
   m_Layer: 0
   m_Name: Persistence
   m_TagString: Untagged
@@ -973,18 +972,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &287266648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 287266647}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b9bb073d793af1428d718b4d8280678, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ofScene: 1
 --- !u!4 &287266649
 Transform:
   m_ObjectHideFlags: 0
@@ -5412,7 +5399,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11469878, guid: 3319f4b276d71e24d977b12e24e5b974, type: 2}
       propertyPath: firstSceneToLoad
-      value: ExitScene
+      value: level1room1
       objectReference: {fileID: 0}
     - target: {fileID: 11461696, guid: 3319f4b276d71e24d977b12e24e5b974, type: 2}
       propertyPath: firstSceneToLoad
@@ -9543,7 +9530,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1657713033}
-  - 114: {fileID: 1657713032}
   m_Layer: 0
   m_Name: ScenePersistence
   m_TagString: Untagged
@@ -9551,18 +9537,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1657713032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1657713031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b9bb073d793af1428d718b4d8280678, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ofScene: 1
 --- !u!4 &1657713033
 Transform:
   m_ObjectHideFlags: 0
