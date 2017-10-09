@@ -7,6 +7,7 @@ public class Timer : MonoBehaviour {
 	static public float timer = 0; 
 	public Text timerText; 
 	public bool paused = false;
+	public string timerString;
 
 	// Use this for initialization 
 	void Start () { 
@@ -21,7 +22,7 @@ public class Timer : MonoBehaviour {
 		int seconds = (int)(timer % 60); 
 		int minutes = (int)(timer / 60); 
 
-		string timerString = string.Format ("{0:0}:{1:00}", minutes, seconds); 
+		timerString = string.Format ("{0:0}:{1:00}", minutes, seconds); 
 
 		timerText.text = timerString; 
 		}

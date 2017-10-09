@@ -1,30 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+public class ScenePersistance : ScenePersistenceCommon {
 
-public class ScenePersistance : MonoBehaviour {
-
-    public int ofScene;
-    private bool condition;
-    private GameObject p1, p2;
-    private Transform loc;
-    void Awake()
+    public void Awake()
     {
-        if (GameController.GetInstance().GetLastScene() > ofScene)
-        {
-            p1 = GameObject.Find("Astronaut");
-            p2 = GameObject.Find("Astronaut_2");
-            loc = GameObject.Find("PositionBack").transform;
-            p1.transform.position = loc.position;
-            p2.transform.position = loc.position;
-
-            PSV p = (PSV)GameController.GetInstance().GetSavedObjectFor(ofScene);
-            if ( p != null ) {
-                GameObject.Find("Box").transform.position = p.boxPos;
-            }
-        }
-
-        GameController.GetInstance().SetLastScene(ofScene);
+        base.Awake();
     }
 
 	// Use this for initialization
@@ -32,13 +13,22 @@ public class ScenePersistance : MonoBehaviour {
 	
 	}
 	
-	// Update is called once per frame
-	void Update () {
+    public override void RestoreScene()
+    {
+        object obj = GameController.GetInstance().GetSavedObjectFor(ofScene);
+        if(obj != null)
+        {
+            GameObject.Find("Box").transform.position = ((PSV)obj).boxPos;
+        }
+    }
+
+    public override void SaveScene()
+    {
         PSV p = new PSV();
         Vector3 tmp = GameObject.Find("Box").transform.position;
         p.boxPos = new Vector3(tmp.x, tmp.y, tmp.z);
         GameController.GetInstance().SetSavedObjectFor(ofScene, p);
-	}
+    }
 
     private class PSV
     {
