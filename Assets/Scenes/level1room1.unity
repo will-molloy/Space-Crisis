@@ -1135,7 +1135,6 @@ Transform:
   - {fileID: 698530449}
   - {fileID: 1823824939}
   - {fileID: 1540743477}
-  - {fileID: 744795020}
   m_Father: {fileID: 0}
   m_RootOrder: 8
 --- !u!251 &277397828
@@ -1168,7 +1167,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawns:
   - {fileID: 1540743477}
-  - {fileID: 744795020}
   _itemRange: 010000000200000003000000
 --- !u!1 &318509070
 GameObject:
@@ -3319,34 +3317,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 733407263}
---- !u!1 &744795019
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 744795020}
-  m_Layer: 0
-  m_Name: ItemSpawn (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &744795020
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 744795019}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7, y: 0.4, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 277397827}
-  m_RootOrder: 4
 --- !u!1 &756549375
 GameObject:
   m_ObjectHideFlags: 0
@@ -8065,7 +8035,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1540743476}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 0.4, z: 0}
+  m_LocalPosition: {x: 5, y: 0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
