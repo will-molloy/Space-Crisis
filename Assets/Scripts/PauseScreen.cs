@@ -6,12 +6,12 @@ public class PauseScreen : MonoBehaviour {
 	Timer timer;
 	public bool paused = false;
 	public GameObject pauseScreen;
-	PlatformerCharacter2D move;
+	GameObject[] players;
 
 	// Use this for initialization
 	void Awake () {
 		timer = GameObject.Find("TimerText").GetComponent<Timer>();
-		move = GameObject.FindGameObjectWithTag ("Player").GetComponent<PlatformerCharacter2D> ();
+		players = GameObject.FindGameObjectsWithTag ("Player");
 	}
 	
 	// Update is called once per frame
@@ -19,13 +19,22 @@ public class PauseScreen : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Escape) && !paused) {
 			timer.Pause ();
 			pauseScreen.SetActive (true);
-			move.frozen = true;
-
+			for (int i = 0; i < players.Length; i++) {
+				PlatformerCharacter2D move = players [i].GetComponent<PlatformerCharacter2D> ();
+				move.frozen = true;
+			}
+			//move[0].frozen = true;
+			//move[1].frozen = true;
 			paused = true;
 		} else if (Input.GetKeyDown (KeyCode.Escape) && paused) {
 			timer.Resume ();
 			pauseScreen.SetActive (false);
-			move.frozen = false;
+			for (int i = 0; i < players.Length; i++) {
+				PlatformerCharacter2D move = players [i].GetComponent<PlatformerCharacter2D> ();
+				move.frozen = false;
+			}
+			//move[0].frozen = false;
+			//move[1].frozen = false;
 			paused = false;
 		}
 	}
