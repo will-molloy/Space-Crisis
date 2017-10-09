@@ -21,12 +21,12 @@ public class PauseScreen : MonoBehaviour {
 			pauseScreen.SetActive (true);
 			for (int i = 0; i < players.Length; i++) {
 				PlatformerCharacter2D move = players [i].GetComponent<PlatformerCharacter2D> ();
-				move.frozen = true;
+				//move.frozen = true;
 			}
 			//move[0].frozen = true;
 			//move[1].frozen = true;
 			paused = true;
-		} else if (Input.GetKeyDown (KeyCode.Escape) && paused) {
+		} else if ((Input.GetKeyDown (KeyCode.Escape) && paused)) {
 			timer.Resume ();
 			pauseScreen.SetActive (false);
 			for (int i = 0; i < players.Length; i++) {
@@ -35,7 +35,7 @@ public class PauseScreen : MonoBehaviour {
 			}
 			//move[0].frozen = false;
 			//move[1].frozen = false;
-			paused = false;
+			//paused = false;
 		}
 	}
 }
