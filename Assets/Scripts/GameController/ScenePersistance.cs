@@ -33,6 +33,5 @@ public class ScenePersistance : ScenePersistenceCommon {
     private class PSV
     {
         public Vector3 boxPos;
-        public Vector3 HitlerPos;
     }
 }
