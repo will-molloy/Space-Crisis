@@ -3,21 +3,22 @@ using System.Collections;
 using UnityStandardAssets._2D;
 using System.Collections.Generic;
 
-public class Lever : MonoBehaviour {
+public class Lever : MonoBehaviour
+{
 
-    private int remainingFrames = int.MaxValue;
-    private bool isRunning = false;
+    protected int remainingFrames = int.MaxValue;
+    protected bool isRunning = false;
 
     public int timeInFrames;
     public List<GameObject> thingsToControl = new List<GameObject>();
-   
+
     void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("COLLUSION" + other);
-        if(other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
             Platformer2DUserControl p1 = other.gameObject.GetComponent<Platformer2DUserControl>();
-            if(p1 != null)
+            if (p1 != null)
             {
                 p1.lever = this;
             }
@@ -37,15 +38,17 @@ public class Lever : MonoBehaviour {
         }
     }
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    virtual public void Update()
+    {
         if (isRunning) remainingFrames--;
-        if(isRunning && remainingFrames < 1)
+        if (isRunning && remainingFrames < 1)
         {
             foreach (GameObject obj in thingsToControl)
             {
@@ -55,10 +58,10 @@ public class Lever : MonoBehaviour {
             }
             isRunning = false;
         }
-	
-	}
 
-    public void activate()
+    }
+
+    public virtual void activate()
     {
         Debug.Log("ACTIVATE");
         Debug.Log("IS RUNING " + isRunning);
@@ -67,8 +70,8 @@ public class Lever : MonoBehaviour {
 
         Flip();
         remainingFrames = timeInFrames;
- 
-        foreach(GameObject obj in thingsToControl)
+
+        foreach (GameObject obj in thingsToControl)
         {
             PlateScript ps = obj.GetComponent<PlateScript>();
             ps.setAnimationTime(this.timeInFrames);
