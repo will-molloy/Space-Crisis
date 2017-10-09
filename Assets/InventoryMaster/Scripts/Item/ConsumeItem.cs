@@ -26,7 +26,6 @@ public class ConsumeItem : MonoBehaviour, IPointerDownHandler
 				{
 					eS = Obj.GetComponent<PlayerInventory>().characterSystem.GetComponent<EquipmentSystem>();
 
-
 				}
 
 			}
@@ -46,6 +45,35 @@ public class ConsumeItem : MonoBehaviour, IPointerDownHandler
 
             if (eS != null)
                 itemTypeOfSlot = eS.itemTypeOfSlots;
+
+			if (data.button == PointerEventData.InputButton.Left) {
+
+				GameObject itemName = null;
+
+				foreach(GameObject Obj in GameObject.FindGameObjectsWithTag("Player"))
+				{
+					if(Obj.name == "Astronaut")
+					{
+						bool check = Obj.GetComponent<PlayerInventory>().inventory.GetComponent<Inventory>().checkIfItemAllreadyExist(item.itemID, item.itemValue);
+
+						Debug.LogError ("Item id: " + item.itemID + " Item value: " + item.itemValue + " " + check);
+
+						//if (!check) {
+						//	Debug.LogError (check);
+						//	Obj.GetComponent<PlayerInventory>().inventory.GetComponent<Inventory>().addItemToInventory(item.itemID, item.itemValue);
+						//	Obj.GetComponent<PlayerInventory>().inventory.GetComponent<Inventory>().stackableSettings();
+						//}
+
+					}
+
+					itemName = Obj.GetComponent<PlayerInventory> ().inventory.GetComponent<Inventory> ().getItemGameObjectByName (item);
+						
+				}
+
+
+				Debug.LogError ("Left click registered on " + itemName.name);
+				
+			}
 
             /*if (data.button == PointerEventData.InputButton.Right)
             {
