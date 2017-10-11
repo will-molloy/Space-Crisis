@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class ItemSpawnManager : MonoBehaviour {
 
@@ -11,6 +12,8 @@ public class ItemSpawnManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+		System.Random r = new System.Random();
+		_itemRange = _itemRange.OrderBy(x => r.Next()).ToArray();
         _spawnedItems = new List<int>();
         Spawn();
 
@@ -23,21 +26,14 @@ public class ItemSpawnManager : MonoBehaviour {
 
         for (int i = 0; i < _spawns.Length; i++)
         {
-            int randomNumber = Random.Range(0, _itemRange.Length);
 
-            while (_spawnedItems.Contains(randomNumber)) {
-                randomNumber = Random.Range(0, _itemRange.Length);
-            }
-
-            _spawnedItems.Add(randomNumber);
-
-            if (!(inventoryItemList.itemList[_itemRange[randomNumber]].itemModel == null))
+			if (!(inventoryItemList.itemList[_itemRange[i]].itemModel == null))
             {
 
-                Debug.Log("Item " + _itemRange[randomNumber] + " picked!");
-                GameObject randomLootItem = (GameObject)Instantiate(inventoryItemList.itemList[_itemRange[randomNumber]].itemModel);
+				Debug.Log("Item " + _itemRange[i] + " picked!");
+				GameObject randomLootItem = (GameObject)Instantiate(inventoryItemList.itemList[_itemRange[i]].itemModel);
                 PickUpItem item = randomLootItem.AddComponent<PickUpItem>();
-                item.item = inventoryItemList.itemList[_itemRange[randomNumber]];
+				item.item = inventoryItemList.itemList[_itemRange[i]];
 
                 randomLootItem.transform.localPosition = _spawns[i].position;
             }
