@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
 public class Level2PlayerControl : MonoBehaviour
 {
     public string horizontalKey;
