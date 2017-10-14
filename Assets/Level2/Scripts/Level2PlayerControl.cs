@@ -10,7 +10,8 @@ public class Level2PlayerControl : MonoBehaviour
     public LayerMask wallLayer;
     public LayerMask pickupLayer;
     public float moveTime = 0.1f;
-    public KeyCode inventoryCycleKey;
+    public KeyCode inventoryCycleKeyLeft;
+    public KeyCode inventoryCycleKeyRight;
     public KeyCode actionKey;
 
     private BoxCollider2D selfCollider;
@@ -38,8 +39,14 @@ public class Level2PlayerControl : MonoBehaviour
         {
             TryMove(horizontal, vertical);
         }
-        if(Input.GetKey(actionKey)) {
+        else if(Input.GetKey(actionKey)) {
             TryInteract();
+        }
+        else if(Input.GetKey(inventoryCycleKeyLeft)) {
+            Leve2Controller.instance.CycleCursorLeft();
+        }
+        else if(Input.GetKey(inventoryCycleKeyRight)) {
+            Leve2Controller.instance.CycleCursorRight();
         }
     }
 
