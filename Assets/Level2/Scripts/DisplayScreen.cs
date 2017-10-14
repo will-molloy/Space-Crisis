@@ -5,7 +5,6 @@ using System.Collections;
 public class DisplayScreen : MonoBehaviour {
 
 	public Texture2D baseTexture;
-
 	private LambdaGrid lambdaGrid {get; set;}
 	// Use this for initialization
 	private SpriteRenderer renderer;
@@ -27,15 +26,6 @@ public class DisplayScreen : MonoBehaviour {
 		cubeCanvas.transform.position = new Vector3(transform.position.x - 1 , transform.position.y - 1 , 0);
 		cubeCanvas.name = "Cube Canvas of " + name;
 
-		lambdaGrid = new LambdaGrid();
-		lambdaGrid.SetAt(0,0,LambdaGrid.LambdaCube.CYAN);
-		lambdaGrid.SetAt(2,2,LambdaGrid.LambdaCube.PURPLE);
-		lambdaGrid.FallDown();
-		lambdaGrid.SimpleMap(LambdaGrid.LambdaCube.PURPLE, LambdaGrid.LambdaCube.YELLOW);
-
-		var beh = new LambdaBehavior(i => i.SimpleMap(LambdaGrid.LambdaCube.CYAN, LambdaGrid.LambdaCube.GREEN));
-		lambdaGrid.Apply(beh);
-
 	}
 
     Vector3[] SpriteLocalToWorld(Sprite sp)
@@ -51,17 +41,29 @@ public class DisplayScreen : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		//splice the texture here
 		if(changed) {
 			ApplyLambdaGrid();
 			changed = false;
 		}
-			
-	
+	}
+
+	public void UpdateLambdaGrid(LambdaGrid grid) {
+	/* 
+		if(grid.Equals(lambdaGrid)) {
+			return;
+		}
+		*/
+		lambdaGrid = grid;
+		changed = true;
+	}
+
+	public LambdaGrid GetLambdaGrid() {
+		return lambdaGrid;
 	}
 
     private void ApplyLambdaGrid()
     {
+		Debug.Log("REDRAW");
 		if(lambdaGrid == null) return;
 		//OR YOU KNOW, JUSt RENDER ON TOP OF IT
 		/* ^
@@ -70,6 +72,9 @@ public class DisplayScreen : MonoBehaviour {
 		   |
 		   |_________> 
 		 (0,0) */
+		foreach(Transform child in cubeCanvas.gameObject.GetComponentInChildren<Transform>()) {
+			Destroy(child.gameObject);
+		}
         for (int i = 0; i < LambdaGrid.MAX_LAMBDA_GRID_HEIGHT; i++)
         {
             for (int j = 0; j < LambdaGrid.MAX_LAMBDA_GRID_WIDTH; j++)
@@ -77,6 +82,7 @@ public class DisplayScreen : MonoBehaviour {
                 Sprite next = LambdaGrid.LambdaGridItemToSprite(lambdaGrid.GetAt(i, j));
                 if (next != null)
                 {
+					// Rendering on top of it
                     GameObject rdSubObj = new GameObject();
                     rdSubObj.name = "A Cube";
                     rdSubObj.transform.parent = cubeCanvas.transform;

@@ -9,7 +9,7 @@ public class Level2PlayerControl : MonoBehaviour
     public string verticalKey;
     public LayerMask wallLayer;
     public LayerMask pickupLayer;
-    public float moveTime = 100;
+    public float moveTime = 0.1f;
     public KeyCode inventoryCycleKey;
     public KeyCode actionKey;
 
@@ -39,7 +39,7 @@ public class Level2PlayerControl : MonoBehaviour
             TryMove(horizontal, vertical);
         }
         if(Input.GetKey(actionKey)) {
-            TryPickup();
+            TryInteract();
         }
     }
 
@@ -91,8 +91,11 @@ public class Level2PlayerControl : MonoBehaviour
 
     }
 
-    bool Move(int x, int y, out RaycastHit2D hit)
+    bool Move(int x, int y)
     {
+        if(coroutineState) { 
+            return false;
+        }
         Vector2 currPos = transform.position;
         Vector2 end;
         // Vertical (y) takes priority
@@ -120,36 +123,44 @@ public class Level2PlayerControl : MonoBehaviour
         }
         // Disable self collider
         selfCollider.enabled = false;
-        hit = Physics2D.Linecast(currPos, end, wallLayer);
+        var hit = Physics2D.Linecast(currPos, end, wallLayer);
         // Re enable it
         selfCollider.enabled = true;
         if(hit.transform != null) {
             return false;
         }
-        if(!coroutineState) {
-            coroutineState = true;
-            StartCoroutine(DoMove(end));
-        }
-        // Return true on able to move?
+        coroutineState = true;
+        StartCoroutine(DoMove(end));
         return true;
     }
 
-    void TryPickup() {
+    void TryInteract() {
+        // Try pickup first
         var hit = Physics2D.Linecast(transform.position, transform.position + (Vector3)facing.GetVector(), pickupLayer);
 
-        if(hit.transform != null) {
+        if(hit && hit.transform != null) {
             GameObject.Destroy(hit.transform.gameObject);
+            return;
         }
 
+        // Then, try interract with a slot
+        var hits = Physics2D.LinecastAll(transform.position, transform.position + (Vector3)facing.GetVector());
+        foreach(var h in hits) {
+            if(h.transform.gameObject.tag == "LambdaSlot") {
+                var slot = h.transform.GetComponent<LambdaSlot>();
+                var beh = new LambdaBehavior(i => i.SimpleMap(LambdaGrid.LambdaCube.CYAN, LambdaGrid.LambdaCube.GREEN));
+                beh = new LambdaBehavior(i => i.Stack(LambdaGrid.LambdaCube.ORANGE));
+                slot.InsertLambda(beh);
+                return;
+            }
+        }
     }
 
     void TryMove(int x, int y)
     {
         RaycastHit2D hit;
-        if (Move(x, y, out hit))
+        if (Move(x, y))
         {
-            if(hit.transform == null)
-                return;
         }
     }
 }
@@ -182,4 +193,5 @@ static class FaceMethods
         }
     }
 }
+
 

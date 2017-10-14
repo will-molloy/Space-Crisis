@@ -23,6 +23,21 @@ public class LambdaGrid {
         }
     }
 
+	private LambdaGrid(LambdaCube[,] newMatrix) {
+		lambdaActualLines = new LambdaCube[MAX_LAMBDA_GRID_HEIGHT, MAX_LAMBDA_GRID_WIDTH];
+        for (int i = 0; i < MAX_LAMBDA_GRID_HEIGHT; i++)
+        {
+            for (int j = 0; j < MAX_LAMBDA_GRID_WIDTH; j++)
+            {
+				lambdaActualLines[i, j] = newMatrix[i, j];
+            }
+        }
+	}
+
+	public LambdaGrid Deepcopy() {
+		return new LambdaGrid(lambdaActualLines);
+	}
+
 	public LambdaCube GetAt(int x, int y) {
 		if(x >= 0 && x < MAX_LAMBDA_GRID_WIDTH && y >= 0 && y < MAX_LAMBDA_GRID_HEIGHT)
 			return lambdaActualLines[x, y];
@@ -90,7 +105,20 @@ public class LambdaGrid {
 	}
 
 	public void Stack(LambdaCube what) {
-		throw new NotImplementedException();
+        for (int j = 0; j < MAX_LAMBDA_GRID_WIDTH; j++)
+        {
+            for (int i = 0; i < MAX_LAMBDA_GRID_HEIGHT; i++)
+            {
+				if(lambdaActualLines[i, j] == LambdaCube.NONE) {
+					if(i == 0) {
+						// the col is empty
+						break;
+					}
+					lambdaActualLines[i, j] = what;
+					break;
+				}
+            }
+        }
 
 	}
 
@@ -119,6 +147,10 @@ public class LambdaGrid {
 
 	}
 
+	public void Identity() {
+
+	}
+
 	public string ToString() {
 		
 		string build = "";
@@ -136,5 +168,27 @@ public class LambdaGrid {
 	public void Apply(LambdaBehavior behavior) {
 		behavior.function(this);
 	}
+
+	// override object.Equals
+	public override bool Equals(object obj)
+	{
+		if (obj == null || GetType() != obj.GetType())
+		{
+			return false;
+		}
+		
+		LambdaGrid grid = (LambdaGrid) obj;
+        for (int i = 0; i < MAX_LAMBDA_GRID_HEIGHT; i++)
+        {
+            for (int j = 0; j < MAX_LAMBDA_GRID_WIDTH; j++)
+            {
+				if(lambdaActualLines[i, j] != grid.lambdaActualLines[i, j]) {
+					return false;
+				}
+            }
+        }
+		return true;
+	}
+	
 
 }
