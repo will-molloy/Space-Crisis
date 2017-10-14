@@ -3,6 +3,11 @@ using System.Collections;
 
 public class LambdaBehavior {
 
-	public delegate void fn(LambdaGrid gridA, LambdaGrid gridB);
+	// XXX: Maybe just return void since we are mutating the state?
+	public delegate void Fn(LambdaGrid gridA);
+	public Fn function;
 
+	public LambdaBehavior(Fn f) {
+		function = f;
+	}
 }

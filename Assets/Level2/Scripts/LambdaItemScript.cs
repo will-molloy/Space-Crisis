@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class LambdaItemScript : MonoBehaviour {
 
+	private LambdaBehavior lambdaBehavior;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -12,5 +14,9 @@ public class LambdaItemScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+	}
+
+	void OnCollisionEnter2D () {
+
 	}
 }

@@ -8,8 +8,10 @@ public class Level2PlayerControl : MonoBehaviour
     public string horizontalKey;
     public string verticalKey;
     public LayerMask wallLayer;
+    public LayerMask pickupLayer;
     public float moveTime = 100;
     public KeyCode inventoryCycleKey;
+    public KeyCode actionKey;
 
     private BoxCollider2D selfCollider;
     private Rigidbody2D rigidbody;
@@ -35,6 +37,9 @@ public class Level2PlayerControl : MonoBehaviour
         if (horizontal != 0 || vertical != 0)
         {
             TryMove(horizontal, vertical);
+        }
+        if(Input.GetKey(actionKey)) {
+            TryPickup();
         }
     }
 
@@ -84,8 +89,6 @@ public class Level2PlayerControl : MonoBehaviour
                 break;
         }
 
-
-
     }
 
     bool Move(int x, int y, out RaycastHit2D hit)
@@ -127,8 +130,17 @@ public class Level2PlayerControl : MonoBehaviour
             coroutineState = true;
             StartCoroutine(DoMove(end));
         }
-        // Return turn on able to move?
+        // Return true on able to move?
         return true;
+    }
+
+    void TryPickup() {
+        var hit = Physics2D.Linecast(transform.position, transform.position + (Vector3)facing.GetVector(), pickupLayer);
+
+        if(hit.transform != null) {
+            GameObject.Destroy(hit.transform.gameObject);
+        }
+
     }
 
     void TryMove(int x, int y)
@@ -140,9 +152,34 @@ public class Level2PlayerControl : MonoBehaviour
                 return;
         }
     }
+}
 
-    private enum Face
+/*
+case class Face {}
+object Face {
+    def getVector(Face f) : Vector2 = ???
+}
+ */
+enum Face
+{
+    UP, DOWN, LEFT, RIGHT
+}
+static class FaceMethods
+{
+    public static Vector2 GetVector(this Face face)
     {
-        UP, DOWN, LEFT, RIGHT
+        switch (face)
+        {
+            case Face.UP:
+                return Vector2.up;
+            case Face.LEFT:
+                return Vector2.left;
+            case Face.DOWN:
+                return Vector2.down;
+            case Face.RIGHT:
+                return Vector2.right;
+            default: return Vector2.zero;
+        }
     }
 }
+
