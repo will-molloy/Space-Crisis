@@ -19,6 +19,8 @@ public class Level2PlayerControl : MonoBehaviour
     private float inverseMoveTime;
     private bool coroutineState;
     private Face facing;
+    private float interactionDelay = 0.33f;
+    private float timeStamp;
 
     // Use this for initialization
     void Start()
@@ -27,6 +29,10 @@ public class Level2PlayerControl : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         inverseMoveTime = 1f / moveTime;
         coroutineState = false;
+        if(inventoryCycleKeyLeft == KeyCode.None && inventoryCycleKeyRight == KeyCode.None) {
+            throw new System.Exception("One of the key must be null");
+        }
+        timeStamp = Time.time;
     }
 
     // Update is called once per frame
@@ -146,19 +152,74 @@ public class Level2PlayerControl : MonoBehaviour
         var hit = Physics2D.Linecast(transform.position, transform.position + (Vector3)facing.GetVector(), pickupLayer);
 
         if(hit && hit.transform != null) {
-            GameObject.Destroy(hit.transform.gameObject);
+            var script = hit.transform.gameObject.GetComponent<LambdaItemScript>();
+            var destroy = false;
+            if(script != null && script.lambdaBehavior != null) {
+                destroy = true;
+                // We check if any of the key is null
+                if(inventoryCycleKeyLeft != KeyCode.None) {
+                    // must be the player on left
+                    destroy = Leve2Controller.instance.PutInInventory(Leve2Controller.PlayerSide.LEFT, script.lambdaBehavior);
+                }
+                else if(inventoryCycleKeyRight != KeyCode.None) {
+                    destroy = Leve2Controller.instance.PutInInventory(Leve2Controller.PlayerSide.RIGHT, script.lambdaBehavior);
+                }
+                else throw new System.Exception("Both keys are null on this player");
+            }
+            if(destroy)
+                GameObject.Destroy(hit.transform.gameObject);
             return;
         }
 
-        // Then, try interract with a slot
+
+        // Check if we are allowed to interact with a slot
+        if(timeStamp > Time.time) {
+            return;
+        }
+        else {
+            timeStamp = Time.time + interactionDelay;
+        }
+
+
+        // Then, try interract with a slot 
         var hits = Physics2D.LinecastAll(transform.position, transform.position + (Vector3)facing.GetVector());
         foreach(var h in hits) {
             if(h.transform.gameObject.tag == "LambdaSlot") {
                 var slot = h.transform.GetComponent<LambdaSlot>();
-                var beh = new LambdaBehavior(i => i.SimpleMap(LambdaGrid.LambdaCube.CYAN, LambdaGrid.LambdaCube.GREEN));
-                beh = new LambdaBehavior(i => i.Stack(LambdaGrid.LambdaCube.ORANGE));
-                slot.InsertLambda(beh);
-                return;
+                // First we check if there is something in the slot and we have a free place in inventory
+                if (slot.HasLambdaInSlot())
+                {
+                    if (inventoryCycleKeyLeft != KeyCode.None
+                        && !Leve2Controller.instance.IsCurrentInventorySlotTaken(Leve2Controller.PlayerSide.LEFT))
+                    {
+                        // must be the player on left
+                        Leve2Controller.instance.PutInInventory(Leve2Controller.PlayerSide.LEFT, slot.RemoveLambda());
+                    }
+                    else if (inventoryCycleKeyRight != KeyCode.None
+                        && !Leve2Controller.instance.IsCurrentInventorySlotTaken(Leve2Controller.PlayerSide.RIGHT))
+                    {
+                        Leve2Controller.instance.PutInInventory(Leve2Controller.PlayerSide.RIGHT, slot.RemoveLambda());
+                    }
+                    else throw new System.Exception("Both keys are null on this player, or inventory slot if taken, you can ignore this.");
+
+                    return;
+                }
+                else {
+                    LambdaBehavior beh;
+                    if (inventoryCycleKeyLeft != KeyCode.None)
+                    {
+                        // must be the player on left
+                        beh = Leve2Controller.instance.GetInventoryNForPlayer(Leve2Controller.PlayerSide.LEFT);
+                    }
+                    else if (inventoryCycleKeyRight != KeyCode.None)
+                    {
+                        beh = Leve2Controller.instance.GetInventoryNForPlayer(Leve2Controller.PlayerSide.RIGHT);
+                    }
+                    else throw new System.Exception("Both keys are null on this player");
+                    if (beh != null)
+                        slot.InsertLambda(beh);
+                    return;
+                }
             }
         }
     }

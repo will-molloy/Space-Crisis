@@ -11,9 +11,9 @@ public class Room1Sequence : LambdaSequence {
 		start.SetAt(0, 5, LambdaGrid.LambdaCube.RED);
 
 		end = new LambdaGrid();
-		start.SetAt(0, 3, LambdaGrid.LambdaCube.CYAN);
-		start.SetAt(0, 4, LambdaGrid.LambdaCube.CYAN);
-		start.SetAt(0, 5, LambdaGrid.LambdaCube.CYAN);
+		end.SetAt(0, 3, LambdaGrid.LambdaCube.CYAN);
+		end.SetAt(0, 4, LambdaGrid.LambdaCube.CYAN);
+		end.SetAt(0, 5, LambdaGrid.LambdaCube.CYAN);
 		
 		if(CheckValidity()) {
 			var first = seq[0].GetComponent<DisplayScreen>();

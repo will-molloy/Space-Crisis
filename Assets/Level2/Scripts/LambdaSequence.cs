@@ -69,11 +69,16 @@ public class LambdaSequence : MonoBehaviour {
 	}
 
 	protected void Cascade(int n, LambdaGrid nextGrid) {
-		if(n >= seq.Count) return;
+		if(n >= seq.Count - 1) return;
 		var dp = seq[n].GetComponent<DisplayScreen>();
 		if(dp == null) {
 			// Not a display, apply the fuction
 			var slot = seq[n].GetComponent<LambdaSlot>();
+			if(!slot.HasLambdaInSlot()) {
+				// This slot is empty, interrupt the flow with nulls
+				Cascade(n+1, new LambdaGrid());
+				return;
+			}
 			var newGrid = nextGrid.Deepcopy();
 			newGrid.Apply(slot.behavior);
 			Cascade(n+1, newGrid);
@@ -90,9 +95,6 @@ public class LambdaSequence : MonoBehaviour {
 		}
 	}
 
-	protected void DoCascade() {
-
-	}
 
 
 }

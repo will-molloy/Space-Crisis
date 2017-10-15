@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 public class LambdaItemScript : MonoBehaviour {
 
-	private LambdaBehavior lambdaBehavior;
+	public LambdaBehavior lambdaBehavior;
+	public string description;
 
 	// Use this for initialization
 	void Start () {

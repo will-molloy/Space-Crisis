@@ -7,9 +7,13 @@ public class LambdaSlot : MonoBehaviour {
 	public LambdaBehavior behavior;
 	// Use this for initialization
 	private Animator animator;
+
+	public float interactionDelay = 0.5f;
+	private bool delayState = false;
 	void Start () {
 		animator = GetComponent<Animator>();
 		behavior = new LambdaBehavior(i => i.Identity());
+		behavior.desc = "identity";
 	}
 	
 	// Update is called once per frame
@@ -28,7 +32,16 @@ public class LambdaSlot : MonoBehaviour {
 	}
 
 	// Return an item here instead?
-	public void RemoveLambda() {
+	/** @NULLABLE
+	 */
+	public LambdaBehavior RemoveLambda() {
+		var ret = behavior;
 		behavior = null;
+		return ret;
 	}
+
+	public bool HasLambdaInSlot() {
+		return behavior != null;
+	}
+
 }
