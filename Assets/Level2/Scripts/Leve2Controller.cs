@@ -20,7 +20,7 @@ public class Leve2Controller : MonoBehaviour {
     public static int TOOL_BAR_ITEM_SIZE = 64;
 
     private int handLeftCurrPos, handRightCurrPos = 0;
-    private GameObject handLeft, handRight;
+    private GameObject handLeft, handRight, toolbarLeft, toolbarRight;
     private float inverseMoveTime = 1000;
     private bool leftCoroutineState, rightCoroutineState = false;
 
@@ -34,6 +34,8 @@ public class Leve2Controller : MonoBehaviour {
         }
         handLeft = GameObject.Find("HandLeft");
         handRight = GameObject.Find("HandRight");
+        toolbarLeft = GameObject.Find("ToolbarLeft");
+        toolbarRight = GameObject.Find("ToolbarRight");
         DontDestroyOnLoad(gameObject);
     }
 
