@@ -124,12 +124,10 @@ public class LambdaGrid {
 
 	public void StackMap(LambdaCube from, LambdaCube[] tos) {
 		throw new NotImplementedException();
-
 	}
 
 	public void Filter(LambdaCube what) {
-		throw new NotImplementedException();
-
+		SimpleMap(what, LambdaCube.NONE);
 	}
 
 	public void FilterContains(LambdaCube what) {
@@ -138,8 +136,17 @@ public class LambdaGrid {
 	}
 
 	public void Reverse() {
-		throw new NotImplementedException();
-
+		// Inverse the column
+        for (int j = 0; j < MAX_LAMBDA_GRID_WIDTH; j++)
+        {
+            for (int i = 0; i < MAX_LAMBDA_GRID_HEIGHT / 2; i++)
+            {
+                var tmp = lambdaActualLines[MAX_LAMBDA_GRID_HEIGHT - i - 1, j];
+                lambdaActualLines[MAX_LAMBDA_GRID_HEIGHT -i - 1, j] = lambdaActualLines[i, j];
+                lambdaActualLines[i, j] = tmp;
+            }
+        }
+		FallDown();
 	}
 
 	public void StackEquals() {

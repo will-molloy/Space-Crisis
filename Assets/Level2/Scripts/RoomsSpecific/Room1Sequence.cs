@@ -10,16 +10,16 @@ public class Room1Sequence : LambdaSequence {
 		start.SetAt(0, 4, LambdaGrid.LambdaCube.RED);
 		start.SetAt(0, 5, LambdaGrid.LambdaCube.RED);
 
-		end = new LambdaGrid();
-		end.SetAt(0, 3, LambdaGrid.LambdaCube.CYAN);
-		end.SetAt(0, 4, LambdaGrid.LambdaCube.CYAN);
-		end.SetAt(0, 5, LambdaGrid.LambdaCube.CYAN);
+		answer = new LambdaGrid();
+		answer.SetAt(0, 3, LambdaGrid.LambdaCube.CYAN);
+		answer.SetAt(0, 4, LambdaGrid.LambdaCube.CYAN);
+		answer.SetAt(0, 5, LambdaGrid.LambdaCube.CYAN);
 		
 		if(CheckValidity()) {
 			var first = seq[0].GetComponent<DisplayScreen>();
 			first.UpdateLambdaGrid(start);
 			var last = seq[seq.Count - 1].GetComponent<DisplayScreen>();
-			last.UpdateLambdaGrid(end);
+			last.UpdateLambdaGrid(answer);
 		}
 		else {
 			throw new System.Exception("Invalid sequence, Check it again!");

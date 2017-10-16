@@ -8,7 +8,7 @@ public class LambdaSequence : MonoBehaviour {
 	[SerializeField]
 	public List<GameObject> seq;
 
-	public LambdaGrid start, end;
+	public LambdaGrid start, answer;
 
 	// Use this for initialization
 	void Start () {
@@ -34,7 +34,7 @@ public class LambdaSequence : MonoBehaviour {
 			if(seq.Count < 2) {
 				return false;
 			}
-			return IsA<DisplayScreen>(seq[0]) && IsA<DisplayScreen>(seq[seq.Count-1]);
+			return IsA<DisplayScreen>(seq[0]) && IsA<DisplayScreen>(seq[seq.Count-1]) && IsA<DisplayScreen>(seq[seq.Count-2]);
 		}
 		return false;
 	}
@@ -69,7 +69,13 @@ public class LambdaSequence : MonoBehaviour {
 	}
 
 	protected void Cascade(int n, LambdaGrid nextGrid) {
-		if(n >= seq.Count - 1) return;
+		if(n >= seq.Count - 1) {
+			var lastDp = seq[seq.Count - 2].GetComponent<DisplayScreen>();
+			if(lastDp.GetLambdaGrid().Equals(seq[n].GetComponent<DisplayScreen>().GetLambdaGrid())) {
+				Leve2Controller.instance.SetRoomCompleted();
+			}
+			return;
+		}
 		var dp = seq[n].GetComponent<DisplayScreen>();
 		if(dp == null) {
 			// Not a display, apply the fuction

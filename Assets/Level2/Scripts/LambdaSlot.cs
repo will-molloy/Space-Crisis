@@ -9,7 +9,6 @@ public class LambdaSlot : MonoBehaviour {
 	private Animator animator;
 
 	public float interactionDelay = 0.5f;
-	private bool delayState = false;
 	void Start () {
 		animator = GetComponent<Animator>();
 		behavior = new LambdaBehavior(i => i.Identity());

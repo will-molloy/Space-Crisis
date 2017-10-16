@@ -63,7 +63,6 @@ public class DisplayScreen : MonoBehaviour {
 
     private void ApplyLambdaGrid()
     {
-		Debug.Log("REDRAW");
 		if(lambdaGrid == null) return;
 		//OR YOU KNOW, JUSt RENDER ON TOP OF IT
 		/* ^

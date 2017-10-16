@@ -59,6 +59,16 @@ public class Leve2Controller : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
     }
 
+    public void SetRoomCompleted() {
+        //Activate portal
+        var portals = GameObject.FindGameObjectsWithTag("Portal");
+        foreach (var portal in portals)
+        {
+            portal.transform.localPosition = new Vector3(portal.transform.localPosition.x,
+            portal.transform.localPosition.y, 0);
+        }
+    }
+
     private void MakeOptOn(PlayerSide side, out LambdaBehavior[] toOptOn, out int n) {
         switch(side) {
             case PlayerSide.LEFT: toOptOn = leftInventory; n = handLeftCurrPos; break;

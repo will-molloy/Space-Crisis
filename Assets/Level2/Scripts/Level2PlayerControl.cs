@@ -200,7 +200,10 @@ public class Level2PlayerControl : MonoBehaviour
                     {
                         Leve2Controller.instance.PutInInventory(Leve2Controller.PlayerSide.RIGHT, slot.RemoveLambda());
                     }
-                    else throw new System.Exception("Both keys are null on this player, or inventory slot if taken, you can ignore this.");
+                    else if(inventoryCycleKeyLeft == KeyCode.None && inventoryCycleKeyRight == KeyCode.None) 
+                    {
+                        throw new System.Exception("Both keys are null on this player");
+                    }
 
                     return;
                 }
