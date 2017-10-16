@@ -56,7 +56,7 @@ public class Level2PlayerControl : MonoBehaviour
         else if(Input.GetKey(inventoryCycleKeyRight)) {
             Leve2Controller.instance.CycleCursorRight();
         }
-        else if(Input.GetKey(dropKey)) {
+        else if(Input.GetKey(dropKey) && coroutineState == false) {
             TryDrop();
         }
     }
