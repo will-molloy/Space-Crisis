@@ -13,6 +13,8 @@ public class Level2PlayerControl : MonoBehaviour
     public KeyCode inventoryCycleKeyLeft;
     public KeyCode inventoryCycleKeyRight;
     public KeyCode actionKey;
+    public KeyCode dropKey;
+    public GameObject lambdaItemPrefab;
 
     private BoxCollider2D selfCollider;
     private Rigidbody2D rigidbody;
@@ -54,6 +56,23 @@ public class Level2PlayerControl : MonoBehaviour
         else if(Input.GetKey(inventoryCycleKeyRight)) {
             Leve2Controller.instance.CycleCursorRight();
         }
+        else if(Input.GetKey(dropKey)) {
+            TryDrop();
+        }
+    }
+
+    private Leve2Controller.PlayerSide DetermineSide() {
+        if (inventoryCycleKeyLeft != KeyCode.None)
+        {
+            // must be the player on left
+            return Leve2Controller.PlayerSide.LEFT;
+        }
+        else if (inventoryCycleKeyRight != KeyCode.None)
+        {
+            return Leve2Controller.PlayerSide.RIGHT;
+        }
+        else throw new System.Exception("Both keys are null on this player");
+
     }
 
     private IEnumerator DoMove(Vector3 end)
@@ -147,27 +166,41 @@ public class Level2PlayerControl : MonoBehaviour
         return true;
     }
 
+
+    private void TryDrop() {
+        // First we check if there is anything in the front
+        var hits = Physics2D.LinecastAll(transform.position, transform.position + (Vector3)facing.GetVector(), wallLayer | pickupLayer);
+        if(hits.Length > 0) {
+            return;
+        }
+        var side = DetermineSide();
+        var beh = Leve2Controller.instance.GetInventoryNForPlayer(side);
+        if(beh != null) {
+            var go = Instantiate(lambdaItemPrefab);
+            var parent = GameObject.Find("Items");
+            go.transform.SetParent(parent.transform);
+            go.transform.localPosition = transform.position + (Vector3)facing.GetVector();
+            go.transform.localScale = new Vector3(3.125f, 3.125f, 0);
+            go.layer = pickupLayer;
+            var itemScript = go.AddComponent<LambdaItemScript>();
+            itemScript.lambdaBehavior = beh;
+            itemScript.description = beh.desc;
+        }
+    }
+
     void TryInteract() {
         // Try pickup first
         var hit = Physics2D.Linecast(transform.position, transform.position + (Vector3)facing.GetVector(), pickupLayer);
 
         if(hit && hit.transform != null) {
             var script = hit.transform.gameObject.GetComponent<LambdaItemScript>();
-            var destroy = false;
             if(script != null && script.lambdaBehavior != null) {
-                destroy = true;
                 // We check if any of the key is null
-                if(inventoryCycleKeyLeft != KeyCode.None) {
-                    // must be the player on left
-                    destroy = Leve2Controller.instance.PutInInventory(Leve2Controller.PlayerSide.LEFT, script.lambdaBehavior);
+                var side = DetermineSide();
+                if(Leve2Controller.instance.PutInInventory(side, script.lambdaBehavior)) {
+                    GameObject.Destroy(hit.transform.gameObject);
                 }
-                else if(inventoryCycleKeyRight != KeyCode.None) {
-                    destroy = Leve2Controller.instance.PutInInventory(Leve2Controller.PlayerSide.RIGHT, script.lambdaBehavior);
-                }
-                else throw new System.Exception("Both keys are null on this player");
             }
-            if(destroy)
-                GameObject.Destroy(hit.transform.gameObject);
             return;
         }
 
@@ -186,39 +219,20 @@ public class Level2PlayerControl : MonoBehaviour
         foreach(var h in hits) {
             if(h.transform.gameObject.tag == "LambdaSlot") {
                 var slot = h.transform.GetComponent<LambdaSlot>();
+                var side = DetermineSide();
                 // First we check if there is something in the slot and we have a free place in inventory
                 if (slot.HasLambdaInSlot())
                 {
-                    if (inventoryCycleKeyLeft != KeyCode.None
-                        && !Leve2Controller.instance.IsCurrentInventorySlotTaken(Leve2Controller.PlayerSide.LEFT))
+                    if (!Leve2Controller.instance.IsCurrentInventorySlotTaken(side))
                     {
-                        // must be the player on left
+                        // The slot is not taken
                         Leve2Controller.instance.PutInInventory(Leve2Controller.PlayerSide.LEFT, slot.RemoveLambda());
                     }
-                    else if (inventoryCycleKeyRight != KeyCode.None
-                        && !Leve2Controller.instance.IsCurrentInventorySlotTaken(Leve2Controller.PlayerSide.RIGHT))
-                    {
-                        Leve2Controller.instance.PutInInventory(Leve2Controller.PlayerSide.RIGHT, slot.RemoveLambda());
-                    }
-                    else if(inventoryCycleKeyLeft == KeyCode.None && inventoryCycleKeyRight == KeyCode.None) 
-                    {
-                        throw new System.Exception("Both keys are null on this player");
-                    }
-
                     return;
                 }
                 else {
                     LambdaBehavior beh;
-                    if (inventoryCycleKeyLeft != KeyCode.None)
-                    {
-                        // must be the player on left
-                        beh = Leve2Controller.instance.GetInventoryNForPlayer(Leve2Controller.PlayerSide.LEFT);
-                    }
-                    else if (inventoryCycleKeyRight != KeyCode.None)
-                    {
-                        beh = Leve2Controller.instance.GetInventoryNForPlayer(Leve2Controller.PlayerSide.RIGHT);
-                    }
-                    else throw new System.Exception("Both keys are null on this player");
+                    beh = Leve2Controller.instance.GetInventoryNForPlayer(side);
                     if (beh != null)
                         slot.InsertLambda(beh);
                     return;
