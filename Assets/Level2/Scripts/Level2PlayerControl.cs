@@ -226,7 +226,7 @@ public class Level2PlayerControl : MonoBehaviour
                     if (!Leve2Controller.instance.IsCurrentInventorySlotTaken(side))
                     {
                         // The slot is not taken
-                        Leve2Controller.instance.PutInInventory(Leve2Controller.PlayerSide.LEFT, slot.RemoveLambda());
+                        Leve2Controller.instance.PutInInventory(side, slot.RemoveLambda());
                     }
                     return;
                 }
