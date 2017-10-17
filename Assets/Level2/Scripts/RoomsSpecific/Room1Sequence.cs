@@ -5,16 +5,25 @@ public class Room1Sequence : LambdaSequence {
 
 	// Use this for initialization
 	protected void Start () {
-		start = new LambdaGrid();
-		start.SetAt(0, 3, LambdaGrid.LambdaCube.RED);
-		start.SetAt(0, 4, LambdaGrid.LambdaCube.RED);
-		start.SetAt(0, 5, LambdaGrid.LambdaCube.RED);
+		start = LambdaGrid.FromString
+        ("NONE NONE NONE NONE NONE NONE NONE NONE\n" +
+		"NONE NONE NONE NONE NONE NONE NONE NONE\n" +
+		"NONE NONE NONE NONE NONE NONE NONE NONE\n" +
+		"NONE NONE NONE NONE NONE NONE NONE NONE\n" +
+		"NONE NONE NONE NONE NONE NONE NONE NONE\n" +
+		"NONE RED NONE NONE NONE NONE RED NONE\n" +
+		"NONE YELLOW RED NONE NONE RED YELLOW NONE\n" +
+		"NONE YELLOW YELLOW RED RED YELLOW YELLOW NONE");
 
-		answer = new LambdaGrid();
-		answer.SetAt(0, 3, LambdaGrid.LambdaCube.CYAN);
-		answer.SetAt(0, 4, LambdaGrid.LambdaCube.CYAN);
-		answer.SetAt(0, 5, LambdaGrid.LambdaCube.CYAN);
-		
+		answer = LambdaGrid.FromString
+        ("NONE NONE NONE NONE NONE NONE NONE NONE\n" +
+		"NONE NONE NONE NONE NONE NONE NONE NONE\n" +
+		"NONE NONE NONE NONE NONE NONE NONE NONE\n" +
+		"NONE NONE NONE NONE NONE NONE NONE NONE\n" +
+		"NONE NONE NONE NONE NONE NONE NONE NONE\n" +
+		"NONE RED RED RED RED RED RED NONE\n" +
+		"NONE YELLOW YELLOW YELLOW YELLOW YELLOW YELLOW NONE\n" +
+		"NONE RED RED RED RED RED RED NONE");
 		if(CheckValidity()) {
 			var first = seq[0].GetComponent<DisplayScreen>();
 			first.UpdateLambdaGrid(start);

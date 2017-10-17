@@ -86,6 +86,8 @@ public class LambdaGrid {
 			case LambdaCube.CYAN: return Leve2Controller.CYAN_CUBE;
 			case LambdaCube.BLUE: return Leve2Controller.BLUE_CUBE;
 			case LambdaCube.PURPLE: return Leve2Controller.PURPLE_CUBE;
+			case LambdaCube.RAINBOW: return Leve2Controller.RAINBOW_CUBE;
+			case LambdaCube.ALPHA: return Leve2Controller.CUPHEAD_CUBE;
 			default: return null;
 		}
 	}
@@ -99,9 +101,9 @@ public class LambdaGrid {
 					lambdaActualLines[i, j] = to;
 				}
 				// WE need to fall down incase map to none
-				FallDown();
             }
         }
+        FallDown();
 	}
 
 	public void Stack(LambdaCube what) {
@@ -119,11 +121,41 @@ public class LambdaGrid {
 				}
             }
         }
-
 	}
 
+	private void Bump(int i, int j) {
+		if(i >= MAX_LAMBDA_GRID_HEIGHT) {
+			lambdaActualLines[i-1, j] = LambdaCube.NONE;
+			return;
+		}
+		if(lambdaActualLines[i+1, j] != LambdaCube.NONE) {
+			Bump(i+1, j);
+		}
+			lambdaActualLines[i+1, j] = lambdaActualLines[i, j];
+			lambdaActualLines[i,j] = LambdaCube.NONE;
+		
+	}
+
+/* tos => |0|
+	      |1|
+		  ^^^ */
 	public void StackMap(LambdaCube from, LambdaCube[] tos) {
-		throw new NotImplementedException();
+		if(tos.Length != 2) {
+			throw new System.NotImplementedException();
+		}
+        for (int i = 0; i < MAX_LAMBDA_GRID_HEIGHT; i++)
+        {
+            for (int j = 0; j < MAX_LAMBDA_GRID_WIDTH; j++)
+            {
+				if(lambdaActualLines[i, j] == from) {
+					Bump(i+1, j);
+					lambdaActualLines[i+1, j] = tos[0];
+					lambdaActualLines[i, j] = tos[1];
+				}
+				// WE need to fall down incase map to none
+				FallDown();
+            }
+        }
 	}
 
 	public void Filter(LambdaCube what) {
@@ -195,6 +227,33 @@ public class LambdaGrid {
             }
         }
 		return true;
+	}
+	
+	/**
+	 * Parse a string representation of the grid
+	 * Lines are seped by '\n'
+	 * Items are seped by a blank char
+	 */
+	public static LambdaGrid FromString(String str) {
+		// Tokenise 
+		var lines = str.Split('\n');
+		var grid = new LambdaGrid();
+		if(lines.Length != MAX_LAMBDA_GRID_HEIGHT) {
+			throw new System.Exception("Invalid string");
+		}
+		for(int i = 0; i < MAX_LAMBDA_GRID_HEIGHT; i++) {
+			var tokens = lines[i].Split();
+            if (tokens.Length != MAX_LAMBDA_GRID_WIDTH)
+            {
+                throw new System.Exception(String.Format("Invalid String"));
+			}
+			for(int j = 0; j < MAX_LAMBDA_GRID_WIDTH; j++) {
+				var eVal = Enum.Parse(typeof(LambdaCube), tokens[j]);
+				grid.SetAt(MAX_LAMBDA_GRID_HEIGHT - i - 1, j, (LambdaCube)eVal);
+			}
+		}
+		// Potential FallDown()
+		return grid;
 	}
 	
 

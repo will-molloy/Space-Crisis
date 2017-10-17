@@ -12,6 +12,8 @@ public class Leve2Controller : MonoBehaviour {
     public static Sprite CYAN_CUBE = Resources.Load<Sprite>("Sprites/buildable_blocks5");
     public static Sprite BLUE_CUBE = Resources.Load<Sprite>("Sprites/buildable_blocks6");
     public static Sprite PURPLE_CUBE = Resources.Load<Sprite>("Sprites/buildable_blocks7");
+    public static Sprite RAINBOW_CUBE = Resources.Load<Sprite>("Sprites/buildable_blocks8");
+    public static Sprite CUPHEAD_CUBE = Resources.Load<Sprite>("Sprites/buildable_blocks9");
     public static Sprite DISCO_1 = Resources.Load<Sprite>("Sprites/basetile2");
     public static Sprite DISCO_2 = Resources.Load<Sprite>("Sprites/basetile3");
     public static Sprite DISCO_3 = Resources.Load<Sprite>("Sprites/basetile4");
