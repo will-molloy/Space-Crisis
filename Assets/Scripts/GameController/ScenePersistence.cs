@@ -34,12 +34,7 @@ public class ScenePersistence : MonoBehaviour
     public void SaveScene()
     {
         Debug.Log("Saving: " + thisScene);
-        List<GameObject> objsToSave = new List<GameObject>();
-        foreach (GameObject obj in getChildObjs(transform))
-        {
-            objsToSave.Add(obj.gameObject);
-        }
-        GameController.getInstance().SaveObjsPosFor(thisScene, objsToSave);
+        GameController.getInstance().SaveObjsPosFor(thisScene, getChildObjs(transform));
     }
 
     private List<GameObject> getChildObjs(Transform transform)
@@ -48,7 +43,7 @@ public class ScenePersistence : MonoBehaviour
         foreach (Transform t in transform)
         {
             objs.Add(t.gameObject);
-            objs.AddRange(getChildObjs(t));
+            objs.AddRange(getChildObjs(t)); // recursively add child components
         }
         return objs;
     }

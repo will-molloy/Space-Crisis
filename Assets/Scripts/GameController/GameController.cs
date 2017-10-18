@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 public class GameController
 {
-    private static Dictionary<string, Dictionary<String, Vector3>> savedScenePositions; // Scene.name :: Object.name :: Position
+    private static Dictionary<string, Dictionary<String, Vector3>> savedScenePositions; // Scene.name :: Object.name :: Position, For persisting scene
+    private static Dictionary<string, Dictionary<String, Vector3>> initialScenePositions; // For resseting scene e.g. on death
     private static readonly string[] playableScenes = new string[] { "level1room1", "level1room2", "level1room3" };
     private static GameController instance;
 
