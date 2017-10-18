@@ -10,7 +10,7 @@ public class ScenePersistence : MonoBehaviour
     {
         Debug.Log("Restoring: " + thisScene);
 
-        foreach (KeyValuePair<string, Vector3> objPos in GameController.getInstance().getSavedObjPosFor(thisScene))
+        foreach (KeyValuePair<string, Vector3> objPos in GameController.getInstance().getSavedObjsPosFor(thisScene))
         {
             Debug.Log("Restoring: Key :" + objPos.Key + ", Value: " + objPos.Value);
 

@@ -4,18 +4,24 @@ using System.Collections.Generic;
 
 public class GameController
 {
-    private static Dictionary<string, Dictionary<String, Vector3>> savedScenePositions; // Scene.name :: Object.name :: Position, For persisting scene
-    private static Dictionary<string, Dictionary<String, Vector3>> initialScenePositions; // For resseting scene e.g. on death
+    // Scene.name :: Object.name :: Position, For persisting given scene objects
+    private static Dictionary<string, Dictionary<string, Vector3>> savedScenePositions;
+
+    // For resseting scene e.g. level restart
+    private static Dictionary<string, Dictionary<string, Vector3>> initialScenePositions; 
+
     private static readonly string[] playableScenes = new string[] { "level1room1", "level1room2", "level1room3" };
     private static GameController instance;
 
     private GameController()
     {
+        initialScenePositions = new Dictionary<string, Dictionary<string, Vector3>>();
         savedScenePositions = new Dictionary<string, Dictionary<string, Vector3>>();
         foreach (string playableScene in playableScenes)
         {
-            Dictionary<String, Vector3> sceneInitialPos = new Dictionary<string, Vector3>();
-            savedScenePositions[playableScene] = sceneInitialPos;
+            Dictionary<String, Vector3> scenePos = new Dictionary<string, Vector3>();
+            savedScenePositions[playableScene] = scenePos;
+            initialScenePositions[playableScene] = scenePos;
         }
     }
 
@@ -31,12 +37,19 @@ public class GameController
         foreach (GameObject obj in objects)
         {
             savedScenePositions[sceneName][obj.name] = obj.transform.position;
+            if (!initialScenePositions[sceneName].ContainsKey(obj.name)) // write once
+                initialScenePositions[sceneName][obj.name] = obj.transform.position;
         }
     }
 
-    public Dictionary<String, Vector3> getSavedObjPosFor(string sceneName)
+    public Dictionary<String, Vector3> getSavedObjsPosFor(string sceneName)
     {
         return savedScenePositions[sceneName];
+    }
+
+    public Dictionary<String, Vector3> getInitialObjsPosFor(string sceneName)
+    {
+        return initialScenePositions[sceneName];
     }
 
     internal void AddItem(Item item)
