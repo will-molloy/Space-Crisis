@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using System.Collections.Generic;
 
 public class LambdaGrid {
 
@@ -13,7 +14,7 @@ public class LambdaGrid {
 	}
 
 	public LambdaGrid() {
-        lambdaActualLines = new LambdaCube[MAX_LAMBDA_GRID_HEIGHT, MAX_LAMBDA_GRID_WIDTH];
+		lambdaActualLines = GetNoneGrid();
         for (int i = 0; i < MAX_LAMBDA_GRID_HEIGHT; i++)
         {
             for (int j = 0; j < MAX_LAMBDA_GRID_WIDTH; j++)
@@ -22,6 +23,18 @@ public class LambdaGrid {
             }
         }
     }
+
+	internal static LambdaCube[,] GetNoneGrid() {
+		var tmp = new LambdaCube[MAX_LAMBDA_GRID_HEIGHT, MAX_LAMBDA_GRID_WIDTH];
+        for (int i = 0; i < MAX_LAMBDA_GRID_HEIGHT; i++)
+        {
+            for (int j = 0; j < MAX_LAMBDA_GRID_WIDTH; j++)
+            {
+				tmp[i, j] = LambdaCube.NONE;
+            }
+        }
+		return tmp;
+	}
 
 	private LambdaGrid(LambdaCube[,] newMatrix) {
 		lambdaActualLines = new LambdaCube[MAX_LAMBDA_GRID_HEIGHT, MAX_LAMBDA_GRID_WIDTH];
@@ -74,7 +87,7 @@ public class LambdaGrid {
 
 
 	public enum LambdaCube {
-		RED, ORANGE, YELLOW, GREEN, CYAN, BLUE, PURPLE, NONE, RAINBOW, ALPHA, BETA, GAMMA, YETA
+		RED, ORANGE, YELLOW, GREEN, CYAN, BLUE, PURPLE, NONE, RAINBOW, ALPHA, BETA, GAMMA, YEETA, ANY
 	}
 
 	public static Sprite LambdaGridItemToSprite(LambdaGrid.LambdaCube en) {
@@ -124,7 +137,7 @@ public class LambdaGrid {
 	}
 
 	private void Bump(int i, int j) {
-		if(i >= MAX_LAMBDA_GRID_HEIGHT) {
+		if(i >= MAX_LAMBDA_GRID_HEIGHT - 1) {
 			lambdaActualLines[i-1, j] = LambdaCube.NONE;
 			return;
 		}
@@ -143,7 +156,17 @@ public class LambdaGrid {
 		if(tos.Length != 2) {
 			throw new System.NotImplementedException();
 		}
-        for (int i = 0; i < MAX_LAMBDA_GRID_HEIGHT; i++)
+		if(from == tos[0]) {
+			StackMapTopEq(from, tos);
+		}
+		else {
+			StackMapBtmEq(from, tos);
+		}
+		FallDown();
+	}
+
+	internal void StackMapTopEq(LambdaCube from, LambdaCube[] tos) {
+        for (int i = MAX_LAMBDA_GRID_HEIGHT - 1 ; i >= 0 ; i--)
         {
             for (int j = 0; j < MAX_LAMBDA_GRID_WIDTH; j++)
             {
@@ -152,19 +175,142 @@ public class LambdaGrid {
 					lambdaActualLines[i+1, j] = tos[0];
 					lambdaActualLines[i, j] = tos[1];
 				}
-				// WE need to fall down incase map to none
-				FallDown();
             }
         }
 	}
+
+	internal void StackMapBtmEq(LambdaCube from, LambdaCube[] tos){
+        for (int i = 0 ; i < MAX_LAMBDA_GRID_HEIGHT - 1 ; i++)
+        {
+            for (int j = 0; j < MAX_LAMBDA_GRID_WIDTH; j++)
+            {
+				if(lambdaActualLines[i, j] == from) {
+					Bump(i+1, j);
+					lambdaActualLines[i+1, j] = tos[0];
+					lambdaActualLines[i, j] = tos[1];
+				}
+            }
+        }
+    }
 
 	public void Filter(LambdaCube what) {
 		SimpleMap(what, LambdaCube.NONE);
 	}
 
-	public void FilterContains(LambdaCube what) {
-		throw new NotImplementedException();
+	internal void Centerify(){
+		Squeeze();
+		var n = Math.Floor(FindNEmptyCol() / 2f);
+		while(n-- > 0) {
+			DestructiveShiftRight();
+		}
+	}
 
+	internal void DestructiveShiftRight() {
+        for (int j = MAX_LAMBDA_GRID_WIDTH - 1; j >= 1; j--) {
+            for (int i = 0; i < MAX_LAMBDA_GRID_HEIGHT; i++) {
+				lambdaActualLines[i, j] = lambdaActualLines[i, j-1];
+			}
+		}
+        // Shift in an empty col
+        for (int i = 0; i < MAX_LAMBDA_GRID_HEIGHT; i++)
+        {
+			lambdaActualLines[i, 0] = LambdaCube.NONE;
+		}
+
+	}
+
+	public void Squeeze() {
+		// What's C#'s bitmap?
+		bool[] bmap = new bool[MAX_LAMBDA_GRID_WIDTH];
+		// An easy to populate the array?
+		for(int i = 0; i < MAX_LAMBDA_GRID_WIDTH; i++) {
+			bmap[i] = false;
+		}
+        for (int j = 0; j < MAX_LAMBDA_GRID_WIDTH; j++)
+        {
+            for (int i = 0; i < MAX_LAMBDA_GRID_HEIGHT; i++)
+            {
+				if(lambdaActualLines[i, j] != LambdaCube.NONE) {
+					break;
+				}
+                if (i >= MAX_LAMBDA_GRID_HEIGHT - 1)
+                {
+                    // Must be empty col
+                    bmap[j] = true;
+                }
+            }
+        }
+		SqueezeLeft(bmap);
+	}
+
+	internal void SqueezeLeft(bool[] bmap) {
+        LambdaCube[,] tmp = GetNoneGrid();
+        var gridi = 0;
+		for(int bmapi = 0; bmapi < MAX_LAMBDA_GRID_WIDTH; bmapi++) {
+			if(bmap[bmapi]) {
+				continue;
+			}
+            for (int j = 0; j < MAX_LAMBDA_GRID_HEIGHT; j++) {
+				tmp[j, gridi] = lambdaActualLines[j, bmapi];
+			}
+			gridi++;
+		}
+		lambdaActualLines = tmp;
+	}
+
+	internal int FindNEmptyCol() {
+		var n = 0;
+        for (int j = 0; j < MAX_LAMBDA_GRID_WIDTH; j++)
+        {
+            for (int i = 0; i < MAX_LAMBDA_GRID_HEIGHT; i++)
+            {
+				if(lambdaActualLines[i, j] != LambdaCube.NONE) {
+					break;
+				}
+                if (i >= MAX_LAMBDA_GRID_HEIGHT - 1)
+                {
+                    // Must be empty col
+					n++;
+                }
+            }
+        }
+		return n;
+	}
+
+	public void FilterRejects(LambdaCube what) {
+		// Filter out any cols containing the cube
+        for (int j = 0; j < MAX_LAMBDA_GRID_WIDTH; j++)
+        {
+            for (int i = 0; i < MAX_LAMBDA_GRID_HEIGHT; i++)
+            {
+				if(lambdaActualLines[i, j] == what) {
+					// Clean up the line
+					for(int k = 0; k < MAX_LAMBDA_GRID_HEIGHT; k++) {
+						lambdaActualLines[k, j] = LambdaCube.NONE;
+					}
+					break;
+				}
+            }
+        }
+		Centerify();
+	}
+
+	public void FilterContains(LambdaCube what) {
+		// The inverse of FilterRejects
+        for (int j = 0; j < MAX_LAMBDA_GRID_WIDTH; j++)
+        {
+            for (int i = 0; i < MAX_LAMBDA_GRID_HEIGHT; i++)
+            {
+				if(lambdaActualLines[i, j] != what) {
+					// Clean up the line
+					for(int k = 0; k < MAX_LAMBDA_GRID_HEIGHT; k++) {
+						lambdaActualLines[k, j] = LambdaCube.NONE;
+					}
+					break;
+				}
+            }
+        }
+		Centerify();
 	}
 
 	public void Reverse() {
