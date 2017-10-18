@@ -9530,6 +9530,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1657713033}
+  - 114: {fileID: 1657713032}
   m_Layer: 0
   m_Name: ScenePersistence
   m_TagString: Untagged
@@ -9537,6 +9538,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1657713032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1657713031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de066841aa0a1784cac6d71fcea4b734, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisScene: level1room2
 --- !u!4 &1657713033
 Transform:
   m_ObjectHideFlags: 0

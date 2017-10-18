@@ -1,50 +1,32 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System;
 using System.Collections.Generic;
 
 
-public class GameController {
+public class GameController
+{
 
     private static GameController instance;
+    private Dictionary<String, GameObject[]> savedSceneObjects = new Dictionary<string, GameObject[]>(); // Scene :: Objects, for persisting scene
 
-    private int lastScene;
-
-    private Dictionary<int, object> savedObjects = new Dictionary<int, object>();
-   
-    private GameController()
-    {
-        lastScene = 0;
-    }
+    private GameController() { }
 
     public static GameController GetInstance()
     {
-        if(instance == null)
-        {
+        if (instance == null)
             instance = new GameController();
-        }
         return instance;
     }
 
-    public void SetLastScene(int a)
+
+    public void SaveObjectsFor(string scene, GameObject[] objects)
     {
-        lastScene = a;
+        savedSceneObjects[scene] = objects;
     }
 
-    public int GetLastScene()
-    {   
-        return lastScene;
-    }
-
-    public void SetSavedObjectFor(int of, object obj)
+    public GameObject[] GetObjectsFor(string scene)
     {
-        
-        savedObjects[of] = obj;
-    }
-
-    public object GetSavedObjectFor(int of)
-    {
-        return savedObjects[of];
+        return savedSceneObjects[scene];
     }
 
 }
