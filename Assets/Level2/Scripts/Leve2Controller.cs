@@ -65,7 +65,6 @@ public class Leve2Controller : MonoBehaviour {
         inventoryList.Add(leftInventory);
         inventoryList.Add(rightInventory);
         playerOnPortalCount = 0;
-        SetRoomCompleted();
     }
 
     public void SetRoomCompleted() {
