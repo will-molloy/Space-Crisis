@@ -2634,20 +2634,34 @@ SpriteRenderer:
 GameObject:
   m_PrefabParentObject: {fileID: 132218, guid: dd993a22868a9e04f9c6dc5a7095f925, type: 2}
   m_PrefabInternal: {fileID: 1518005578}
---- !u!61 &201459176
-BoxCollider2D:
+--- !u!50 &201459176
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 201459172}
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &201459178
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 201459172}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Size: {x: 0.32, y: 0.32}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18868bf1abd0254e98bcb803a8977ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &206045576
 GameObject:
   m_ObjectHideFlags: 8
@@ -9535,7 +9549,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 156982, guid: 08de70b536e59dd4e9ba342f49b88b49, type: 2}
       propertyPath: m_Name
-      value: YELLOW->RED,YELLOW
+      value: MapYellowToRedYellow
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 08de70b536e59dd4e9ba342f49b88b49, type: 2}
@@ -11901,7 +11915,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 156982, guid: 08de70b536e59dd4e9ba342f49b88b49, type: 2}
       propertyPath: m_Name
-      value: YELLOW->RED
+      value: MapYellowToRed
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 08de70b536e59dd4e9ba342f49b88b49, type: 2}
@@ -17382,7 +17396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cacb625c6bb231649b77b528781175af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: GAY
+  description: Pride
   from: NONE
   to: RAINBOW
 --- !u!1 &1145847185
@@ -19917,7 +19931,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cacb625c6bb231649b77b528781175af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: 
+  description: CUPHEAD!
   from: YELLOW
   to: ALPHA
 --- !u!1 &1326960268
@@ -25297,6 +25311,38 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!1 &1756719072 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 132218, guid: dd993a22868a9e04f9c6dc5a7095f925, type: 2}
+  m_PrefabInternal: {fileID: 532813457}
+--- !u!114 &1756719077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1756719072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18868bf1abd0254e98bcb803a8977ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!50 &1756719078
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1756719072}
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1763130331
 GameObject:
   m_ObjectHideFlags: 8

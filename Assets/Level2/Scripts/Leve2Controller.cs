@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Leve2Controller : MonoBehaviour {
     public const int GRID_SIZE = 1;
@@ -36,9 +37,14 @@ public class Leve2Controller : MonoBehaviour {
     private const float inverseMoveTime = 1000;
     private bool leftCoroutineState, rightCoroutineState = false;
 
+    private int playerOnPortalCount;
+
     public enum PlayerSide {
         LEFT, RIGHT
     }
+
+    private string[] sceneStrings = new string[]{"level2room1","level2room2","level2room3"};
+    private uint currentLevel = 0;
 
     void Awake() {
         if(instance == null) {
@@ -58,7 +64,8 @@ public class Leve2Controller : MonoBehaviour {
         inventoryList = new List<LambdaBehavior[]>();
         inventoryList.Add(leftInventory);
         inventoryList.Add(rightInventory);
-        DontDestroyOnLoad(gameObject);
+        playerOnPortalCount = 0;
+        SetRoomCompleted();
     }
 
     public void SetRoomCompleted() {
@@ -109,7 +116,7 @@ public class Leve2Controller : MonoBehaviour {
     }
 
     void UpdateUI() {
-        foreach(var a in toolBarList) {
+        foreach (var a in toolBarList) {
             foreach (RectTransform child in a.gameObject.GetComponentInChildren<RectTransform>())
             {
                 Destroy(child.gameObject);
@@ -199,7 +206,6 @@ public class Leve2Controller : MonoBehaviour {
     }
 
     private IEnumerator CycleCoRoutineRightHand(Transform rtf, Vector3 end) {
-
         // Only one instace should be running
         float remainingDist = (rtf.position - end).sqrMagnitude;
         
@@ -211,9 +217,23 @@ public class Leve2Controller : MonoBehaviour {
         }
         rightCoroutineState = false;
         yield return null;
-
     }
 
+    private void StartNextLevel() {
+        if(currentLevel < sceneStrings.Length - 1)
+            SceneManager.LoadScene(sceneStrings[++currentLevel]);
+    }
 
+    public void AddPlayerEnterPortal() {
+        playerOnPortalCount++;
+        if(playerOnPortalCount >= 2) {
+            playerOnPortalCount = 0;
+            StartNextLevel();
+        }
+    }
+
+    public void DecreasePlayerEnterPortal() {
+        playerOnPortalCount--;
+    }
 
 }

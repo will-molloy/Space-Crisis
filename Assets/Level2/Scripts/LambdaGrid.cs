@@ -301,13 +301,18 @@ public class LambdaGrid {
         {
             for (int i = 0; i < MAX_LAMBDA_GRID_HEIGHT; i++)
             {
-				if(lambdaActualLines[i, j] != what) {
-					// Clean up the line
-					for(int k = 0; k < MAX_LAMBDA_GRID_HEIGHT; k++) {
-						lambdaActualLines[k, j] = LambdaCube.NONE;
-					}
+				if(lambdaActualLines[i, j] == what) {
 					break;
 				}
+                // Clean up the line
+                if (i >= MAX_LAMBDA_GRID_HEIGHT - 1)
+                {
+                    // Must be a col without `what`
+                    for (int k = 0; k < MAX_LAMBDA_GRID_HEIGHT; k++)
+                    {
+                        lambdaActualLines[k, j] = LambdaCube.NONE;
+                    }
+                }
             }
         }
 		Centerify();
