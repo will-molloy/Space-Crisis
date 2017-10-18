@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using System;
 
 public class ScenePersistence : MonoBehaviour
 {
@@ -11,7 +10,7 @@ public class ScenePersistence : MonoBehaviour
     {
         Debug.Log("Restoring: " + thisScene);
 
-        foreach (KeyValuePair<string, Vector3> objPos in GameController.getInstance().getSavedObjectPositionsFor(thisScene))
+        foreach (KeyValuePair<string, Vector3> objPos in GameController.getInstance().getSavedObjPosFor(thisScene))
         {
             Debug.Log("Restoring: Key :" + objPos.Key + ", Value: " + objPos.Value);
 
@@ -36,20 +35,20 @@ public class ScenePersistence : MonoBehaviour
     {
         Debug.Log("Saving: " + thisScene);
         List<GameObject> objsToSave = new List<GameObject>();
-        foreach (GameObject obj in getChildren(transform))
+        foreach (GameObject obj in getChildObjs(transform))
         {
             objsToSave.Add(obj.gameObject);
         }
-        GameController.getInstance().SaveObjectsFor(thisScene, objsToSave);
+        GameController.getInstance().SaveObjsPosFor(thisScene, objsToSave);
     }
 
-    private List<GameObject> getChildren(Transform transform)
+    private List<GameObject> getChildObjs(Transform transform)
     {
         List<GameObject> objs = new List<GameObject>();
         foreach (Transform t in transform)
         {
             objs.Add(t.gameObject);
-            objs.AddRange(getChildren(t));
+            objs.AddRange(getChildObjs(t));
         }
         return objs;
     }

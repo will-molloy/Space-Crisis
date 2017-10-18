@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
 
 public class GameController
 {
@@ -26,7 +25,7 @@ public class GameController
         return instance;
     }
 
-    public void SaveObjectsFor(string sceneName, List<GameObject> objects)
+    public void SaveObjsPosFor(string sceneName, List<GameObject> objects)
     {
         foreach (GameObject obj in objects)
         {
@@ -34,7 +33,7 @@ public class GameController
         }
     }
 
-    public Dictionary<String, Vector3> getSavedObjectPositionsFor(string sceneName)
+    public Dictionary<String, Vector3> getSavedObjPosFor(string sceneName)
     {
         return savedScenePositions[sceneName];
     }
