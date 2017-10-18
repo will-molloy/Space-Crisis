@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using System;
 
 public class ScenePersistence : MonoBehaviour {
 
-    public string thisScene;
+    private static ScenePersistence instance;
     private static GameController gameController;
     private static readonly string[] playableScenes = new string[]{ "level1room1", "level1room2", "level1room3" };
 
@@ -30,6 +31,15 @@ public class ScenePersistence : MonoBehaviour {
 */
     }
 
+    private ScenePersistence() { }
+
+    public static ScenePersistence GetInstance()
+    {
+        if (instance == null)
+            instance = new ScenePersistence();
+        return instance;
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -52,10 +62,10 @@ public class ScenePersistence : MonoBehaviour {
         }
     }
 
-    public void RestoreScene()
+    public void RestoreScene(string scene)
     {
-        GameObject[] savedObjects = gameController.GetObjectsFor(thisScene);
-        GameObject[] currentObjects = SceneManager.GetSceneByName(thisScene).GetRootGameObjects();
+        GameObject[] savedObjects = gameController.GetObjectsFor(scene);
+        GameObject[] currentObjects = SceneManager.GetSceneByName(scene).GetRootGameObjects();
        
         for (int i = 0; i < currentObjects.Length; i++)
         {

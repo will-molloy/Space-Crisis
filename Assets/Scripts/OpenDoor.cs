@@ -7,11 +7,12 @@ public class OpenDoor : MonoBehaviour
     public string sceneToLoad;
     public Sprite[] sprites = new Sprite[3];
     private List<GameObject> colliders;
-
+    private static ScenePersistence scenePersistence;
 
     // Use this for initialization
     void Start()
     {
+        scenePersistence = ScenePersistence.GetInstance();
         colliders = new List<GameObject>();
     }
 
@@ -24,6 +25,7 @@ public class OpenDoor : MonoBehaviour
         if (colliders.Count == 2)
         {
             SceneManager.LoadScene(sceneToLoad);
+            scenePersistence.RestoreScene(sceneToLoad);
         }
     }
 
