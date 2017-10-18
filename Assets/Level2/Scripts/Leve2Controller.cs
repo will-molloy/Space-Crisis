@@ -20,6 +20,9 @@ public class Leve2Controller : MonoBehaviour {
     public static Sprite DISCO_3 = Resources.Load<Sprite>("Sprites/basetile4");
     public static Sprite ITEM_IN_SLOT = Resources.Load<Sprite>("Sprites/white");
 
+    public static readonly AudioClip TAP_CLIP = Resources.Load<AudioClip>("Audios/tap");
+    public static readonly AudioClip COMPLETE_CLIP = Resources.Load<AudioClip>("Audios/complete");
+
     public GameObject itemInInvenPrefab;
 
     public static Leve2Controller instance;
@@ -46,6 +49,8 @@ public class Leve2Controller : MonoBehaviour {
     private string[] sceneStrings = new string[]{"level2room1","level2room2","level2room3"};
     private uint currentLevel = 0;
 
+    private AudioSource audioSrcObj;
+
     void Awake() {
         if(instance == null) {
             instance = this;
@@ -64,17 +69,27 @@ public class Leve2Controller : MonoBehaviour {
         inventoryList = new List<LambdaBehavior[]>();
         inventoryList.Add(leftInventory);
         inventoryList.Add(rightInventory);
+        audioSrcObj = gameObject.AddComponent<AudioSource>();
         playerOnPortalCount = 0;
     }
 
     public void SetRoomCompleted() {
         //Activate portal
+        PlayVictorySoundOneShot();
         var portals = GameObject.FindGameObjectsWithTag("Portal");
         foreach (var portal in portals)
         {
             portal.transform.localPosition = new Vector3(portal.transform.localPosition.x,
             portal.transform.localPosition.y, 0);
         }
+    }
+
+    internal void PlaySoundOneShot() {
+        audioSrcObj.PlayOneShot(TAP_CLIP);
+    }
+
+    internal void PlayVictorySoundOneShot() {
+        audioSrcObj.PlayOneShot(COMPLETE_CLIP);
     }
 
     private void MakeOptOn(PlayerSide side, out LambdaBehavior[] toOptOn, out int n) {
@@ -98,6 +113,9 @@ public class Leve2Controller : MonoBehaviour {
         MakeOptOn(side, out toOptOn, out n);
         var ret = toOptOn[n];
         toOptOn[n] = null;
+        if(ret != null) {
+            PlaySoundOneShot();
+        }
         UpdateUI();
         return ret;
     }
@@ -109,6 +127,7 @@ public class Leve2Controller : MonoBehaviour {
         if(toOptOn[n] == null) {
             toOptOn[n] = beh;
             UpdateUI();
+            PlaySoundOneShot();
             return true;
         }
         return false;
@@ -154,6 +173,7 @@ public class Leve2Controller : MonoBehaviour {
     /* TODO: WARNING: Duplicated code, `eval`ing this would be good */
     public int CycleCursorLeft() {
         if(leftCoroutineState) return -1;
+        PlaySoundOneShot();
         handLeftCurrPos++;
         var rtf = handLeft.GetComponent<RectTransform>();
         if(handLeftCurrPos >= TOOL_BAR_SIZE) {
@@ -188,6 +208,7 @@ public class Leve2Controller : MonoBehaviour {
 
     public int CycleCursorRight() {
         if(rightCoroutineState) return -1;
+        PlaySoundOneShot();
         handRightCurrPos++;
         var rtf = handRight.GetComponent<RectTransform>();
         if(handRightCurrPos >= TOOL_BAR_SIZE) {
