@@ -7,12 +7,10 @@ public class ChangeScene : MonoBehaviour
     public string sceneToLoad;
     public Sprite[] sprites = new Sprite[3];
     private List<GameObject> colliders;
-    private static ScenePersistence scenePersistence;
 
     // Use this for initialization
     void Start()
     {
-        scenePersistence = ScenePersistence.GetInstance();
         colliders = new List<GameObject>();
     }
 
@@ -24,8 +22,9 @@ public class ChangeScene : MonoBehaviour
 
         if (colliders.Count == 2)
         {
+            GameController.SaveScene(SceneManager.GetActiveScene().name); // faster to save current scene only, need additional parameter
             SceneManager.LoadScene(sceneToLoad);
-            scenePersistence.RestoreScene(sceneToLoad);
+            GameController.RestoreScene(sceneToLoad);
         }
     }
 
