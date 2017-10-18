@@ -14,21 +14,6 @@ public class ScenePersistence : MonoBehaviour {
         gameController = GameController.GetInstance();
         // Save positions of all objects in all scenes
         SaveScenes();
-/*
-        p1 = GameObject.Find("Astronaut");
-        p2 = GameObject.Find("Astronaut_2");
-        loc = GameObject.Find("PositionBack").transform;
-        p1.transform.position = loc.position;
-        p2.transform.position = loc.position;
-        Inventory inv = p1.GetComponent<PlayerInventory>().inventory.GetComponent<Inventory>();
-        List<Item> l = GameController.GetInstance().GetListOfItems();
-        l.ForEach(i => {
-            Debug.Log("HAS ITEM " + i);
-            inv.addItemToInventory(i.itemID, i.itemValue);
-            inv.updateItemList();
-            inv.stackableSettings();
-        });
-*/
     }
 
     private ScenePersistence() { }
@@ -72,4 +57,20 @@ public class ScenePersistence : MonoBehaviour {
             currentObjects[i].transform.position = savedObjects[i].transform.position;
         }
     }
+
+    /*
+        p1 = GameObject.Find("Astronaut");
+        p2 = GameObject.Find("Astronaut_2");
+        loc = GameObject.Find("PositionBack").transform;
+        p1.transform.position = loc.position;
+        p2.transform.position = loc.position;
+        Inventory inv = p1.GetComponent<PlayerInventory>().inventory.GetComponent<Inventory>();
+        List<Item> l = GameController.GetInstance().GetListOfItems();
+        l.ForEach(i => {
+            Debug.Log("HAS ITEM " + i);
+            inv.addItemToInventory(i.itemID, i.itemValue);
+            inv.updateItemList();
+            inv.stackableSettings();
+        });
+*/
 }

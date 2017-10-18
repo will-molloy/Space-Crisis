@@ -4545,6 +4545,7 @@ Prefab:
         type: 3}
     m_RemovedComponents:
     - {fileID: 6147860, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
+    - {fileID: 11455370, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1178956416 stripped
@@ -4573,6 +4574,22 @@ PolygonCollider2D:
       - {x: 0.14999999, y: -0.28}
       - {x: 0.14999999, y: 0.14}
       - {x: 0.049999997, y: 0.29999998}
+--- !u!114 &1178956418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1178956416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08c210970d4f2a7449123873a8fe683f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneToLoad: level1room3
+  sprites:
+  - {fileID: 21300000, guid: 09d59336f6e009946a49ede611e0ec1a, type: 3}
+  - {fileID: 21300000, guid: 83c518b04b384174a9bf92f47cf5b116, type: 3}
+  - {fileID: 21300000, guid: 2e291f9a483cf254887b24f0f6da1d3d, type: 3}
 --- !u!1001 &1182242390
 Prefab:
   m_ObjectHideFlags: 0
@@ -5760,6 +5777,7 @@ Prefab:
         type: 3}
     m_RemovedComponents:
     - {fileID: 6147860, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
+    - {fileID: 11455370, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1416982830 stripped
@@ -5788,6 +5806,22 @@ PolygonCollider2D:
       - {x: 0.14999999, y: -0.28}
       - {x: 0.14999999, y: 0.21}
       - {x: 0.06, y: 0.29999998}
+--- !u!114 &1416982832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1416982830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08c210970d4f2a7449123873a8fe683f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneToLoad: level1room1
+  sprites:
+  - {fileID: 21300000, guid: f1d28c571907c474a9e15c0d300cdc3b, type: 3}
+  - {fileID: 21300000, guid: 78f5e6e7ce262a7428861288855ac4be, type: 3}
+  - {fileID: 21300000, guid: b6fa2254eb1c04644aa712593f149aad, type: 3}
 --- !u!1 &1444116016 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 118724, guid: 8b32f0c7e022ffc44a2453ef2eeb7380, type: 2}
