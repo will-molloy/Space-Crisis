@@ -6,22 +6,23 @@ using UnityEngine.SceneManagement;
 
 public class Leve2Controller : MonoBehaviour {
     public const int GRID_SIZE = 1;
-    public static Sprite RED_CUBE = Resources.Load<Sprite>("Sprites/buildable_blocks1");
-    public static Sprite ORANGE_CUBE = Resources.Load<Sprite>("Sprites/buildable_blocks2");
-    public static Sprite YELLOW_CUBE = Resources.Load<Sprite>("Sprites/buildable_blocks3");
-    public static Sprite GREEN_CUBE = Resources.Load<Sprite>("Sprites/buildable_blocks4");
-    public static Sprite CYAN_CUBE = Resources.Load<Sprite>("Sprites/buildable_blocks5");
-    public static Sprite BLUE_CUBE = Resources.Load<Sprite>("Sprites/buildable_blocks6");
-    public static Sprite PURPLE_CUBE = Resources.Load<Sprite>("Sprites/buildable_blocks7");
-    public static Sprite RAINBOW_CUBE = Resources.Load<Sprite>("Sprites/buildable_blocks8");
-    public static Sprite CUPHEAD_CUBE = Resources.Load<Sprite>("Sprites/buildable_blocks9");
-    public static Sprite DISCO_1 = Resources.Load<Sprite>("Sprites/basetile2");
-    public static Sprite DISCO_2 = Resources.Load<Sprite>("Sprites/basetile3");
-    public static Sprite DISCO_3 = Resources.Load<Sprite>("Sprites/basetile4");
-    public static Sprite ITEM_IN_SLOT = Resources.Load<Sprite>("Sprites/white");
+    public static Sprite RED_CUBE;
+    public static Sprite ORANGE_CUBE;
+    public static Sprite YELLOW_CUBE;
+    public static Sprite GREEN_CUBE;
 
-    public static readonly AudioClip TAP_CLIP = Resources.Load<AudioClip>("Audios/tap");
-    public static readonly AudioClip COMPLETE_CLIP = Resources.Load<AudioClip>("Audios/complete");
+    public static Sprite CYAN_CUBE;
+    public static Sprite BLUE_CUBE;
+    public static Sprite PURPLE_CUBE;
+    public static Sprite RAINBOW_CUBE;
+    public static Sprite CUPHEAD_CUBE;
+    public static Sprite DISCO_1;
+    public static Sprite DISCO_2;
+    public static Sprite DISCO_3;
+    public static Sprite ITEM_IN_SLOT;
+
+    public static AudioClip TAP_CLIP;
+    public static AudioClip COMPLETE_CLIP;
 
     public GameObject itemInInvenPrefab;
 
@@ -59,6 +60,23 @@ public class Leve2Controller : MonoBehaviour {
             Destroy(gameObject);
             return;
         }
+
+        RED_CUBE = Resources.Load<Sprite>("Sprites/buildable_blocks1");
+        ORANGE_CUBE = Resources.Load<Sprite>("Sprites/buildable_blocks2");
+        YELLOW_CUBE = Resources.Load<Sprite>("Sprites/buildable_blocks3");
+        GREEN_CUBE = Resources.Load<Sprite>("Sprites/buildable_blocks4");
+        CYAN_CUBE = Resources.Load<Sprite>("Sprites/buildable_blocks5");
+        BLUE_CUBE = Resources.Load<Sprite>("Sprites/buildable_blocks6");
+        PURPLE_CUBE = Resources.Load<Sprite>("Sprites/buildable_blocks7");
+        RAINBOW_CUBE = Resources.Load<Sprite>("Sprites/buildable_blocks8");
+        CUPHEAD_CUBE = Resources.Load<Sprite>("Sprites/buildable_blocks9");
+        DISCO_1 = Resources.Load<Sprite>("Sprites/basetile2");
+        DISCO_2 = Resources.Load<Sprite>("Sprites/basetile3");
+        DISCO_3 = Resources.Load<Sprite>("Sprites/basetile4");
+        ITEM_IN_SLOT = Resources.Load<Sprite>("Sprites/white");
+
+        TAP_CLIP = Resources.Load<AudioClip>("Audios/tap");
+        COMPLETE_CLIP = Resources.Load<AudioClip>("Audios/complete");
         handLeft = GameObject.Find("HandLeft");
         handRight = GameObject.Find("HandRight");
         toolbarLeft = GameObject.Find("ToolbarLeft");
