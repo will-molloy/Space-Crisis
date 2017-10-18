@@ -3,55 +3,43 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
-public static class GameController 
+public class GameController
 {
-    private static Dictionary<String, GameObject[]> savedSceneObjects = new Dictionary<string, GameObject[]>(); // Scene :: Objects, for persisting scene
+    private static Dictionary<string, Dictionary<String, Vector3>> savedScenePositions; // Scene.name :: Object.name :: Position
     private static readonly string[] playableScenes = new string[] { "level1room1", "level1room2", "level1room3" };
+    private static GameController instance;
 
-    public static GameObject[] GetObjectsFor(string scene)
+    private GameController()
     {
-        return savedSceneObjects[scene];
-    }
-
-    private static void SaveScenes() // DO NOT USE (yet)
-    {
-        Debug.Log("Saving scenes");
+        savedScenePositions = new Dictionary<string, Dictionary<string, Vector3>>();
         foreach (string playableScene in playableScenes)
         {
-            SaveScene(playableScene);
+            Dictionary<String, Vector3> sceneInitialPos = new Dictionary<string, Vector3>();
+            savedScenePositions[playableScene] = sceneInitialPos;
         }
     }
 
-    public static void SaveScene(string sceneName) // Only works for LOADED scenes
+    public static GameController getInstance()
     {
-        Debug.Log("Saving: " + sceneName);
-        Scene scene = SceneManager.GetSceneByName(sceneName);
-        GameObject[] objects = scene.GetRootGameObjects();
-        SaveObjectsFor(sceneName, scene.GetRootGameObjects());
+        if (instance == null)
+            instance = new GameController();
+        return instance;
     }
 
-    public static void SaveObjectsFor(string scene, GameObject[] objects)
+    public void SaveObjectsFor(string sceneName, List<GameObject> objects)
     {
-        foreach(GameObject obj in objects)
+        foreach (GameObject obj in objects)
         {
-            MonoBehaviour.DontDestroyOnLoad(obj);
+            savedScenePositions[sceneName][obj.name] = obj.transform.position;
         }
-        savedSceneObjects[scene] = objects;
     }
 
-    public static void RestoreScene(string scene)
+    public Dictionary<String, Vector3> getSavedObjectPositionsFor(string sceneName)
     {
-        Debug.Log("Restoring: " + scene);
-        GameObject[] savedObjects = GetObjectsFor(scene);
-        GameObject[] currentObjects = SceneManager.GetSceneByName(scene).GetRootGameObjects();
-
-        for (int i = 0; i < currentObjects.Length; i++)
-        {
-            currentObjects[i].transform.position = savedObjects[i].transform.position;
-        }
+        return savedScenePositions[sceneName];
     }
 
-    internal static void AddItem(Item item)
+    internal void AddItem(Item item)
     {
         Debug.Log("Not implemeneted");
     }

@@ -22,9 +22,7 @@ public class ChangeScene : MonoBehaviour
 
         if (colliders.Count == 2)
         {
-            GameController.SaveScene(SceneManager.GetActiveScene().name); // faster to save current scene only, need additional parameter
             SceneManager.LoadScene(sceneToLoad);
-            GameController.RestoreScene(sceneToLoad);
         }
     }
 

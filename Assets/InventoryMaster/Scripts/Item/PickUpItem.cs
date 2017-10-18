@@ -46,7 +46,7 @@ public class PickUpItem : MonoBehaviour
                     _inventory.addItemToInventory(item.itemID, item.itemValue);
                     _inventory.updateItemList();
                     _inventory.stackableSettings();
-                    GameController.AddItem(item);
+                    GameController.getInstance().AddItem(item);
                     Destroy(this.gameObject);
                 }
 
