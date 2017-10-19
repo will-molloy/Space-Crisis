@@ -197,7 +197,11 @@ public class Level2PlayerControl : MonoBehaviour
             if(script != null && script.lambdaBehavior != null) {
                 // We check if any of the key is null
                 var side = DetermineSide();
-                if(Leve2Controller.instance.PutInInventory(side, script.lambdaBehavior)) {
+                var i = Leve2Controller.instance.GetNextEmptySlotForPlayer(side);
+                if (i >= 0)
+                {
+                    // An empty slot
+                    Leve2Controller.instance.PutInInventory(side, script.lambdaBehavior, i);
                     GameObject.Destroy(hit.transform.gameObject);
                 }
             }
@@ -213,7 +217,6 @@ public class Level2PlayerControl : MonoBehaviour
             timeStamp = Time.time + interactionDelay;
         }
 
-
         // Then, try interract with a slot 
         var hits = Physics2D.LinecastAll(transform.position, transform.position + (Vector3)facing.GetVector());
         foreach(var h in hits) {
@@ -223,14 +226,15 @@ public class Level2PlayerControl : MonoBehaviour
                 // First we check if there is something in the slot and we have a free place in inventory
                 if (slot.HasLambdaInSlot())
                 {
-                    if (!Leve2Controller.instance.IsCurrentInventorySlotTaken(side))
-                    {
-                        // The slot is not taken
-                        Leve2Controller.instance.PutInInventory(side, slot.RemoveLambda());
+                    var i = Leve2Controller.instance.GetNextEmptySlotForPlayer(side);
+                    if(i >= 0) {
+                        // An empty slot
+                        Leve2Controller.instance.PutInInventory(side, slot.RemoveLambda(), i);
                     }
                     return;
                 }
                 else {
+                    // Empty slot, we try to find one to put in
                     LambdaBehavior beh;
                     beh = Leve2Controller.instance.GetInventoryNForPlayer(side);
                     if (beh != null)

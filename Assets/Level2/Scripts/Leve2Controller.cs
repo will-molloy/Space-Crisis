@@ -124,6 +124,22 @@ public class Leve2Controller : MonoBehaviour {
         MakeOptOn(side, out toOptOn, out n);
         return toOptOn[n] != null;
     }
+
+/** Get the next empty slot as an int, 
+    returns -1 if inventory is full
+ */
+    public int GetNextEmptySlotForPlayer(PlayerSide side) {
+        LambdaBehavior[] toOptOn;
+        int n;
+        MakeOptOn(side, out toOptOn, out n /*ignored*/);
+        for(int i = 0; i < TOOL_BAR_SIZE; i++) {
+            if(toOptOn[i] == null) {
+                return i;
+            }
+        }
+        return -1;
+
+    }
     /** @Nullable
      */
     public LambdaBehavior GetInventoryNForPlayer(PlayerSide side) {
@@ -145,6 +161,20 @@ public class Leve2Controller : MonoBehaviour {
         MakeOptOn(side, out toOptOn, out n);
         if(toOptOn[n] == null) {
             toOptOn[n] = beh;
+            UpdateUI();
+            PlaySoundOneShot();
+            return true;
+        }
+        return false;
+    }
+
+    /* Overloaded method for PutInInventory */
+    public bool PutInInventory(PlayerSide side, LambdaBehavior beh, int slotNumber) {
+        LambdaBehavior[] toOptOn;
+        int n;
+        MakeOptOn(side, out toOptOn, out n /* ignored */); /* Getting the toOptOn only */
+        if(toOptOn[slotNumber] == null) {
+            toOptOn[slotNumber] = beh;
             UpdateUI();
             PlaySoundOneShot();
             return true;
