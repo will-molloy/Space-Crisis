@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &172026
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 483858}
+  - 114: {fileID: 11411114}
+  m_Layer: 0
+  m_Name: Grid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &483858
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 172026}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 31.321857, y: -13.227131, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11411114
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 172026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0089a4ef480ec454ba5484f13775d2c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OptimizeColliderAsDefault: 1
+  selected: 1
+  width: 1.2
+  height: 1.2
+  color:
+    r: 1
+    g: 1
+    b: 1
+    a: 1
+  showPreview: 0
+  optimized: 1
+  snapToGrid: 1
+  currentPrefabList: 0
+  editor: {fileID: 0}
+  goFocus: {fileID: 0}
+  selectedObj: {fileID: 0}
+  locked: 0
+  gridEnabled: 0
+  showGrid: 1
+  hideOtherLayer: 0
+  complexView: 1
+  mode: 0
+  currentLayer: 0
+  tileMap: 0
+  spriteMapIndex: 0
+  spriteMapZoomFactor: 1
+  ColliderBatchingSize: {x: 20, y: 20}
+  layerList: []
+  levelLayerList: []
+  currentLayerTransform: {fileID: 0}
+  prefabs: []
+  prefabs0: []
+  prefabs1: []
+  prefabs2: []
+  prefabs3: []
+  prefabs4: []
+  prefabs5: []
+  prefabs6: []
+  prefabs7: []
+  prefabs8: []
+  prefabs9: []
+  levelTransform: {fileID: 0}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 172026}
+  m_IsPrefabParent: 1
