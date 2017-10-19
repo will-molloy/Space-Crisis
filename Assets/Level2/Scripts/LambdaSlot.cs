@@ -13,6 +13,7 @@ public class LambdaSlot : MonoBehaviour {
 		animator = GetComponent<Animator>();
 		behavior = new LambdaBehavior(i => i.Identity());
 		behavior.desc = "identity";
+		behavior.extraAction = new LambdaBehavior.ExtraActionOnTMProUI(ui => {ui.fontSize = 16; ui.alignment = TMPro.TextAlignmentOptions.Center;});
 	}
 	
 	// Update is called once per frame

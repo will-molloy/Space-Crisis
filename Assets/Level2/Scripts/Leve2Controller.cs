@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Leve2Controller : MonoBehaviour {
     public const int GRID_SIZE = 1;
@@ -166,9 +167,11 @@ public class Leve2Controller : MonoBehaviour {
                 var go = Instantiate(itemInInvenPrefab);
                 go.transform.SetParent(toolbarLeft.transform);
                 go.transform.localPosition = new Vector3(0, 128 - (i * TOOL_BAR_ITEM_SIZE), 0);
-                var c = go.GetComponentInChildren<UnityEngine.UI.Text>();
+                var c = go.GetComponentInChildren<TMPro.TextMeshProUGUI>();
                 c.text = leftInventory[i].desc;
-                c.fontSize = 10;
+                if(leftInventory[i].extraAction != null) {
+                    leftInventory[i].extraAction(c);
+                }
             }
         }
 
@@ -179,13 +182,13 @@ public class Leve2Controller : MonoBehaviour {
                 var go = Instantiate(itemInInvenPrefab);
                 go.transform.SetParent(toolbarRight.transform);
                 go.transform.localPosition = new Vector3(0, 128 - (i * TOOL_BAR_ITEM_SIZE), 0);
-                var c = go.GetComponentInChildren<UnityEngine.UI.Text>();
+                var c = go.GetComponentInChildren<TMPro.TextMeshProUGUI>();
                 c.text = rightInventory[i].desc;
-                c.fontSize = 10;
+                if(rightInventory[i].extraAction != null) {
+                    rightInventory[i].extraAction(c);
+                }
             }
         }
-
-
     }
 
     /* TODO: WARNING: Duplicated code, `eval`ing this would be good */

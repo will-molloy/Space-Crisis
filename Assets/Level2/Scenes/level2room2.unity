@@ -1566,7 +1566,7 @@ SpriteRenderer:
   m_FlipY: 0
 --- !u!1 &137678215
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 8
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
@@ -1585,7 +1585,7 @@ GameObject:
   m_IsActive: 1
 --- !u!4 &137678216
 Transform:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 8
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 137678215}
@@ -1598,7 +1598,7 @@ Transform:
   m_RootOrder: 0
 --- !u!114 &137678217
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 8
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 137678215}
@@ -1623,7 +1623,7 @@ MonoBehaviour:
   lambdaItemPrefab: {fileID: 156982, guid: 08de70b536e59dd4e9ba342f49b88b49, type: 2}
 --- !u!212 &137678218
 SpriteRenderer:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 8
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 137678215}
@@ -1653,7 +1653,7 @@ SpriteRenderer:
   m_FlipY: 0
 --- !u!61 &137678219
 BoxCollider2D:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 8
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 137678215}
@@ -1668,7 +1668,7 @@ BoxCollider2D:
 --- !u!50 &137678220
 Rigidbody2D:
   serializedVersion: 2
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 8
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 137678215}
@@ -2676,7 +2676,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!61 &201459176
 BoxCollider2D:
-  m_ObjectHideFlags: 8
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 201459172}
@@ -3370,7 +3370,7 @@ Camera:
   near clip plane: 2
   far clip plane: 1000
   field of view: 83
-  orthographic: 0
+  orthographic: 1
   orthographic size: 8
   m_Depth: -1
   m_CullingMask:
@@ -3397,7 +3397,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!1 &257460880
 GameObject:
   m_ObjectHideFlags: 0
@@ -3428,7 +3428,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
 --- !u!114 &257460882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8017,7 +8017,7 @@ Prefab:
     - target: {fileID: 11411114, guid: 599520f84b96cbe44b5ae976882d6e0e, type: 2}
       propertyPath: currentLayerTransform
       value: 
-      objectReference: {fileID: 2018221472}
+      objectReference: {fileID: 1947370768}
     - target: {fileID: 11411114, guid: 599520f84b96cbe44b5ae976882d6e0e, type: 2}
       propertyPath: goFocus
       value: 
@@ -8048,7 +8048,7 @@ Prefab:
       objectReference: {fileID: 837297534}
     - target: {fileID: 11411114, guid: 599520f84b96cbe44b5ae976882d6e0e, type: 2}
       propertyPath: currentLayer
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11411114, guid: 599520f84b96cbe44b5ae976882d6e0e, type: 2}
       propertyPath: layerList.Array.data[1]
@@ -8183,7 +8183,7 @@ GameObject:
   m_PrefabInternal: {fileID: 518211956}
 --- !u!114 &578586553
 MonoBehaviour:
-  m_ObjectHideFlags: 8
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 578586548}
@@ -8192,7 +8192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cacb625c6bb231649b77b528781175af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Reject Cyan
+  description: 
   from: CYAN
   to: NONE
 --- !u!213 &583316436
@@ -11295,7 +11295,7 @@ GameObject:
   m_PrefabInternal: {fileID: 907793553}
 --- !u!114 &770569730
 MonoBehaviour:
-  m_ObjectHideFlags: 8
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 770569725}
@@ -19072,7 +19072,7 @@ GameObject:
   m_PrefabInternal: {fileID: 288985586}
 --- !u!114 &1242452076
 MonoBehaviour:
-  m_ObjectHideFlags: 8
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1242452071}
@@ -19081,7 +19081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cacb625c6bb231649b77b528781175af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Reject Yellow
+  description: 
   from: YELLOW
   to: NONE
 --- !u!1 &1242506215
@@ -20837,7 +20837,7 @@ GameObject:
   m_PrefabInternal: {fileID: 1362815068}
 --- !u!114 &1342564543
 MonoBehaviour:
-  m_ObjectHideFlags: 8
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1342564538}
@@ -22802,7 +22802,7 @@ Prefab:
   m_IsPrefabParent: 0
 --- !u!1 &1519658568
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 8
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
@@ -22821,7 +22821,7 @@ GameObject:
   m_IsActive: 1
 --- !u!4 &1519658569
 Transform:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 8
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1519658568}
@@ -22834,7 +22834,7 @@ Transform:
   m_RootOrder: 1
 --- !u!114 &1519658570
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 8
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1519658568}
@@ -22859,7 +22859,7 @@ MonoBehaviour:
   lambdaItemPrefab: {fileID: 156982, guid: 08de70b536e59dd4e9ba342f49b88b49, type: 2}
 --- !u!61 &1519658571
 BoxCollider2D:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 8
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1519658568}
@@ -22874,7 +22874,7 @@ BoxCollider2D:
 --- !u!50 &1519658572
 Rigidbody2D:
   serializedVersion: 2
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 8
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1519658568}
@@ -22890,7 +22890,7 @@ Rigidbody2D:
   m_Constraints: 4
 --- !u!212 &1519658573
 SpriteRenderer:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 8
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1519658568}
