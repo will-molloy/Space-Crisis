@@ -182,10 +182,9 @@ public class Leve2Controller : MonoBehaviour {
                 var c = go.GetComponentInChildren<UnityEngine.UI.Text>();
                 c.text = rightInventory[i].desc;
                 c.fontSize = 10;
+                var ngo = new GameObject();
             }
         }
-
-
     }
 
     /* TODO: WARNING: Duplicated code, `eval`ing this would be good */
