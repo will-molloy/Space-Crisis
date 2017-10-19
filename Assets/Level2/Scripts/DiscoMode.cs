@@ -6,11 +6,12 @@ public class DiscoMode : MonoBehaviour {
 
 // DOES ABOSOLUTELY NOTHING
 	public string DISCOOOOOOOOOO;
-	private float time = Time.time;
+	private float time;
 
 
 	// Use this for initialization
 	void Start () {
+		time = Time.time;
 	}
 	
 	// Update is called once per frame

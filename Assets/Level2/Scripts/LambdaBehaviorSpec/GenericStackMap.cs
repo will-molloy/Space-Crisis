@@ -7,7 +7,9 @@ public class GenericStackMap : LambdaItemScript {
 
 	public string from, toTop, toBtm;
 	// Use this for initialization
-	private static string templateStr = "Map {0} to {1} and {2}";
+	private static string templateString = "<sprite=\"{1}\" index=0>\n" +
+                                           "<sprite=\"{0}\" index=0> <sprite=\"simplearrow\" index=0> <sprite=\"{2}\" index=0>";
+
 	void Start () {
 		var lfrom = (LambdaGrid.LambdaCube)Enum.Parse(typeof(LambdaGrid.LambdaCube), from);
 		var ltoTop = (LambdaGrid.LambdaCube)Enum.Parse(typeof(LambdaGrid.LambdaCube), toTop);
@@ -15,15 +17,11 @@ public class GenericStackMap : LambdaItemScript {
 		lambdaBehavior = new LambdaBehavior(i => i.StackMap(lfrom, new LambdaGrid.LambdaCube[2]{ltoTop, ltoBtm}));
 		// Override desc in GUI
 		if(String.IsNullOrEmpty(description)) {
-			OverrideString();
+            description = String.Format(templateString, LambdaGrid.GetAssetStringFromCube(lfrom), LambdaGrid.GetAssetStringFromCube(ltoTop), LambdaGrid.GetAssetStringFromCube(ltoBtm));
 		}
 		lambdaBehavior.desc = description;
 	}
 
-	void OverrideString() {
-        description = String.Format(templateStr, from, toTop, toBtm);
-	}
-	
 	// Update is called once per frame
 	void Update () {
 	

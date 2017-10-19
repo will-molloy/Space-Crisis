@@ -90,20 +90,6 @@ public class LambdaGrid {
 		RED, ORANGE, YELLOW, GREEN, CYAN, BLUE, PURPLE, NONE, RAINBOW, ALPHA, BETA, GAMMA, YEETA, ANY
 	}
 
-	public static Sprite LambdaGridItemToSprite(LambdaGrid.LambdaCube en) {
-		switch(en) {
-			case LambdaCube.RED: return Leve2Controller.RED_CUBE;
-			case LambdaCube.ORANGE: return Leve2Controller.ORANGE_CUBE;
-			case LambdaCube.YELLOW: return Leve2Controller.YELLOW_CUBE;
-			case LambdaCube.GREEN: return Leve2Controller.GREEN_CUBE;
-			case LambdaCube.CYAN: return Leve2Controller.CYAN_CUBE;
-			case LambdaCube.BLUE: return Leve2Controller.BLUE_CUBE;
-			case LambdaCube.PURPLE: return Leve2Controller.PURPLE_CUBE;
-			case LambdaCube.RAINBOW: return Leve2Controller.RAINBOW_CUBE;
-			case LambdaCube.ALPHA: return Leve2Controller.CUPHEAD_CUBE;
-			default: return null;
-		}
-	}
 
 	public void SimpleMap(LambdaCube from, LambdaCube to) {
         for (int i = 0; i < MAX_LAMBDA_GRID_HEIGHT; i++)
@@ -405,6 +391,29 @@ public class LambdaGrid {
 		}
 		// Potential FallDown()
 		return grid;
+	}
+
+	public static Sprite LambdaGridItemToSprite(LambdaGrid.LambdaCube en) {
+		switch(en) {
+			case LambdaCube.RED: return Leve2Controller.RED_CUBE;
+			case LambdaCube.ORANGE: return Leve2Controller.ORANGE_CUBE;
+			case LambdaCube.YELLOW: return Leve2Controller.YELLOW_CUBE;
+			case LambdaCube.GREEN: return Leve2Controller.GREEN_CUBE;
+			case LambdaCube.CYAN: return Leve2Controller.CYAN_CUBE;
+			case LambdaCube.BLUE: return Leve2Controller.BLUE_CUBE;
+			case LambdaCube.PURPLE: return Leve2Controller.PURPLE_CUBE;
+			case LambdaCube.RAINBOW: return Leve2Controller.RAINBOW_CUBE;
+			case LambdaCube.ALPHA: return Leve2Controller.CUPHEAD_CUBE;
+			default: return null;
+		}
+	}
+
+	public static string GetAssetStringFromCube(LambdaCube cube) {
+		var baseStr = "buildable_blocks";
+		if(cube == LambdaCube.RAINBOW) {
+			return baseStr + "8";
+		}
+		return baseStr + ((int)cube + 1).ToString();
 	}
 	
 
