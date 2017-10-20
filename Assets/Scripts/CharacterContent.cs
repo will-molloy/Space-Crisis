@@ -6,14 +6,12 @@ using System.Collections.Generic;
 
 public class CharacterContent : MonoBehaviour
 {
-    public List<Button> statementBtns;
-    private List<string> statementStrings;
+    public Dictionary<string, CharacterPage> characterProfile;
 
     // Use this for initialization
     void Start()
     {
-        statementBtns = new List<Button>();
-        statementStrings = new List<string>();
+        characterProfile = new Dictionary<string, CharacterPage>();
     }
 
     // Update is called once per frame
@@ -22,33 +20,38 @@ public class CharacterContent : MonoBehaviour
 
     }
 
-
-    public void addStatement(string statement)
+    public void addStatement(GameObject NPC, string statement)
     {
-        if (!statementStrings.Contains(statement)){
-            statementStrings.Add(statement);
-            /* GameObject UItext = new GameObject(statement);
-             UItext.transform.SetParent(this.gameObject.transform);
+        if (!characterProfile.ContainsKey(NPC.name))
+        {
+            // create new page for this NPC
+            Image npcImage = NPC.GetComponent<Image>();
+            CharacterPage newPage = new CharacterPage(NPC.name, npcImage);
+            updatePage(newPage, statement);
 
-             //RectTransform trans = UItext.AddComponent<RectTransform>();
-
-             Text text = UItext.AddComponent<Text>();
-             text.text = statement;
-             text.color = Color.black;
-             text.fontSize = 14;
-             text.font = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
-             statements.Add(text);
-        */
-          
-            GameObject btnPrefab = (GameObject)Instantiate(Resources.Load("ButtonPrefab"),new Vector3(transform.position.x, transform.position.y), Quaternion.identity );
-            btnPrefab.transform.SetParent(this.gameObject.transform);
-            Button statementBtn = btnPrefab.GetComponent<Button>();
-            
-
-            statementBtn.tag = "StatementButton";
-            statementBtn.GetComponentInChildren<Text>().text = statement;
-
-            statementBtns.Add(statementBtn);
+            characterProfile.Add(NPC.name, newPage);
         }
+        else {
+            // page already exists
+            CharacterPage existingPage = characterProfile[NPC.name];
+
+            // add statement if does not yet exist
+            if (!existingPage.statementExists(statement)) {
+                updatePage(existingPage, statement);
+            }
+        }
+    }
+
+    private void updatePage(CharacterPage page, string btnText) {
+        page.addStatement(btnText);
+        
+        GameObject btnPrefab = (GameObject)Instantiate(Resources.Load("ButtonPrefab"), new Vector3(transform.position.x, transform.position.y), Quaternion.identity);
+        btnPrefab.transform.SetParent(this.gameObject.transform);
+        Button statementBtn = btnPrefab.GetComponent<Button>();
+
+        statementBtn.tag = "StatementButton";
+        statementBtn.GetComponentInChildren<Text>().text = btnText;
+        
+        page.addStatementBtn(statementBtn);
     }
 }
