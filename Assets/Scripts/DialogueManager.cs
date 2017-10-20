@@ -52,7 +52,10 @@ public class DialogueManager : MonoBehaviour
         {
             dText.text = dialogLines[currentLine];
 
-            characterContent.addStatement(activeNPC, dText.text);
+            //add dialogue line if its from the NPC
+            if (dBox.tag.Equals("NPCDialogue")){
+                characterContent.addStatement(activeNPC, dText.text);
+            }
         }
 
         if (currentLine >= dialogLines.Length)
