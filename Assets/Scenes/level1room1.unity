@@ -1437,7 +1437,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 406714, guid: 9582cce20a27e574d9da4dda81e7ee47, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.88
+      value: 0.59
       objectReference: {fileID: 0}
     - target: {fileID: 406714, guid: 9582cce20a27e574d9da4dda81e7ee47, type: 2}
       propertyPath: m_LocalPosition.z
@@ -8267,7 +8267,7 @@ Prefab:
     - target: {fileID: 11426328, guid: 3319f4b276d71e24d977b12e24e5b974, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1610224675}
+      objectReference: {fileID: 1610224674}
     - target: {fileID: 11426328, guid: 3319f4b276d71e24d977b12e24e5b974, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ResetScenesInLevel
@@ -8299,6 +8299,10 @@ Prefab:
     - target: {fileID: 11426328, guid: 3319f4b276d71e24d977b12e24e5b974, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 196544, guid: 3319f4b276d71e24d977b12e24e5b974, type: 2}
+      propertyPath: m_Name
+      value: Time-Health-Paused-GameOver
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11469878, guid: 3319f4b276d71e24d977b12e24e5b974, type: 2}
@@ -9113,7 +9117,7 @@ CanvasRenderer:
 GameObject:
   m_PrefabParentObject: {fileID: 198538, guid: 3319f4b276d71e24d977b12e24e5b974, type: 2}
   m_PrefabInternal: {fileID: 1403785345}
---- !u!114 &1610224675
+--- !u!114 &1610224674
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -9121,10 +9125,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1610224673}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d625422426e435468f574606b8efe65, type: 3}
+  m_Script: {fileID: 11500000, guid: 443ecaaee50a2134c977dc93991a80ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneToReset: 0
+  LevelToReset: 0
 --- !u!1 &1611461856
 GameObject:
   m_ObjectHideFlags: 0
@@ -11713,10 +11717,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1963943050}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d625422426e435468f574606b8efe65, type: 3}
+  m_Script: {fileID: 11500000, guid: 443ecaaee50a2134c977dc93991a80ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneToReset: 0
+  LevelToReset: 0
 --- !u!1 &1964091593
 GameObject:
   m_ObjectHideFlags: 0

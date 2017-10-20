@@ -31,7 +31,7 @@ public static class GameController
     }
 
     /// <summary>
-    /// Scenes the player can access, they must be included in the build path.
+    /// Scenes the player can access, the scene files must be included in the build path.
     /// </summary>
     public enum PlayableScene
     {

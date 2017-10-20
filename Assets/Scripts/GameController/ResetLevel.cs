@@ -1,26 +1,35 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Reset all scenes in given level and put players at first scene in level
+/// </summary>
+/// <author>Will Molloy</author>
 public class ResetLevel : MonoBehaviour {
 
     public GameController.Level LevelToReset;
 
-    /**
-     * Reset all scenes in given level and put players at first scene in level
-     */
     public void ResetScenesInLevel()
     {
         GameController.PlayableScene? firstSceneInLevel = null;
 
-        // Set all scenes in the level to reset when scene persistance awakes
+        // Set all scenes in the level to reset when their scene persistance component awakes
         foreach (GameController.PlayableScene scene in GameController.getScenesForLevel(LevelToReset))
         {
-            if (firstSceneInLevel == null)
+            if (!firstSceneInLevel.HasValue)
                 firstSceneInLevel = scene;
             Debug.Log("Resseting: " + LevelToReset.ToString() + " ," + scene.ToString());
             GameController.SetShouldBeReset(scene, true);
         }
         GameController.clearScenesForLevel(LevelToReset);
-        SceneManager.LoadScene(firstSceneInLevel.ToString());
+        // Load the first scene in the level
+        if (firstSceneInLevel.HasValue)
+        {
+            SceneManager.LoadScene(GameController.GetFileNameForScene(firstSceneInLevel.Value));
+        }
+        else
+        {
+            throw new System.Exception("Could not retrieve first scene for: " + LevelToReset.ToString());
+        }
     }
 }
