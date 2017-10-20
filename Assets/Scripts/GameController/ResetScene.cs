@@ -7,14 +7,14 @@ using UnityEngine.SceneManagement;
 /// <author>Will Molloy</author>
 public class ResetScene : MonoBehaviour {
 
-    public GameController.PlayableScene SceneToReset;
+    public GameController.PlayableScene ThisScene;
 
     public void ResetCurrentScene()
     {
         // Set scenes persistence component to reset the scene when it awakes.
-        GameController.SetShouldBeReset(SceneToReset, true);
-        GameController.ClearPersistedDataForScene(SceneToReset);
+        GameController.SetShouldBeReset(ThisScene, true);
+        GameController.ClearPersistedDataForScene(ThisScene);
         // Reload the scene.
-        SceneManager.LoadScene(SceneToReset.ToString());
+        SceneManager.LoadScene(ThisScene.ToString());
     }
 }
