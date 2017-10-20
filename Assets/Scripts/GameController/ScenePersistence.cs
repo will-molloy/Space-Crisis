@@ -3,14 +3,19 @@ using System.Collections.Generic;
 
 public class ScenePersistence : MonoBehaviour
 {
+    public GameController.PlayableScene thisScene;
+    public static bool resetScene;
 
-    public string thisScene;
-
-    public void Awake()
+    void Awake()
     {
-        Debug.Log("Restoring: " + thisScene);
+        RestoreScene(thisScene);
+    }
 
-        foreach (KeyValuePair<string, Vector3> objPos in GameController.getInstance().getSavedObjsPosFor(thisScene))
+    public void RestoreScene(GameController.PlayableScene sceneName)
+    {
+        Debug.Log("Restoring: " + sceneName);
+
+        foreach (KeyValuePair<string, Vector3> objPos in GameController.getSavedObjsPosFor(sceneName))
         {
             Debug.Log("Restoring: Key :" + objPos.Key + ", Value: " + objPos.Value);
 
@@ -34,7 +39,7 @@ public class ScenePersistence : MonoBehaviour
     public void SaveScene()
     {
         Debug.Log("Saving: " + thisScene);
-        GameController.getInstance().SaveObjsPosFor(thisScene, getChildObjs(transform));
+        GameController.SaveObjsPosFor(thisScene, getChildObjs(transform));
     }
 
     private List<GameObject> getChildObjs(Transform transform)

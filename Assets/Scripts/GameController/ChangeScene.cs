@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour
 {
-    public string sceneToLoad;
+    public GameController.PlayableScene sceneToLoad;
     public Sprite[] sprites = new Sprite[3];
     private List<GameObject> colliders;
 
@@ -22,7 +22,7 @@ public class ChangeScene : MonoBehaviour
 
         if (colliders.Count == 2)
         {
-            SceneManager.LoadScene(sceneToLoad);
+            SceneManager.LoadScene(sceneToLoad.ToString());
         }
     }
 
