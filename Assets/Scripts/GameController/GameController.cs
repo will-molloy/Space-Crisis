@@ -35,19 +35,19 @@ public static class GameController
     /// </summary>
     public enum PlayableScene
     {
-        [Level(Level.Level1)]
-        level1room1,
-        [Level(Level.Level1)]
-        level1room2,
-        [Level(Level.Level1)]
-        level1room3,
-        [Level(Level.Level2)]
-        level2room1,
-        [Level(Level.Level2)]
-        level2room2,
-        [Level(Level.None)]
+        [Level(Level.Level1), FileName("level1room1")]
+        Level1Room1,
+        [Level(Level.Level1), FileName("level1room2")]
+        Level1Room2,
+        [Level(Level.Level1), FileName("level1room3")]
+        Level1Room3,
+        [Level(Level.Level2), FileName("level2room1")]
+        Level2Room1,
+        [Level(Level.Level2), FileName("level2room2")]
+        Level2Room2,
+        [Level(Level.None), FileName("WelcomeScreen")]
         WelcomeScreen,
-        [Level(Level.None)]
+        [Level(Level.None), FileName("ExitScene")]
         ExitScene,
     }
 
@@ -58,12 +58,30 @@ public static class GameController
 
     public class LevelAttribute : Attribute
     {
-        public Level level { get; set; }
+        public readonly Level level;
 
         public LevelAttribute(Level level)
         {
             this.level = level;
         }
+    }
+
+    public class FileNameAttribute : Attribute
+    {
+        public readonly string fileName;
+
+        public FileNameAttribute(string fileName)
+        {
+            this.fileName = fileName;
+        }
+    }
+
+    /// <summary>
+    /// Retrives the file name for the given scene.
+    /// </summary>
+    public static string GetFileNameForScene(this PlayableScene value)
+    {
+        return value.GetAttribute<FileNameAttribute>().fileName;
     }
 
     /// <summary>
@@ -146,3 +164,4 @@ public static class GameController
         Debug.Log("Not implemeneted");
     }
 }
+
