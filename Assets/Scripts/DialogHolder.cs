@@ -28,7 +28,7 @@ public class DialogHolder : MonoBehaviour
     {
         moveOn = false;
         dMan = FindObjectOfType<DialogueManager>();
-        
+
         textLines = dBoxes[boxIndex].GetComponent<TextHolder>().getTextLines();
     }
 
@@ -53,7 +53,7 @@ public class DialogHolder : MonoBehaviour
 
                     setAndShowDialogue(dBoxes[boxIndex]);
                 }
-               
+
             }
         }
     }
@@ -116,7 +116,7 @@ public class DialogHolder : MonoBehaviour
 
         dMan.dialogLines = textLines;
         dMan.currentLine = 0;
-        
+
         dMan.showDialogue(this.gameObject.name);
 
     }
