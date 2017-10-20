@@ -1,32 +1,38 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
-/**
- * Contains all static data about game scenes.
- */
+/// <summary>
+/// Contains all static data for the game scenes.
+/// </summary>
+/// 
+/// <author>Will Molloy</author>
 public static class GameController
 {
     // Scene.name :: Object.name :: Position, For persisting given scene objects
-    private static Dictionary<PlayableScene, Dictionary<string, Vector3>> savedScenePositions;
+    private static Dictionary<PlayableScene, Dictionary<string, Vector3>> SavedScenePositions;
 
     // For resseting scene e.g. level restart
-    private static Dictionary<PlayableScene, Dictionary<string, Vector3>> initialScenePositions;
-    private static Dictionary<PlayableScene, bool> resetSceneDict;
+    private static Dictionary<PlayableScene, Dictionary<string, Vector3>> InitialScenePositions;
+    private static Dictionary<PlayableScene, bool> SceneShouldBeReset;
 
     static GameController()
     {
-        initialScenePositions = new Dictionary<PlayableScene, Dictionary<string, Vector3>>();
-        savedScenePositions = new Dictionary<PlayableScene, Dictionary<string, Vector3>>();
-        resetSceneDict = new Dictionary<PlayableScene, bool>();
+        InitialScenePositions = new Dictionary<PlayableScene, Dictionary<string, Vector3>>();
+        SavedScenePositions = new Dictionary<PlayableScene, Dictionary<string, Vector3>>();
+        SceneShouldBeReset = new Dictionary<PlayableScene, bool>();
         foreach (PlayableScene playableScene in Enum.GetValues(typeof(PlayableScene)))
         {            
-            savedScenePositions[playableScene] = new Dictionary<string, Vector3>(); ;
-            initialScenePositions[playableScene] = new Dictionary<string, Vector3>(); ;
-            resetSceneDict[playableScene] = false;
+            SavedScenePositions[playableScene] = new Dictionary<string, Vector3>(); ;
+            InitialScenePositions[playableScene] = new Dictionary<string, Vector3>(); ;
+            SceneShouldBeReset[playableScene] = false;
         }
     }
 
+    /// <summary>
+    /// Scenes the player can access, they must be included in the build path.
+    /// </summary>
     public enum PlayableScene
     {
         [Level(Level.Level1)]
@@ -45,6 +51,9 @@ public static class GameController
         ExitScene,
     }
 
+    /// <summary>
+    /// Level attribute for the game scenes.
+    /// </summary>
     public enum Level {  Level1, Level2, None }
 
     public class LevelAttribute : Attribute
@@ -57,39 +66,10 @@ public static class GameController
         }
     }
 
-    public static T GetAttributeOfType<T>(this Enum enumVal) where T : Attribute
-    {
-        var type = enumVal.GetType();
-        var memInfo = type.GetMember(enumVal.ToString());
-        var attributes = memInfo[0].GetCustomAttributes(typeof(T), false);
-        return (attributes.Length > 0) ? (T)attributes[0] : null;
-    }
-
-    public static List<PlayableScene> getScenesForLevel(Level level)
-    {
-        PlayableScene[] scenes = (PlayableScene[])Enum.GetValues(typeof(PlayableScene));
-        List<PlayableScene> filteredScenes = new List<PlayableScene>();
-        foreach (PlayableScene s in scenes){
-            if (s.GetAttribute<LevelAttribute>().level.Equals(level))
-            {
-                filteredScenes.Add(s);
-            }
-        }
-
-        return filteredScenes;
-    }
-
-    public static void clearScenesForLevel(Level level)
-    {
-        getScenesForLevel(level).ForEach(scene => ClearPersistedDataForScene(scene));
-    }
-
-    public static void ClearPersistedDataForScene(PlayableScene sceneName)
-    {
-        savedScenePositions[sceneName] = new Dictionary<string, Vector3>();
-    }
-
-    public static T GetAttribute<T>(this PlayableScene value) where T : Attribute
+    /// <summary>
+    /// Extension method for retrieving the attributes from the PlayableScene enum.
+    /// </summary>
+    private static T GetAttribute<T>(this PlayableScene value) where T : Attribute
     {
         var type = value.GetType();
         var memberInfo = type.GetMember(value.ToString());
@@ -97,38 +77,68 @@ public static class GameController
         return (T)attributes[0];
     }
 
-    public static void SaveObjsPosFor(PlayableScene sceneName, List<GameObject> objects)
+    /// <summary>
+    /// Gets all the scenes assigned to the given level
+    /// </summary>
+    public static List<PlayableScene> getScenesForLevel(Level levelToRetrieve)
+    {
+        PlayableScene[] scenes = (PlayableScene[])Enum.GetValues(typeof(PlayableScene));
+        return scenes.Where(scene => scene.GetAttribute<LevelAttribute>().level.Equals(levelToRetrieve)).ToList();
+    }
+
+    /// <summary>
+    /// Clears the persisted data in all scenes for the given level
+    /// E.g. use when restarting level from pause menu or on losing all lives.
+    /// </summary>
+    public static void clearScenesForLevel(Level level)
+    {
+        getScenesForLevel(level).ForEach(scene => ClearPersistedDataForScene(scene));
+    }
+
+    /// <summary>
+    /// Clears the persisted data for the given scene.
+    /// E.g. use with reset button.
+    /// </summary>
+    public static void ClearPersistedDataForScene(PlayableScene sceneName)
+    {
+        SavedScenePositions[sceneName] = new Dictionary<string, Vector3>();
+    }
+
+    /// <summary>
+    /// Saves the positions of the given objects for the given scene.
+    /// </summary>
+    public static void SaveObjectPositions(PlayableScene sceneName, List<GameObject> objects)
     {
         foreach (GameObject obj in objects)
         {
-            savedScenePositions[sceneName][obj.name] = obj.transform.position;
-            if (!initialScenePositions[sceneName].ContainsKey(obj.name))
+            SavedScenePositions[sceneName][obj.name] = obj.transform.position;
+            if (!InitialScenePositions[sceneName].ContainsKey(obj.name))
             {
                 // write once
                 Debug.Log("Saved initial: " + obj.name);
-                initialScenePositions[sceneName][obj.name] = obj.transform.position;
+                InitialScenePositions[sceneName][obj.name] = obj.transform.position;
             }
         }
     }
 
-    public static Dictionary<string, Vector3> getSavedObjsPosFor(PlayableScene sceneName)
+    public static Dictionary<string, Vector3> GetSavedObjectPositons(PlayableScene sceneName)
     {
-        return savedScenePositions[sceneName];
+        return SavedScenePositions[sceneName];
     }
 
-    public static Dictionary<string, Vector3> getInitialObjsPosFor(PlayableScene sceneName)
+    public static Dictionary<string, Vector3> GetInitialObjectPositions(PlayableScene sceneName)
     {
-        return initialScenePositions[sceneName];
+        return InitialScenePositions[sceneName];
     }
 
-    public static bool getResetSceneAttributeFor(PlayableScene sceneName)
+    public static bool GetShouldBeReset(PlayableScene sceneName)
     {
-        return resetSceneDict[sceneName];
+        return SceneShouldBeReset[sceneName];
     }
 
-    public static void setResetSceneAttributeFor(PlayableScene sceneName, bool resetScene)
+    public static void SetShouldBeReset(PlayableScene sceneName, bool resetScene)
     {
-        resetSceneDict[sceneName] = resetScene;
+        SceneShouldBeReset[sceneName] = resetScene;
     }
 
     internal static void AddItem(Item item)

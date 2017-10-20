@@ -9,7 +9,7 @@ public class ResetScene : MonoBehaviour {
      */
     public void ResetCurrentScene()
     {
-        GameController.setResetSceneAttributeFor(SceneToReset, true);
+        GameController.SetShouldBeReset(SceneToReset, true);
         GameController.ClearPersistedDataForScene(SceneToReset);
         SceneManager.LoadScene(SceneToReset.ToString());
     }
