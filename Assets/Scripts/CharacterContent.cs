@@ -35,7 +35,7 @@ public class CharacterContent : MonoBehaviour
             Text text = UItext.AddComponent<Text>();
             text.text = statement;
             text.color = Color.black;
-            text.fontSize = 12;
+            text.fontSize = 14;
             text.font = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
             statements.Add(text);
             statementStrings.Add(statement);
