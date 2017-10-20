@@ -5,11 +5,10 @@ using System;
 public class ScenePersistence : MonoBehaviour
 {
     public GameController.PlayableScene thisScene;
-    public bool resetSceneOnLoad { get; set; }
 
     void Awake()
     {
-        if (resetSceneOnLoad)
+        if (GameController.getResetSceneAttributeFor(thisScene)) 
             ResetScene(thisScene);
         RestoreScene(thisScene);
     }
@@ -17,7 +16,8 @@ public class ScenePersistence : MonoBehaviour
     public void ResetScene(GameController.PlayableScene sceneName)
     {
         Debug.Log("Resseting: " + sceneName);
-        MoveObjects(GameController.getInitialObjsPosFor(sceneName)); // initial, default positions
+        MoveObjects(GameController.getInitialObjsPosFor(sceneName)); // move objects to initial, default positions
+        GameController.setResetSceneAttributeFor(sceneName, false);
     }
 
     private void MoveObjects(Dictionary<string, Vector3> objPositions)
@@ -34,7 +34,7 @@ public class ScenePersistence : MonoBehaviour
     public void RestoreScene(GameController.PlayableScene sceneName)
     {
         Debug.Log("Restoring: " + sceneName);
-        MoveObjects(GameController.getSavedObjsPosFor(sceneName)); // saved, persisted positions
+        MoveObjects(GameController.getSavedObjsPosFor(sceneName)); // move objects to saved, persisted positions
     }
 
     // Use this for initialization

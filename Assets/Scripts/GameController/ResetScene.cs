@@ -1,23 +1,37 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.SceneManagement;
-using System.Linq;
+using UnityEngine.UI;
 
 public class ResetScene : MonoBehaviour {
 
-    public GameController.LevelAttribute.Level LevelToReset;
+    public GameController.Level LevelToReset;
+    public GameController.PlayableScene SceneToReset;
 
-    void ResetLevel()
+    /**
+     * Reset all scenes in given level and put players at first scene in level
+     */
+    public void ResetScenesInLevel()
     {
-        // Set all scenes in the level to not reset when scene persistance wakes
+        GameController.PlayableScene? firstSceneInLevel = null;
+
+        // Set all scenes in the level to reset when scene persistance awakes
         foreach(GameController.PlayableScene scene in GameController.getScenesForLevel(LevelToReset))
         {
-            foreach (GameObject obj in SceneManager.GetSceneByName(scene.ToString()).GetRootGameObjects().Where(x => x.CompareTag("Persistence")).ToList())
-            {
-                ScenePersistence persistence = obj.GetComponent<ScenePersistence>();
-                persistence.resetSceneOnLoad = true;
-            }
+            if (firstSceneInLevel == null)
+                firstSceneInLevel = scene;          
+            Debug.Log("Resseting: " + LevelToReset.ToString() + " ," + scene.ToString());
+            GameController.setResetSceneAttributeFor(scene, true);
         }
+        GameController.clearScenesForLevel(LevelToReset);
+        SceneManager.LoadScene(firstSceneInLevel.ToString());
+    }
+    /**
+     * Reset the given scene only 
+     */
+    public void ResetCurrentScene()
+    {
+        GameController.setResetSceneAttributeFor(SceneToReset, true);
+        GameController.ClearPersistedDataForScene(SceneToReset);
+        SceneManager.LoadScene(SceneToReset.ToString());
     }
 }
