@@ -7,13 +7,12 @@ using System.Collections.Generic;
 public class CharacterContent : MonoBehaviour
 {
     public List<Button> statementBtns;
-    public List<Text> statements;
     private List<string> statementStrings;
 
     // Use this for initialization
     void Start()
     {
-        statements = new List<Text>();
+        statementBtns = new List<Button>();
         statementStrings = new List<string>();
     }
 
@@ -40,23 +39,11 @@ public class CharacterContent : MonoBehaviour
              text.font = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
              statements.Add(text);
         */
-
-            /*create button from prefab
-            GameObject btnPrefab = (GameObject)Instantiate(Resources.Load("ButtonPrefab"));
-            Button statementBtn = btnPrefab.GetComponent<Button>();
-
-            statementBtn.tag = "StatementButton";
-            statementBtn.GetComponentInChildren<Text>().text = statement;
-            //statementBtn.transform.SetParent(FindObjectOfType<CharacterContent>().transform);*/
-
-            //-----\
           
             GameObject btnPrefab = (GameObject)Instantiate(Resources.Load("ButtonPrefab"),new Vector3(transform.position.x, transform.position.y), Quaternion.identity );
             btnPrefab.transform.SetParent(this.gameObject.transform);
             Button statementBtn = btnPrefab.GetComponent<Button>();
-
-          
-           // buttonToAdd.targetGraphic = statementBtn.targetGraphic;
+            
 
             statementBtn.tag = "StatementButton";
             statementBtn.GetComponentInChildren<Text>().text = statement;
