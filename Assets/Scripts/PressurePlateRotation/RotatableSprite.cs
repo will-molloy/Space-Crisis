@@ -16,7 +16,7 @@ public class RotatableSprite : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         translation = Time.deltaTime * rotationSpeed;
         if (activated && getRotation() <= upperAngle)

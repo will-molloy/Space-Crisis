@@ -23,8 +23,6 @@ public class PauseScreen : MonoBehaviour {
 				PlatformerCharacter2D move = players [i].GetComponent<PlatformerCharacter2D> ();
 				//move.frozen = true;
 			}
-			//move[0].frozen = true;
-			//move[1].frozen = true;
 			paused = true;
 		} else if ((Input.GetKeyDown (KeyCode.Escape) && paused)) {
 			timer.Resume ();
@@ -33,9 +31,7 @@ public class PauseScreen : MonoBehaviour {
 				PlatformerCharacter2D move = players [i].GetComponent<PlatformerCharacter2D> ();
 				move.frozen = false;
 			}
-			//move[0].frozen = false;
-			//move[1].frozen = false;
-			//paused = false;
+			paused = false;
 		}
 	}
 }
