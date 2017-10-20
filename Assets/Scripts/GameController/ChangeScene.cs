@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
-public class OpenDoor : MonoBehaviour
+public class ChangeScene : MonoBehaviour
 {
-    public string sceneToLoad;
+    public GameController.PlayableScene sceneToLoad;
     public Sprite[] sprites = new Sprite[3];
     private List<GameObject> colliders;
-
 
     // Use this for initialization
     void Start()
@@ -18,12 +17,12 @@ public class OpenDoor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SpriteRenderer r = GetComponent<SpriteRenderer>();
-        r.sprite = sprites[2 - colliders.Count];
+        SpriteRenderer sprite = GetComponent<SpriteRenderer>();
+        sprite.sprite = sprites[2 - colliders.Count];
 
         if (colliders.Count == 2)
         {
-            SceneManager.LoadScene(sceneToLoad);
+            SceneManager.LoadScene(GameController.GetFileNameForScene(sceneToLoad));
         }
     }
 

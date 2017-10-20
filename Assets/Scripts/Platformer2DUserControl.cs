@@ -90,7 +90,6 @@ namespace UnityStandardAssets._2D
 
         void OnCollisionStay2D(Collision2D collider)
         {
-            Debug.Log(collider);
             if (collider.gameObject.tag == "Rope" && canSwing == true)
             {
 

@@ -26,7 +26,6 @@ public class PressurePlate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(name + " y:" + transform.position.y + " colliders:" + localColliders.Count);
         if (!isInAnimation) return;
 
         transform.Translate(movementDirection * translation);
