@@ -39,9 +39,13 @@ public static class GameController
         level2room1,
         [Level(Level.Level2)]
         level2room2,
+        [Level(Level.None)]
+        WelcomeScreen,
+        [Level(Level.None)]
+        ExitScene,
     }
 
-    public enum Level {  Level1, Level2, Level3 }
+    public enum Level {  Level1, Level2, None }
 
     public class LevelAttribute : Attribute
     {
