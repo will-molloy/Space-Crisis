@@ -1,27 +1,40 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class ScenePersistence : MonoBehaviour
 {
     public GameController.PlayableScene thisScene;
-    public static bool resetScene;
+    public bool resetSceneOnLoad { get; set; }
 
     void Awake()
     {
+        if (resetSceneOnLoad)
+            ResetScene(thisScene);
         RestoreScene(thisScene);
+    }
+
+    public void ResetScene(GameController.PlayableScene sceneName)
+    {
+        Debug.Log("Resseting: " + sceneName);
+        MoveObjects(GameController.getInitialObjsPosFor(sceneName)); // initial, default positions
+    }
+
+    private void MoveObjects(Dictionary<string, Vector3> objPositions)
+    {
+        foreach (KeyValuePair<string, Vector3> objPos in objPositions)
+        {
+            Debug.Log("Moving:" + objPos.Key + ", to: " + objPos.Value);
+
+            GameObject obj = GameObject.Find(objPos.Key);
+            obj.transform.position = objPos.Value;
+        }
     }
 
     public void RestoreScene(GameController.PlayableScene sceneName)
     {
         Debug.Log("Restoring: " + sceneName);
-
-        foreach (KeyValuePair<string, Vector3> objPos in GameController.getSavedObjsPosFor(sceneName))
-        {
-            Debug.Log("Restoring: Key :" + objPos.Key + ", Value: " + objPos.Value);
-
-            GameObject obj = GameObject.Find(objPos.Key);
-            obj.transform.position = objPos.Value;
-        }
+        MoveObjects(GameController.getSavedObjsPosFor(sceneName)); // saved, persisted positions
     }
 
     // Use this for initialization
@@ -38,7 +51,6 @@ public class ScenePersistence : MonoBehaviour
 
     public void SaveScene()
     {
-        Debug.Log("Saving: " + thisScene);
         GameController.SaveObjsPosFor(thisScene, getChildObjs(transform));
     }
 
@@ -51,5 +63,10 @@ public class ScenePersistence : MonoBehaviour
             objs.AddRange(getChildObjs(t)); // recursively add child components
         }
         return objs;
+    }
+
+    public static implicit operator ScenePersistence(GameObject v)
+    {
+        throw new NotImplementedException();
     }
 }

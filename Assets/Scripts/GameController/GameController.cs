@@ -22,7 +22,7 @@ public static class GameController
         }
     }
 
-    class LevelAttribute : Attribute
+    public class LevelAttribute : Attribute
     {
         public enum Level { Level1, Level2, Level3 }
         public LevelAttribute(Level level)
@@ -53,10 +53,10 @@ public static class GameController
         return (attributes.Length > 0) ? (T)attributes[0] : null;
     }
 
-    public static List<PlayableScene> getScenesForLevel(Attribute level)
+    public static List<PlayableScene> getScenesForLevel(LevelAttribute.Level level)
     {
         PlayableScene[] scenes = (PlayableScene[])Enum.GetValues(typeof(PlayableScene));
-        return scenes.Where(x => GetAttribute<LevelAttribute>(x) == level).ToList();
+        return scenes.Where(scene => scene.GetAttribute<LevelAttribute>().Equals(level)).ToList();
     }
 
     public static T GetAttribute<T>(this PlayableScene value) where T : Attribute
