@@ -116,9 +116,9 @@ using UnityEngine;
 
         public void Move(float move, bool crouch, bool jump)
 		{
-			if (!frozen){
+		if (!frozen) {
 			// If crouching, check to see if the character can stand up
-            if (!crouch && m_Anim.GetBool ("Crouch")) {
+			if (!crouch && m_Anim.GetBool ("Crouch")) {
 				/*
                 // If the character has a ceiling preventing them from standing up, keep them crouching
                 if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
@@ -156,7 +156,9 @@ using UnityEngine;
 				updateGroundState (false);
 				m_Rigidbody2D.AddForce (new Vector2 (0f, m_JumpForce));
 			}
-			}
+		} else {
+			m_Rigidbody2D.velocity = Vector3.zero;
+		}
         }
 
 
