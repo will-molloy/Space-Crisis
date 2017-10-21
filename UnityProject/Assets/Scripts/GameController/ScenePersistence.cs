@@ -18,7 +18,7 @@ public class ScenePersistence : MonoBehaviour
         SaveScene();
     }
 
-    private void SaveScene()
+    public void SaveScene()
     {
         GameController.SaveObjectPositions(thisScene, getChildObjs(transform));
     }
