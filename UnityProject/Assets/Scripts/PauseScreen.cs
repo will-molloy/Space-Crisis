@@ -21,7 +21,7 @@ public class PauseScreen : MonoBehaviour {
 			pauseScreen.SetActive (true);
 			for (int i = 0; i < players.Length; i++) {
 				PlatformerCharacter2D move = players [i].GetComponent<PlatformerCharacter2D> ();
-				//move.frozen = true;
+				move.frozen = true;
 			}
 			paused = true;
 		} else if ((Input.GetKeyDown (KeyCode.Escape) && paused)) {

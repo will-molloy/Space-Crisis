@@ -26,6 +26,10 @@ public class ChangeScene : MonoBehaviour
         }
     }
 
+	public void SceneTransition(){
+		SceneManager.LoadScene(GameController.GetFileNameForScene(sceneToLoad));
+	}
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (IsValidCollider(other))
