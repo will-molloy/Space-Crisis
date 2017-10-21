@@ -77,7 +77,6 @@ public class DialogHolder : MonoBehaviour
             dMan.setActiveNPC(this.gameObject);
             if (autoDialog)
             {
-
                 //dMan.showBox(this.gameObject.name , dialogue);
                 // show dialogue
                 if (!dMan.diaglogActive)
@@ -85,7 +84,7 @@ public class DialogHolder : MonoBehaviour
                     setAndShowDialogue(dBoxes[boxIndex]);
                     dMan.currentLine = 0;
                 }
-
+                autoDialog = false;
             }
         }
     }

@@ -59,14 +59,6 @@ public class CharacterContent : MonoBehaviour
             KeyValuePair<Image, List<string>> page = (KeyValuePair<Image, List<string>>)characterProfile[index];
             List<string> statements = page.Value;
 
-            //show alien name
-            GameObject npcNameUI = this.transform.Find("AlienName").gameObject;
-            npcNameUI.GetComponent<Text>().text = findNpcNameGivenIndex(index);
-
-            //show alien imgae
-            Image npcImageUI = this.transform.Find("AlienImage").gameObject.GetComponent<Image>();
-            npcImageUI.sprite = page.Key.sprite;
-
             //show buttons -> only if the content is empty
             if (contentPane.transform.childCount == 0)
             {
@@ -82,6 +74,16 @@ public class CharacterContent : MonoBehaviour
                     //page.addStatementBtn(statementBtn);
                 }
             }
+
+            //show alien name
+            GameObject npcNameUI = this.transform.Find("AlienName").gameObject;
+            npcNameUI.GetComponent<Text>().text = findNpcNameGivenIndex(index);
+
+            //show alien image
+            Image npcImageUI = this.transform.Find("AlienImage").gameObject.GetComponent<Image>();
+            npcImageUI.sprite = page.Key.sprite;
+
+            
         }
     }
 

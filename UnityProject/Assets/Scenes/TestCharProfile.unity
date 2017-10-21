@@ -904,8 +904,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 860485f0166912747862027cf0590a60, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 4e0f1b09ccfd210478d620bff26d892f, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1936,7 +1936,6 @@ GameObject:
   - 222: {fileID: 327426150}
   - 114: {fileID: 327426149}
   - 114: {fileID: 327426148}
-  - 114: {fileID: 327426147}
   m_Layer: 0
   m_Name: Content
   m_TagString: Untagged
@@ -1963,20 +1962,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.000015258789, y: 0.000061035156}
   m_SizeDelta: {x: 247, y: 620}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &327426147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11438732, guid: 2f62ab66c73515446a92d0855fd92713,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 327426145}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3e2a9cc1e3b5b844b9da999d881b56e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  contentPane: {fileID: 0}
-  index: 0
 --- !u!114 &327426148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9187,7 +9172,6 @@ MonoBehaviour:
   boxIndex: 0
   dialogue: 
   textLines: []
-  lineToBreak: 0
   autoDialog: 0
 --- !u!61 &1300137915
 BoxCollider2D:
@@ -9849,6 +9833,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   contentPane: {fileID: 327426145}
   index: 0
+  size: 2
+  npcFirstLine: 
 --- !u!1 &1366826561
 GameObject:
   m_ObjectHideFlags: 0
@@ -12176,7 +12162,6 @@ MonoBehaviour:
   boxIndex: 0
   dialogue: 
   textLines: []
-  lineToBreak: 0
   autoDialog: 0
 --- !u!61 &1649283287
 BoxCollider2D:
