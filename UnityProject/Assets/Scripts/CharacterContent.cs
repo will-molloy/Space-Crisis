@@ -65,7 +65,7 @@ public class CharacterContent : MonoBehaviour
 
             //show alien imgae
             Image npcImageUI = this.transform.Find("AlienImage").gameObject.GetComponent<Image>();
-           // npcImageUI.sprite = page.getNpcImage().sprite;
+            npcImageUI.sprite = page.Key.sprite;
 
             //show buttons -> only if the content is empty
             if (contentPane.transform.childCount == 0)
