@@ -15,7 +15,6 @@ public class DialogHolder : MonoBehaviour
     private DialogueManager dMan;
 
     public string[] textLines;
-    public int lineToBreak;
     // public Item item to check
     public bool autoDialog;
     private bool showDecisionBox;
@@ -35,12 +34,6 @@ public class DialogHolder : MonoBehaviour
     {
         if (dMan.activeNPC == this.gameObject) // only update dialogue if the current active NPC holds this dialogue
         {
-            if (dMan.currentLine == lineToBreak && lineToBreak != 0)
-            {
-                //!!! needs to check if user has the item in their inventory!!!!!
-                dMan.closeDialogue();
-            }
-
             // check if should move on to next dialogue box
             if (dMan.currentLine >= textLines.Length)
             {    // end of this box's file asset
@@ -49,6 +42,7 @@ public class DialogHolder : MonoBehaviour
                     boxIndex++;
 
                     setAndShowDialogue(dBoxes[boxIndex]);
+                    dMan.currentLine = 0;
                 }
 
             }
@@ -89,6 +83,7 @@ public class DialogHolder : MonoBehaviour
                 if (!dMan.diaglogActive)
                 {
                     setAndShowDialogue(dBoxes[boxIndex]);
+                    dMan.currentLine = 0;
                 }
 
             }
@@ -107,7 +102,7 @@ public class DialogHolder : MonoBehaviour
         dMan.dBox = box;
 
         dMan.dialogLines = textLines;
-        dMan.currentLine = 0;
+
 
         dMan.showDialogue(this.gameObject.name);
 
