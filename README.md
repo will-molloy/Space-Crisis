@@ -1,7 +1,7 @@
 # Space-Crisis
 Game developed in unity. SOFTENG306 
 
-<p align="center"> <img src = Assets/Welcome-Screen/main-screen.png/></p>
+<p align="center"> <img src = UnityProject/Assets/Welcome-Screen/main-screen.png/></p>
 
 ## How to run 
 Download the lastest release from the release page [here](https://github.com/wilmol/SE306_Project2/releases)  

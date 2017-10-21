@@ -118,7 +118,8 @@ public class PlatformerCharacter2D : MonoBehaviour
     {
         if (!frozen)
         {
-            // If crouching, check to see if the character can stand up
+			m_Rigidbody2D.gravityScale = 1;
+			// If crouching, check to see if the character can stand up
             if (!crouch && m_Anim.GetBool("Crouch"))
             {
                 /*
@@ -164,6 +165,7 @@ public class PlatformerCharacter2D : MonoBehaviour
         else
         {
             m_Rigidbody2D.velocity = Vector3.zero;
+			m_Rigidbody2D.gravityScale = 0;
         }
     }
 
