@@ -18,7 +18,7 @@ public class CharacterContent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        showPage(index);
     }
 
     public void addStatement(GameObject NPC, string statement)
@@ -47,7 +47,7 @@ public class CharacterContent : MonoBehaviour
         page.addStatement(btnText);
         
         GameObject btnPrefab = (GameObject)Instantiate(Resources.Load("ButtonPrefab"), new Vector3(transform.position.x, transform.position.y), Quaternion.identity);
-        btnPrefab.transform.SetParent(this.gameObject.transform);
+        //btnPrefab.transform.SetParent(this.gameObject.transform);
         Button statementBtn = btnPrefab.GetComponent<Button>();
 
         statementBtn.tag = "StatementButton";
