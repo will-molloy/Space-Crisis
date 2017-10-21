@@ -1,5 +1,5 @@
-# Space-Crisis
-Game developed in unity. SOFTENG306 
+## Space-Crisis [![Build Status](https://travis-ci.com/wilmol/SE306_Project2.svg?token=Fxpxpqr26vp9edeBzyVz&branch=master)](https://travis-ci.com/wilmol/SE306_Project2)
+Serious game developed in Unity. SOFTENG306 - University of Auckland
 
 <p align="center"> <img src = UnityProject/Assets/Welcome-Screen/main-screen.png/></p>
 
@@ -30,7 +30,7 @@ View the wiki [here](https://github.com/wilmol/SE306_Project2/wiki)
 ## Bugs
 View the issue page [here](https://github.com/wilmol/SE306_Project2/issues)  
 
-### Authors (username - name - UPI):
+## Authors (username - name - UPI):
 1. RustedWheel - David Qi - yqi955
 1. wilmol - Will Molloy - wmol664
 1. minhakim96 - Minha Kim - mkim907
