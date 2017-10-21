@@ -33,8 +33,7 @@ public class CharacterContent : MonoBehaviour
             // create new page for this NPC
             Image npcImage = NPC.GetComponent<Image>();
             KeyValuePair<Image, List<string>> newPage = new KeyValuePair<Image, List<string>>(npcImage, new List<string>());
-
-            //updatePage(newPage, statement);
+            
             newPage.Value.Add(statement);
             characterProfile.Add(NPC.name, newPage);
             size = characterProfile.Count;
@@ -47,16 +46,9 @@ public class CharacterContent : MonoBehaviour
             // add statement if does not yet exist
             if (!existingPage.Value.Contains(statement))
             {
-                //updatePage(existingPage, statement);
                 existingPage.Value.Add(statement);
             }
         }
-    }
-
-    private void updatePage(KeyValuePair<Image, List<string>> page, string statement)
-    {
-        //page.Value.Add(statement);
-
     }
 
     public void showPage(int index)
@@ -69,7 +61,7 @@ public class CharacterContent : MonoBehaviour
 
             //show alien name
             GameObject npcNameUI = this.transform.Find("AlienName").gameObject;
-            //npcNameUI.GetComponent<Text>().text = ;
+            npcNameUI.GetComponent<Text>().text = findNpcNameGivenIndex(index);
 
             //show alien imgae
             Image npcImageUI = this.transform.Find("AlienImage").gameObject.GetComponent<Image>();
@@ -91,6 +83,12 @@ public class CharacterContent : MonoBehaviour
                 }
             }
         }
+    }
+
+    private string findNpcNameGivenIndex(int index) {
+        string[] keys = new string[characterProfile.Keys.Count];
+        characterProfile.Keys.CopyTo(keys, 0);
+        return keys[index];
     }
 
     public void nextPage()
