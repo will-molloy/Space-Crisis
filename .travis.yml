@@ -1,30 +1,33 @@
-# do not install anything extra onto the image
 language: generic
 
-# use a Mac OSX image
+# CI only works on Linux or macOS, Unity only works on Linux or Windows 
+# Therefore must use macOS 
 os: osx
 
-# only run builds on pushes to the master branch
 branches:
   only:
   - master
   - /.*/
 
-# send email notifications when the build changes from succeeding to broken
 notifications:
   email:
     on_success: never
     on_failure: change
+    
+rvm:
+- 2.2
 
-# run the script to download and install Unity editor
+before_install:
+- chmod a+x ./Scripts/install.sh
+- chmod a+x ./Scripts/build.sh
+    
 install:
 - sudo -E sh ./Scripts/install.sh
 
-# run the script for unit tests and builds
 script:
 - sudo -E sh ./Scripts/build.sh
 
-# environment variables used in bash scripts
+# Set project name
 env:
   global:
   - UNITYCI_PROJECT_NAME="UnityProject"
