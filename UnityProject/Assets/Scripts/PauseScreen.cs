@@ -19,31 +19,17 @@ public class PauseScreen : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Escape) && !paused) {
 			timer.Pause ();
 			pauseScreen.SetActive (true);
-            FreezePlayers();
+			PlayerUtility.FreezePlayers();
 			paused = true;
 		} else if ((Input.GetKeyDown (KeyCode.Escape) && paused)) {
 			timer.Resume ();
 			pauseScreen.SetActive (false);
-            UnFreezePlayers();
+			PlayerUtility.UnFreezePlayers();
 			paused = false;
 		}
+		if (pauseScreen.activeSelf == false) {
+			paused = false;
+			PlayerUtility.UnFreezePlayers();
+		}
 	}
-
-    public void FreezePlayers()
-    {
-        List<GameObject> players = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
-        players.ForEach(player => {
-            PlatformerCharacter2D move = player.GetComponent<PlatformerCharacter2D>();
-            move.frozen = false;
-        });
-    }
-
-    public void UnFreezePlayers()
-    {
-        List<GameObject> players = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
-        players.ForEach(player => {
-            PlatformerCharacter2D move = player.GetComponent<PlatformerCharacter2D>();
-            move.frozen = true;
-        });
-    }
 }
