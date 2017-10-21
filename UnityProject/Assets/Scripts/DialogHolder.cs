@@ -15,10 +15,8 @@ public class DialogHolder : MonoBehaviour
     private DialogueManager dMan;
 
     public string[] textLines;
-    public int lineToBreak;
     // public Item item to check
     public bool autoDialog;
-    private bool moveOn;
     private bool showDecisionBox;
 
     //needs to link to inventory 
@@ -26,7 +24,6 @@ public class DialogHolder : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        moveOn = false;
         dMan = FindObjectOfType<DialogueManager>();
 
         textLines = dBoxes[boxIndex].GetComponent<TextHolder>().getTextLines();
@@ -37,13 +34,6 @@ public class DialogHolder : MonoBehaviour
     {
         if (dMan.activeNPC == this.gameObject) // only update dialogue if the current active NPC holds this dialogue
         {
-            if (dMan.currentLine == lineToBreak && lineToBreak != 0)
-            {
-                moveOn = true;
-                //!!! needs to check if user has the item in their inventory!!!!!
-                dMan.closeDialogue();
-            }
-
             // check if should move on to next dialogue box
             if (dMan.currentLine >= textLines.Length)
             {    // end of this box's file asset
@@ -52,6 +42,7 @@ public class DialogHolder : MonoBehaviour
                     boxIndex++;
 
                     setAndShowDialogue(dBoxes[boxIndex]);
+                    dMan.currentLine = 0;
                 }
 
             }
@@ -68,16 +59,11 @@ public class DialogHolder : MonoBehaviour
 
                 //dMan.showBox(this.gameObject.name , dialogue);
                 // show dialogue
-                if (!dMan.diaglogActive && !moveOn)
+                if (!dMan.diaglogActive)
                 {
                     setAndShowDialogue(dBoxes[boxIndex]);
                 }
-
-                if (!dMan.diaglogActive && moveOn)
-                {
-                    dMan.currentLine = lineToBreak + 1; // line5 corresponds to the text file content
-                    dMan.showDialogue(this.gameObject.name);
-                }
+                
 
             }
         }
@@ -91,14 +77,14 @@ public class DialogHolder : MonoBehaviour
             dMan.setActiveNPC(this.gameObject);
             if (autoDialog)
             {
-
                 //dMan.showBox(this.gameObject.name , dialogue);
                 // show dialogue
-                if (!dMan.diaglogActive && !moveOn)
+                if (!dMan.diaglogActive)
                 {
                     setAndShowDialogue(dBoxes[boxIndex]);
+                    dMan.currentLine = 0;
                 }
-
+                autoDialog = false;
             }
         }
     }
@@ -115,7 +101,7 @@ public class DialogHolder : MonoBehaviour
         dMan.dBox = box;
 
         dMan.dialogLines = textLines;
-        dMan.currentLine = 0;
+
 
         dMan.showDialogue(this.gameObject.name);
 
