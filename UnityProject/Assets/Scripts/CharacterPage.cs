@@ -63,4 +63,14 @@ public class CharacterPage
     public List<Button> getStatementButtons() {
         return statementBtns;
     }
+    
+    public string getNpcName()
+    {
+        return NPCname;
+    }
+
+    public Image getNpcImage()
+    {
+        return NPCImage;
+    }
 }

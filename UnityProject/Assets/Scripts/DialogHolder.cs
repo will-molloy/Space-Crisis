@@ -18,7 +18,6 @@ public class DialogHolder : MonoBehaviour
     public int lineToBreak;
     // public Item item to check
     public bool autoDialog;
-    private bool moveOn;
     private bool showDecisionBox;
 
     //needs to link to inventory 
@@ -26,7 +25,6 @@ public class DialogHolder : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        moveOn = false;
         dMan = FindObjectOfType<DialogueManager>();
 
         textLines = dBoxes[boxIndex].GetComponent<TextHolder>().getTextLines();
@@ -39,7 +37,6 @@ public class DialogHolder : MonoBehaviour
         {
             if (dMan.currentLine == lineToBreak && lineToBreak != 0)
             {
-                moveOn = true;
                 //!!! needs to check if user has the item in their inventory!!!!!
                 dMan.closeDialogue();
             }
@@ -68,16 +65,11 @@ public class DialogHolder : MonoBehaviour
 
                 //dMan.showBox(this.gameObject.name , dialogue);
                 // show dialogue
-                if (!dMan.diaglogActive && !moveOn)
+                if (!dMan.diaglogActive)
                 {
                     setAndShowDialogue(dBoxes[boxIndex]);
                 }
-
-                if (!dMan.diaglogActive && moveOn)
-                {
-                    dMan.currentLine = lineToBreak + 1; // line5 corresponds to the text file content
-                    dMan.showDialogue(this.gameObject.name);
-                }
+                
 
             }
         }
@@ -94,7 +86,7 @@ public class DialogHolder : MonoBehaviour
 
                 //dMan.showBox(this.gameObject.name , dialogue);
                 // show dialogue
-                if (!dMan.diaglogActive && !moveOn)
+                if (!dMan.diaglogActive)
                 {
                     setAndShowDialogue(dBoxes[boxIndex]);
                 }

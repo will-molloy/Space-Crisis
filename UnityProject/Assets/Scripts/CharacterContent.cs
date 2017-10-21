@@ -64,9 +64,18 @@ public class CharacterContent : MonoBehaviour
             CharacterPage page = (CharacterPage)characterProfile[pageNumber];
             List<Button> statementBtns = page.getStatementButtons();
 
+            //show buttons
             foreach (Button b in statementBtns) {
                 b.transform.SetParent(contentPane.transform);
             }
+            //show alien name
+            GameObject npcNameUI = this.transform.Find("AlienName").gameObject;
+            npcNameUI.GetComponent<Text>().text = page.getNpcName();
+
+            //show alien imgae
+            Image npcImageUI = this.transform.Find("AlienImage").gameObject.GetComponent<Image>();
+            npcImageUI = page.getNpcImage();
+
         }
     }
 }
