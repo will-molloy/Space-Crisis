@@ -6,12 +6,11 @@ using System.Collections.Generic;
 
 public class CharacterContent : MonoBehaviour
 {
-    public Dictionary<string, CharacterPage> characterProfile;
+    public Dictionary<string, CharacterPage> characterProfile = new Dictionary<string, CharacterPage>();
 
     // Use this for initialization
     void Start()
     {
-        characterProfile = new Dictionary<string, CharacterPage>();
     }
 
     // Update is called once per frame
