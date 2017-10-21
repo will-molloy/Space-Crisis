@@ -1,51 +1,42 @@
 #! /bin/sh
 
-## Run the editor unit tests
-echo "Running editor unit tests for ${UNITYCI_PROJECT_NAME}"
-/Applications/Unity/Unity.app/Contents/MacOS/Unity \
-	-batchmode \
-	-nographics \
-	-silent-crashes \
-	-logFile $(pwd)/unity.log \
-	-projectPath "$(pwd)/${UNITYCI_PROJECT_NAME}" \
-	-runEditorTests \
-	-editorTestsResultFile $(pwd)/test.xml \
-	-quit
+project="UnityProject"
 
-rc0=$?
-echo "Unit test logs"
-cat $(pwd)/test.xml
-# exit if tests failed
-if [ $rc0 -ne 0 ]; then { echo "Failed unit tests"; exit $rc0; } fi
+echo "Attempting to build $project for Windows"
+/Applications/Unity/Unity.app/Contents/MacOS/Unity 
+  -batchmode 
+  -nographics 
+  -silent-crashes 
+  -logFile $(pwd)/unity.log 
+  -projectPath $(pwd) 
+  -buildWindowsPlayer "$(pwd)/Build/windows/$project.exe" 
+  -quit
 
-## Make the builds
-# Recall from install.sh that a separate module was needed for Windows build support
-echo "Attempting build of ${UNITYCI_PROJECT_NAME} for Windows"
-/Applications/Unity/Unity.app/Contents/MacOS/Unity \
-	-batchmode \
-	-nographics \
-	-silent-crashes \
-	-logFile $(pwd)/unity.log \
-	-projectPath "$(pwd)/${UNITYCI_PROJECT_NAME}" \
-	-buildWindowsPlayer "$(pwd)/Build/windows/${UNITYCI_PROJECT_NAME}.exe" \
-	-quit
+echo "Attempting to build $project for OS X"
+/Applications/Unity/Unity.app/Contents/MacOS/Unity 
+  -batchmode 
+  -nographics 
+  -silent-crashes 
+  -logFile $(pwd)/unity.log 
+  -projectPath $(pwd) 
+  -buildOSXUniversalPlayer "$(pwd)/Build/osx/$project.app" 
+  -quit
 
-rc1=$?
-echo "Build logs (Windows)"
+echo "Attempting to build $project for Linux"
+/Applications/Unity/Unity.app/Contents/MacOS/Unity 
+  -batchmode 
+  -nographics 
+  -silent-crashes 
+  -logFile $(pwd)/unity.log 
+  -projectPath $(pwd) 
+  -buildLinuxUniversalPlayer "$(pwd)/Build/linux/$project.exe" 
+  -quit
+
+echo 'Logs from build'
 cat $(pwd)/unity.log
 
-echo "Attempting build of ${UNITYCI_PROJECT_NAME} for OSX"
-/Applications/Unity/Unity.app/Contents/MacOS/Unity \
-	-batchmode \
-	-nographics \
-	-silent-crashes \
-	-logFile $(pwd)/unity.log \
-	-projectPath "$(pwd)/${UNITYCI_PROJECT_NAME}" \
-	-buildOSXUniversalPlayer "$(pwd)/Build/osx/${UNITYCI_PROJECT_NAME}.app" \
-	-quit
 
-rc2=$?
-echo "Build logs (OSX)"
-cat $(pwd)/unity.log
-
-exit $(($rc1|$rc2))
+echo 'Attempting to zip builds'
+zip -r $(pwd)/Build/linux.zip $(pwd)/Build/linux/
+zip -r $(pwd)/Build/mac.zip $(pwd)/Build/osx/
+zip -r $(pwd)/Build/windows.zip $(pwd)/Build/windows/
