@@ -9,6 +9,7 @@ public class CharacterContent : MonoBehaviour
     public static OrderedDictionary characterProfile = new OrderedDictionary();
     public GameObject contentPane;
     public int index;
+    public int size = characterProfile.Count;
     // Use this for initialization
     void Start()
     {
@@ -32,6 +33,7 @@ public class CharacterContent : MonoBehaviour
             updatePage(newPage, statement);
 
             characterProfile.Add(NPC.name, newPage);
+            size = characterProfile.Count;
         }
         else
         {
