@@ -20,10 +20,13 @@ public class DialogueManager : MonoBehaviour
     private Vector2[] linearBackups;
 
     public GameObject activeNPC;
-
+    public GameObject content;
+    private CharacterContent characterContent;
     // Use this for initialization
     void Start()
     {
+        characterContent = content.GetComponent<CharacterContent>();
+
         dText.enabled = false;
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
@@ -43,12 +46,16 @@ public class DialogueManager : MonoBehaviour
             //diaglogActive = false;
 
             currentLine++;
-           
+
         }
         if (dialogLines.Length > 0 && currentLine < dialogLines.Length)
         {
-            
             dText.text = dialogLines[currentLine];
+
+            if (dBox.tag.Equals("NPCStatement"))
+            {
+                characterContent.addStatement(activeNPC, dText.text);
+            }
         }
 
         if (currentLine >= dialogLines.Length)
@@ -57,16 +64,16 @@ public class DialogueManager : MonoBehaviour
             //currentLine = 0;
         }
 
-     
+
     }
 
     public void showBox(string source, string dialogue)
     {
 
-        
+
         diaglogActive = true;
         dBox.SetActive(true);
-      //  sText.text = source;
+        //  sText.text = source;
         dText.text = dialogue;
         dText.enabled = true;
 
@@ -77,7 +84,7 @@ public class DialogueManager : MonoBehaviour
         if (!isFrozen)
         {
             isFrozen = true;
-           // freezePlayer();
+            // freezePlayer();
         }
         dText.enabled = true;
         diaglogActive = true;
@@ -85,13 +92,14 @@ public class DialogueManager : MonoBehaviour
 
         // enable button if any
         Button[] btns = dBox.GetComponents<Button>();
-        for (int i = 0; i < btns.Length; i++) {
+        for (int i = 0; i < btns.Length; i++)
+        {
             Debug.Log(" length : " + btns.Length);
             btns[i].enabled = true;
             btns[i].interactable = true;
         }
 
-      //  sText.text = source;
+        //  sText.text = source;
 
     }
 
@@ -104,7 +112,7 @@ public class DialogueManager : MonoBehaviour
         if (isFrozen)
         {
             isFrozen = false;
-           // unfreezePlayer();
+            // unfreezePlayer();
         }
 
     }
@@ -114,7 +122,7 @@ public class DialogueManager : MonoBehaviour
         linearBackups[0] = playerBody[0].velocity;
 
         linearBackups[1] = playerBody[1].velocity;
-        
+
         playerBody[0].velocity = Vector2.zero;
         playerBody[1].velocity = Vector2.zero;
 
@@ -131,9 +139,10 @@ public class DialogueManager : MonoBehaviour
         playerBody[1].velocity = linearBackups[1];
     }
 
-    public void setActiveNPC(GameObject NPC) {
+    public void setActiveNPC(GameObject NPC)
+    {
         activeNPC = NPC;
     }
 
-    
+
 }
