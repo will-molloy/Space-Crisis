@@ -6,7 +6,7 @@ using System.Collections.Specialized;
 
 public class CharacterContent : MonoBehaviour
 {
-    public OrderedDictionary characterProfile = new OrderedDictionary();
+    public static OrderedDictionary characterProfile = new OrderedDictionary();
     public GameObject contentPane;
     public int index;
     // Use this for initialization
@@ -50,15 +50,6 @@ public class CharacterContent : MonoBehaviour
     {
         page.addStatement(btnText);
 
-        GameObject btnPrefab = (GameObject)Instantiate(Resources.Load("ButtonPrefab"), new Vector3(transform.position.x, transform.position.y), Quaternion.identity);
-        btnPrefab.transform.SetParent(contentPane.transform);
-        Button statementBtn = btnPrefab.GetComponent<Button>();
-        statementBtn.gameObject.SetActive(false); // do not show initially
-
-        statementBtn.tag = "StatementButton";
-        statementBtn.GetComponentInChildren<Text>().text = btnText;
-
-        page.addStatementBtn(statementBtn);
     }
 
     public void showPage(int index)
@@ -67,14 +58,8 @@ public class CharacterContent : MonoBehaviour
         {
             // show the first character in dictionary
             CharacterPage page = (CharacterPage)characterProfile[index];
-            List<Button> statementBtns = page.getStatementButtons();
+            List<string> statements = page.getStatementStrings();
 
-            //show buttons
-            foreach (Button b in statementBtns)
-            {
-                //b.transform.SetParent(contentPane.transform);
-                b.gameObject.SetActive(true);
-            }
             //show alien name
             GameObject npcNameUI = this.transform.Find("AlienName").gameObject;
             npcNameUI.GetComponent<Text>().text = page.getNpcName();
@@ -83,17 +68,34 @@ public class CharacterContent : MonoBehaviour
             Image npcImageUI = this.transform.Find("AlienImage").gameObject.GetComponent<Image>();
             npcImageUI.sprite = page.getNpcImage().sprite;
 
+            //show buttons -> only if the content is empty
+            if (contentPane.transform.childCount == 0)
+            {
+                foreach (string s in statements)
+                {
+                    GameObject btnPrefab = (GameObject)Instantiate(Resources.Load("ButtonPrefab"), new Vector3(transform.position.x, transform.position.y), Quaternion.identity);
+                    btnPrefab.transform.SetParent(contentPane.transform);
+                    Button statementBtn = btnPrefab.GetComponent<Button>();
+
+                    statementBtn.tag = "StatementButton";
+                    statementBtn.GetComponentInChildren<Text>().text = s;
+
+                    //page.addStatementBtn(statementBtn);
+                }
+            }
         }
     }
 
-    public void nextPage() {
+    public void nextPage()
+    {
 
         clearScreen();
         if ((index + 1) < characterProfile.Count)
         {
             index++;
         }
-        else {
+        else
+        {
             index = 0;
         }
         showPage(index);
@@ -114,14 +116,15 @@ public class CharacterContent : MonoBehaviour
         showPage(index);
     }
 
-    private void clearScreen() {
+    private void clearScreen()
+    {
         // clear screen before showing new page
         foreach (Transform t in contentPane.transform)
         {
             if (t.tag.Equals("StatementButton"))
             {
-                // Destroy(t.gameObject);
-                t.gameObject.SetActive(false);
+                Destroy(t.gameObject);
+                //t.gameObject.SetActive(false);
             }
         }
     }

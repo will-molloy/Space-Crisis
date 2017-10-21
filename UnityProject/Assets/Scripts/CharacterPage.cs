@@ -6,15 +6,15 @@ using UnityEngine.UI;
 public class CharacterPage
 {
 
-    private Image NPCImage;
-    private string NPCname;
-    public List<Button> statementBtns;
-    private List<string> statementStrings;
+    private static Image _NPCImage;
+    private static string _NPCname;
+    public static List<Button> statementBtns;
+    private static List<string> statementStrings;
 
     // Use this for initialization
     void Start()
     {
-        
+
 
     }
 
@@ -26,10 +26,10 @@ public class CharacterPage
     }
 
 
-    public CharacterPage(string NPCname, Image npcImage) {
-        this.NPCname = NPCname;
-
-        this.NPCImage = npcImage;
+    public CharacterPage(string NPCname, Image npcImage)
+    {
+        _NPCname = NPCname;
+        _NPCImage = npcImage;
         statementBtns = new List<Button>();
         statementStrings = new List<string>();
     }
@@ -42,35 +42,39 @@ public class CharacterPage
         }
     }
 
-    public void addStatementBtn(Button btn) {
+    public void addStatementBtn(Button btn)
+    {
         if (!statementBtns.Contains(btn))
         {
             statementBtns.Add(btn);
         }
     }
 
-    public bool statementExists(string statement) {
-        if (statementStrings.Contains(statement)) {
+    public bool statementExists(string statement)
+    {
+        if (statementStrings.Contains(statement))
+        {
             return true;
         }
         return false;
     }
     public void setNPCnameAndImage(string NPCname, Image npcImage)
     {
-        
+
     }
 
-    public List<Button> getStatementButtons() {
-        return statementBtns;
+    public List<string> getStatementStrings()
+    {
+        return statementStrings;
     }
-    
+
     public string getNpcName()
     {
-        return NPCname;
+        return _NPCname;
     }
 
     public Image getNpcImage()
     {
-        return NPCImage;
+        return _NPCImage;
     }
 }
