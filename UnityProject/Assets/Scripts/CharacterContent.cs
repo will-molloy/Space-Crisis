@@ -10,6 +10,7 @@ public class CharacterContent : MonoBehaviour
     public GameObject contentPane;
     public int index;
     public int size = characterProfile.Count;
+    public string npcFirstLine;
     // Use this for initialization
     void Start()
     {
@@ -21,6 +22,8 @@ public class CharacterContent : MonoBehaviour
     void Update()
     {
         showPage(index);
+        KeyValuePair<Image, List<string>> page = (KeyValuePair<Image, List<string>>)characterProfile[index];
+        npcFirstLine = page.Value[0];
     }
 
     public void addStatement(GameObject NPC, string statement)
@@ -29,28 +32,30 @@ public class CharacterContent : MonoBehaviour
         {
             // create new page for this NPC
             Image npcImage = NPC.GetComponent<Image>();
-            CharacterPage newPage = new CharacterPage(NPC.name, npcImage);
-            updatePage(newPage, statement);
+            KeyValuePair<Image, List<string>> newPage = new KeyValuePair<Image, List<string>>(npcImage, new List<string>());
 
+            //updatePage(newPage, statement);
+            newPage.Value.Add(statement);
             characterProfile.Add(NPC.name, newPage);
             size = characterProfile.Count;
         }
         else
         {
             // page already exists
-            CharacterPage existingPage = (CharacterPage)characterProfile[NPC.name];
+            KeyValuePair<Image, List<string>> existingPage = (KeyValuePair<Image, List<string>>)characterProfile[NPC.name];
 
             // add statement if does not yet exist
-            if (!existingPage.statementExists(statement))
+            if (!existingPage.Value.Contains(statement))
             {
-                updatePage(existingPage, statement);
+                //updatePage(existingPage, statement);
+                existingPage.Value.Add(statement);
             }
         }
     }
 
-    private void updatePage(CharacterPage page, string btnText)
+    private void updatePage(KeyValuePair<Image, List<string>> page, string statement)
     {
-        page.addStatement(btnText);
+        //page.Value.Add(statement);
 
     }
 
@@ -59,16 +64,16 @@ public class CharacterContent : MonoBehaviour
         if (characterProfile.Count >= (index + 1))
         {
             // show the first character in dictionary
-            CharacterPage page = (CharacterPage)characterProfile[index];
-            List<string> statements = page.getStatementStrings();
+            KeyValuePair<Image, List<string>> page = (KeyValuePair<Image, List<string>>)characterProfile[index];
+            List<string> statements = page.Value;
 
             //show alien name
             GameObject npcNameUI = this.transform.Find("AlienName").gameObject;
-            npcNameUI.GetComponent<Text>().text = page.getNpcName();
+            //npcNameUI.GetComponent<Text>().text = ;
 
             //show alien imgae
             Image npcImageUI = this.transform.Find("AlienImage").gameObject.GetComponent<Image>();
-            npcImageUI.sprite = page.getNpcImage().sprite;
+           // npcImageUI.sprite = page.getNpcImage().sprite;
 
             //show buttons -> only if the content is empty
             if (contentPane.transform.childCount == 0)
