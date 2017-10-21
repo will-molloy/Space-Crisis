@@ -6,6 +6,7 @@ public class PickUpItem : MonoBehaviour
     private Inventory _inventory;
     private GameObject _player1;
 	private GameObject _player2;
+	public AudioClip pickUpFX;
     // Use this for initialization
 
     void Start()
@@ -48,6 +49,7 @@ public class PickUpItem : MonoBehaviour
                     _inventory.stackableSettings();
                     GameController.AddItem(item);
                     Destroy(this.gameObject);
+					AudioSource.PlayClipAtPoint(pickUpFX, transform.position);
                 }
 
             }

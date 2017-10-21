@@ -10,6 +10,7 @@ public class LifeSystem : MonoBehaviour {
 	 int healthPerHeart = 1;
 	GameObject[] players;
 	GameObject[] spawnPoints;
+	public AudioClip[] damagedAudioClips;	
 	public bool isDead = false;
 
 	public Image[] imgs;
@@ -62,6 +63,10 @@ public class LifeSystem : MonoBehaviour {
 			currentHearts -= 1;
 			currentHearts = Mathf.Clamp (currentHearts, 0, startHearts * healthPerHeart);
 			UpdateHearts ();
+
+			// Play a random audio clip of the player getting hurt.
+			int j = Random.Range (0, damagedAudioClips.Length);
+			AudioSource.PlayClipAtPoint(damagedAudioClips[j], transform.position);
 
 			if (currentHearts == 0) {
 				isDead = true;

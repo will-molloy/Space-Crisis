@@ -28,8 +28,8 @@ GameObject:
   - 61: {fileID: 6198414}
   - 50: {fileID: 5076482}
   - 114: {fileID: 11420440}
-  - 114: {fileID: 11447900}
   - 114: {fileID: 11456570}
+  - 114: {fileID: 11441494}
   m_Layer: 9
   m_Name: Astronaut
   m_TagString: Player
@@ -57,7 +57,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 155526}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.76, y: -4.76, z: 0}
+  m_LocalPosition: {x: -20.86, y: -1.46, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -123,15 +123,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d08f91df3bd212f429df17f53ce2f364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaxSpeed: 10
-  m_JumpForce: 400
+  m_MaxSpeed: 6
+  m_JumpForce: 800
   m_CrouchSpeed: 0.36
   m_AirControl: 1
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 4096
   m_GroundCheck: {fileID: 0}
---- !u!114 &11447900
+  m_LeverLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  jumpAudios:
+  - {fileID: 8300000, guid: 50a8d8a939a0f4e77a0dac6ecd2e582b, type: 3}
+  frozen: 0
+--- !u!114 &11441494
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -139,17 +145,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 155526}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d08f91df3bd212f429df17f53ce2f364, type: 3}
+  m_Script: {fileID: 11500000, guid: 0db4493228a4ba442a891316e3ee246f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaxSpeed: 10
-  m_JumpForce: 365
-  m_CrouchSpeed: 0.36
-  m_AirControl: 0
-  m_WhatIsGround:
-    serializedVersion: 2
-    m_Bits: 4096
-  m_GroundCheck: {fileID: 0}
+  inventory: {fileID: 0}
+  characterSystem: {fileID: 0}
+  craftSystem: {fileID: 0}
+  HPMANACanvas: {fileID: 0}
+  currentHealth: 60
 --- !u!114 &11456570
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -161,6 +164,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d7b34a3bb2d4e4b926e7e729d3d410, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpKey: Jump
+  horizontalKey: Horizontal
+  ctrlKey: 0
 --- !u!212 &21236194
 SpriteRenderer:
   m_ObjectHideFlags: 1
