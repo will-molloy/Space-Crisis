@@ -51,8 +51,9 @@ public class CharacterContent : MonoBehaviour
         page.addStatement(btnText);
 
         GameObject btnPrefab = (GameObject)Instantiate(Resources.Load("ButtonPrefab"), new Vector3(transform.position.x, transform.position.y), Quaternion.identity);
-        //btnPrefab.transform.SetParent(contentPane.transform);
+        btnPrefab.transform.SetParent(contentPane.transform);
         Button statementBtn = btnPrefab.GetComponent<Button>();
+        statementBtn.gameObject.SetActive(false); // do not show initially
 
         statementBtn.tag = "StatementButton";
         statementBtn.GetComponentInChildren<Text>().text = btnText;
@@ -60,19 +61,19 @@ public class CharacterContent : MonoBehaviour
         page.addStatementBtn(statementBtn);
     }
 
-    public void showPage(int pageNumber)
+    public void showPage(int index)
     {
-
-        if (characterProfile.Count >= (pageNumber + 1))
+        if (characterProfile.Count >= (index + 1))
         {
             // show the first character in dictionary
-            CharacterPage page = (CharacterPage)characterProfile[pageNumber];
+            CharacterPage page = (CharacterPage)characterProfile[index];
             List<Button> statementBtns = page.getStatementButtons();
 
             //show buttons
             foreach (Button b in statementBtns)
             {
-                b.transform.SetParent(contentPane.transform);
+                //b.transform.SetParent(contentPane.transform);
+                b.gameObject.SetActive(true);
             }
             //show alien name
             GameObject npcNameUI = this.transform.Find("AlienName").gameObject;
@@ -85,5 +86,43 @@ public class CharacterContent : MonoBehaviour
         }
     }
 
+    public void nextPage() {
 
+        clearScreen();
+        if ((index + 1) < characterProfile.Count)
+        {
+            index++;
+        }
+        else {
+            index = 0;
+        }
+        showPage(index);
+    }
+
+    public void previousPage()
+    {
+        clearScreen();
+
+        if ((index - 1) >= 0)
+        {
+            index--;
+        }
+        else
+        {
+            index = 0;
+        }
+        showPage(index);
+    }
+
+    private void clearScreen() {
+        // clear screen before showing new page
+        foreach (Transform t in contentPane.transform)
+        {
+            if (t.tag.Equals("StatementButton"))
+            {
+                // Destroy(t.gameObject);
+                t.gameObject.SetActive(false);
+            }
+        }
+    }
 }
