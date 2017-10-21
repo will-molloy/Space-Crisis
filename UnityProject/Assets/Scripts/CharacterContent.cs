@@ -33,39 +33,45 @@ public class CharacterContent : MonoBehaviour
 
             characterProfile.Add(NPC.name, newPage);
         }
-        else {
+        else
+        {
             // page already exists
             CharacterPage existingPage = (CharacterPage)characterProfile[NPC.name];
 
             // add statement if does not yet exist
-            if (!existingPage.statementExists(statement)) {
+            if (!existingPage.statementExists(statement))
+            {
                 updatePage(existingPage, statement);
             }
         }
     }
 
-    private void updatePage(CharacterPage page, string btnText) {
+    private void updatePage(CharacterPage page, string btnText)
+    {
         page.addStatement(btnText);
-        
+
         GameObject btnPrefab = (GameObject)Instantiate(Resources.Load("ButtonPrefab"), new Vector3(transform.position.x, transform.position.y), Quaternion.identity);
         //btnPrefab.transform.SetParent(contentPane.transform);
         Button statementBtn = btnPrefab.GetComponent<Button>();
 
         statementBtn.tag = "StatementButton";
         statementBtn.GetComponentInChildren<Text>().text = btnText;
-        
+
         page.addStatementBtn(statementBtn);
     }
 
-    public void showPage(int pageNumber) {
+    public void showPage(int pageNumber)
+    {
 
-        if (characterProfile.Count >= (pageNumber + 1)) {
+        if (characterProfile.Count >= (pageNumber + 1))
+        {
             // show the first character in dictionary
             CharacterPage page = (CharacterPage)characterProfile[pageNumber];
             List<Button> statementBtns = page.getStatementButtons();
 
             //show buttons
-            foreach (Button b in statementBtns) {
+            foreach (Button b in statementBtns)
+            {
                 b.transform.SetParent(contentPane.transform);
             }
             //show alien name
@@ -78,4 +84,6 @@ public class CharacterContent : MonoBehaviour
 
         }
     }
+
+
 }
