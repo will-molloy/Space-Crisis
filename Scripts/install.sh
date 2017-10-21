@@ -7,13 +7,6 @@ echo 'Downloading Unity 5.5.1 pkg:'
 curl --retry 5 -o Unity.pkg http://netstorage.unity3d.com/unity/88d00a7498cd/MacEditorInstaller/Unity-5.5.1f1.pkg
 if [ $? -ne 0 ]; then { echo "Download failed"; exit $?; } fi
 
-# In Unity 5 they split up build platform support into modules which are installed separately
-# By default, only Mac OSX support is included in the original editor package; Windows, Linux, iOS, Android, and others are separate
-# In this example we download Windows support. Refer to http://unity.grimdork.net/ to see what form the URLs should take
-echo 'Downloading Unity 5.5.1 Windows Build Support pkg:'
-curl --retry 5 -o Unity_win.pkg http://netstorage.unity3d.com/unity/88d00a7498cd/MacEditorTargetInstaller/UnitySetup-Windows-Support-for-Editor-5.5.1f1.pkg
-if [ $? -ne 0 ]; then { echo "Download failed"; exit $?; } fi
-
 # Run installer(s)
 echo 'Installing Unity.pkg'
 sudo installer -dumplog -package Unity.pkg -target /
