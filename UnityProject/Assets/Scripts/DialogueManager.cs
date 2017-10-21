@@ -142,6 +142,7 @@ public class DialogueManager : MonoBehaviour
     public void setActiveNPC(GameObject NPC)
     {
         activeNPC = NPC;
+        currentLine = 0;
     }
 
 
