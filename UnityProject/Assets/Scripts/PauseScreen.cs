@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class PauseScreen : MonoBehaviour {
@@ -19,19 +19,31 @@ public class PauseScreen : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Escape) && !paused) {
 			timer.Pause ();
 			pauseScreen.SetActive (true);
-			for (int i = 0; i < players.Length; i++) {
-				PlatformerCharacter2D move = players [i].GetComponent<PlatformerCharacter2D> ();
-				move.frozen = true;
-			}
+            FreezePlayers();
 			paused = true;
 		} else if ((Input.GetKeyDown (KeyCode.Escape) && paused)) {
 			timer.Resume ();
 			pauseScreen.SetActive (false);
-			for (int i = 0; i < players.Length; i++) {
-				PlatformerCharacter2D move = players [i].GetComponent<PlatformerCharacter2D> ();
-				move.frozen = false;
-			}
+            UnFreezePlayers();
 			paused = false;
 		}
 	}
+
+    public void FreezePlayers()
+    {
+        List<GameObject> players = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
+        players.ForEach(player => {
+            PlatformerCharacter2D move = player.GetComponent<PlatformerCharacter2D>();
+            move.frozen = false;
+        });
+    }
+
+    public void UnFreezePlayers()
+    {
+        List<GameObject> players = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
+        players.ForEach(player => {
+            PlatformerCharacter2D move = player.GetComponent<PlatformerCharacter2D>();
+            move.frozen = true;
+        });
+    }
 }
