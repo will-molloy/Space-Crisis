@@ -741,8 +741,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 267657790}
-        m_MethodName: LoadByIndex
-        m_Mode: 3
+        m_MethodName: SceneTransition
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -794,9 +794,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 267657785}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed28c7fb9d964884b98deb8a19486fd5, type: 3}
+  m_Script: {fileID: 11500000, guid: 08c210970d4f2a7449123873a8fe683f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneToLoad: 0
+  sprites:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &382866743
 GameObject:
   m_ObjectHideFlags: 0
