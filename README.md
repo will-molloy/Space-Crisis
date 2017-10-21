@@ -30,7 +30,7 @@ View the wiki [here](https://github.com/wilmol/SE306_Project2/wiki)
 ## Bugs
 View the issue page [here](https://github.com/wilmol/SE306_Project2/issues)  
 
-### Authors (username - name - UPI):
+## Authors (username - name - UPI):
 1. RustedWheel - David Qi - yqi955
 1. wilmol - Will Molloy - wmol664
 1. minhakim96 - Minha Kim - mkim907

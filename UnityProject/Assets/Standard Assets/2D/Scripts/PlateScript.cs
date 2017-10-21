@@ -30,14 +30,9 @@ public class PlateScript : MonoBehaviour {
     {
         isRunning = false;
     }
-
-	// Use this for initialization
-	void Start () {
-	
-	}
 	
 	// Update is called once per frame
-	void Update() {
+	public void Update() {
         //Debug.Log(isRunning);
         if (!isRunning) return;
         //transform.position = Vector3.Lerp(transform.position, translationDirection, 300 * Time.deltaTime);
