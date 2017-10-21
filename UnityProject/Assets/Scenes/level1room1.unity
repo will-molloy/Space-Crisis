@@ -919,19 +919,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 490288, guid: 11f926089a397c94c82e74b3e88c4964, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0.90767336
+      value: -0.9076734
       objectReference: {fileID: 0}
     - target: {fileID: 490288, guid: 11f926089a397c94c82e74b3e88c4964, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0.24321035
+      value: 0.24321036
       objectReference: {fileID: 0}
     - target: {fileID: 490288, guid: 11f926089a397c94c82e74b3e88c4964, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.08852132
+      value: 0.088521324
       objectReference: {fileID: 0}
     - target: {fileID: 490288, guid: 11f926089a397c94c82e74b3e88c4964, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.33036602
+      value: 0.33036605
       objectReference: {fileID: 0}
     - target: {fileID: 490288, guid: 11f926089a397c94c82e74b3e88c4964, type: 2}
       propertyPath: m_RootOrder
@@ -1146,6 +1146,11 @@ Prefab:
       propertyPath: m_SortingOrder
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 21204702, guid: 2a232a9e7305ed846b356cea57444737, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 451662e0ce14d6c4c9c78ff2a28b0ce3,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2a232a9e7305ed846b356cea57444737, type: 2}
   m_IsPrefabParent: 0
@@ -1354,7 +1359,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 558254f4d3e0b214e9b481249b9bb135, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -1380,19 +1385,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 477454, guid: 48dc36c09eec02e4baa3357c8aa613e5, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0.90767336
+      value: -0.9076734
       objectReference: {fileID: 0}
     - target: {fileID: 477454, guid: 48dc36c09eec02e4baa3357c8aa613e5, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0.24321035
+      value: 0.24321036
       objectReference: {fileID: 0}
     - target: {fileID: 477454, guid: 48dc36c09eec02e4baa3357c8aa613e5, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.08852132
+      value: 0.088521324
       objectReference: {fileID: 0}
     - target: {fileID: 477454, guid: 48dc36c09eec02e4baa3357c8aa613e5, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.33036602
+      value: 0.33036605
       objectReference: {fileID: 0}
     - target: {fileID: 477454, guid: 48dc36c09eec02e4baa3357c8aa613e5, type: 2}
       propertyPath: m_RootOrder
@@ -2290,17 +2295,13 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 134092, guid: 6e69f909501db244285cba6895f12be0, type: 2}
-      propertyPath: m_Name
-      value: PressurePlate2ndLevel
-      objectReference: {fileID: 0}
     - target: {fileID: 11493812, guid: 6e69f909501db244285cba6895f12be0, type: 2}
       propertyPath: parent
       value: 
       objectReference: {fileID: 1738153800}
-    - target: {fileID: 21253972, guid: 6e69f909501db244285cba6895f12be0, type: 2}
-      propertyPath: m_SortingOrder
-      value: -1
+    - target: {fileID: 134092, guid: 6e69f909501db244285cba6895f12be0, type: 2}
+      propertyPath: m_Name
+      value: PressurePlate2ndLevel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e69f909501db244285cba6895f12be0, type: 2}
@@ -2960,7 +2961,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 558254f4d3e0b214e9b481249b9bb135, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3816,7 +3817,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0.000015258789, y: 0}
+  m_AnchoredPosition: {x: 0.000015258789, y: -0.000061035156}
   m_SizeDelta: {x: 247, y: 620}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &801425405
@@ -4481,7 +4482,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: add4c0bfa033793439651785d1db984a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 451662e0ce14d6c4c9c78ff2a28b0ce3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -6910,19 +6911,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 477454, guid: 48dc36c09eec02e4baa3357c8aa613e5, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0.90767336
+      value: -0.9076734
       objectReference: {fileID: 0}
     - target: {fileID: 477454, guid: 48dc36c09eec02e4baa3357c8aa613e5, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0.24321035
+      value: 0.24321036
       objectReference: {fileID: 0}
     - target: {fileID: 477454, guid: 48dc36c09eec02e4baa3357c8aa613e5, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.08852132
+      value: 0.088521324
       objectReference: {fileID: 0}
     - target: {fileID: 477454, guid: 48dc36c09eec02e4baa3357c8aa613e5, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.33036602
+      value: 0.33036605
       objectReference: {fileID: 0}
     - target: {fileID: 477454, guid: 48dc36c09eec02e4baa3357c8aa613e5, type: 2}
       propertyPath: m_RootOrder
@@ -10346,7 +10347,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 396131275}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.48709682
+  m_Size: 0.4870968
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -11418,19 +11419,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 477454, guid: 48dc36c09eec02e4baa3357c8aa613e5, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0.90767336
+      value: -0.9076734
       objectReference: {fileID: 0}
     - target: {fileID: 477454, guid: 48dc36c09eec02e4baa3357c8aa613e5, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0.24321035
+      value: 0.24321036
       objectReference: {fileID: 0}
     - target: {fileID: 477454, guid: 48dc36c09eec02e4baa3357c8aa613e5, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.08852132
+      value: 0.088521324
       objectReference: {fileID: 0}
     - target: {fileID: 477454, guid: 48dc36c09eec02e4baa3357c8aa613e5, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.33036602
+      value: 0.33036605
       objectReference: {fileID: 0}
     - target: {fileID: 477454, guid: 48dc36c09eec02e4baa3357c8aa613e5, type: 2}
       propertyPath: m_RootOrder
