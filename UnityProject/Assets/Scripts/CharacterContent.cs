@@ -7,6 +7,7 @@ using System.Collections.Specialized;
 public class CharacterContent : MonoBehaviour
 {
     public OrderedDictionary characterProfile = new OrderedDictionary();
+    public GameObject contentPane;
     public int index;
     // Use this for initialization
     void Start()
@@ -47,7 +48,7 @@ public class CharacterContent : MonoBehaviour
         page.addStatement(btnText);
         
         GameObject btnPrefab = (GameObject)Instantiate(Resources.Load("ButtonPrefab"), new Vector3(transform.position.x, transform.position.y), Quaternion.identity);
-        //btnPrefab.transform.SetParent(this.gameObject.transform);
+        //btnPrefab.transform.SetParent(contentPane.transform);
         Button statementBtn = btnPrefab.GetComponent<Button>();
 
         statementBtn.tag = "StatementButton";
@@ -58,13 +59,13 @@ public class CharacterContent : MonoBehaviour
 
     public void showPage(int pageNumber) {
 
-        if (characterProfile.Count >= pageNumber) {
+        if (characterProfile.Count >= (pageNumber + 1)) {
             // show the first character in dictionary
             CharacterPage page = (CharacterPage)characterProfile[pageNumber];
             List<Button> statementBtns = page.getStatementButtons();
 
             foreach (Button b in statementBtns) {
-                b.transform.SetParent(this.gameObject.transform);
+                b.transform.SetParent(contentPane.transform);
             }
         }
     }
