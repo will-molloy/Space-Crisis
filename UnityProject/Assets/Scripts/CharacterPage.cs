@@ -59,4 +59,8 @@ public class CharacterPage
     {
         
     }
+
+    public List<Button> getStatementButtons() {
+        return statementBtns;
+    }
 }

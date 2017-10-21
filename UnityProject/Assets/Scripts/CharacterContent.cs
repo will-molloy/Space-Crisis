@@ -2,15 +2,17 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
-
+using System.Collections.Specialized;
 
 public class CharacterContent : MonoBehaviour
 {
-    public Dictionary<string, CharacterPage> characterProfile = new Dictionary<string, CharacterPage>();
-
+    public OrderedDictionary characterProfile = new OrderedDictionary();
+    public int index;
     // Use this for initialization
     void Start()
     {
+        index = 0;
+        showPage(index);
     }
 
     // Update is called once per frame
@@ -21,7 +23,7 @@ public class CharacterContent : MonoBehaviour
 
     public void addStatement(GameObject NPC, string statement)
     {
-        if (!characterProfile.ContainsKey(NPC.name))
+        if (!characterProfile.Contains(NPC.name))
         {
             // create new page for this NPC
             Image npcImage = NPC.GetComponent<Image>();
@@ -32,7 +34,7 @@ public class CharacterContent : MonoBehaviour
         }
         else {
             // page already exists
-            CharacterPage existingPage = characterProfile[NPC.name];
+            CharacterPage existingPage = (CharacterPage)characterProfile[NPC.name];
 
             // add statement if does not yet exist
             if (!existingPage.statementExists(statement)) {
@@ -52,5 +54,18 @@ public class CharacterContent : MonoBehaviour
         statementBtn.GetComponentInChildren<Text>().text = btnText;
         
         page.addStatementBtn(statementBtn);
+    }
+
+    public void showPage(int pageNumber) {
+
+        if (characterProfile.Count >= pageNumber) {
+            // show the first character in dictionary
+            CharacterPage page = (CharacterPage)characterProfile[pageNumber];
+            List<Button> statementBtns = page.getStatementButtons();
+
+            foreach (Button b in statementBtns) {
+                b.transform.SetParent(this.gameObject.transform);
+            }
+        }
     }
 }
