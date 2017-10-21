@@ -13,12 +13,12 @@ public class ScenePersistence : MonoBehaviour
     public GameController.PlayableScene thisScene;
 
     // Update is called once per frame
-    void FixedUpdate()
+    public void FixedUpdate()
     {
         SaveScene();
     }
 
-    public void SaveScene()
+    private void SaveScene()
     {
         GameController.SaveObjectPositions(thisScene, getChildObjs(transform));
     }
@@ -40,21 +40,21 @@ public class ScenePersistence : MonoBehaviour
     void Awake()
     {
         if (GameController.GetShouldBeReset(thisScene)) 
-            ResetScene(thisScene);
-        RestoreScene(thisScene);
+            ResetScene();
+        RestoreScene();
     }
 
-    private void ResetScene(GameController.PlayableScene sceneName)
+    private void ResetScene()
     {
-        Debug.Log("Resseting: " + sceneName);
-        MoveObjects(GameController.GetInitialObjectPositions(sceneName)); // move objects to initial, default positions
-        GameController.SetShouldBeReset(sceneName, false); // scene has now been reset, set back to false
+        Debug.Log("Resseting: " + thisScene);
+        MoveObjects(GameController.GetInitialObjectPositions(thisScene)); // move objects to initial, default positions
+        GameController.SetShouldBeReset(thisScene, false); // scene has now been reset, set back to false
     }
 
-    private void RestoreScene(GameController.PlayableScene sceneName)
+    private void RestoreScene()
     {
-        Debug.Log("Restoring: " + sceneName);
-        MoveObjects(GameController.GetSavedObjectPositons(sceneName)); // move objects to saved, persisted positions
+        Debug.Log("Restoring: " + thisScene);
+        MoveObjects(GameController.GetSavedObjectPositons(thisScene)); // move objects to saved, persisted positions
     }
 
     private void MoveObjects(Dictionary<string, Vector3> objPositions)

@@ -57,7 +57,7 @@ public class GameControllerTest
         gameObject.transform.position = new Vector3(0, 0, 0);
 
         // attempt to save obj positions
-        persistence.GetComponent<ScenePersistence>().SaveScene();
+        persistence.GetComponent<ScenePersistence>().FixedUpdate();
         
         // ensure gamecontroller has the objects position in both initial and saved dictionaries
         Assert.AreEqual(
@@ -92,13 +92,13 @@ public class GameControllerTest
         gameObject.transform.position = new Vector3(0, 0, 0);
 
         // attempt to save obj positions
-        persistence.GetComponent<ScenePersistence>().SaveScene();
+        persistence.GetComponent<ScenePersistence>().FixedUpdate();
 
         // Move the object
         gameObject.transform.position = new Vector3(1, 1, 1);
 
         // save positions again
-        persistence.GetComponent<ScenePersistence>().SaveScene();
+        persistence.GetComponent<ScenePersistence>().FixedUpdate();
 
         // ensure initial dictionary has only initial position
         Assert.AreEqual(
