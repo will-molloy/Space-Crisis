@@ -52,7 +52,10 @@ public class DialogueManager : MonoBehaviour
         {
             dText.text = dialogLines[currentLine];
 
-            characterContent.addStatement(activeNPC, dText.text);
+            if (dBox.tag.Equals("NPCStatement"))
+            {
+                characterContent.addStatement(activeNPC, dText.text);
+            }
         }
 
         if (currentLine >= dialogLines.Length)
