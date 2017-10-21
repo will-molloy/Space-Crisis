@@ -81,7 +81,7 @@ public class CharacterContent : MonoBehaviour
 
             //show alien imgae
             Image npcImageUI = this.transform.Find("AlienImage").gameObject.GetComponent<Image>();
-            npcImageUI = page.getNpcImage();
+            npcImageUI.sprite = page.getNpcImage().sprite;
 
         }
     }
