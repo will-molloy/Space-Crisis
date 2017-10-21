@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 public class LeverEventTest
 {
-
     private GameObject lever = new GameObject();
     private GameObject plate = new GameObject();
 
@@ -17,11 +16,6 @@ public class LeverEventTest
         plate.AddComponent<PlateScript>();
         plate.AddComponent<Transform>();
 
-        plate.GetComponent<PlateScript>().translationAmount = 10;
-        plate.GetComponent<PlateScript>().translationDirection = Vector3.down;
-        plate.transform.position = new Vector3(0, 0, 0);
-
-        lever.GetComponent<Lever>().timeInFrames = 1;
         lever.GetComponent<Lever>().thingsToControl = new List<GameObject>
         {
             plate,
@@ -31,8 +25,17 @@ public class LeverEventTest
     [Test]
     public void TestLeverSingleMovement()
     {
-        Assert.AreEqual(new Vector3(0,0,0), plate.transform.position);
+        // setup
+        plate.GetComponent<PlateScript>().translationAmount = 10;
+        lever.GetComponent<Lever>().timeInFrames = 1;
+        plate.GetComponent<PlateScript>().translationDirection = Vector3.down;
+        plate.transform.position = new Vector3(0, 0, 0);
+        
+        // activate lever
         lever.GetComponent<Lever>().activate();
-        Assert.AreEqual(new Vector3(0,10,0), plate.transform.position);
+        plate.GetComponent<PlateScript>().Update();
+
+        // ensure plate moved down 10
+        Assert.AreEqual(new Vector3(0,-10,0), plate.transform.position);
     }
 }
