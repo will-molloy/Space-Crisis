@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using mattmc3.Common.Collections.Generic;
 
 /// <summary>
 /// Contains all static data for the game scenes.
@@ -11,27 +12,23 @@ using System.Linq;
 public static class GameController
 {
     // Scene.name :: Object.name :: Position, For persisting given scene objects
-    private static Dictionary<PlayableScene, Dictionary<string, Vector3>> SavedScenePositions;
+    private static Dictionary<PlayableScene, Dictionary<string, Vector3>> SavedScenePositions = new Dictionary<PlayableScene, Dictionary<string, Vector3>>();
 
     // For resseting scene e.g. level restart
-    private static Dictionary<PlayableScene, Dictionary<string, Vector3>> InitialScenePositions;
-    private static Dictionary<PlayableScene, bool> SceneShouldBeReset;
+    private static Dictionary<PlayableScene, Dictionary<string, Vector3>> InitialScenePositions = new Dictionary<PlayableScene, Dictionary<string, Vector3>>();
+    private static Dictionary<PlayableScene, bool> SceneShouldBeReset = new Dictionary<PlayableScene, bool>();
 
-    // Scene :: Item location :: Item, For item persisting items in scene
-    private static Dictionary<PlayableScene, Dictionary<Vector3, PickUpItem>> ItemsInScene; 
+    // Scene :: Item ID :: ItemWasPickedUp, For item persisting items in scenes/inventory
+    private static Dictionary<PlayableScene, OrderedDictionary<int, bool>> ItemsInScene = new Dictionary<PlayableScene, OrderedDictionary<int, bool>>();
 
     static GameController()
     {
-        InitialScenePositions = new Dictionary<PlayableScene, Dictionary<string, Vector3>>();
-        SavedScenePositions = new Dictionary<PlayableScene, Dictionary<string, Vector3>>();
-        SceneShouldBeReset = new Dictionary<PlayableScene, bool>();
-        ItemsInScene = new Dictionary<PlayableScene, Dictionary<Vector3, PickUpItem>>();
         foreach (PlayableScene playableScene in Enum.GetValues(typeof(PlayableScene)))
-        {            
-            SavedScenePositions[playableScene] = new Dictionary<string, Vector3>(); ;
-            InitialScenePositions[playableScene] = new Dictionary<string, Vector3>(); ;
+        {
+            SavedScenePositions[playableScene] = new Dictionary<string, Vector3>();
+            InitialScenePositions[playableScene] = new Dictionary<string, Vector3>();
             SceneShouldBeReset[playableScene] = false;
-            ItemsInScene[playableScene] = new Dictionary<Vector3, PickUpItem> ();
+            ItemsInScene[playableScene] = new OrderedDictionary<int, bool>();
         }
     }
 
@@ -61,7 +58,7 @@ public static class GameController
     /// <summary>
     /// Level attribute for the game scenes.
     /// </summary>
-    public enum Level {  Level1, Level2, None }
+    public enum Level { Level1, Level2, None }
 
     public class LevelAttribute : Attribute
     {
@@ -105,7 +102,7 @@ public static class GameController
     /// <summary>
     /// Gets all the scenes assigned to the given level
     /// </summary>
-    public static List<PlayableScene> getScenesForLevel(Level levelToRetrieve)
+    public static List<PlayableScene> GetScenesForLevel(Level levelToRetrieve)
     {
         PlayableScene[] scenes = (PlayableScene[])Enum.GetValues(typeof(PlayableScene));
         return scenes.Where(scene => scene.GetAttribute<LevelAttribute>().level.Equals(levelToRetrieve)).ToList();
@@ -114,20 +111,27 @@ public static class GameController
     /// <summary>
     /// Clears the persisted data in all scenes for the given level
     /// E.g. use when restarting level from pause menu or on losing all lives.
+    /// 
+    /// Item Spawns are reset.
     /// </summary>
-    public static void clearScenesForLevel(Level level)
+    public static void ClearScenesForLevel(Level level)
     {
-        getScenesForLevel(level).ForEach(scene => ClearPersistedDataForScene(scene));
+        GetScenesForLevel(level).ForEach(scene =>
+        {
+            ClearPersistedDataForScene(scene);
+            ItemsInScene[scene] = new OrderedDictionary<int, bool>();
+        });
     }
 
     /// <summary>
     /// Clears the persisted data for the given scene.
     /// E.g. use with reset button.
+    /// 
+    /// Item spawns ARE NOT reset
     /// </summary>
     public static void ClearPersistedDataForScene(PlayableScene sceneName)
     {
         SavedScenePositions[sceneName] = new Dictionary<string, Vector3>();
-        ItemsInScene[sceneName] = new Dictionary<Vector3, PickUpItem>();
     }
 
     /// <summary>
@@ -163,15 +167,45 @@ public static class GameController
         SceneShouldBeReset[sceneName] = resetScene;
     }
 
-    public static void AddItemToScene(PlayableScene scene, Vector3 itemPos, PickUpItem item)
+    public static void AddGeneratedItems(PlayableScene scene, List<int> itemIds)
     {
-        Debug.Log("Saved item: " + item.name);
-        ItemsInScene[scene][itemPos] = item;
+        itemIds.ForEach(itemId => ItemsInScene[scene].Add(itemId, false)); // false: just generated, not picked up
     }
 
-    public static Dictionary<Vector3, PickUpItem> GetItemsFor(PlayableScene scene)
+    /// <summary>
+    /// Returns the generated item Id set for the given scene
+    /// </summary>
+    public static OrderedDictionary<int, bool> GetItemsInScene(PlayableScene scene)
     {
         return ItemsInScene[scene];
+    }
+
+    /// <summary>
+    /// Sets the item picked up bool to true
+    /// </summary>
+    public static void AddItemToPersistedInventory(PlayableScene scene, Item item)
+    {
+        ItemsInScene[scene].SetValue(item.itemID, true);
+    }
+
+    /// <summary>
+    /// Retrieve all items picked up from all scenes.
+    /// 
+    /// HashSet was a quick fix for items duplicating.
+    /// If you want duplicates have them in the item database twice with a different key.
+    /// </summary>
+    public static HashSet<int> GetItemsPickedUp()
+    {
+        HashSet<int> itemsPickedUp = new HashSet<int>();
+        foreach (PlayableScene scene in Enum.GetValues(typeof(PlayableScene)))
+        {
+            foreach (int itemId in GetItemsInScene(scene).Keys)
+            {
+                if (GetItemsInScene(scene).GetValue(itemId)) // if picked up
+                    itemsPickedUp.Add(itemId);
+            }
+        }
+        return itemsPickedUp;
     }
 }
 

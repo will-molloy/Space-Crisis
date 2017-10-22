@@ -30,9 +30,9 @@ public class GameControllerTest
             GameController.PlayableScene.Level2Room2,
         };
 
-        Assert.AreEqual(expectedScenesLevel1, GameController.getScenesForLevel(GameController.Level.Level1));
-        Assert.AreEqual(expectedScenesLevel2, GameController.getScenesForLevel(GameController.Level.Level2));
-        Assert.AreEqual(expectedScenesNoLevel, GameController.getScenesForLevel(GameController.Level.None));
+        Assert.AreEqual(expectedScenesLevel1, GameController.GetScenesForLevel(GameController.Level.Level1));
+        Assert.AreEqual(expectedScenesLevel2, GameController.GetScenesForLevel(GameController.Level.Level2));
+        Assert.AreEqual(expectedScenesNoLevel, GameController.GetScenesForLevel(GameController.Level.None));
     }
 
     /// <summary>

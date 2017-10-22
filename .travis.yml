@@ -17,14 +17,14 @@ rvm:
 - 2.2
 
 before_install:
-- chmod a+x ./Scripts/install.sh
-- chmod a+x ./Scripts/build.sh
+- chmod a+x ./TravisBuildScripts/install.sh
+- chmod a+x ./TravisBuildScripts/build.sh
     
 install:
-- sudo -E sh ./Scripts/install.sh
+- sudo -E sh ./TravisBuildScripts/install.sh
 
 script:
-- sudo -E sh ./Scripts/build.sh
+- sudo -E sh ./TravisBuildScripts/build.sh
 
 # Set project name
 env:
