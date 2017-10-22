@@ -81,10 +81,12 @@ public class DialogueManager : MonoBehaviour
 
     public void showDialogue(string source)
     {
+        PlayerUtility.FreezePlayers();
         if (!isFrozen)
         {
             isFrozen = true;
-            // freezePlayer();
+            //freezePlayer();
+            //PlayerUtility.FreezePlayers();
         }
         dText.enabled = true;
         diaglogActive = true;
@@ -107,11 +109,12 @@ public class DialogueManager : MonoBehaviour
         dText.enabled = false;
         diaglogActive = false;
         dBox.SetActive(false);
-
+        PlayerUtility.UnFreezePlayers();
         if (isFrozen)
         {
             isFrozen = false;
-            // unfreezePlayer();
+           // unfreezePlayer();
+            //PlayerUtility.UnFreezePlayers();
         }
 
     }
