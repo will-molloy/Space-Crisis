@@ -3,40 +3,44 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class ItemSpawnManager : MonoBehaviour {
-
-    public Transform[] _spawns;
+public class ItemSpawnManager : MonoBehaviour
+{
+    public GameController.PlayableScene ThisScene;
     static ItemDataBaseList inventoryItemList;
-    public int[] _itemRange;
-	public AudioClip pickUpFX;
-    public List<int> _spawnedItems;
+    public int[] ItemKeyRange;
+    public AudioClip pickUpFX;
+    private List<Vector3> ItemSpawnsPositions;
 
     // Use this for initialization
-    void Start () {
-		System.Random r = new System.Random();
-		_itemRange = _itemRange.OrderBy(x => r.Next()).ToArray();
-        _spawnedItems = new List<int>();
+    void Start()
+    {
+        ItemSpawnsPositions = new List<Vector3>();
+        foreach (Transform t in transform)
+        {
+            if (t.CompareTag("item-spawn"))
+                ItemSpawnsPositions.Add(t.position);
+        }
+        System.Random r = new System.Random();
+        ItemKeyRange = ItemKeyRange.OrderBy(x => r.Next()).ToArray(); // RNG
         Spawn();
+    }
 
-}
-	
-	// Update is called once per frame
-	void Spawn () {
-
+    // Update is called once per frame
+    void Spawn()
+    {
         inventoryItemList = (ItemDataBaseList)Resources.Load("ItemDatabase");
 
-        for (int i = 0; i < _spawns.Length; i++)
+        for (int i = 0; i < ItemSpawnsPositions.Count; i++)
         {
-
-			if (!(inventoryItemList.itemList[_itemRange[i]].itemModel == null))
+            if (!(inventoryItemList.itemList[ItemKeyRange[i]].itemModel == null))
             {
-
-				Debug.Log("Item " + _itemRange[i] + " picked!");
-				GameObject randomLootItem = (GameObject)Instantiate(inventoryItemList.itemList[_itemRange[i]].itemModel);
+                Debug.Log("Item " + ItemKeyRange[i] + " picked!");
+                GameObject randomLootItem = (GameObject)Instantiate(inventoryItemList.itemList[ItemKeyRange[i]].itemModel);
                 PickUpItem item = randomLootItem.AddComponent<PickUpItem>();
-				item.item = inventoryItemList.itemList[_itemRange[i]];
-				item.pickUpFX = pickUpFX;
-                randomLootItem.transform.localPosition = _spawns[i].position;
+                item.item = inventoryItemList.itemList[ItemKeyRange[i]];
+                item.pickUpFX = pickUpFX;
+                randomLootItem.transform.localPosition = ItemSpawnsPositions[i];
+                GameController.AddItemForScene(ThisScene, item); // Add item to GameController database
             }
 
         }

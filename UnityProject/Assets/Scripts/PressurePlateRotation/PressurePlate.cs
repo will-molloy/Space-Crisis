@@ -30,7 +30,10 @@ public class PressurePlate : MonoBehaviour
         if (!isInAnimation) return;
 
         transform.Translate(movementDirection * translation);
-        localColliders.ForEach(gameObject => gameObject.transform.Translate(movementDirection * translation));
+        localColliders.ForEach(gameObject => {
+            gameObject.transform.Translate(movementDirection * translation); // make objects go down with pad
+            gameObject.transform.Rotate(new Vector2(0, 0)); // make objects flat on pad 
+            });
 
         isInAnimation = GetYPos() < upperY && GetYPos() > lowerY;
     }

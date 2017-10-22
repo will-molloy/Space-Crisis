@@ -1427,6 +1427,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisScene: 1
+  ItemSpawns:
+  - {fileID: 910621581}
+  - {fileID: 1134005679}
+  - {fileID: 809755908}
 --- !u!4 &287266649
 Transform:
   m_ObjectHideFlags: 0
@@ -5240,7 +5244,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 809755908}
   m_Layer: 12
-  m_Name: Spawn
+  m_Name: ItemSpawn3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5253,12 +5257,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 809755907}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.25, y: 1.4, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 19.071184, y: -7.2736883, z: 0}
+  m_LocalScale: {x: 2.0032144, y: 0.51711774, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
-  m_Father: {fileID: 698842734}
-  m_RootOrder: 4
+  m_Father: {fileID: 1366826563}
+  m_RootOrder: 2
 --- !u!1 &817487398
 GameObject:
   m_ObjectHideFlags: 0
@@ -5746,7 +5750,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 910621581}
   m_Layer: 12
-  m_Name: Item spawn
+  m_Name: ItemSpawn1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5759,11 +5763,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 910621580}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5, y: 1.4, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 19.227165, y: -2.1825285, z: 0}
+  m_LocalScale: {x: 3, y: 0.5250893, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
-  m_Father: {fileID: 1188425478}
+  m_Father: {fileID: 1366826563}
   m_RootOrder: 0
 --- !u!1 &923541606
 GameObject:
@@ -6864,7 +6868,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1134005679}
   m_Layer: 12
-  m_Name: Item spawn
+  m_Name: ItemSpawn2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6877,12 +6881,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1134005678}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 1.8, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 8.379264, y: 10.454018, z: 0}
+  m_LocalScale: {x: 0.632098, y: 0.44537315, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
-  m_Father: {fileID: 1833397394}
-  m_RootOrder: 0
+  m_Father: {fileID: 1366826563}
+  m_RootOrder: 1
 --- !u!1 &1144757263
 GameObject:
   m_ObjectHideFlags: 0
@@ -7762,8 +7766,7 @@ Transform:
   m_LocalPosition: {x: 14.053122, y: -10.620369, z: 0}
   m_LocalScale: {x: 3, y: 0.5250893, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children:
-  - {fileID: 910621581}
+  m_Children: []
   m_Father: {fileID: 377308302}
   m_RootOrder: 15
 --- !u!61 &1188425479
@@ -9271,13 +9274,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3933f564c5a027242a7f662b88364c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawns:
-  - {fileID: 1134005679}
-  - {fileID: 910621581}
-  - {fileID: 809755908}
+  ThisScene: 1
   _itemRange: 010000000400000005000000
   pickUpFX: {fileID: 8300000, guid: d8d04c6f80a1140db85ede568dab1f51, type: 3}
-  _spawnedItems: 
 --- !u!4 &1366826563
 Transform:
   m_ObjectHideFlags: 0
@@ -9288,7 +9287,10 @@ Transform:
   m_LocalPosition: {x: -0.92716575, y: -0.7023472, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
+  m_Children:
+  - {fileID: 910621581}
+  - {fileID: 1134005679}
+  - {fileID: 809755908}
   m_Father: {fileID: 0}
   m_RootOrder: 2
 --- !u!1 &1366846166
@@ -11669,7 +11671,7 @@ RectTransform:
   - {fileID: 1388156605}
   - {fileID: 1806189600}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 13.63, y: 3.02}
@@ -12746,8 +12748,7 @@ Transform:
   m_LocalPosition: {x: 7.0731215, y: 1.9496312, z: 0}
   m_LocalScale: {x: 0.632098, y: 0.44537315, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children:
-  - {fileID: 1134005679}
+  m_Children: []
   m_Father: {fileID: 377308302}
   m_RootOrder: 19
 --- !u!61 &1833397395

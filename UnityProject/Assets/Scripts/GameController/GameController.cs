@@ -17,6 +17,9 @@ public static class GameController
     private static Dictionary<PlayableScene, Dictionary<string, Vector3>> InitialScenePositions;
     private static Dictionary<PlayableScene, bool> SceneShouldBeReset;
 
+    // For item spawns
+    private static Dictionary<PlayableScene, List<PickUpItem>> PlacedItems;
+
     static GameController()
     {
         InitialScenePositions = new Dictionary<PlayableScene, Dictionary<string, Vector3>>();
@@ -28,6 +31,11 @@ public static class GameController
             InitialScenePositions[playableScene] = new Dictionary<string, Vector3>(); ;
             SceneShouldBeReset[playableScene] = false;
         }
+    }
+
+    internal static void AddItemForScene(PlayableScene thisScene, PickUpItem item)
+    {
+        throw new NotImplementedException();
     }
 
     /// <summary>
@@ -79,9 +87,9 @@ public static class GameController
     /// <summary>
     /// Retrives the file name for the given scene.
     /// </summary>
-    public static string GetFileNameForScene(this PlayableScene value)
+    public static string GetFileNameForScene(this PlayableScene scene)
     {
-        return value.GetAttribute<FileNameAttribute>().fileName;
+        return scene.GetAttribute<FileNameAttribute>().fileName;
     }
 
     /// <summary>
@@ -157,11 +165,6 @@ public static class GameController
     public static void SetShouldBeReset(PlayableScene sceneName, bool resetScene)
     {
         SceneShouldBeReset[sceneName] = resetScene;
-    }
-
-    internal static void AddItem(Item item)
-    {
-        Debug.Log("Not implemeneted");
     }
 }
 
