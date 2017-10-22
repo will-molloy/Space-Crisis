@@ -40,15 +40,21 @@ public class DialogueManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-        if (diaglogActive && Input.GetKeyDown(KeyCode.Space))
-        {
-            //dBox.SetActive(false);
-            //diaglogActive = false;
-
-            currentLine++;
-
+        if (Input.GetKeyDown(KeyCode.Space ) && activeNPC != null) {
+           
+            if (!diaglogActive)
+            {
+                DialogHolder dh = activeNPC.GetComponent<DialogHolder>();
+                dBox = dh.dBoxes[dh.boxIndex];
+                dialogLines = dBox.GetComponent<TextHolder>().getTextLines();
+                currentLine = 0;
+                showDialogue(this.gameObject.name);
+            }
+            else {
+                currentLine++;
+            }
         }
+        
         if (dialogLines.Length > 0 && currentLine < dialogLines.Length)
         {
             dText.text = dialogLines[currentLine];
@@ -59,7 +65,7 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
-        if (currentLine >= dialogLines.Length)
+        if ((currentLine >= dialogLines.Length) && diaglogActive)
         {
             closeDialogue();
             //currentLine = 0;
@@ -68,20 +74,10 @@ public class DialogueManager : MonoBehaviour
 
     }
 
-    public void showBox(string source, string dialogue)
-    {
-
-
-        diaglogActive = true;
-        dBox.SetActive(true);
-        //  sText.text = source;
-        dText.text = dialogue;
-        dText.enabled = true;
-
-    }
-
     public void showDialogue(string source)
     {
+        Debug.Log("Show dialogue");
+
         if (!isFrozen)
         {
             isFrozen = true;
@@ -106,6 +102,8 @@ public class DialogueManager : MonoBehaviour
 
     public void closeDialogue()
     {
+        Debug.Log("close dialogue");
+
         dText.enabled = false;
         diaglogActive = false;
         dBox.SetActive(false);

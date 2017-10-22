@@ -6,11 +6,9 @@ using System;
 
 public class DialogHolder : MonoBehaviour
 {
-    //public GameObject[] dBoxes;
     public List<GameObject> dBoxes;
     public int boxIndex = 0;
-    // public TextAsset[] textAssets;
-
+   
     public string dialogue;
     private DialogueManager dMan;
 
@@ -34,6 +32,7 @@ public class DialogHolder : MonoBehaviour
     {
         if (dMan != null && this != null && dMan.activeNPC == this.gameObject) // only update dialogue if the current active NPC holds this dialogue
         {
+            
             // check if should move on to next dialogue box
             if (dMan.currentLine >= textLines.Length)
             {    // end of this box's file asset
@@ -42,7 +41,6 @@ public class DialogHolder : MonoBehaviour
                     boxIndex++;
 
                     setAndShowDialogue(dBoxes[boxIndex]);
-                    dMan.currentLine = 0;
                 }
 
             }
@@ -51,15 +49,7 @@ public class DialogHolder : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        //dMan.setActiveNPC(this.gameObject);
-        if (other.gameObject.CompareTag("Player"))
-        {
-            if (Input.GetKeyUp(KeyCode.Space))
-            {
-                setAndShowDialogue(dBoxes[boxIndex]);
-                
-            }
-        }
+      
     }
 
 
@@ -75,7 +65,7 @@ public class DialogHolder : MonoBehaviour
                 if (!dMan.diaglogActive)
                 {
                     setAndShowDialogue(dBoxes[boxIndex]);
-                    dMan.currentLine = 0;
+                    //dMan.currentLine = 0;
                 }
                 autoDialog = false;
             }
@@ -95,6 +85,7 @@ public class DialogHolder : MonoBehaviour
 
         dMan.dialogLines = textLines;
 
+        dMan.currentLine = 0;
 
         dMan.showDialogue(this.gameObject.name);
 
