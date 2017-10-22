@@ -19,7 +19,6 @@ public class ItemSpawnManager : MonoBehaviour
     /// <param name="itemPos"></param> Item position
     public static void spawnItem(int itemKey, AudioClip itemPickUpSound, Vector3 itemPos)
     {
-        Debug.Log("Spawning item: " + itemKey);
         GameObject randomLootItemObject = (GameObject)Instantiate(ItemDataBaseList.itemList[itemKey].itemModel);
         PickUpItem pickUpItem = randomLootItemObject.AddComponent<PickUpItem>();
         pickUpItem.item = ItemDataBaseList.itemList[itemKey];
@@ -70,8 +69,9 @@ public class ItemSpawnManager : MonoBehaviour
             // Only spawn items not picked up
             if (!itemsToSpawn.GetValue(itemId)) // [] doesn't work with custom datastructure
             {
-                spawnItem(itemId, ItemPickUpSound, ItemSpawnPositions[itemPosIndex++]);
+                spawnItem(itemId, ItemPickUpSound, ItemSpawnPositions[itemPosIndex]);
             }
+            itemPosIndex++;
         }
     }
 
