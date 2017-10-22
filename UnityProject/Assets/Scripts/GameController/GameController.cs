@@ -19,7 +19,7 @@ public static class GameController
     private static Dictionary<PlayableScene, bool> SceneShouldBeReset = new Dictionary<PlayableScene, bool>();
 
     // Scene :: Item ID :: ItemWasPickedUp, For item persisting items in scenes/inventory
-    private static Dictionary<PlayableScene, OrderedDictionary<int, bool>> ItemsInScene = new Dictionary<PlayableScene, OrderedDictionary<int, bool>>();
+    private static Dictionary<PlayableScene, OrderedDictionary<int, bool>> GeneratedItemsForScene = new Dictionary<PlayableScene, OrderedDictionary<int, bool>>();
 
     static GameController()
     {
@@ -28,7 +28,7 @@ public static class GameController
             SavedScenePositions[playableScene] = new Dictionary<string, Vector3>();
             InitialScenePositions[playableScene] = new Dictionary<string, Vector3>();
             SceneShouldBeReset[playableScene] = false;
-            ItemsInScene[playableScene] = new OrderedDictionary<int, bool>();
+            GeneratedItemsForScene[playableScene] = new OrderedDictionary<int, bool>();
         }
     }
 
@@ -86,6 +86,11 @@ public static class GameController
         return scene.GetAttribute<FileNameAttribute>().fileName;
     }
 
+    public static string ToString(this PlayableScene scene)
+    {
+        return scene.GetFileName();
+    }
+
     /// <summary>
     /// Extension method for retrieving the attributes from the PlayableScene enum.
     /// </summary>
@@ -117,7 +122,7 @@ public static class GameController
         GetScenesForLevel(level).ForEach(scene =>
         {
             ClearPersistedDataForScene(scene);
-            ItemsInScene[scene] = new OrderedDictionary<int, bool>();
+            GeneratedItemsForScene[scene] = new OrderedDictionary<int, bool>();
         });
     }
 
@@ -165,9 +170,12 @@ public static class GameController
         SceneShouldBeReset[sceneName] = resetScene;
     }
 
+    /// <summary>
+    /// Set the generated the order of item Ids for a scene
+    /// </summary>
     public static void AddGeneratedItems(PlayableScene scene, List<int> itemIds)
     {
-        itemIds.ForEach(itemId => ItemsInScene[scene].Add(itemId, false)); // false: just generated, not picked up
+        itemIds.ForEach(itemId => GeneratedItemsForScene[scene].Add(itemId, false)); // false: just generated, not picked up
     }
 
     /// <summary>
@@ -175,7 +183,7 @@ public static class GameController
     /// </summary>
     public static OrderedDictionary<int, bool> GetItemsInScene(PlayableScene scene)
     {
-        return ItemsInScene[scene];
+        return GeneratedItemsForScene[scene];
     }
 
     /// <summary>
@@ -183,7 +191,7 @@ public static class GameController
     /// </summary>
     public static void AddItemToPersistedInventory(PlayableScene scene, Item item)
     {
-        ItemsInScene[scene].SetValue(item.itemID, true);
+        GeneratedItemsForScene[scene].SetValue(item.itemID, true);
     }
 
     /// <summary>

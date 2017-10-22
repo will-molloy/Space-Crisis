@@ -39,7 +39,7 @@ public class ItemSpawnManager : MonoBehaviour
         // Load the item database
         ItemDataBaseList = (ItemDataBaseList)Resources.Load("ItemDatabase");
 
-        Spawn();
+        GenerateAndSpawnItems();
     }
 
     /// <summary>
@@ -47,7 +47,7 @@ public class ItemSpawnManager : MonoBehaviour
     /// if they have retrieves them to ensure consistency.
     /// If not spawns the items.
     /// </summary>
-    private void Spawn()
+    private void GenerateAndSpawnItems()
     {
         if (UniqueItemSpawnIds.Length < ItemSpawnPositions.Count)
             throw new System.Exception("Need more items to spawn in " + ThisScene.GetFileName());
