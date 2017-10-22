@@ -81,7 +81,6 @@ public class DialogueManager : MonoBehaviour
 
     public void showDialogue(string source)
     {
-        //PlayerUtility.FreezePlayers();
         if (!isFrozen)
         {
             isFrozen = true;
@@ -116,6 +115,7 @@ public class DialogueManager : MonoBehaviour
            // unfreezePlayer();
             PlayerUtility.UnFreezePlayers();
         }
+       // cleanUpDialogue();
 
     }
 
@@ -149,6 +149,17 @@ public class DialogueManager : MonoBehaviour
 
     public GameObject getActiveNPC() {
         return activeNPC;
+    }
+
+    private void cleanUpDialogue() {
+        DialogHolder dh = activeNPC.GetComponent<DialogHolder>();
+
+        if (!dh.dBoxes.Contains(dBox))
+        {
+            dBox = dh.dBoxes[dh.dBoxes.Count - 1];
+            dialogLines = dh.dBoxes[dh.dBoxes.Count - 1].GetComponent<TextHolder>().getTextLines();
+            currentLine = 0;
+        }
     }
 
 }
