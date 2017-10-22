@@ -109,13 +109,16 @@ public class Tooltip : MonoBehaviour
 
     public void activateTooltip()               //if you activate the tooltip through hovering over an item
     {
-        tooltipTextName.SetActive(true);
-        tooltipImageIcon.SetActive(true);
-        tooltipTextDesc.SetActive(true);
-        transform.GetChild(0).gameObject.SetActive(true);          //Tooltip getting activated
+       // tooltipTextName.SetActive(true);
+       // tooltipImageIcon.SetActive(true);
+       // tooltipTextDesc.SetActive(true);
+       // transform.GetChild(0).gameObject.SetActive(true);          //Tooltip getting activated
         transform.GetChild(1).GetComponent<Image>().sprite = item.itemIcon;         //and the itemIcon...
         transform.GetChild(2).GetComponent<Text>().text = item.itemName;            //,itemName...
-        transform.GetChild(3).GetComponent<Text>().text = item.itemDesc;            //and itemDesc is getting set        
+        transform.GetChild(3).GetComponent<Text>().text = item.itemDesc;            //and itemDesc is getting set       
+
+        Text descriptionText = GameObject.FindGameObjectWithTag("DescriptionText").GetComponent<Text>();
+        descriptionText.text = tooltipDescText.text;
     }
 
     public void deactivateTooltip()             //deactivating the tooltip after you went out of a slot

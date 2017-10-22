@@ -2,8 +2,9 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System;
 
-public class ShowTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class ShowTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {         //Tooltip
 
     public Tooltip tooltip;                                     //The tooltip script
@@ -29,6 +30,18 @@ public class ShowTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerEnter(PointerEventData data)                               //if you hit a item in the slot
     {
+        
+
+    }
+
+    public void OnPointerExit(PointerEventData data)                //if we go out of the slot with the item
+    {
+        if (tooltip != null)
+            tooltip.deactivateTooltip();            //the tooltip getting deactivated
+    }
+
+    void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
+    {
         if (tooltip != null)
         {
             item = GetComponent<ItemOnObject>().item;                   //we get the item
@@ -42,7 +55,7 @@ public class ShowTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             GetComponent<RectTransform>().GetWorldCorners(slotCorners); //get the corners of the slot                
 
             Vector2 localPointerPosition;
-            if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRectTransform, slotCorners[3], data.pressEventCamera, out localPointerPosition))   // and set the localposition of the tooltip...
+            if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRectTransform, slotCorners[3], eventData.pressEventCamera, out localPointerPosition))   // and set the localposition of the tooltip...
             {
                 if (transform.parent.parent.parent.GetComponent<Hotbar>() == null)
                     tooltipRectTransform.localPosition = localPointerPosition;          //at the right bottom side of the slot
@@ -51,13 +64,5 @@ public class ShowTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             }
 
         }
-
     }
-
-    public void OnPointerExit(PointerEventData data)                //if we go out of the slot with the item
-    {
-        if (tooltip != null)
-            tooltip.deactivateTooltip();            //the tooltip getting deactivated
-    }
-
 }
