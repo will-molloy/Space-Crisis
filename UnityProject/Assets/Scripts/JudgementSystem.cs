@@ -40,6 +40,9 @@ public class JudgementSystem : MonoBehaviour {
             dMan.getActiveNPC().GetComponent<DialogHolder>().setAndShowDialogue(correctAnswerBox);
         }
         else {
+            LifeSystem life = GameObject.FindGameObjectWithTag("Team").GetComponent<LifeSystem>();
+                    life.TakeDamage();
+                
             dMan.currentLine = 0;
             dMan.getActiveNPC().GetComponent<DialogHolder>().setAndShowDialogue(wrongAnswerBox);
         }
