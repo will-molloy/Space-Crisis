@@ -47,7 +47,7 @@ public class PickUpItem : MonoBehaviour
                     _inventory.addItemToInventory(item.itemID, item.itemValue);
                     _inventory.updateItemList();
                     _inventory.stackableSettings();
-                    GameController.AddItem(item);
+ //                   GameController.AddItem(item);
                     Destroy(this.gameObject);
 					AudioSource.PlayClipAtPoint(pickUpFX, transform.position);
                 }

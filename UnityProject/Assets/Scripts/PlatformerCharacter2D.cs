@@ -17,7 +17,7 @@ public class PlatformerCharacter2D : MonoBehaviour
     [SerializeField]
     private Transform m_GroundCheck;
     public LayerMask m_LeverLayer;
-	public AudioClip[] jumpAudios;			// Array of audio clips for when the player jumps
+	public AudioClip jumpAudio;			// Array of audio clips for when the player jumps
     const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
     private bool m_Grounded;            // Whether or not the player is grounded.
     private Transform m_CeilingCheck;   // A position marking where to check for ceilings
@@ -159,10 +159,12 @@ public class PlatformerCharacter2D : MonoBehaviour
             {
                 // Add a vertical force to the player.
                 updateGroundState(false);
-				// Play a random jump audio clip.
-				int i = UnityEngine.Random.Range(0, jumpAudios.Length);
-				AudioSource.PlayClipAtPoint(jumpAudios[i], transform.position);
 
+				if (jumpAudio != null){
+					// Play the random jump audio clip.
+					AudioSource.PlayClipAtPoint(jumpAudio, transform.position);
+				}
+					
                 m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
             }
         }
