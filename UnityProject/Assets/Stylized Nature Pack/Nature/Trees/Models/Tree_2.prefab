@@ -41,7 +41,7 @@ Material:
   m_Shader: {fileID: 10604, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2000
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -55,16 +55,16 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _BumpSpecMap
+          name: _TranslucencyMap
         second:
-          m_Texture: {fileID: 2800000, guid: c68d8c20273bc2c4ebfc9f40800889a1, type: 3}
+          m_Texture: {fileID: 2800000, guid: d77150f2cfc4e2b42916aa7241448c51, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _TranslucencyMap
+          name: _BumpSpecMap
         second:
-          m_Texture: {fileID: 2800000, guid: d77150f2cfc4e2b42916aa7241448c51, type: 3}
+          m_Texture: {fileID: 2800000, guid: c68d8c20273bc2c4ebfc9f40800889a1, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -99,7 +99,7 @@ Material:
   m_Shader: {fileID: 10605, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2000
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -113,9 +113,9 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _BumpSpecMap
+          name: _ShadowTex
         second:
-          m_Texture: {fileID: 2800000, guid: c68d8c20273bc2c4ebfc9f40800889a1, type: 3}
+          m_Texture: {fileID: 2800000, guid: 9537a8e2fde632f40886d11e403f44af, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -127,9 +127,9 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _ShadowTex
+          name: _BumpSpecMap
         second:
-          m_Texture: {fileID: 2800000, guid: 9537a8e2fde632f40886d11e403f44af, type: 3}
+          m_Texture: {fileID: 2800000, guid: c68d8c20273bc2c4ebfc9f40800889a1, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -353,7 +353,7 @@ MonoBehaviour:
   m_Name: Tree Data
   m_EditorClassIdentifier: 
   _uniqueID: 10935
-  materialHash: f0dcb613549e8d2cac9222c6a4628998163889152
+  materialHash: 31a480f7568af5a20c5182338055d1a4163889152
   root:
     _uniqueID: 1
     seed: 834568
@@ -432,15 +432,15 @@ MonoBehaviour:
     groundOffset: 0
     rootMatrix:
       e00: 1
-      e01: 0
-      e02: 0
+      e01: 0.000000014901161
+      e02: -0.000000029802322
       e03: 0
-      e10: 0
+      e10: -0.000000014901161
       e11: 1
-      e12: 0
+      e12: 0.000000029802322
       e13: 0
-      e20: 0
-      e21: 0
+      e20: 0.000000029802322
+      e21: -0.000000029802322
       e22: 1
       e23: 0
       e30: 0
@@ -1726,15 +1726,15 @@ MonoBehaviour:
     rotation: {x: 0, y: 0, z: 0, w: 1}
     matrix:
       e00: 1
-      e01: 0
-      e02: 0
+      e01: 0.000000014901161
+      e02: -0.000000029802322
       e03: 0
-      e10: 0
+      e10: -0.000000014901161
       e11: 1
-      e12: 0
+      e12: 0.000000029802322
       e13: 0
-      e20: 0
-      e21: 0
+      e20: 0.000000029802322
+      e21: -0.000000029802322
       e22: 1
       e23: 0
       e30: 0
