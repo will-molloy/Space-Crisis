@@ -44,7 +44,7 @@ public class PickUpItem : MonoBehaviour
                 else if (inventory.ItemsInInventory.Count < (inventory.width * inventory.height))
                 {
                     inventory.addItemToInventory(item.itemID, item.itemValue);
-                    GameController.AddItemToPersistedInventory(thisScene, item);
+                    GameController.AddItemToPersistedInventory(thisScene, item.itemID);
                     Destroy(this.gameObject);
                     if (pickUpFX != null)
                         AudioSource.PlayClipAtPoint(pickUpFX, transform.position);
