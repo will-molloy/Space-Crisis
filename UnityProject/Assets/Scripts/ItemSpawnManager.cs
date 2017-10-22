@@ -8,6 +8,7 @@ public class ItemSpawnManager : MonoBehaviour {
     public Transform[] _spawns;
     static ItemDataBaseList inventoryItemList;
     public int[] _itemRange;
+	public AudioClip pickUpFX;
     public List<int> _spawnedItems;
 
     // Use this for initialization
@@ -34,7 +35,7 @@ public class ItemSpawnManager : MonoBehaviour {
 				GameObject randomLootItem = (GameObject)Instantiate(inventoryItemList.itemList[_itemRange[i]].itemModel);
                 PickUpItem item = randomLootItem.AddComponent<PickUpItem>();
 				item.item = inventoryItemList.itemList[_itemRange[i]];
-
+				item.pickUpFX = pickUpFX;
                 randomLootItem.transform.localPosition = _spawns[i].position;
             }
 

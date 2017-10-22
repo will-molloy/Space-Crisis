@@ -12,8 +12,8 @@ GameObject:
   - 95: {fileID: 9550500}
   - 61: {fileID: 6117426}
   - 50: {fileID: 5099008}
-  - 114: {fileID: 11430702}
   - 114: {fileID: 11428584}
+  - 114: {fileID: 11401440}
   m_Layer: 9
   m_Name: Astronaut_2
   m_TagString: Player
@@ -43,7 +43,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 105544}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.76, y: -4.76, z: 0}
+  m_LocalPosition: {x: -19.95, y: -1.94, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -111,6 +111,20 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11401440
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 105544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3d7b34a3bb2d4e4b926e7e729d3d410, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpKey: Jump2
+  horizontalKey: Horizontal2
+  ctrlKey: 0
 --- !u!114 &11428584
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -122,25 +136,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d08f91df3bd212f429df17f53ce2f364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaxSpeed: 10
-  m_JumpForce: 400
+  m_MaxSpeed: 6
+  m_JumpForce: 800
   m_CrouchSpeed: 0.36
-  m_AirControl: 0
+  m_AirControl: 1
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 4096
   m_GroundCheck: {fileID: 0}
---- !u!114 &11430702
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 105544}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b4ee5dcb45d2fa48800151d700eff82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_LeverLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  jumpAudios:
+  - {fileID: 8300000, guid: fc55d077383484ac0ad66aa17fcd746f, type: 3}
+  frozen: 0
 --- !u!212 &21266860
 SpriteRenderer:
   m_ObjectHideFlags: 1

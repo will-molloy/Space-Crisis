@@ -5,7 +5,7 @@ public class SpawnManager : MonoBehaviour {
 
 	public int maxPlatforms = 20;
 	public GameObject platform;
-	public float horizontalMin = 6.5f; //Spwaning platform to the right of our first platform, this is the minimum distance to it
+	public float horizontalMin = 6.5f; 
 	public float horizontalMax = 14f;
 	public float verticalMin = -6f;
 	public float verticalMax = 6f;
