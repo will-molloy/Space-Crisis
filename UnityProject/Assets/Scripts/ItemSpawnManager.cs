@@ -11,6 +11,21 @@ public class ItemSpawnManager : MonoBehaviour
     public AudioClip pickUpFX;
     private List<Vector3> ItemSpawnsPositions;
 
+    /// <summary>
+    /// Spawns the given item at the given location.
+    /// </summary>
+    /// <param name="itemKey"></param> Items key in the database
+    /// <param name="itemAudioFx"></param> Items audio pick up sound
+    /// <param name="itemPos"></param> Item position
+    public static void spawnItem(int itemKey, AudioClip itemAudioFx, Vector3 itemPos)
+    {
+        GameObject randomLootItemObject = (GameObject)Instantiate(inventoryItemList.itemList[itemKey].itemModel);
+        PickUpItem pickUpItem = randomLootItemObject.AddComponent<PickUpItem>();
+        pickUpItem.item = inventoryItemList.itemList[itemKey];
+        pickUpItem.pickUpFX = itemAudioFx;
+        randomLootItemObject.transform.localPosition = itemPos;
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -57,22 +72,6 @@ public class ItemSpawnManager : MonoBehaviour
                 spawnItem(itemId, pickUpFX, ItemSpawnsPositions[itemPosIndex++]);
             }
         }
-    }
-
-    /// <summary>
-    /// Spawns the given item at the given location.
-    /// </summary>
-    /// <param name="itemKey"></param> Items key in the database
-    /// <param name="itemAudioFx"></param> Items audio pick up sound
-    /// <param name="itemPos"></param> Item position
-    public static void spawnItem(int itemKey, AudioClip itemAudioFx, Vector3 itemPos)
-    {
-        GameObject randomLootItemObject = (GameObject)Instantiate(inventoryItemList.itemList[itemKey].itemModel);
-        PickUpItem pickUpItem = randomLootItemObject.AddComponent<PickUpItem>();
-        Object.DontDestroyOnLoad(pickUpItem);
-        pickUpItem.item = inventoryItemList.itemList[itemKey];
-        pickUpItem.pickUpFX = itemAudioFx;
-        randomLootItemObject.transform.localPosition = itemPos;
     }
 
     private void RandomiseItemSpawns()
