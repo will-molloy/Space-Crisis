@@ -1,28 +1,43 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using mattmc3.Common.Collections.Generic;
 
 public class ItemSpawnManager : MonoBehaviour
 {
     public GameController.PlayableScene ThisScene;
-    static ItemDataBaseList inventoryItemList;
-    public int[] ItemKeyRange;
-    public AudioClip pickUpFX;
-    private static List<Vector3> ItemSpawnsPositions;
+    static ItemDataBaseList ItemDataBaseList;
+    public int[] UniqueItemSpawnIds;
+    public AudioClip ItemPickUpSound;
+    private List<Vector3> ItemSpawnPositions;
+
+    /// <summary>
+    /// Spawns the given item at the given location.
+    /// </summary>
+    /// <param name="itemKey"></param> Items key in the database
+    /// <param name="itemPickUpSound"></param> Items audio pick up sound
+    /// <param name="itemPos"></param> Item position
+    public static void spawnItem(int itemKey, AudioClip itemPickUpSound, Vector3 itemPos)
+    {
+        GameObject randomLootItemObject = (GameObject)Instantiate(ItemDataBaseList.itemList[itemKey].itemModel);
+        PickUpItem pickUpItem = randomLootItemObject.AddComponent<PickUpItem>();
+        pickUpItem.item = ItemDataBaseList.itemList[itemKey];
+        pickUpItem.pickUpFX = itemPickUpSound;
+        randomLootItemObject.transform.localPosition = itemPos;
+    }
 
     // Use this for initialization
     void Start()
     {
-        // Load the item spawn positions
-        ItemSpawnsPositions = new List<Vector3>();
-        foreach (Transform t in transform)
+        // Load the item spawn positions - these are the child components with the tag "item-spawn"
+        ItemSpawnPositions = new List<Vector3>();
+        foreach (Transform child in transform)
         {
-            if (t.CompareTag("item-spawn"))
-                ItemSpawnsPositions.Add(t.position);
+            if (child.CompareTag("item-spawn"))
+                ItemSpawnPositions.Add(child.position);
         }
         // Load the item database
-        inventoryItemList = (ItemDataBaseList)Resources.Load("ItemDatabase");
+        ItemDataBaseList = (ItemDataBaseList)Resources.Load("ItemDatabase");
 
         Spawn();
     }
@@ -34,54 +49,36 @@ public class ItemSpawnManager : MonoBehaviour
     /// </summary>
     private void Spawn()
     {
-        if (ItemKeyRange.Length < ItemSpawnsPositions.Count)
+        if (UniqueItemSpawnIds.Length < ItemSpawnPositions.Count)
             throw new System.Exception("Need more items to spawn in " + ThisScene.GetFileName());
 
-        RandomiseItemSpawns();
-        // Retrieve items already spawned in this scene
-        Dictionary<Vector3, PickUpItem> ItemsPersistedInThisScene = GameController.GetItemsFor(ThisScene);
-
-        for (int i = 0; i < ItemSpawnsPositions.Count; i++)
+        // Retrieve item Ids generated for this scene
+        OrderedDictionary<int, bool> itemsToSpawn = GameController.GetItemsInScene(ThisScene);
+        if (itemsToSpawn.Count < ItemSpawnPositions.Count)
         {
-            if (ItemsPersistedInThisScene.ContainsKey(ItemSpawnsPositions[i]))
+            // Items not yet generated:
+            RandomiseItemSpawns();
+            GameController.AddGeneratedItems(ThisScene, UniqueItemSpawnIds.Take(ItemSpawnPositions.Count).ToList()); // persist
+            itemsToSpawn = GameController.GetItemsInScene(ThisScene); // retrieve
+        }
+
+        // Spawn items
+        int itemPosIndex = 0;
+        foreach (int itemId in itemsToSpawn.Keys)
+        {
+            // Only spawn items not picked up
+            if (!itemsToSpawn.GetValue(itemId)) // [] doesn't work with custom datastructure
             {
-                // Item has already spawned before 
-                PickUpItem persistedPickUpItem = ItemsPersistedInThisScene[ItemSpawnsPositions[i]];
-                if (!WasPickedUp(persistedPickUpItem))
-                {
-                    // Item hasn't been picked up - respawn the exact same item
-                    Debug.Log("Re-adding: " + persistedPickUpItem.name);
-                    GameObject newGameObject = new GameObject();
-                    PickUpItem newPickUpItem = newGameObject.AddComponent<PickUpItem>();
-                    newPickUpItem.item = persistedPickUpItem.item;
-                    newPickUpItem.pickUpFX = pickUpFX;
-                    newGameObject.transform.localPosition = persistedPickUpItem.transform.localPosition;
-                }
+                spawnItem(itemId, ItemPickUpSound, ItemSpawnPositions[itemPosIndex]);
             }
-            else
-            {
-                // Item hasn't yet been spawned
-                Debug.Log("Spawning. Item " + ItemKeyRange[i] + " picked!");
-                GameObject randomLootItemObject = (GameObject)Instantiate(inventoryItemList.itemList[ItemKeyRange[i]].itemModel);
-                PickUpItem pickUpItem = randomLootItemObject.AddComponent<PickUpItem>();
-                Object.DontDestroyOnLoad(pickUpItem);
-                pickUpItem.item = inventoryItemList.itemList[ItemKeyRange[i]];
-                pickUpItem.pickUpFX = pickUpFX;
-                randomLootItemObject.transform.localPosition = ItemSpawnsPositions[i];
-                GameController.AddItemToScene(ThisScene, ItemSpawnsPositions[i], pickUpItem); // Add item to GameController database
-            }
+            itemPosIndex++;
         }
     }
 
     private void RandomiseItemSpawns()
     {
-        // RNG: Randomise items to be spawned
+        Debug.Log("Randomising items");
         System.Random r = new System.Random();
-        ItemKeyRange = ItemKeyRange.OrderBy(x => r.Next()).ToArray();
-    }
-
-    private bool WasPickedUp(PickUpItem gameObject)
-    {
-        return gameObject == null && !ReferenceEquals(gameObject, null);
+        UniqueItemSpawnIds = UniqueItemSpawnIds.OrderBy(x => r.Next()).ToArray();
     }
 }
