@@ -22,7 +22,7 @@ public class ChangeScene : MonoBehaviour
 
         if (colliders.Count == 2)
         {
-            SceneManager.LoadScene(GameController.GetFileNameForScene(sceneToLoad));
+            SceneManager.LoadScene(GameController.GetFileName(sceneToLoad));
         }
     }
 

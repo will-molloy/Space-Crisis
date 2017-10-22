@@ -62,7 +62,6 @@ public class ScenePersistence : MonoBehaviour
     {
         foreach (KeyValuePair<string, Vector3> objPos in objPositions)
         {
-            Debug.Log("Moving:" + objPos.Key + ", to: " + objPos.Value);
             GameObject obj = GameObject.Find(objPos.Key);
             obj.transform.position = objPos.Value;
         }
