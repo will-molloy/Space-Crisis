@@ -36,11 +36,14 @@ public class JudgementSystem : MonoBehaviour {
         if ((correctItemId == playerItemChoice) && (correctStatement.Trim().Equals(playerStatementChoice.Trim())))
         {
             //correct answer
+            dMan.currentLine = 0;
             dMan.getActiveNPC().GetComponent<DialogHolder>().setAndShowDialogue(correctAnswerBox);
         }
         else {
+            dMan.currentLine = 0;
             dMan.getActiveNPC().GetComponent<DialogHolder>().setAndShowDialogue(wrongAnswerBox);
         }
+       
     }
 
     public void showButton() {
