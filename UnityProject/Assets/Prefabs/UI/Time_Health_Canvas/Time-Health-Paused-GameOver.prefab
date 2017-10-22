@@ -67,7 +67,7 @@ GameObject:
   - 222: {fileID: 22268388}
   - 114: {fileID: 11425480}
   - 114: {fileID: 11405002}
-  - 114: {fileID: 11461212}
+  - 114: {fileID: 11400266}
   m_Layer: 5
   m_Name: PauseBack
   m_TagString: Untagged
@@ -296,7 +296,7 @@ GameObject:
   - 222: {fileID: 22266658}
   - 114: {fileID: 11497110}
   - 114: {fileID: 11439878}
-  - 114: {fileID: 11413018}
+  - 114: {fileID: 11447246}
   m_Layer: 5
   m_Name: GameOverBack
   m_TagString: Untagged
@@ -333,6 +333,7 @@ GameObject:
   - 114: {fileID: 11448078}
   - 114: {fileID: 11444820}
   - 114: {fileID: 11462360}
+  - 82: {fileID: 8207108}
   m_Layer: 5
   m_Name: GameOverMenu
   m_TagString: Untagged
@@ -430,6 +431,80 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!82 &8207108
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 167166}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 59148afcc75b39d42b2306433535aaa3, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &9580584
 Animator:
   serializedVersion: 3
@@ -468,6 +543,18 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &11400266
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 118336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 633f2932fabeba14b868dc9609a45bdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SceneToLoad: 5
 --- !u!114 &11402038
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -552,8 +639,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11461212}
-        m_MethodName: SceneTransition
+      - m_Target: {fileID: 11400266}
+        m_MethodName: LoadScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -753,22 +840,6 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Restart Level
---- !u!114 &11413018
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 164606}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08c210970d4f2a7449123873a8fe683f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneToLoad: 5
-  sprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &11414122
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1138,8 +1209,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11413018}
-        m_MethodName: SceneTransition
+      - m_Target: {fileID: 11447246}
+        m_MethodName: LoadScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1235,6 +1306,18 @@ MonoBehaviour:
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
+--- !u!114 &11447246
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 164606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 633f2932fabeba14b868dc9609a45bdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SceneToLoad: 5
 --- !u!114 &11448078
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1314,22 +1397,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &11461212
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 118336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08c210970d4f2a7449123873a8fe683f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneToLoad: 5
-  sprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &11462360
 MonoBehaviour:
   m_ObjectHideFlags: 1
