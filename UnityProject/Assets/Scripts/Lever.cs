@@ -71,7 +71,10 @@ public class Lever : MonoBehaviour
         Flip();
         remainingFrames = timeInFrames;
 
-		AudioSource.PlayClipAtPoint(pulledFX, transform.position);
+		if (pulledFX != null){
+			AudioSource.PlayClipAtPoint(pulledFX, transform.position);
+		}
+
 
         foreach (GameObject obj in thingsToControl)
         {
