@@ -27,9 +27,9 @@ public class PauseScreen : MonoBehaviour {
 			PlayerUtility.UnFreezePlayers();
 			paused = false;
 		}
-		if (pauseScreen.activeSelf == false) {
+		/*if (pauseScreen.activeSelf == false) {
 			paused = false;
 			PlayerUtility.UnFreezePlayers();
-		}
+		}*/
 	}
 }
