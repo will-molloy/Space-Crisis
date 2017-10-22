@@ -894,4 +894,8 @@ public class Inventory : MonoBehaviour
             ItemsInInventory[i].indexItemInList = i;
         }
     }
+
+    public void activateItemInventory() {
+        this.gameObject.SetActive(true);
+    }
 }

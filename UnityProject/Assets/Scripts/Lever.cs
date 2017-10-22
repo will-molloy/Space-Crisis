@@ -25,7 +25,6 @@ public class Lever : MonoBehaviour
         }
     }
 
-
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
@@ -85,4 +84,8 @@ public class Lever : MonoBehaviour
         theScale.x *= -1;
         transform.localScale = theScale;
     }
+
+	public void assignSoundFX(AudioClip clip){
+		pulledFX = clip;
+	}
 }

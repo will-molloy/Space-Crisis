@@ -215,6 +215,10 @@ public class CraftSystem : MonoBehaviour
         }
     }
 
+    public void activateCraft() {
+        this.gameObject.SetActive(true);
+    }
+
 
 
 }

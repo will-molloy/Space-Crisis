@@ -30,7 +30,10 @@ public class PressurePlate : MonoBehaviour
         if (!isInAnimation) return;
 
         transform.Translate(movementDirection * translation);
-        localColliders.ForEach(gameObject => gameObject.transform.Translate(movementDirection * translation));
+        localColliders.ForEach(gameObject => {
+            gameObject.transform.Translate(movementDirection * translation); // make objects go down with pad
+            gameObject.transform.Rotate(new Vector2(0, 0)); // make objects flat on pad 
+            });
 
         isInAnimation = GetYPos() < upperY && GetYPos() > lowerY;
     }
@@ -50,7 +53,11 @@ public class PressurePlate : MonoBehaviour
         isInAnimation = GetYPos() > lowerY;
 		if (isInAnimation) {
 			movementDirection = Vector2.down;
-			AudioSource.PlayClipAtPoint(pressuredAudioClips[0], transform.position);
+
+			if(pressuredAudioClips != null){
+				AudioSource.PlayClipAtPoint(pressuredAudioClips[0], transform.position);
+			}
+
 		}
 
     }
@@ -65,7 +72,10 @@ public class PressurePlate : MonoBehaviour
         isInAnimation = localColliders.Count == 0 && GetYPos() < upperY;
 		if (isInAnimation) {
 			movementDirection = Vector2.up;
-			AudioSource.PlayClipAtPoint(pressuredAudioClips[1], transform.position);
+
+			if (pressuredAudioClips != null) {
+				AudioSource.PlayClipAtPoint (pressuredAudioClips [1], transform.position);
+			}
 		}
 
     }

@@ -17,16 +17,21 @@ public static class GameController
     private static Dictionary<PlayableScene, Dictionary<string, Vector3>> InitialScenePositions;
     private static Dictionary<PlayableScene, bool> SceneShouldBeReset;
 
+    // Scene :: Item location :: Item, For item persisting items in scene
+    private static Dictionary<PlayableScene, Dictionary<Vector3, PickUpItem>> ItemsInScene; 
+
     static GameController()
     {
         InitialScenePositions = new Dictionary<PlayableScene, Dictionary<string, Vector3>>();
         SavedScenePositions = new Dictionary<PlayableScene, Dictionary<string, Vector3>>();
         SceneShouldBeReset = new Dictionary<PlayableScene, bool>();
+        ItemsInScene = new Dictionary<PlayableScene, Dictionary<Vector3, PickUpItem>>();
         foreach (PlayableScene playableScene in Enum.GetValues(typeof(PlayableScene)))
         {            
             SavedScenePositions[playableScene] = new Dictionary<string, Vector3>(); ;
             InitialScenePositions[playableScene] = new Dictionary<string, Vector3>(); ;
             SceneShouldBeReset[playableScene] = false;
+            ItemsInScene[playableScene] = new Dictionary<Vector3, PickUpItem> ();
         }
     }
 
@@ -79,9 +84,9 @@ public static class GameController
     /// <summary>
     /// Retrives the file name for the given scene.
     /// </summary>
-    public static string GetFileNameForScene(this PlayableScene value)
+    public static string GetFileName(this PlayableScene scene)
     {
-        return value.GetAttribute<FileNameAttribute>().fileName;
+        return scene.GetAttribute<FileNameAttribute>().fileName;
     }
 
     /// <summary>
@@ -120,6 +125,7 @@ public static class GameController
     public static void ClearPersistedDataForScene(PlayableScene sceneName)
     {
         SavedScenePositions[sceneName] = new Dictionary<string, Vector3>();
+        ItemsInScene[sceneName] = new Dictionary<Vector3, PickUpItem>();
     }
 
     /// <summary>
@@ -130,12 +136,8 @@ public static class GameController
         foreach (GameObject obj in objects)
         {
             SavedScenePositions[sceneName][obj.name] = obj.transform.position;
-            if (!InitialScenePositions[sceneName].ContainsKey(obj.name))
-            {
-                // write once
-                Debug.Log("Saved initial: " + obj.name);
+            if (!InitialScenePositions[sceneName].ContainsKey(obj.name)) // write once
                 InitialScenePositions[sceneName][obj.name] = obj.transform.position;
-            }
         }
     }
 
@@ -159,9 +161,15 @@ public static class GameController
         SceneShouldBeReset[sceneName] = resetScene;
     }
 
-    internal static void AddItem(Item item)
+    public static void AddItemToScene(PlayableScene scene, Vector3 itemPos, PickUpItem item)
     {
-        Debug.Log("Not implemeneted");
+        Debug.Log("Saved item: " + item.name);
+        ItemsInScene[scene][itemPos] = item;
+    }
+
+    public static Dictionary<Vector3, PickUpItem> GetItemsFor(PlayableScene scene)
+    {
+        return ItemsInScene[scene];
     }
 }
 
