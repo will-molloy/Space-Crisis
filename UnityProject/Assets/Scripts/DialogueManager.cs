@@ -76,7 +76,7 @@ public class DialogueManager : MonoBehaviour
 
     public void showDialogue(string source)
     {
-
+        Debug.Log("Show dia");
         if (!isFrozen)
         {
             isFrozen = true;
@@ -101,6 +101,7 @@ public class DialogueManager : MonoBehaviour
 
     public void closeDialogue()
     {
+        Debug.Log("close dia");
         dText.enabled = false;
         diaglogActive = false;
         dBox.SetActive(false);
