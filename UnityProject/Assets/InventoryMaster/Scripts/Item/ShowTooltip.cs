@@ -46,12 +46,9 @@ public class ShowTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {
             item = GetComponent<ItemOnObject>().item;                   //we get the item
 
-            //update the btn of plyaer choice
-            GameObject judgebtn = GameObject.FindGameObjectWithTag("JudgementBtn");
-            judgebtn.GetComponent<JudgementSystem>().setItemID(item.itemID);
-
             tooltip.item = item;                                        //set the item in the tooltip
             tooltip.activateTooltip();                                  //set all informations of the item in the tooltip
+
             if (canvasRectTransform == null)
                 return;
 
