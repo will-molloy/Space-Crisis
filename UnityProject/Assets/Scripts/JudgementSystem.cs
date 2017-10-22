@@ -46,4 +46,8 @@ public class JudgementSystem : MonoBehaviour {
     public void showButton() {
         this.gameObject.SetActive(true);
     }
+
+    public void hideButton() {
+        this.gameObject.SetActive(false);
+    }
 }
