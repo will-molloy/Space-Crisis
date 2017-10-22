@@ -47,7 +47,12 @@ public class JudgementSystem : MonoBehaviour {
         this.gameObject.SetActive(true);
     }
 
-    public void hideButton() {
+    public void hideButtonAndInventorie() {
         this.gameObject.SetActive(false);
+        GameObject inventoryItem = GameObject.FindGameObjectWithTag("MainInventory");
+        GameObject inventoryCraft = GameObject.FindGameObjectWithTag("CraftSystem");
+
+        inventoryItem.SetActive(false);
+        inventoryCraft.SetActive(false);
     }
 }
