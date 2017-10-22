@@ -29,6 +29,10 @@ public class ScenePersistence : MonoBehaviour
             ResetScene();
         RestoreScene();
 
+        // Set inventory scene
+        PickUpItem.thisScene = thisScene; 
+
+        // Get inventory
         foreach (GameObject Obj in GameObject.FindGameObjectsWithTag("Player"))
         {
             if (Obj.name == "Astronaut")

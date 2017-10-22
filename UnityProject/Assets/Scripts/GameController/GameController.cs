@@ -12,45 +12,36 @@ using mattmc3.Common.Collections.Generic;
 public static class GameController
 {
     // Scene.name :: Object.name :: Position, For persisting given scene objects
-    private static Dictionary<PlayableScene, Dictionary<string, Vector3>> SavedScenePositions;
+    private static Dictionary<PlayableScene, Dictionary<string, Vector3>> SavedScenePositions = new Dictionary<PlayableScene, Dictionary<string, Vector3>>();
 
     // For resseting scene e.g. level restart
-    private static Dictionary<PlayableScene, Dictionary<string, Vector3>> InitialScenePositions;
-    private static Dictionary<PlayableScene, bool> SceneShouldBeReset;
+    private static Dictionary<PlayableScene, Dictionary<string, Vector3>> InitialScenePositions = new Dictionary<PlayableScene, Dictionary<string, Vector3>>();
+    private static Dictionary<PlayableScene, bool> SceneShouldBeReset = new Dictionary<PlayableScene, bool>();
 
-    // Scene :: Item location :: Item, For item persisting items in scene
-    private static Dictionary<PlayableScene, Dictionary<Vector3, PickUpItem>> ItemsInScene;
-
-    private static Dictionary<PlayableScene, OrderedDictionary<int, bool>> items = new Dictionary<PlayableScene, OrderedDictionary<int, bool>>();
+    // Scene :: Item ID :: ItemWasPickedUp, For item persisting items in scenes/inventory
+    private static Dictionary<PlayableScene, OrderedDictionary<int, bool>> itemsInScene = new Dictionary<PlayableScene, OrderedDictionary<int, bool>>();
 
     public static void AddGeneratedItems(PlayableScene scene, List<int> itemIds)
     {
-        itemIds.ForEach(itemId => items[scene].Add(itemId, false));
+        itemIds.ForEach(itemId => itemsInScene[scene].Add(itemId, false)); // false: just generated, not picked up
     }
 
     public static OrderedDictionary<int, bool> GetGeneratedItems(PlayableScene scene)
     {
-        return items[scene];
+        return itemsInScene[scene];
     }
 
-    // Global inventory -- shared across all scenes and levels
-    private static List<Item> InventoryItems;
+    // Global inventory - shared across all scenes and levels
+    private static List<Item> InventoryItems = new List<Item>();
 
     static GameController()
     {
-        InitialScenePositions = new Dictionary<PlayableScene, Dictionary<string, Vector3>>();
-        SavedScenePositions = new Dictionary<PlayableScene, Dictionary<string, Vector3>>();
-        SceneShouldBeReset = new Dictionary<PlayableScene, bool>();
-        ItemsInScene = new Dictionary<PlayableScene, Dictionary<Vector3, PickUpItem>>();
-        InventoryItems = new List<Item>();
         foreach (PlayableScene playableScene in Enum.GetValues(typeof(PlayableScene)))
         {            
             SavedScenePositions[playableScene] = new Dictionary<string, Vector3>(); 
             InitialScenePositions[playableScene] = new Dictionary<string, Vector3>(); 
             SceneShouldBeReset[playableScene] = false;
-            ItemsInScene[playableScene] = new Dictionary<Vector3, PickUpItem> ();
-
-            items[playableScene] = new OrderedDictionary<int, bool>();
+            itemsInScene[playableScene] = new OrderedDictionary<int, bool>();
         }
     }
 
@@ -131,20 +122,26 @@ public static class GameController
     /// <summary>
     /// Clears the persisted data in all scenes for the given level
     /// E.g. use when restarting level from pause menu or on losing all lives.
+    /// 
+    /// Item Spawns are reset.
     /// </summary>
     public static void clearScenesForLevel(Level level)
     {
-        getScenesForLevel(level).ForEach(scene => ClearPersistedDataForScene(scene));
+        getScenesForLevel(level).ForEach(scene => {
+            ClearPersistedDataForScene(scene);
+            itemsInScene[scene] = new OrderedDictionary<int, bool>();
+        });
     }
 
     /// <summary>
     /// Clears the persisted data for the given scene.
     /// E.g. use with reset button.
+    /// 
+    /// Item spawns ARE NOT reset
     /// </summary>
     public static void ClearPersistedDataForScene(PlayableScene sceneName)
     {
         SavedScenePositions[sceneName] = new Dictionary<string, Vector3>();
-        ItemsInScene[sceneName] = new Dictionary<Vector3, PickUpItem>();
     }
 
     /// <summary>
@@ -180,18 +177,9 @@ public static class GameController
         SceneShouldBeReset[sceneName] = resetScene;
     }
 
-    public static void AddItemToScene(PlayableScene scene, Vector3 itemPos, PickUpItem item)
+    public static void AddItemToPersistedInventory(PlayableScene scene, Item item)
     {
-        ItemsInScene[scene][itemPos] = item;
-    }
-
-    public static Dictionary<Vector3, PickUpItem> GetItemsFor(PlayableScene scene)
-    {
-        return ItemsInScene[scene];
-    }
-
-    public static void AddItemToPersistedInventory(Item item)
-    {
+        itemsInScene[scene].SetValue(item.itemID, true);
         InventoryItems.Add(item);
     }
 

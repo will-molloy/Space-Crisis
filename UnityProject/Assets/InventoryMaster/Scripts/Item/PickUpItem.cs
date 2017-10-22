@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 public class PickUpItem : MonoBehaviour
 {
+    public static GameController.PlayableScene thisScene; // SET IN SCENE PERSISTENCE AWAKE()
     public Item item;
     private Inventory inventory;
     private GameObject player1;
@@ -37,7 +38,7 @@ public class PickUpItem : MonoBehaviour
                 else if (inventory.ItemsInInventory.Count < (inventory.width * inventory.height))
                 {
                     inventory.addItemToInventory(item.itemID, item.itemValue);
-                    GameController.AddItemToPersistedInventory(item);
+                    GameController.AddItemToPersistedInventory(thisScene, item);
                     Destroy(this.gameObject);
                     AudioSource.PlayClipAtPoint(pickUpFX, transform.position);
                 }

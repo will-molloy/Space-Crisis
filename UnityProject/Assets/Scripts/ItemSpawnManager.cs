@@ -48,15 +48,20 @@ public class ItemSpawnManager : MonoBehaviour
             itemsToSpawn = GameController.GetGeneratedItems(ThisScene); // retrieve
         }
 
+        // Spawn items
         int itemPosIndex = 0;
         foreach (int itemId in itemsToSpawn.Keys)
         {
-            GameObject randomLootItemObject = (GameObject)Instantiate(inventoryItemList.itemList[itemId].itemModel);
-            PickUpItem pickUpItem = randomLootItemObject.AddComponent<PickUpItem>();
-            Object.DontDestroyOnLoad(pickUpItem);
-            pickUpItem.item = inventoryItemList.itemList[itemId];
-            pickUpItem.pickUpFX = pickUpFX;
-            randomLootItemObject.transform.localPosition = ItemSpawnsPositions[itemPosIndex++];
+            // Only spawn items not picked up
+            if (!itemsToSpawn.GetValue(itemId)) // [] doesn't work
+            {
+                GameObject randomLootItemObject = (GameObject)Instantiate(inventoryItemList.itemList[itemId].itemModel);
+                PickUpItem pickUpItem = randomLootItemObject.AddComponent<PickUpItem>();
+                Object.DontDestroyOnLoad(pickUpItem);
+                pickUpItem.item = inventoryItemList.itemList[itemId];
+                pickUpItem.pickUpFX = pickUpFX;
+                randomLootItemObject.transform.localPosition = ItemSpawnsPositions[itemPosIndex++];
+            }
         }
 
         //RandomiseItemSpawns();
