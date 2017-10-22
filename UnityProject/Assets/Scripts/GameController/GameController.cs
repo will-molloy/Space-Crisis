@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using mattmc3.Common.Collections.Generic;
 
 /// <summary>
 /// Contains all static data for the game scenes.
@@ -20,6 +21,18 @@ public static class GameController
     // Scene :: Item location :: Item, For item persisting items in scene
     private static Dictionary<PlayableScene, Dictionary<Vector3, PickUpItem>> ItemsInScene;
 
+    private static Dictionary<PlayableScene, OrderedDictionary<int, bool>> items = new Dictionary<PlayableScene, OrderedDictionary<int, bool>>();
+
+    public static void AddItem(PlayableScene scene, int itemId)
+    {
+        items[scene][itemId] = false;
+    }
+
+    public static OrderedDictionary<int, bool> GetItems(PlayableScene scene)
+    {
+        return items[scene];
+    }
+
     // Global inventory -- shared across all scenes and levels
     private static List<Item> InventoryItems;
 
@@ -36,6 +49,8 @@ public static class GameController
             InitialScenePositions[playableScene] = new Dictionary<string, Vector3>(); 
             SceneShouldBeReset[playableScene] = false;
             ItemsInScene[playableScene] = new Dictionary<Vector3, PickUpItem> ();
+
+            items[playableScene] = new OrderedDictionary<int, bool>();
         }
     }
 
