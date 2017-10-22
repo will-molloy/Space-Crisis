@@ -32,12 +32,12 @@ public class PickUpItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_inventory != null && Input.GetKeyDown(KeyCode.E))
+        if (_inventory != null)
         {
             float distance1 = Vector3.Distance(this.gameObject.transform.position, _player1.transform.position);
 			float distance2 = Vector3.Distance(this.gameObject.transform.position, _player2.transform.position);
 
-			if (distance1 <= 3 || distance2 <= 3)
+			if (distance1 <= 2 || distance2 <= 2)
             {
                 bool check = _inventory.checkIfItemAllreadyExist(item.itemID, item.itemValue);
                 if (check)
@@ -47,7 +47,7 @@ public class PickUpItem : MonoBehaviour
                     _inventory.addItemToInventory(item.itemID, item.itemValue);
                     _inventory.updateItemList();
                     _inventory.stackableSettings();
-                    GameController.AddItem(item);
+ //                   GameController.AddItem(item);
                     Destroy(this.gameObject);
 					AudioSource.PlayClipAtPoint(pickUpFX, transform.position);
                 }

@@ -25,7 +25,7 @@ public class ResetLevel : MonoBehaviour {
         // Load the first scene in the level
         if (firstSceneInLevel.HasValue)
         {
-            SceneManager.LoadScene(GameController.GetFileNameForScene(firstSceneInLevel.Value));
+            SceneManager.LoadScene(GameController.GetFileName(firstSceneInLevel.Value));
         }
         else
         {
