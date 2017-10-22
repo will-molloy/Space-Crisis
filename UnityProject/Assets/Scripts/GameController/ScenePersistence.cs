@@ -13,15 +13,10 @@ public class ScenePersistence : MonoBehaviour
 {
     public GameController.PlayableScene thisScene;
 
-    void Start()
-    {
-
-    }
-
     /// <summary>
     /// Restore or reset the scene.
     /// </summary>
-    void Awake()
+    void Start()
     {
         // Determine if scene should be restored or reset
         if (GameController.GetShouldBeReset(thisScene))
@@ -42,6 +37,7 @@ public class ScenePersistence : MonoBehaviour
         // Retreive all items the players have picked up
         foreach (int itemId in GameController.GetItemsPickedUp())
         {
+            Debug.Log("Restoring item: " + itemId);
             ItemSpawnManager.spawnItem(itemId, null, playerPosition);
         }
         

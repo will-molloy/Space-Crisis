@@ -19,6 +19,7 @@ public class ItemSpawnManager : MonoBehaviour
     /// <param name="itemPos"></param> Item position
     public static void spawnItem(int itemKey, AudioClip itemAudioFx, Vector3 itemPos)
     {
+        Debug.Log("Spawning item: " + itemKey);
         GameObject randomLootItemObject = (GameObject)Instantiate(inventoryItemList.itemList[itemKey].itemModel);
         PickUpItem pickUpItem = randomLootItemObject.AddComponent<PickUpItem>();
         pickUpItem.item = inventoryItemList.itemList[itemKey];

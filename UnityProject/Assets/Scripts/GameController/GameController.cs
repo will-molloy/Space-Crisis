@@ -189,18 +189,18 @@ public static class GameController
     /// <summary>
     /// Retrieve all items picked up from all scenes.
     /// </summary>
-    public static List<int> GetItemsPickedUp()
+    public static HashSet<int> GetItemsPickedUp()
     {
-        List<int> items = new List<int>();
+        HashSet<int> itemsPickedUp = new HashSet<int>();
         foreach (PlayableScene scene in Enum.GetValues(typeof(PlayableScene)))
         {
             foreach (int itemId in GetItemsInScene(scene).Keys)
             {
                 if (GetItemsInScene(scene).GetValue(itemId)) // if picked up
-                    items.Add(itemId);
+                    itemsPickedUp.Add(itemId);
             }
         }
-        return items;
+        return itemsPickedUp;
     }
 }
 
