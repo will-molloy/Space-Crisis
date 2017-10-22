@@ -45,14 +45,18 @@ public class ItemSpawnManager : MonoBehaviour
         {
             if (ItemsPersistedInThisScene.ContainsKey(ItemSpawnsPositions[i]))
             {
-                // Item has already spawned before
+                // Item has already spawned before 
                 PickUpItem persistedPickUpItem = ItemsPersistedInThisScene[ItemSpawnsPositions[i]];
-                Debug.Log("Re-adding: " + persistedPickUpItem.name);
-                GameObject newGameObject = new GameObject();
-                PickUpItem newPickUpItem = newGameObject.AddComponent<PickUpItem>();
-                newPickUpItem.item = persistedPickUpItem.item;
-                newPickUpItem.pickUpFX = pickUpFX;
-                newGameObject.transform.localPosition = persistedPickUpItem.transform.localPosition;
+                if (!WasPickedUp(persistedPickUpItem))
+                {
+                    // Item hasn't been picked up - respawn the exact same item
+                    Debug.Log("Re-adding: " + persistedPickUpItem.name);
+                    GameObject newGameObject = new GameObject();
+                    PickUpItem newPickUpItem = newGameObject.AddComponent<PickUpItem>();
+                    newPickUpItem.item = persistedPickUpItem.item;
+                    newPickUpItem.pickUpFX = pickUpFX;
+                    newGameObject.transform.localPosition = persistedPickUpItem.transform.localPosition;
+                }
             }
             else
             {
@@ -74,5 +78,10 @@ public class ItemSpawnManager : MonoBehaviour
         // RNG: Randomise items to be spawned
         System.Random r = new System.Random();
         ItemKeyRange = ItemKeyRange.OrderBy(x => r.Next()).ToArray();
+    }
+
+    private bool WasPickedUp(PickUpItem gameObject)
+    {
+        return gameObject == null && !ReferenceEquals(gameObject, null);
     }
 }
