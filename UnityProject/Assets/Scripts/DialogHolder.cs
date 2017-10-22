@@ -51,20 +51,13 @@ public class DialogHolder : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        // dMan.setActiveNPC(this.gameObject);
+        //dMan.setActiveNPC(this.gameObject);
         if (other.gameObject.CompareTag("Player"))
         {
             if (Input.GetKeyUp(KeyCode.Space))
             {
-
-                //dMan.showBox(this.gameObject.name , dialogue);
-                // show dialogue
-                if (!dMan.diaglogActive)
-                {
-                    setAndShowDialogue(dBoxes[boxIndex]);
-                }
+                setAndShowDialogue(dBoxes[boxIndex]);
                 
-
             }
         }
     }

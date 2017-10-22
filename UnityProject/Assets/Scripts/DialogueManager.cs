@@ -40,6 +40,7 @@ public class DialogueManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
         if (diaglogActive && Input.GetKeyDown(KeyCode.Space))
         {
             //dBox.SetActive(false);
@@ -115,8 +116,7 @@ public class DialogueManager : MonoBehaviour
            // unfreezePlayer();
             PlayerUtility.UnFreezePlayers();
         }
-       // cleanUpDialogue();
-
+        // cleanUpDialogue();
     }
 
     private void freezePlayer()
@@ -151,7 +151,7 @@ public class DialogueManager : MonoBehaviour
         return activeNPC;
     }
 
-    private void cleanUpDialogue() {
+    private void resetCurrentLine() {
         DialogHolder dh = activeNPC.GetComponent<DialogHolder>();
 
         if (!dh.dBoxes.Contains(dBox))
