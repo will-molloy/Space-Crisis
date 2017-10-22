@@ -1644,6 +1644,8 @@ MonoBehaviour:
   m_LeverLayer:
     serializedVersion: 2
     m_Bits: 0
+  jumpAudios:
+  - {fileID: 8300000, guid: 20759609d758df945926fd231b58ec0a, type: 3}
   frozen: 0
 --- !u!50 &350478317
 Rigidbody2D:
@@ -4562,6 +4564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a7f0d923e5334f4293c0e635e29857e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damagedAudioClips: []
   isDead: 0
   imgs:
   - {fileID: 472286543}
@@ -4664,6 +4667,7 @@ MonoBehaviour:
   parent: {fileID: 1314535556}
   distToSink: 0.2
   animationTimeInFrames: 10
+  pressuredAudioClips: []
 --- !u!212 &817487401
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6415,6 +6419,7 @@ MonoBehaviour:
   parent: {fileID: 1840316393}
   distToSink: 0.2
   animationTimeInFrames: 10
+  pressuredAudioClips: []
 --- !u!212 &1175842209
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8120,6 +8125,7 @@ MonoBehaviour:
   - {fileID: 910621581}
   - {fileID: 809755908}
   _itemRange: 010000000400000005000000
+  pickUpFX: {fileID: 0}
   _spawnedItems: 
 --- !u!4 &1366826563
 Transform:
@@ -8399,6 +8405,7 @@ MonoBehaviour:
   parent: {fileID: 563254459}
   distToSink: 0.2
   animationTimeInFrames: 10
+  pressuredAudioClips: []
 --- !u!212 &1411585422
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10496,6 +10503,8 @@ MonoBehaviour:
   m_LeverLayer:
     serializedVersion: 2
     m_Bits: 0
+  jumpAudios:
+  - {fileID: 8300000, guid: 2a8b22f1832b24d44b81eff0e387dc83, type: 3}
   frozen: 0
 --- !u!50 &1761057385
 Rigidbody2D:
