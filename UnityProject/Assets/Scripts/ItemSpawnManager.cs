@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using mattmc3.Common.Collections.Generic;
@@ -15,7 +14,7 @@ public class ItemSpawnManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        // Load the item spawn positions
+        // Load the item spawn positions - these are the child components with the tag "item-spawn"
         ItemSpawnsPositions = new List<Vector3>();
         foreach (Transform t in transform)
         {
@@ -39,13 +38,13 @@ public class ItemSpawnManager : MonoBehaviour
             throw new System.Exception("Need more items to spawn in " + ThisScene.GetFileName());
 
         // Retrieve item Ids generated for this scene
-        OrderedDictionary<int, bool> itemsToSpawn = GameController.GetGeneratedItems(ThisScene);
+        OrderedDictionary<int, bool> itemsToSpawn = GameController.GetItemsInScene(ThisScene);
         if (itemsToSpawn.Count < ItemSpawnsPositions.Count)
         {
             // Items not yet generated:
             RandomiseItemSpawns();
             GameController.AddGeneratedItems(ThisScene, ItemIdRange.Take(ItemSpawnsPositions.Count).ToList()); // persist
-            itemsToSpawn = GameController.GetGeneratedItems(ThisScene); // retrieve
+            itemsToSpawn = GameController.GetItemsInScene(ThisScene); // retrieve
         }
 
         // Spawn items
@@ -60,6 +59,12 @@ public class ItemSpawnManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Spawns the given item at the given location.
+    /// </summary>
+    /// <param name="itemKey"></param> Items key in the database
+    /// <param name="itemAudioFx"></param> Items audio pick up sound
+    /// <param name="itemPos"></param> Item position
     public static void spawnItem(int itemKey, AudioClip itemAudioFx, Vector3 itemPos)
     {
         GameObject randomLootItemObject = (GameObject)Instantiate(inventoryItemList.itemList[itemKey].itemModel);
@@ -75,10 +80,5 @@ public class ItemSpawnManager : MonoBehaviour
         Debug.Log("Randomising items");
         System.Random r = new System.Random();
         ItemIdRange = ItemIdRange.OrderBy(x => r.Next()).ToArray();
-    }
-
-    private bool WasPickedUp(PickUpItem gameObject)
-    {
-        return gameObject == null && !ReferenceEquals(gameObject, null);
     }
 }

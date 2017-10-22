@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System;
+using mattmc3.Common.Collections.Generic;
 
 /// <summary>
 /// Usage: Create Empty component with this script and set appropriate variables.
@@ -11,8 +12,6 @@ using System;
 public class ScenePersistence : MonoBehaviour
 {
     public GameController.PlayableScene thisScene;
-    private static Inventory inventory;
-    private GameObject player;
 
     void Start()
     {
@@ -30,23 +29,21 @@ public class ScenePersistence : MonoBehaviour
         RestoreScene();
 
         // Set inventory scene
-        PickUpItem.thisScene = thisScene; 
+        PickUpItem.SetThisScene(thisScene);
 
-        // Get inventory
+        // Retrieve player
+        Vector3 playerPosition = new Vector3();
         foreach (GameObject Obj in GameObject.FindGameObjectsWithTag("Player"))
         {
             if (Obj.name == "Astronaut")
-                player = Obj;
+                playerPosition = Obj.transform.position;
         }
-        if (player != null)
-            inventory = player.GetComponent<PlayerInventory>().inventory.GetComponent<Inventory>();
 
-        // Add any inventory items (from other scenes) to this scenes inventory
-        GameController.GetInventoryItems().ForEach(item =>
+        // Retreive all items the players have picked up
+        foreach (int itemId in GameController.GetItemsPickedUp())
         {
-            Debug.Log("persisting item in inventory: " + item.itemName);
-            inventory.addItemToInventory(item.itemID, item.itemValue);
-        });
+            ItemSpawnManager.spawnItem(itemId, null, playerPosition);
+        }
         
     }
 

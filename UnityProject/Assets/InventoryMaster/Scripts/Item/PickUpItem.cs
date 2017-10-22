@@ -1,12 +1,17 @@
 ﻿using UnityEngine;
 public class PickUpItem : MonoBehaviour
 {
-    public static GameController.PlayableScene thisScene; // SET IN SCENE PERSISTENCE AWAKE()
+    private static GameController.PlayableScene thisScene; // SET IN SCENE PERSISTENCE AWAKE()
     public Item item;
     private Inventory inventory;
     private GameObject player1;
     private GameObject player2;
     public AudioClip pickUpFX;
+
+    public static void SetThisScene(GameController.PlayableScene scene)
+    {
+        thisScene = scene;
+    }
 
     // Use this for initialization
     void Start()
@@ -40,9 +45,9 @@ public class PickUpItem : MonoBehaviour
                     inventory.addItemToInventory(item.itemID, item.itemValue);
                     GameController.AddItemToPersistedInventory(thisScene, item);
                     Destroy(this.gameObject);
-                    AudioSource.PlayClipAtPoint(pickUpFX, transform.position);
+                    if (pickUpFX != null)
+                        AudioSource.PlayClipAtPoint(pickUpFX, transform.position);
                 }
-
             }
         }
     }
