@@ -49,7 +49,11 @@ public class PickUpItem : MonoBehaviour
                     _inventory.stackableSettings();
  //                   GameController.AddItem(item);
                     Destroy(this.gameObject);
-					AudioSource.PlayClipAtPoint(pickUpFX, transform.position);
+
+					if(pickUpFX != null){
+						AudioSource.PlayClipAtPoint(pickUpFX, transform.position);
+					}
+
                 }
 
             }
