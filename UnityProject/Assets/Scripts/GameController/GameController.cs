@@ -19,7 +19,7 @@ public static class GameController
     private static Dictionary<PlayableScene, bool> SceneShouldBeReset = new Dictionary<PlayableScene, bool>();
 
     // Scene :: Item ID :: ItemWasPickedUp, For item persisting items in scenes/inventory
-    private static Dictionary<PlayableScene, OrderedDictionary<int, bool>> itemsInScene = new Dictionary<PlayableScene, OrderedDictionary<int, bool>>();
+    private static Dictionary<PlayableScene, OrderedDictionary<int, bool>> ItemsInScene = new Dictionary<PlayableScene, OrderedDictionary<int, bool>>();
 
     static GameController()
     {
@@ -28,7 +28,7 @@ public static class GameController
             SavedScenePositions[playableScene] = new Dictionary<string, Vector3>();
             InitialScenePositions[playableScene] = new Dictionary<string, Vector3>();
             SceneShouldBeReset[playableScene] = false;
-            itemsInScene[playableScene] = new OrderedDictionary<int, bool>();
+            ItemsInScene[playableScene] = new OrderedDictionary<int, bool>();
         }
     }
 
@@ -100,7 +100,7 @@ public static class GameController
     /// <summary>
     /// Gets all the scenes assigned to the given level
     /// </summary>
-    public static List<PlayableScene> getScenesForLevel(Level levelToRetrieve)
+    public static List<PlayableScene> GetScenesForLevel(Level levelToRetrieve)
     {
         PlayableScene[] scenes = (PlayableScene[])Enum.GetValues(typeof(PlayableScene));
         return scenes.Where(scene => scene.GetAttribute<LevelAttribute>().level.Equals(levelToRetrieve)).ToList();
@@ -112,12 +112,12 @@ public static class GameController
     /// 
     /// Item Spawns are reset.
     /// </summary>
-    public static void clearScenesForLevel(Level level)
+    public static void ClearScenesForLevel(Level level)
     {
-        getScenesForLevel(level).ForEach(scene =>
+        GetScenesForLevel(level).ForEach(scene =>
         {
             ClearPersistedDataForScene(scene);
-            itemsInScene[scene] = new OrderedDictionary<int, bool>();
+            ItemsInScene[scene] = new OrderedDictionary<int, bool>();
         });
     }
 
@@ -167,7 +167,7 @@ public static class GameController
 
     public static void AddGeneratedItems(PlayableScene scene, List<int> itemIds)
     {
-        itemIds.ForEach(itemId => itemsInScene[scene].Add(itemId, false)); // false: just generated, not picked up
+        itemIds.ForEach(itemId => ItemsInScene[scene].Add(itemId, false)); // false: just generated, not picked up
     }
 
     /// <summary>
@@ -175,7 +175,7 @@ public static class GameController
     /// </summary>
     public static OrderedDictionary<int, bool> GetItemsInScene(PlayableScene scene)
     {
-        return itemsInScene[scene];
+        return ItemsInScene[scene];
     }
 
     /// <summary>
@@ -183,11 +183,14 @@ public static class GameController
     /// </summary>
     public static void AddItemToPersistedInventory(PlayableScene scene, Item item)
     {
-        itemsInScene[scene].SetValue(item.itemID, true);
+        ItemsInScene[scene].SetValue(item.itemID, true);
     }
 
     /// <summary>
     /// Retrieve all items picked up from all scenes.
+    /// 
+    /// HashSet was a quick fix for items duplicating.
+    /// If you want duplicates have them in the item database twice with a different key.
     /// </summary>
     public static HashSet<int> GetItemsPickedUp()
     {

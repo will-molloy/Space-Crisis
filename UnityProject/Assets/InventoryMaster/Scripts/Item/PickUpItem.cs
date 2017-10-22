@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 public class PickUpItem : MonoBehaviour
 {
-    private static GameController.PlayableScene thisScene; // SET IN SCENE PERSISTENCE AWAKE()
     public Item item;
+    public AudioClip pickUpFX;
+
     private Inventory inventory;
     private GameObject player1;
     private GameObject player2;
-    public AudioClip pickUpFX;
+    private static GameController.PlayableScene thisScene; // SET IN SCENE PERSISTENCE AWAKE()
 
     public static void SetThisScene(GameController.PlayableScene scene)
     {

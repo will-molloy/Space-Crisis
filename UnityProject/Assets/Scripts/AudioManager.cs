@@ -57,7 +57,7 @@ public static class AudioManager{
 
 		if(manager != null){
 			ItemSpawnManager script = manager.GetComponent<ItemSpawnManager> ();
-			script.pickUpFX = pickUpFX;
+			script.ItemPickUpSound = pickUpFX;
 		}
 
 
