@@ -147,5 +147,8 @@ public class DialogueManager : MonoBehaviour
         currentLine = 0;
     }
 
+    public GameObject getActiveNPC() {
+        return activeNPC;
+    }
 
 }

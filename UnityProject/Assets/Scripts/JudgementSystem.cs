@@ -7,10 +7,16 @@ public class JudgementSystem : MonoBehaviour {
 
     public int playerItemChoice;
     public string playerStatementChoice;
-	// Use this for initialization
-	void Start () {
-	
-	}
+
+    public GameObject correctAnswerBox;
+    public GameObject wrongAnswerBox;
+
+    private DialogueManager dMan;
+
+    // Use this for initialization
+    void Start () {
+        dMan = FindObjectOfType<DialogueManager>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -27,7 +33,14 @@ public class JudgementSystem : MonoBehaviour {
 
     public void judge() {
 
-        if ((correctItemId == playerItemChoice) && (correctStatement.Trim().Equals(playerStatementChoice.Trim()))) { }
+        if ((correctItemId == playerItemChoice) && (correctStatement.Trim().Equals(playerStatementChoice.Trim())))
+        {
+            //correct answer
+            dMan.getActiveNPC().GetComponent<DialogHolder>().setAndShowDialogue(correctAnswerBox);
+        }
+        else {
+            dMan.getActiveNPC().GetComponent<DialogHolder>().setAndShowDialogue(wrongAnswerBox);
+        }
     }
 
     public void showButton() {

@@ -15,7 +15,6 @@ public class SetJudgementStatement : MonoBehaviour {
 	}
 
     public void updateStatement() {
-        Debug.Log("update statement");
         GameObject judgebtn = GameObject.FindGameObjectWithTag("JudgementBtn");
         judgebtn.GetComponent<JudgementSystem>().setStatement(this.gameObject.GetComponentInChildren<Text>().text);
     }
