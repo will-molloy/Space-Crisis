@@ -7952,6 +7952,7 @@ GameObject:
   - 222: {fileID: 1345473089}
   - 114: {fileID: 1345473088}
   - 114: {fileID: 1345473087}
+  - 114: {fileID: 1345473090}
   m_Layer: 5
   m_Name: JudgementButton
   m_TagString: Untagged
@@ -8052,6 +8053,21 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1345473085}
+--- !u!114 &1345473090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1345473085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c414e207c8a53a4c8516bcfab541546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  correctItemId: 5
+  correctStatement: {fileID: 0}
+  playerItemChoice: 0
+  playerStatementChoice: 
 --- !u!1001 &1348136170
 Prefab:
   m_ObjectHideFlags: 0

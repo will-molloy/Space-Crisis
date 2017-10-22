@@ -29,4 +29,8 @@ public class JudgementSystem : MonoBehaviour {
 
         if ((correctItemId == playerItemChoice) && (correctStatement.text.Equals(playerStatementChoice))) { }
     }
+
+    public void showButton() {
+        this.gameObject.SetActive(true);
+    }
 }
