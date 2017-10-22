@@ -6,6 +6,7 @@ public class PressurePlate : MonoBehaviour
     public PressurePlateController parent;
     public float distToSink = 0.2f;
     public int animationTimeInFrames = 10;
+	public AudioClip[] pressuredAudioClips;
 
     private List<GameObject> localColliders;
     private float upperY;
@@ -47,7 +48,11 @@ public class PressurePlate : MonoBehaviour
             parent.colliders.Add(col.gameObject);
         }
         isInAnimation = GetYPos() > lowerY;
-        if (isInAnimation) movementDirection = Vector2.down;
+		if (isInAnimation) {
+			movementDirection = Vector2.down;
+			AudioSource.PlayClipAtPoint(pressuredAudioClips[0], transform.position);
+		}
+
     }
 
     void OnCollisionExit2D(Collision2D col)
@@ -58,7 +63,11 @@ public class PressurePlate : MonoBehaviour
             parent.colliders.Remove(col.gameObject);
         }
         isInAnimation = localColliders.Count == 0 && GetYPos() < upperY;
-        if (isInAnimation) movementDirection = Vector2.up;
+		if (isInAnimation) {
+			movementDirection = Vector2.up;
+			AudioSource.PlayClipAtPoint(pressuredAudioClips[1], transform.position);
+		}
+
     }
 
     private bool IsValidCollider(Collision2D col)

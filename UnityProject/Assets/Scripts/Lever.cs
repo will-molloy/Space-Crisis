@@ -8,7 +8,7 @@ public class Lever : MonoBehaviour
 
     protected int remainingFrames = int.MaxValue;
     protected bool isRunning = false;
-
+	public AudioClip pulledFX;
     public int timeInFrames;
     public List<GameObject> thingsToControl = new List<GameObject>();
 
@@ -38,12 +38,6 @@ public class Lever : MonoBehaviour
         }
     }
 
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     virtual public void Update()
     {
@@ -70,6 +64,11 @@ public class Lever : MonoBehaviour
 
         Flip();
         remainingFrames = timeInFrames;
+
+		if (pulledFX != null){
+			AudioSource.PlayClipAtPoint(pulledFX, transform.position);
+		}
+
 
         foreach (GameObject obj in thingsToControl)
         {
