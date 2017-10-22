@@ -2,9 +2,9 @@
 public class PickUpItem : MonoBehaviour
 {
     public Item item;
-    private static Inventory _inventory;
-    private GameObject _player1;
-    private GameObject _player2;
+    private Inventory inventory;
+    private GameObject player1;
+    private GameObject player2;
     public AudioClip pickUpFX;
 
     // Use this for initialization
@@ -13,32 +13,30 @@ public class PickUpItem : MonoBehaviour
         foreach (GameObject Obj in GameObject.FindGameObjectsWithTag("Player"))
         {
             if (Obj.name == "Astronaut")
-                _player1 = Obj;
+                player1 = Obj;
             else if (Obj.name == "Astronaut_2")
-                _player2 = Obj;
+                player2 = Obj;
         }
-        if (_player1 != null)
-            _inventory = _player1.GetComponent<PlayerInventory>().inventory.GetComponent<Inventory>();
+        if (player1 != null)
+            inventory = player1.GetComponent<PlayerInventory>().inventory.GetComponent<Inventory>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_inventory != null)
+        if (inventory != null)
         {
-            float distance1 = Vector3.Distance(this.gameObject.transform.position, _player1.transform.position);
-            float distance2 = Vector3.Distance(this.gameObject.transform.position, _player2.transform.position);
+            float distance1 = Vector3.Distance(this.gameObject.transform.position, player1.transform.position);
+            float distance2 = Vector3.Distance(this.gameObject.transform.position, player2.transform.position);
 
             if (distance1 <= 2 || distance2 <= 2)
             {
-                bool check = _inventory.checkIfItemAllreadyExist(item.itemID, item.itemValue);
+                bool check = inventory.checkIfItemAllreadyExist(item.itemID, item.itemValue);
                 if (check)
                     Destroy(this.gameObject);
-                else if (_inventory.ItemsInInventory.Count < (_inventory.width * _inventory.height))
+                else if (inventory.ItemsInInventory.Count < (inventory.width * inventory.height))
                 {
-                    _inventory.addItemToInventory(item.itemID, item.itemValue);
-                    _inventory.updateItemList();
-                    _inventory.stackableSettings();
+                    inventory.addItemToInventory(item.itemID, item.itemValue);
                     GameController.AddItemToPersistedInventory(item);
                     Destroy(this.gameObject);
                     AudioSource.PlayClipAtPoint(pickUpFX, transform.position);

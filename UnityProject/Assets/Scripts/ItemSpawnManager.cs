@@ -9,7 +9,7 @@ public class ItemSpawnManager : MonoBehaviour
     static ItemDataBaseList inventoryItemList;
     public int[] ItemKeyRange;
     public AudioClip pickUpFX;
-    private static List<Vector3> ItemSpawnsPositions;
+    private List<Vector3> ItemSpawnsPositions;
 
     // Use this for initialization
     void Start()

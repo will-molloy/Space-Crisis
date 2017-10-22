@@ -42,8 +42,6 @@ public class ScenePersistence : MonoBehaviour
         {
             Debug.Log("persisting item in inventory: " + item.itemName);
             inventory.addItemToInventory(item.itemID, item.itemValue);
-            inventory.updateItemList();
-            inventory.stackableSettings();
         });
         
     }

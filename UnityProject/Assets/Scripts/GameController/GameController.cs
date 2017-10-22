@@ -32,8 +32,8 @@ public static class GameController
         InventoryItems = new List<Item>();
         foreach (PlayableScene playableScene in Enum.GetValues(typeof(PlayableScene)))
         {            
-            SavedScenePositions[playableScene] = new Dictionary<string, Vector3>(); ;
-            InitialScenePositions[playableScene] = new Dictionary<string, Vector3>(); ;
+            SavedScenePositions[playableScene] = new Dictionary<string, Vector3>(); 
+            InitialScenePositions[playableScene] = new Dictionary<string, Vector3>(); 
             SceneShouldBeReset[playableScene] = false;
             ItemsInScene[playableScene] = new Dictionary<Vector3, PickUpItem> ();
         }
