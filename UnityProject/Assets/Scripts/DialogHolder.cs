@@ -32,7 +32,7 @@ public class DialogHolder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (dMan.activeNPC == this.gameObject) // only update dialogue if the current active NPC holds this dialogue
+        if (dMan != null && this != null && dMan.activeNPC == this.gameObject) // only update dialogue if the current active NPC holds this dialogue
         {
             // check if should move on to next dialogue box
             if (dMan.currentLine >= textLines.Length)
