@@ -35,6 +35,11 @@ public static class GameController
         }
     }
 
+    internal static void AddItemToPersistedInventory(Item item)
+    {
+        throw new NotImplementedException();
+    }
+
     /// <summary>
     /// Scenes the player can access, the scene files must be included in the build path.
     /// </summary>
