@@ -3,7 +3,7 @@ using System.Collections;
 
 public class JudgementSystem : MonoBehaviour {
     public int correctItemId;
-    public TextAsset correctStatement;
+    public string correctStatement;
 
     public int playerItemChoice;
     public string playerStatementChoice;
@@ -27,7 +27,7 @@ public class JudgementSystem : MonoBehaviour {
 
     public void judge() {
 
-        if ((correctItemId == playerItemChoice) && (correctStatement.text.Equals(playerStatementChoice))) { }
+        if ((correctItemId == playerItemChoice) && (correctStatement.Trim().Equals(playerStatementChoice.Trim()))) { }
     }
 
     public void showButton() {

@@ -86,7 +86,7 @@ public class DialogueManager : MonoBehaviour
         {
             isFrozen = true;
             //freezePlayer();
-            //PlayerUtility.FreezePlayers();
+            PlayerUtility.FreezePlayers();
         }
         dText.enabled = true;
         diaglogActive = true;
@@ -114,7 +114,7 @@ public class DialogueManager : MonoBehaviour
         {
             isFrozen = false;
            // unfreezePlayer();
-            //PlayerUtility.UnFreezePlayers();
+            PlayerUtility.UnFreezePlayers();
         }
 
     }
