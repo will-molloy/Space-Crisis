@@ -52,7 +52,7 @@ public class DialogueManager : MonoBehaviour
         {
             dText.text = dialogLines[currentLine];
 
-            if (dBox.tag.Equals("NPCStatement"))
+            if (diaglogActive && dBox.tag.Equals("NPCStatement"))
             {
                 characterContent.addStatement(activeNPC, dText.text);
             }
@@ -94,7 +94,6 @@ public class DialogueManager : MonoBehaviour
         Button[] btns = dBox.GetComponents<Button>();
         for (int i = 0; i < btns.Length; i++)
         {
-            Debug.Log(" length : " + btns.Length);
             btns[i].enabled = true;
             btns[i].interactable = true;
         }
@@ -142,6 +141,7 @@ public class DialogueManager : MonoBehaviour
     public void setActiveNPC(GameObject NPC)
     {
         activeNPC = NPC;
+        currentLine = 0;
     }
 
 
