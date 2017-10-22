@@ -22,7 +22,7 @@ public static class GameController
     private static Dictionary<PlayableScene, OrderedDictionary<int, bool>> GeneratedItemsForScene = new Dictionary<PlayableScene, OrderedDictionary<int, bool>>();
     // For maintaining item pick up order
     private static List<int> InventoryItemsInPickUpOrder = new List<int>();
-    
+
     static GameController()
     {
         foreach (PlayableScene playableScene in Enum.GetValues(typeof(PlayableScene)))
@@ -178,7 +178,11 @@ public static class GameController
     /// </summary>
     public static void AddGeneratedItems(PlayableScene scene, List<int> itemIds)
     {
-        itemIds.ForEach(itemId => GeneratedItemsForScene[scene].Add(itemId, false)); // false: just generated, not picked up
+        itemIds.ForEach(itemId =>
+        {
+            if (!GeneratedItemsForScene[scene].ContainsKey(itemId))
+                GeneratedItemsForScene[scene].Add(itemId, false);
+        });
     }
 
     /// <summary>

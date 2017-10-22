@@ -6,7 +6,7 @@ using mattmc3.Common.Collections.Generic;
 public class ItemSpawnManager : MonoBehaviour
 {
     public GameController.PlayableScene ThisScene;
-    static ItemDataBaseList ItemDataBaseList;
+    static ItemDataBaseList ItemDataBaseList = (ItemDataBaseList)Resources.Load("ItemDatabase");
     public int[] UniqueItemSpawnIds;
     public AudioClip ItemPickUpSound;
     private List<Vector3> ItemSpawnPositions;
@@ -27,7 +27,7 @@ public class ItemSpawnManager : MonoBehaviour
     }
 
     // Use this for initialization
-    void Start()
+    public void Start()
     {
         // Load the item spawn positions - these are the child components with the tag "item-spawn"
         ItemSpawnPositions = new List<Vector3>();
@@ -36,8 +36,6 @@ public class ItemSpawnManager : MonoBehaviour
             if (child.CompareTag("item-spawn"))
                 ItemSpawnPositions.Add(child.position);
         }
-        // Load the item database
-        ItemDataBaseList = (ItemDataBaseList)Resources.Load("ItemDatabase");
 
         GenerateAndSpawnItems();
     }
