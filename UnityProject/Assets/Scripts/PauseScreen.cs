@@ -7,6 +7,9 @@ public class PauseScreen : MonoBehaviour {
 	public bool paused = false;
 	public GameObject pauseScreen;
 	GameObject[] players;
+	bool frozen = false;
+	public GameObject pauseMenu;
+	public GameObject controlPanel;
 
 	// Use this for initialization
 	void Awake () {
@@ -21,15 +24,15 @@ public class PauseScreen : MonoBehaviour {
 			pauseScreen.SetActive (true);
 			PlayerUtility.FreezePlayers();
 			paused = true;
-		} else if ((Input.GetKeyDown (KeyCode.Escape) && paused)) {
+			frozen = true;
+		} else if (((Input.GetKeyDown (KeyCode.Escape) && paused))||(pauseScreen.activeSelf == false)&&frozen) {
 			timer.Resume ();
+			pauseMenu.SetActive (true);
+			controlPanel.SetActive (false);
 			pauseScreen.SetActive (false);
 			PlayerUtility.UnFreezePlayers();
 			paused = false;
+			frozen = false;
 		}
-		/*if (pauseScreen.activeSelf == false) {
-			paused = false;
-			PlayerUtility.UnFreezePlayers();
-		}*/
 	}
 }

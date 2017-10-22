@@ -18,14 +18,29 @@ public class RotatableSprite : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        translation = Time.deltaTime * rotationSpeed;
-        if (activated && getRotation() <= upperAngle)
+        if (translation > 0)
         {
-            transform.Rotate(0, 0, translation);
-        }
-        else if (!activated && getRotation() >= lowerAngle)
+            translation = Time.deltaTime * rotationSpeed;
+            if (activated && getRotation() <= upperAngle)
+            {
+                transform.Rotate(0, 0, translation);
+            }
+            else if (!activated && getRotation() >= lowerAngle)
+            {
+                transform.Rotate(0, 0, -1 * translation);
+            }
+        } else
         {
-            transform.Rotate(0, 0, -1 * translation);
+            translation = Time.deltaTime * rotationSpeed;
+            if (activated && (getRotation()>upperAngle || getRotation() == 0))
+            {
+                transform.Rotate(0, 0, translation);
+            }
+            else if (!(activated) && getRotation() >= upperAngle -1 && getRotation() < 360 -lowerAngle)
+            {
+                Debug.Log("here");
+                transform.Rotate(0, 0, -1 * translation);
+            }
         }
     }
 
