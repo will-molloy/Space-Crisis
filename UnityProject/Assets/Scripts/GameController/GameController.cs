@@ -23,12 +23,12 @@ public static class GameController
 
     private static Dictionary<PlayableScene, OrderedDictionary<int, bool>> items = new Dictionary<PlayableScene, OrderedDictionary<int, bool>>();
 
-    public static void AddItem(PlayableScene scene, int itemId)
+    public static void AddGeneratedItems(PlayableScene scene, List<int> itemIds)
     {
-        items[scene][itemId] = false;
+        itemIds.ForEach(itemId => items[scene].Add(itemId, false));
     }
 
-    public static OrderedDictionary<int, bool> GetItems(PlayableScene scene)
+    public static OrderedDictionary<int, bool> GetGeneratedItems(PlayableScene scene)
     {
         return items[scene];
     }
