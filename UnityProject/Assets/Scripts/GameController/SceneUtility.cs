@@ -8,6 +8,6 @@ public class SceneUtility : MonoBehaviour {
 
     public void LoadScene()
     {
-        SceneManager.LoadScene(GameController.GetFileNameForScene(SceneToLoad));
+        SceneManager.LoadScene(GameController.GetFileName(SceneToLoad));
     }
 }

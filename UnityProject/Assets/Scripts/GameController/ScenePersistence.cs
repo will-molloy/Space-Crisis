@@ -35,10 +35,11 @@ public class ScenePersistence : MonoBehaviour
     }
 
     /// <summary>
-    /// Depending on the GameController state the current scene will be restored or reset.
+    /// Restore or reset the scene.
     /// </summary>
     void Awake()
     {
+        // Determine if scene should be restored or reset
         if (GameController.GetShouldBeReset(thisScene)) 
             ResetScene();
         RestoreScene();
@@ -63,7 +64,6 @@ public class ScenePersistence : MonoBehaviour
     {
         foreach (KeyValuePair<string, Vector3> objPos in objPositions)
         {
-            Debug.Log("Moving:" + objPos.Key + ", to: " + objPos.Value);
             GameObject obj = GameObject.Find(objPos.Key);
             obj.transform.position = objPos.Value;
         }
