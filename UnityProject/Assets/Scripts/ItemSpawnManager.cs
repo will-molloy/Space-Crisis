@@ -35,6 +35,7 @@ public class ItemSpawnManager : MonoBehaviour {
 				GameObject randomLootItem = (GameObject)Instantiate(inventoryItemList.itemList[_itemRange[i]].itemModel);
                 PickUpItem item = randomLootItem.AddComponent<PickUpItem>();
 				item.item = inventoryItemList.itemList[_itemRange[i]];
+				randomLootItem.tag = "Item";
 				item.pickUpFX = pickUpFX;
                 randomLootItem.transform.localPosition = _spawns[i].position;
             }

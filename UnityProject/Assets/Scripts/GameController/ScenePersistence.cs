@@ -48,12 +48,14 @@ public class ScenePersistence : MonoBehaviour
     {
         Debug.Log("Resseting: " + thisScene);
         MoveObjects(GameController.GetInitialObjectPositions(thisScene)); // move objects to initial, default positions
+		AudioManager.loadAudio();
         GameController.SetShouldBeReset(thisScene, false); // scene has now been reset, set back to false
     }
 
     private void RestoreScene()
     {
         Debug.Log("Restoring: " + thisScene);
+		AudioManager.loadAudio();
         MoveObjects(GameController.GetSavedObjectPositons(thisScene)); // move objects to saved, persisted positions
     }
 
