@@ -53,49 +53,21 @@ public class ItemSpawnManager : MonoBehaviour
         foreach (int itemId in itemsToSpawn.Keys)
         {
             // Only spawn items not picked up
-            if (!itemsToSpawn.GetValue(itemId)) // [] doesn't work
+            if (!itemsToSpawn.GetValue(itemId)) // [] doesn't work with custom datastructure
             {
-                GameObject randomLootItemObject = (GameObject)Instantiate(inventoryItemList.itemList[itemId].itemModel);
-                PickUpItem pickUpItem = randomLootItemObject.AddComponent<PickUpItem>();
-                Object.DontDestroyOnLoad(pickUpItem);
-                pickUpItem.item = inventoryItemList.itemList[itemId];
-                pickUpItem.pickUpFX = pickUpFX;
-                randomLootItemObject.transform.localPosition = ItemSpawnsPositions[itemPosIndex++];
+                spawnItem(itemId, pickUpFX, ItemSpawnsPositions[itemPosIndex++]);
             }
         }
+    }
 
-        //RandomiseItemSpawns();
-        //// Retrieve items already spawned in this scene
-        //Dictionary<Vector3, PickUpItem> ItemsPersistedInThisScene = GameController.GetItemsFor(ThisScene);
-
-        //for (int i = 0; i < ItemSpawnsPositions.Count; i++)
-        //{
-        //    if (ItemsPersistedInThisScene.ContainsKey(ItemSpawnsPositions[i]))
-        //    {
-        //        // Item has already spawned before 
-        //        PickUpItem persistedPickUpItem = ItemsPersistedInThisScene[ItemSpawnsPositions[i]];
-        //        if (!WasPickedUp(persistedPickUpItem))
-        //        {
-        //            // Item hasn't been picked up - respawn the exact same item
-        //            GameObject randomLootItemObject = (GameObject)Instantiate(inventoryItemList.itemList[ItemKeyRange[i]].itemModel);
-        //            PickUpItem newPickUpItem = randomLootItemObject.AddComponent<PickUpItem>();
-        //            newPickUpItem.item = persistedPickUpItem.item;
-        //            newPickUpItem.pickUpFX = pickUpFX;
-        //            randomLootItemObject.transform.localPosition = persistedPickUpItem.transform.localPosition;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        // Item hasn't yet been spawned
-        //        GameObject randomLootItemObject = (GameObject)Instantiate(inventoryItemList.itemList[ItemKeyRange[i]].itemModel);
-        //        PickUpItem pickUpItem = randomLootItemObject.AddComponent<PickUpItem>();
-        //        Object.DontDestroyOnLoad(pickUpItem);
-        //        pickUpItem.item = inventoryItemList.itemList[ItemKeyRange[i]];
-        //        pickUpItem.pickUpFX = pickUpFX;
-        //        randomLootItemObject.transform.localPosition = ItemSpawnsPositions[i];
-        //        GameController.AddItemToScene(ThisScene, ItemSpawnsPositions[i], pickUpItem); // Add item to GameController database
-        //    }
-        //}
+    public static void spawnItem(int itemKey, AudioClip itemAudioFx, Vector3 itemPos)
+    {
+        GameObject randomLootItemObject = (GameObject)Instantiate(inventoryItemList.itemList[itemKey].itemModel);
+        PickUpItem pickUpItem = randomLootItemObject.AddComponent<PickUpItem>();
+        Object.DontDestroyOnLoad(pickUpItem);
+        pickUpItem.item = inventoryItemList.itemList[itemKey];
+        pickUpItem.pickUpFX = itemAudioFx;
+        randomLootItemObject.transform.localPosition = itemPos;
     }
 
     private void RandomiseItemSpawns()
