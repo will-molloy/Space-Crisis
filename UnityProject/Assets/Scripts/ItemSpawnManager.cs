@@ -6,7 +6,7 @@ using mattmc3.Common.Collections.Generic;
 public class ItemSpawnManager : MonoBehaviour
 {
     public GameController.PlayableScene ThisScene;
-    static ItemDataBaseList ItemDataBaseList = (ItemDataBaseList)Resources.Load("ItemDatabase");
+    private static ItemDataBaseList ItemDataBaseList;
     public int[] UniqueItemSpawnIds;
     public AudioClip ItemPickUpSound;
     private List<Vector3> ItemSpawnPositions;
@@ -29,6 +29,9 @@ public class ItemSpawnManager : MonoBehaviour
     // Use this for initialization
     public void Start()
     {
+        // Load item database
+        ItemDataBaseList = (ItemDataBaseList)Resources.Load("ItemDatabase");
+
         // Load the item spawn positions - these are the child components with the tag "item-spawn"
         ItemSpawnPositions = new List<Vector3>();
         foreach (Transform child in transform)
@@ -36,7 +39,6 @@ public class ItemSpawnManager : MonoBehaviour
             if (child.CompareTag("item-spawn"))
                 ItemSpawnPositions.Add(child.position);
         }
-
         GenerateAndSpawnItems();
     }
 
@@ -47,6 +49,8 @@ public class ItemSpawnManager : MonoBehaviour
     /// </summary>
     private void GenerateAndSpawnItems()
     {
+        UniqueItemSpawnIds = UniqueItemSpawnIds.Distinct().ToArray();
+        Debug.Log(UniqueItemSpawnIds.Length + " " + ItemSpawnPositions.Count);
         if (UniqueItemSpawnIds.Length < ItemSpawnPositions.Count)
             throw new System.Exception("Need more items to spawn in " + ThisScene.GetFileName());
 
