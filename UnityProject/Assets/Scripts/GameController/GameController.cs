@@ -18,7 +18,10 @@ public static class GameController
     private static Dictionary<PlayableScene, bool> SceneShouldBeReset;
 
     // Scene :: Item location :: Item, For item persisting items in scene
-    private static Dictionary<PlayableScene, Dictionary<Vector3, PickUpItem>> ItemsInScene; 
+    private static Dictionary<PlayableScene, Dictionary<Vector3, PickUpItem>> ItemsInScene;
+
+    // Global inventory -- shared across all scenes and levels
+    private static List<Item> InventoryItems;
 
     static GameController()
     {
@@ -26,6 +29,7 @@ public static class GameController
         SavedScenePositions = new Dictionary<PlayableScene, Dictionary<string, Vector3>>();
         SceneShouldBeReset = new Dictionary<PlayableScene, bool>();
         ItemsInScene = new Dictionary<PlayableScene, Dictionary<Vector3, PickUpItem>>();
+        InventoryItems = new List<Item>();
         foreach (PlayableScene playableScene in Enum.GetValues(typeof(PlayableScene)))
         {            
             SavedScenePositions[playableScene] = new Dictionary<string, Vector3>(); ;
@@ -33,11 +37,6 @@ public static class GameController
             SceneShouldBeReset[playableScene] = false;
             ItemsInScene[playableScene] = new Dictionary<Vector3, PickUpItem> ();
         }
-    }
-
-    internal static void AddItemToPersistedInventory(Item item)
-    {
-        throw new NotImplementedException();
     }
 
     /// <summary>
@@ -168,13 +167,22 @@ public static class GameController
 
     public static void AddItemToScene(PlayableScene scene, Vector3 itemPos, PickUpItem item)
     {
-        Debug.Log("Saved item: " + item.name);
         ItemsInScene[scene][itemPos] = item;
     }
 
     public static Dictionary<Vector3, PickUpItem> GetItemsFor(PlayableScene scene)
     {
         return ItemsInScene[scene];
+    }
+
+    public static void AddItemToPersistedInventory(Item item)
+    {
+        InventoryItems.Add(item);
+    }
+
+    public static List<Item> GetInventoryItems()
+    {
+        return InventoryItems;
     }
 }
 

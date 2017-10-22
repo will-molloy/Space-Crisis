@@ -1,30 +1,22 @@
 ﻿using UnityEngine;
-using System.Collections;
 public class PickUpItem : MonoBehaviour
 {
     public Item item;
-    private Inventory _inventory;
+    private static Inventory _inventory;
     private GameObject _player1;
-	private GameObject _player2;
-	public AudioClip pickUpFX;
-    // Use this for initialization
+    private GameObject _player2;
+    public AudioClip pickUpFX;
 
+    // Use this for initialization
     void Start()
     {
-
-		foreach(GameObject Obj in GameObject.FindGameObjectsWithTag("Player"))
-		{
-			if(Obj.name == "Astronaut")
-			{
-				_player1 = Obj;
-
-
-			} else if(Obj.name == "Astronaut_2") {
-				_player2 = Obj;
-			}
-
-		}
-			
+        foreach (GameObject Obj in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            if (Obj.name == "Astronaut")
+                _player1 = Obj;
+            else if (Obj.name == "Astronaut_2")
+                _player2 = Obj;
+        }
         if (_player1 != null)
             _inventory = _player1.GetComponent<PlayerInventory>().inventory.GetComponent<Inventory>();
     }
@@ -35,9 +27,9 @@ public class PickUpItem : MonoBehaviour
         if (_inventory != null)
         {
             float distance1 = Vector3.Distance(this.gameObject.transform.position, _player1.transform.position);
-			float distance2 = Vector3.Distance(this.gameObject.transform.position, _player2.transform.position);
+            float distance2 = Vector3.Distance(this.gameObject.transform.position, _player2.transform.position);
 
-			if (distance1 <= 2 || distance2 <= 2)
+            if (distance1 <= 2 || distance2 <= 2)
             {
                 bool check = _inventory.checkIfItemAllreadyExist(item.itemID, item.itemValue);
                 if (check)
@@ -49,7 +41,7 @@ public class PickUpItem : MonoBehaviour
                     _inventory.stackableSettings();
                     GameController.AddItemToPersistedInventory(item);
                     Destroy(this.gameObject);
-					AudioSource.PlayClipAtPoint(pickUpFX, transform.position);
+                    AudioSource.PlayClipAtPoint(pickUpFX, transform.position);
                 }
 
             }

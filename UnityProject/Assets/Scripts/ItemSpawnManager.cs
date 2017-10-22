@@ -50,7 +50,6 @@ public class ItemSpawnManager : MonoBehaviour
                 if (!WasPickedUp(persistedPickUpItem))
                 {
                     // Item hasn't been picked up - respawn the exact same item
-                    Debug.Log("Re-adding: " + persistedPickUpItem.name);
                     GameObject newGameObject = new GameObject();
                     PickUpItem newPickUpItem = newGameObject.AddComponent<PickUpItem>();
                     newPickUpItem.item = persistedPickUpItem.item;
@@ -61,7 +60,6 @@ public class ItemSpawnManager : MonoBehaviour
             else
             {
                 // Item hasn't yet been spawned
-                Debug.Log("Spawning. Item " + ItemKeyRange[i] + " picked!");
                 GameObject randomLootItemObject = (GameObject)Instantiate(inventoryItemList.itemList[ItemKeyRange[i]].itemModel);
                 PickUpItem pickUpItem = randomLootItemObject.AddComponent<PickUpItem>();
                 Object.DontDestroyOnLoad(pickUpItem);
