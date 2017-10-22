@@ -47,6 +47,8 @@ public static class GameController
         Level2Room1,
         [Level(Level.Level2), FileName("level2room2")]
         Level2Room2,
+        [Level(Level.Level2), FileName("level2room3")]
+        Level2Room3,
         [Level(Level.None), FileName("WelcomeScreen")]
         WelcomeScreen,
         [Level(Level.None), FileName("ExitScene")]
