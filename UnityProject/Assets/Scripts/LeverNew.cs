@@ -3,7 +3,7 @@ using System.Collections;
 using UnityStandardAssets._2D;
 using System.Collections.Generic;
 
-public class Lever : MonoBehaviour
+public class LeverNew : MonoBehaviour
 {
 
     protected int remainingFrames = int.MaxValue;
@@ -11,23 +11,19 @@ public class Lever : MonoBehaviour
 	public AudioClip pulledFX;
     public int timeInFrames;
     public List<GameObject> thingsToControl = new List<GameObject>();
-    LeverState state = LeverState.RIGHT;
-
-    enum LeverState
-    {
-        LEFT, RIGHT
-    }
-
 
     void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("COLLUSION" + other);
+        var am = GetComponent<Animation>();
+        am.Play("lever");
+        am.Play();
         if (other.gameObject.tag == "Player")
         {
             Platformer2DUserControl p1 = other.gameObject.GetComponent<Platformer2DUserControl>();
             if (p1 != null)
             {
-                p1.lever = this;
+                //p1.lever = this;
             }
         }
     }
@@ -52,7 +48,7 @@ public class Lever : MonoBehaviour
         {
             foreach (GameObject obj in thingsToControl)
             {
-                PlateScript ps = obj.GetComponent<PlateScript>();
+                var ps = obj.GetComponent<PlateScript>();
                 ps.stop();
                 ps.reverseDirection();
             }
@@ -68,17 +64,7 @@ public class Lever : MonoBehaviour
         if (isRunning) return;
         isRunning = true;
 
-        var ani = GetComponent<Animator>();
-        if(state == LeverState.LEFT)
-        {
-            ani.SetTrigger("triggerRight");
-            state = LeverState.RIGHT;
-        }
-        else
-        {
-            ani.SetTrigger("triggerLeft");
-            state = LeverState.LEFT;
-        }
+        Flip();
         remainingFrames = timeInFrames;
 
 		if (pulledFX != null){
@@ -88,7 +74,7 @@ public class Lever : MonoBehaviour
 
         foreach (GameObject obj in thingsToControl)
         {
-            PlateScript ps = obj.GetComponent<PlateScript>();
+            var ps = obj.GetComponent<PlateScript>();
             ps.setAnimationTime(this.timeInFrames);
             ps.start();
         }
