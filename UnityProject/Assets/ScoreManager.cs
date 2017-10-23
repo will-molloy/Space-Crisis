@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 
-public class ScoreManager{
+public class ScoreManager
+{
 
     private static ScoreManager _instance;
 
@@ -29,15 +30,17 @@ public class ScoreManager{
 
     public string GetScore(string teamName, int levelType)
     {
-        if (playerScores.ContainsKey(teamName) == false) {
+        if (playerScores.ContainsKey(teamName) == false)
+        {
             return "Error: TeamNotFound";
         }
-        Debug.Log("sm lvl" +levelType);
-        Debug.Log("sm stff" +playerScores[teamName][levelType]);
+        Debug.Log("sm lvl" + levelType);
+        Debug.Log("sm stff" + playerScores[teamName][levelType]);
         return playerScores[teamName][levelType];
     }
 
-    public void SetScore(string teamName, int levelType, string score) {
+    public void SetScore(string teamName, int levelType, string score)
+    {
 
         if (playerScores.ContainsKey(teamName) == false)
         {
@@ -55,10 +58,12 @@ public class ScoreManager{
             {
                 playerScores[teamName].Insert(levelType, score);
             }
-        } else {
+        }
+        else
+        {
             playerScores[teamName].Insert(levelType, score);
         }
-        
+
 
     }
 
