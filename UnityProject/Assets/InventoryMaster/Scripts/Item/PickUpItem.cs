@@ -7,16 +7,12 @@ public class PickUpItem : MonoBehaviour
     private Inventory inventory;
     private GameObject player1;
     private GameObject player2;
-    private static GameController.PlayableScene thisScene; // SET IN SCENE PERSISTENCE AWAKE()
-
-    public static void SetThisScene(GameController.PlayableScene scene)
-    {
-        thisScene = scene;
-    }
+    private GameController.PlayableScene thisScene;
 
     // Use this for initialization
     void Start()
     {
+        thisScene = GameController.CurrentScene;
         foreach (GameObject Obj in GameObject.FindGameObjectsWithTag("Player"))
         {
             if (Obj.name == "Astronaut")

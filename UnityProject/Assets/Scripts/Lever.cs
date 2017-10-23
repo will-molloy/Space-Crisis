@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 public class Lever : MonoBehaviour
 {
-
     protected int remainingFrames = int.MaxValue;
     protected bool isRunning = false;
 	public AudioClip pulledFX;
@@ -14,7 +13,6 @@ public class Lever : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("COLLUSION" + other);
         if (other.gameObject.tag == "Player")
         {
             Platformer2DUserControl p1 = other.gameObject.GetComponent<Platformer2DUserControl>();
@@ -47,7 +45,6 @@ public class Lever : MonoBehaviour
             {
                 PlateScript ps = obj.GetComponent<PlateScript>();
                 ps.stop();
-                ps.reverseDirection();
             }
             isRunning = false;
         }
@@ -56,8 +53,7 @@ public class Lever : MonoBehaviour
 
     public virtual void activate()
     {
-        Debug.Log("ACTIVATE");
-        Debug.Log("IS RUNING " + isRunning);
+        Dictionary<string, Vector3> persistedPlatePositions = GameController.GetPlatePositons();
         if (isRunning) return;
         isRunning = true;
 
@@ -68,10 +64,21 @@ public class Lever : MonoBehaviour
 			AudioSource.PlayClipAtPoint(pulledFX, transform.position);
 		}
 
-
         foreach (GameObject obj in thingsToControl)
         {
             PlateScript ps = obj.GetComponent<PlateScript>();
+            Vector3 currentObjPos = obj.transform.position;
+            if (!persistedPlatePositions.ContainsKey(obj.name)) // Write once
+            {
+                GameController.AddPlatePosition(obj.name, currentObjPos);
+                persistedPlatePositions = GameController.GetPlatePositons();
+            }
+
+            if (currentObjPos != persistedPlatePositions[obj.name])
+            {
+                Debug.Log("Reversing");
+                ps.reverseDirection();
+            }
             ps.setAnimationTime(this.timeInFrames);
             ps.start();
         }

@@ -88,7 +88,6 @@ public class LeverEventTest
 
         // Reload the plate and lever
         Init();
-        plateObj.transform.parent = persistence.transform;
         plateObj.transform.position = GameController.GetSavedObjectPositons(testScene)[plateObj.name];
 
         // ensure plate is still in moved position
