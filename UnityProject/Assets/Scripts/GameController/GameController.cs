@@ -64,7 +64,8 @@ public static class GameController
         WelcomeScreen,
         [Level(Level.None), FileName("ExitScene")]
         ExitScene,
-
+        [Level(Level.MiniGame), FileName("miniGame1exp")]
+        miniGame1exp,
         [Level(Level.Test), FileName("TEST-LEVERS-room2")]
         TestLeverRoom2,
         [Level(Level.Test), FileName("TEST-LEVERS-room3")]
@@ -74,7 +75,7 @@ public static class GameController
     /// <summary>
     /// Level attribute for the game scenes.
     /// </summary>
-    public enum Level { Level1, Level2, None, Test }
+    public enum Level { Level1, Level2, MiniGame, Test, None }
 
     #endregion
 

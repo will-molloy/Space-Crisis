@@ -45,6 +45,7 @@ public class ChangeScene : MonoBehaviour
                 }
             }
         }
+
     }
 
     private void UpdateGracePeriod()
