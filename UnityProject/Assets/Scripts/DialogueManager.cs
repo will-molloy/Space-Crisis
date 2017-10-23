@@ -22,6 +22,9 @@ public class DialogueManager : MonoBehaviour
     public GameObject activeNPC;
     public GameObject content;
     private CharacterContent characterContent;
+
+    public bool allDone = false;
+
     // Use this for initialization
     void Start()
     {
@@ -40,7 +43,7 @@ public class DialogueManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space ) && activeNPC != null) {
+        if (Input.GetKeyDown(KeyCode.Space ) && activeNPC != null ) {
            
             if (!diaglogActive)
             {
@@ -161,4 +164,11 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    public void setAllDone() {
+        allDone = true;
+    }
+
+    public bool getAllDone() {
+        return allDone;
+    }
 }
