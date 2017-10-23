@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
-public class DialogueManager : MonoBehaviour
+public class DialogueManagerCutscene: MonoBehaviour
 {
 
     public GameObject dBox;
@@ -21,11 +21,9 @@ public class DialogueManager : MonoBehaviour
 
     public GameObject activeNPC;
     public GameObject content;
-    private CharacterContent characterContent;
     // Use this for initialization
     void Start()
     {
-        characterContent = content.GetComponent<CharacterContent>();
 
         dText.enabled = false;
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
@@ -34,7 +32,6 @@ public class DialogueManager : MonoBehaviour
         linearBackups = new Vector2[2];
 
         playerBody[0] = players[0].GetComponent<Rigidbody2D>();
-        playerBody[1] = players[1].GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -52,13 +49,6 @@ public class DialogueManager : MonoBehaviour
         {
             dText.text = dialogLines[currentLine];
 
-            if (diaglogActive && dBox.tag.Equals("NPCStatement"))
-            {
-				if(activeNPC != null){
-					characterContent.addStatement(activeNPC, dText.text);
-				}
-                
-            }
         }
 
         if (currentLine >= dialogLines.Length)
