@@ -89,6 +89,10 @@ public class DialogHolder : MonoBehaviour
 
         dMan.showDialogue(this.gameObject.name);
 
+        if (box.tag.Equals("FinalStatement")) {
+            dMan.setAllDone();
+        }
+
     }
 
 

@@ -22,6 +22,9 @@ public class DialogueManager : MonoBehaviour
     public GameObject activeNPC;
     public GameObject content;
     private CharacterContent characterContent;
+
+    public bool allDone = false;
+
     // Use this for initialization
     void Start()
     {
@@ -158,4 +161,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    public void setAllDone() {
+        allDone = true;
+    }
 }
