@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour
 {
-    public GameController.PlayableScene sceneToLoad;
+    public GameController.PlayableScene sceneToLoad = GameController.PlayableScene.None;
     public Sprite[] sprites = new Sprite[3];
     private List<GameObject> colliders;
     public float gracePeriod = 2f;

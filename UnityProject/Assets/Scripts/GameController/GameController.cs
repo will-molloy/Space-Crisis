@@ -63,9 +63,6 @@ public static class GameController
     /// </summary>
     public enum PlayableScene
     {
-        [Level(Level.None), FileName("")] // Nullable
-        None,
-
         [Level(Level.Level1), FileName("level1room1")]
         Level1Room1,
         [Level(Level.Level1), FileName("level1room2")]
@@ -84,11 +81,15 @@ public static class GameController
         ExitScene,
         [Level(Level.MiniGame), FileName("miniGame1exp")]
         miniGame1exp,
-
+        // Nullable
+        [Level(Level.None), FileName("")]
+        None,
+        // Tests
         [Level(Level.Test), FileName("TEST-LEVERS-room2")]
         TestLeverRoom2,
         [Level(Level.Test), FileName("TEST-LEVERS-room3")]
         TestLeverRoom3,
+
     }
 
     public static PlayableScene GetActivePlayableScene()
