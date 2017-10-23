@@ -28,6 +28,7 @@ public static class GameController
 
     // For maintaining levers ===============
     private static Dictionary<string, bool> LeverInFinalPos = new Dictionary<string, bool>();
+    private static Dictionary<string, Vector3> LeverPlateDirection = new Dictionary<string, Vector3>();
 
     public static bool ActivateLever(string leverName)
     {
@@ -45,6 +46,22 @@ public static class GameController
             return false;
         else
             return LeverInFinalPos[leverName];
+    }
+
+    public static void ReversePlateDirection(string plateName)
+    {
+        LeverPlateDirection[plateName] *= -1;
+    }
+
+    public static Vector3 GetLeverPlateDirection(string plateName)
+    {
+        return LeverPlateDirection[plateName];
+    }
+
+    public static void SetLeverPlateDirection(string plateName, Vector3 vector)
+    {
+        if (!LeverPlateDirection.ContainsKey(plateName))
+            LeverPlateDirection[plateName] = vector;
     }
     // ===========
 

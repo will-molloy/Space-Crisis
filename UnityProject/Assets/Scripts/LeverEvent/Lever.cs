@@ -37,7 +37,6 @@ public class Lever : MonoBehaviour
 
     void Start()
     {
-        Debug.Log(GameController.GetLeverInFinalPos(this.name));
         if (GameController.GetLeverInFinalPos(this.name))
         {
             Flip();
@@ -79,19 +78,11 @@ public class Lever : MonoBehaviour
         foreach (GameObject obj in thingsToControl)
         {
             PlateScript ps = obj.GetComponent<PlateScript>();
-            if (!finalPosition)
-            {
-                // Move objs to
-                Debug.Log("Reversing");
-                ps.reverseDirection();
-            } else
-            {
-                // Move objs back
-            }
             Vector3 currentObjPos = obj.transform.position;
 
             ps.setAnimationTime(this.timeInFrames);
             ps.start();
+            ps.reverseDirection();
         }
 
     }
