@@ -1644,8 +1644,7 @@ MonoBehaviour:
   m_LeverLayer:
     serializedVersion: 2
     m_Bits: 0
-  jumpAudios:
-  - {fileID: 8300000, guid: 20759609d758df945926fd231b58ec0a, type: 3}
+  jumpAudio: {fileID: 0}
   frozen: 0
 --- !u!50 &350478317
 Rigidbody2D:
@@ -4520,6 +4519,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   paused: 0
   pauseScreen: {fileID: 1748422151}
+  pauseMenu: {fileID: 0}
+  controlPanel: {fileID: 0}
 --- !u!1 &782174995 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 198538, guid: 3319f4b276d71e24d977b12e24e5b974, type: 2}
@@ -4564,7 +4565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a7f0d923e5334f4293c0e635e29857e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damagedAudioClips: []
+  damagedAudioClips: {fileID: 0}
   isDead: 0
   imgs:
   - {fileID: 472286543}
@@ -6116,7 +6117,7 @@ GameObject:
   - 114: {fileID: 1151259254}
   - 114: {fileID: 1151259253}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Canvas_Dialogue
   m_TagString: Canvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6715,6 +6716,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 09d59336f6e009946a49ede611e0ec1a, type: 3}
   - {fileID: 21300000, guid: 83c518b04b384174a9bf92f47cf5b116, type: 3}
   - {fileID: 21300000, guid: 2e291f9a483cf254887b24f0f6da1d3d, type: 3}
+  gracePeriod: 2
 --- !u!1001 &1182242390
 Prefab:
   m_ObjectHideFlags: 0
@@ -8250,13 +8252,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3933f564c5a027242a7f662b88364c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawns:
-  - {fileID: 1134005679}
-  - {fileID: 910621581}
-  - {fileID: 809755908}
-  _itemRange: 010000000400000005000000
-  pickUpFX: {fileID: 0}
-  _spawnedItems: 
+  ThisScene: 0
+  UniqueItemSpawnIds: 
+  ItemPickUpSound: {fileID: 0}
 --- !u!4 &1366826563
 Transform:
   m_ObjectHideFlags: 0
@@ -8717,6 +8715,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f1d28c571907c474a9e15c0d300cdc3b, type: 3}
   - {fileID: 21300000, guid: 78f5e6e7ce262a7428861288855ac4be, type: 3}
   - {fileID: 21300000, guid: b6fa2254eb1c04644aa712593f149aad, type: 3}
+  gracePeriod: 2
 --- !u!1 &1432290041
 GameObject:
   m_ObjectHideFlags: 0
@@ -10763,8 +10762,7 @@ MonoBehaviour:
   m_LeverLayer:
     serializedVersion: 2
     m_Bits: 0
-  jumpAudios:
-  - {fileID: 8300000, guid: 2a8b22f1832b24d44b81eff0e387dc83, type: 3}
+  jumpAudio: {fileID: 0}
   frozen: 0
 --- !u!50 &1761057385
 Rigidbody2D:
