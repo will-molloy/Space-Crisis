@@ -19,7 +19,9 @@ public static class GameController
     private static Dictionary<PlayableScene, bool> SceneShouldBeReset = new Dictionary<PlayableScene, bool>();
 
     // Scene :: Item ID :: ItemWasPickedUp, For item persisting items in scenes/inventory
-    private static Dictionary<PlayableScene, OrderedDictionary<int, bool>> ItemsInScene = new Dictionary<PlayableScene, OrderedDictionary<int, bool>>();
+    private static Dictionary<PlayableScene, OrderedDictionary<int, bool>> GeneratedItemsForScene = new Dictionary<PlayableScene, OrderedDictionary<int, bool>>();
+    // For maintaining item pick up order
+    private static List<int> InventoryItemsInPickUpOrder = new List<int>();
 
     static GameController()
     {
@@ -28,7 +30,7 @@ public static class GameController
             SavedScenePositions[playableScene] = new Dictionary<string, Vector3>();
             InitialScenePositions[playableScene] = new Dictionary<string, Vector3>();
             SceneShouldBeReset[playableScene] = false;
-            ItemsInScene[playableScene] = new OrderedDictionary<int, bool>();
+            GeneratedItemsForScene[playableScene] = new OrderedDictionary<int, bool>();
         }
     }
 
@@ -88,6 +90,11 @@ public static class GameController
         return scene.GetAttribute<FileNameAttribute>().fileName;
     }
 
+    public static string ToString(this PlayableScene scene)
+    {
+        return scene.GetFileName();
+    }
+
     /// <summary>
     /// Extension method for retrieving the attributes from the PlayableScene enum.
     /// </summary>
@@ -119,7 +126,8 @@ public static class GameController
         GetScenesForLevel(level).ForEach(scene =>
         {
             ClearPersistedDataForScene(scene);
-            ItemsInScene[scene] = new OrderedDictionary<int, bool>();
+            GeneratedItemsForScene[scene] = new OrderedDictionary<int, bool>();
+            InventoryItemsInPickUpOrder = new List<int>();
         });
     }
 
@@ -167,9 +175,16 @@ public static class GameController
         SceneShouldBeReset[sceneName] = resetScene;
     }
 
+    /// <summary>
+    /// Set the generated the order of item Ids for a scene
+    /// </summary>
     public static void AddGeneratedItems(PlayableScene scene, List<int> itemIds)
     {
-        itemIds.ForEach(itemId => ItemsInScene[scene].Add(itemId, false)); // false: just generated, not picked up
+        itemIds.ForEach(itemId =>
+        {
+            if (!GeneratedItemsForScene[scene].ContainsKey(itemId))
+                GeneratedItemsForScene[scene].Add(itemId, false);
+        });
     }
 
     /// <summary>
@@ -177,35 +192,36 @@ public static class GameController
     /// </summary>
     public static OrderedDictionary<int, bool> GetItemsInScene(PlayableScene scene)
     {
-        return ItemsInScene[scene];
+        return GeneratedItemsForScene[scene];
     }
 
     /// <summary>
-    /// Sets the item picked up bool to true
+    /// Add the given item from the given scene to the global inventory.
+    /// 
+    /// If you want duplicates have them in the item database twice with a different key.
     /// </summary>
-    public static void AddItemToPersistedInventory(PlayableScene scene, Item item)
+    public static void AddItemToPersistedInventory(PlayableScene scene, int itemId)
     {
-        ItemsInScene[scene].SetValue(item.itemID, true);
+        GeneratedItemsForScene[scene].SetValue(itemId, true);
+        if (!InventoryItemsInPickUpOrder.Contains(itemId))
+            InventoryItemsInPickUpOrder.Add(itemId);
+    }
+
+    /// <summary>
+    /// Remove the given item from the given scene from the global inventory.
+    /// </summary>
+    public static void RemoveItemFromPersistedInventory(PlayableScene scene, int itemId)
+    {
+        GeneratedItemsForScene[scene].SetValue(itemId, false);
+        InventoryItemsInPickUpOrder.Remove(itemId);
     }
 
     /// <summary>
     /// Retrieve all items picked up from all scenes.
-    /// 
-    /// HashSet was a quick fix for items duplicating.
-    /// If you want duplicates have them in the item database twice with a different key.
     /// </summary>
-    public static HashSet<int> GetItemsPickedUp()
+    public static List<int> GetItemsPickedUp()
     {
-        HashSet<int> itemsPickedUp = new HashSet<int>();
-        foreach (PlayableScene scene in Enum.GetValues(typeof(PlayableScene)))
-        {
-            foreach (int itemId in GetItemsInScene(scene).Keys)
-            {
-                if (GetItemsInScene(scene).GetValue(itemId)) // if picked up
-                    itemsPickedUp.Add(itemId);
-            }
-        }
-        return itemsPickedUp;
+        return InventoryItemsInPickUpOrder;
     }
 }
 
