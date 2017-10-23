@@ -15,14 +15,13 @@ public class PlateScript : MonoBehaviour {
 
     public void reverseDirection()
     {
-        Debug.Log("REV DIR");
-        translationDirection.x = -translationDirection.x;
-        translationDirection.y = -translationDirection.y;
+        GameController.ReversePlateDirection(this.name);
     }
 
     public void start()
     {
-        Debug.Log(translationDirection);
+        GameController.SetLeverPlateDirection(this.name, translationDirection);
+        translationDirection = GameController.GetLeverPlateDirection(this.name);
         isRunning = true;
     }
 
@@ -33,9 +32,7 @@ public class PlateScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	public void Update() {
-        //Debug.Log(isRunning);
         if (!isRunning) return;
-        //transform.position = Vector3.Lerp(transform.position, translationDirection, 300 * Time.deltaTime);
         transform.Translate(translationDirection * ((float)translationAmount / animationTimeInFrames));
     }
 }

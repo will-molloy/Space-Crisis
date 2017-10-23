@@ -16,15 +16,15 @@ public class ScenePersistence : MonoBehaviour
     /// <summary>
     /// Restore or reset the scene.
     /// </summary>
-    void Start()
+    public void Start()
     {
+        // Set global scene
+        GameController.CurrentScene = thisScene;
+
         // Determine if scene should be restored or reset
         if (GameController.GetShouldBeReset(thisScene))
             ResetScene();
         RestoreScene();
-
-        // Set inventory scene
-        PickUpItem.SetThisScene(thisScene);
 
         // Retrieve player
         Vector3 playerPosition = new Vector3();
@@ -37,7 +37,6 @@ public class ScenePersistence : MonoBehaviour
         // Retreive all items the players have picked up
         foreach (int itemId in GameController.GetItemsPickedUp())
         {
-            Debug.Log("Restoring item: " + itemId);
             ItemSpawnManager.spawnItem(itemId, null, playerPosition);
         }
         
