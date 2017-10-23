@@ -37,7 +37,7 @@ public class SnakeHiss : MonoBehaviour {
 			float distance1 = Vector3.Distance(this.gameObject.transform.position, _player1.transform.position);
 			float distance2 = Vector3.Distance(this.gameObject.transform.position, _player2.transform.position);
 
-			if (distance1 <= 7 || distance2 <= 7)
+			if (distance1 <= 6 || distance2 <= 6)
 			{
 				if(_source != null){
 
