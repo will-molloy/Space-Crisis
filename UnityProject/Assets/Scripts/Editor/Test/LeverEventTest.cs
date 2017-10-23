@@ -69,17 +69,23 @@ public class LeverEventTest
         ActivateLever();
 
         // Change scene and persist lever components
+
         // instantiate persistence
         var persistence = new GameObject();
         persistence.AddComponent<ScenePersistence>();
         persistence.AddComponent<Transform>();
         persistence.GetComponent<ScenePersistence>().thisScene = testScene;
+
         // add objects to persist 
         plateObj.transform.parent = persistence.transform;
         leverObj.transform.parent = persistence.transform;
+
         // attempt to save obj positions
         persistence.GetComponent<ScenePersistence>().FixedUpdate();
         persistence.GetComponent<ScenePersistence>().Start();
+
+        // ensure plate is still in moved position
+        Assert.AreEqual(new Vector3(0, -10, 0), plateObj.transform.position);
 
         ActivateLever();
 
