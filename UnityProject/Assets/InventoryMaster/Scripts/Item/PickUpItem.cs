@@ -12,8 +12,7 @@ public class PickUpItem : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        if (ThisScene == GameController.PlayableScene.None)
-            throw new System.Exception("Please set ThisScene");
+        ThisScene = GameController.getActiveScene();
         foreach (GameObject Obj in GameObject.FindGameObjectsWithTag("Player"))
         {
             if (Obj.name == "Astronaut")
