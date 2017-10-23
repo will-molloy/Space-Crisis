@@ -42,7 +42,10 @@ public class Leve2Controller : MonoBehaviour {
     private const float inverseMoveTime = 1000;
     private bool leftCoroutineState, rightCoroutineState = false;
 
-    private int playerOnPortalCount;
+    public GameController.PlayableScene sceneToLoad;
+
+    private HashSet<Portal> playerOnPortalCount;
+
 
     public enum PlayerSide {
         LEFT, RIGHT
@@ -89,7 +92,7 @@ public class Leve2Controller : MonoBehaviour {
         inventoryList.Add(leftInventory);
         inventoryList.Add(rightInventory);
         audioSrcObj = gameObject.AddComponent<AudioSource>();
-        playerOnPortalCount = 0;
+        playerOnPortalCount = new HashSet<Portal>();
     }
 
     public void SetRoomCompleted() {
@@ -291,20 +294,23 @@ public class Leve2Controller : MonoBehaviour {
     }
 
     private void StartNextLevel() {
-        if(currentLevel < sceneStrings.Length - 1)
-            SceneManager.LoadScene(sceneStrings[++currentLevel]);
+        SceneManager.LoadScene(GameController.GetFileName(sceneToLoad));
     }
 
-    public void AddPlayerEnterPortal() {
-        playerOnPortalCount++;
-        if(playerOnPortalCount >= 2) {
-            playerOnPortalCount = 0;
+
+    public void AddPlayerEnterPortal(Portal portal)
+    {
+        playerOnPortalCount.Add(portal);
+        if (playerOnPortalCount.Count >= 2)
+        {
+            playerOnPortalCount.Clear();
             StartNextLevel();
         }
     }
 
-    public void DecreasePlayerEnterPortal() {
-        playerOnPortalCount--;
-    }
+
+public void DecreasePlayerEnterPortal(Portal portal) {
+    playerOnPortalCount.Remove(portal);
+}
 
 }

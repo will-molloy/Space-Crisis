@@ -20,31 +20,16 @@ public class Portal : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D hit) {
 		if(hit.gameObject.tag == "Player") {
-			Leve2Controller.instance.AddPlayerEnterPortal();
+			Leve2Controller.instance.AddPlayerEnterPortal(this);
 		}
 	}
 
 	void OnTriggerExit2D(Collider2D hit) {
 		if(hit.gameObject.tag == "Player") {
-			Leve2Controller.instance.DecreasePlayerEnterPortal();
+			Leve2Controller.instance.DecreasePlayerEnterPortal(this);
 		}
 	}
 
-	void OnCollisionEnter2D(Collision2D hit) {
-		if(hit.transform.tag == "Player") {
-			Leve2Controller.instance.AddPlayerEnterPortal();
-		}
-	}
-
-	void OnCollisionExit2D(Collision2D hit) {
-		if(hit.transform.tag == "Player") {
-			Leve2Controller.instance.DecreasePlayerEnterPortal();
-		}
-	}
-
-	void OnCollisionStay2D(Collision2D hit) {
-		Debug.Log("ASDf");
-	}
 
 
 }

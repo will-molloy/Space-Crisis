@@ -25,6 +25,7 @@ public class ChangeScene : MonoBehaviour
         {
             SceneManager.LoadScene(GameController.GetFileName(sceneToLoad));
         }
+
     }
 
     private void UpdateGracePeriod()
