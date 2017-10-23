@@ -54,7 +54,7 @@ public class PressurePlate : MonoBehaviour
 		if (isInAnimation) {
 			movementDirection = Vector2.down;
 
-			if(pressuredAudioClips != null){
+			if(pressuredAudioClips[0] != null){
 				AudioSource.PlayClipAtPoint(pressuredAudioClips[0], transform.position);
 			}
 
@@ -73,8 +73,8 @@ public class PressurePlate : MonoBehaviour
 		if (isInAnimation) {
 			movementDirection = Vector2.up;
 
-			if (pressuredAudioClips != null) {
-				AudioSource.PlayClipAtPoint (pressuredAudioClips [1], transform.position);
+			if (pressuredAudioClips[1] != null) {
+				AudioSource.PlayClipAtPoint (pressuredAudioClips[1], transform.position);
 			}
 		}
 
