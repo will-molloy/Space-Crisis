@@ -9,13 +9,20 @@ public class LeverEventTest
     private GameObject plateObj;
     private GameController.PlayableScene testScene = GameController.PlayableScene.Level1Room1;
 
+    private int leverId;
+
     [SetUp]
     public void Init()
     {
+        InitObjs();
+        leverObj.name = "lever-" + leverId++; // unique name per test for using persistence
+        plateObj.name = "plate-" + leverId++;
+    }
+
+    private void InitObjs()
+    {
         leverObj = new GameObject();
-        leverObj.name = "lever";
         plateObj = new GameObject();
-        plateObj.name = "plate";
         leverObj.AddComponent<Animator>();
         Lever lever = leverObj.AddComponent<Lever>();
         PlateScript plate = plateObj.AddComponent<PlateScript>();
@@ -80,7 +87,7 @@ public class LeverEventTest
         persistence.FixedUpdate();
 
         // Reload the scene
-        Init();
+        InitObjs();
 
         // ensure plate is still in moved position
         plateObj.transform.position = testScene.GetSavedObjectPositons()[plateObj.name];

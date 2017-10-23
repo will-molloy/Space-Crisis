@@ -28,12 +28,6 @@ public class GameControllerTest
     [Test]
     public void SceneLevelRetrievalTest()
     {
-        List<GameController.PlayableScene> expectedScenesNoLevel = new List<GameController.PlayableScene>
-        {
-            GameController.PlayableScene.WelcomeScreen,
-            GameController.PlayableScene.ExitScene,
-        };
-
         List<GameController.PlayableScene> expectedScenesLevel1 = new List<GameController.PlayableScene>
         {
             GameController.PlayableScene.Level1Room1,
@@ -50,7 +44,6 @@ public class GameControllerTest
 
         Assert.AreEqual(expectedScenesLevel1, GameController.Level.Level1.GetScenes());
         Assert.AreEqual(expectedScenesLevel2, GameController.Level.Level2.GetScenes());
-        Assert.AreEqual(expectedScenesNoLevel, GameController.Level.None.GetScenes());
     }
 
     /// <summary>

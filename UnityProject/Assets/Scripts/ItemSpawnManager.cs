@@ -56,13 +56,13 @@ public class ItemSpawnManager : MonoBehaviour
             throw new System.Exception("Need more items to spawn in " + ThisScene.GetFileName());
 
         // Retrieve item Ids generated for this scene
-        OrderedDictionary<int, bool> itemsToSpawn = GameController.GetItemsInScene(ThisScene);
+        OrderedDictionary<int, bool> itemsToSpawn = ThisScene.GetItemsInScene();
         if (itemsToSpawn.Count < ItemSpawnPositions.Count)
         {
             // Items not yet generated:
             RandomiseItemSpawns();
-            GameController.AddGeneratedItems(ThisScene, UniqueItemSpawnIds.Take(ItemSpawnPositions.Count).ToList()); // persist
-            itemsToSpawn = GameController.GetItemsInScene(ThisScene); // retrieve
+            ThisScene.AddGeneratedItems(UniqueItemSpawnIds.Take(ItemSpawnPositions.Count).ToList()); // persist
+            itemsToSpawn = ThisScene.GetItemsInScene(); // retrieve
         }
 
         // Spawn items

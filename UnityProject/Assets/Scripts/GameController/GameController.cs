@@ -204,7 +204,7 @@ public static class GameController
     /// <summary>
     /// Set the generated the order of item Ids for a scene
     /// </summary>
-    public static void AddGeneratedItems(PlayableScene scene, List<int> itemIds)
+    public static void AddGeneratedItems(this PlayableScene scene, List<int> itemIds)
     {
         itemIds.ForEach(itemId =>
         {
@@ -216,7 +216,7 @@ public static class GameController
     /// <summary>
     /// Returns the generated item Id set for the given scene
     /// </summary>
-    public static OrderedDictionary<int, bool> GetItemsInScene(PlayableScene scene)
+    public static OrderedDictionary<int, bool> GetItemsInScene(this PlayableScene scene)
     {
         return GeneratedItemsForScene[scene];
     }
@@ -226,7 +226,7 @@ public static class GameController
     /// 
     /// If you want duplicates have them in the item database twice with a different key.
     /// </summary>
-    public static void AddItemToPersistedInventory(PlayableScene scene, int itemId)
+    public static void AddItemToPersistedInventory(this PlayableScene scene, int itemId)
     {
         GeneratedItemsForScene[scene].SetValue(itemId, true);
         if (!InventoryItemsInPickUpOrder.Contains(itemId))
@@ -236,7 +236,7 @@ public static class GameController
     /// <summary>
     /// Remove the given item from the given scene from the global inventory.
     /// </summary>
-    public static void RemoveItemFromPersistedInventory(PlayableScene scene, int itemId)
+    public static void RemoveItemFromPersistedInventory(this PlayableScene scene, int itemId)
     {
         GeneratedItemsForScene[scene].SetValue(itemId, false);
         InventoryItemsInPickUpOrder.Remove(itemId);
@@ -273,20 +273,20 @@ public static class GameController
             return LeverInFinalPos[leverName];
     }
 
-    public static void ReversePlateDirection(string plateName)
+    public static void ReversePlateDirection(this PlateScript plate)
     {
-        LeverPlateDirection[plateName] *= -1;
+        LeverPlateDirection[plate.name] *= -1;
     }
 
-    public static Vector3 GetLeverPlateDirection(string plateName)
+    public static Vector3 GetLeverPlateDirection(this PlateScript plate)
     {
-        return LeverPlateDirection[plateName];
+        return LeverPlateDirection[plate.name];
     }
 
-    public static void SetLeverPlateDirection(string plateName, Vector3 vector)
+    public static void SetLeverPlateDirection(this PlateScript plate, Vector3 vector)
     {
-        if (!LeverPlateDirection.ContainsKey(plateName))
-            LeverPlateDirection[plateName] = vector;
+        if (!LeverPlateDirection.ContainsKey(plate.name))
+            LeverPlateDirection[plate.name] = vector;
     }
 
     #endregion
