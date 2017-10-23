@@ -5,15 +5,14 @@ using System.Collections.Generic;
 
 public class Lever : MonoBehaviour
 {
-
     protected int remainingFrames = int.MaxValue;
     protected bool isRunning = false;
-	public AudioClip pulledFX;
+    public AudioClip pulledFX;
     public int timeInFrames;
     public List<GameObject> thingsToControl = new List<GameObject>();
-    LeverState state = LeverState.RIGHT;
+    private LeverState state = LeverState.RIGHT;
 
-    enum LeverState
+    private enum LeverState
     {
         LEFT, RIGHT
     }
@@ -21,10 +20,9 @@ public class Lever : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("COLLUSION" + other);
         if (other.gameObject.tag == "Player")
         {
-            Platformer2DUserControl p1 = other.gameObject.GetComponent<Platformer2DUserControl>();
+            var p1 = other.gameObject.GetComponent<Platformer2DUserControl>();
             if (p1 != null)
             {
                 p1.lever = this;
@@ -44,6 +42,14 @@ public class Lever : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        if (GameController.GetLeverInFinalPos(this.name))
+        {
+            Flip();
+        }
+    }
+
     // Update is called once per frame
     virtual public void Update()
     {
@@ -54,7 +60,6 @@ public class Lever : MonoBehaviour
             {
                 PlateScript ps = obj.GetComponent<PlateScript>();
                 ps.stop();
-                ps.reverseDirection();
             }
             isRunning = false;
         }
@@ -63,9 +68,9 @@ public class Lever : MonoBehaviour
 
     public virtual void activate()
     {
-        Debug.Log("ACTIVATE");
-        Debug.Log("IS RUNING " + isRunning);
         if (isRunning) return;
+
+        GameController.ActivateLever(this.name);
         isRunning = true;
 
         var ani = GetComponent<Animator>();
@@ -81,16 +86,19 @@ public class Lever : MonoBehaviour
         }
         remainingFrames = timeInFrames;
 
-		if (pulledFX != null){
-			AudioSource.PlayClipAtPoint(pulledFX, transform.position);
-		}
-
+        if (pulledFX != null)
+        {
+            AudioSource.PlayClipAtPoint(pulledFX, transform.position);
+        }
 
         foreach (GameObject obj in thingsToControl)
         {
             PlateScript ps = obj.GetComponent<PlateScript>();
+            Vector3 currentObjPos = obj.transform.position;
+
             ps.setAnimationTime(this.timeInFrames);
             ps.start();
+            ps.reverseDirection();
         }
 
     }
@@ -102,7 +110,8 @@ public class Lever : MonoBehaviour
         transform.localScale = theScale;
     }
 
-	public void assignSoundFX(AudioClip clip){
-		pulledFX = clip;
-	}
+    public void assignSoundFX(AudioClip clip)
+    {
+        pulledFX = clip;
+    }
 }

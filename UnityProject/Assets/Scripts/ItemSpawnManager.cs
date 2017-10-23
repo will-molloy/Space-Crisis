@@ -50,7 +50,6 @@ public class ItemSpawnManager : MonoBehaviour
     private void GenerateAndSpawnItems()
     {
         UniqueItemSpawnIds = UniqueItemSpawnIds.Distinct().ToArray();
-        Debug.Log(UniqueItemSpawnIds.Length + " " + ItemSpawnPositions.Count);
         if (UniqueItemSpawnIds.Length < ItemSpawnPositions.Count)
             throw new System.Exception("Need more items to spawn in " + ThisScene.GetFileName());
 
