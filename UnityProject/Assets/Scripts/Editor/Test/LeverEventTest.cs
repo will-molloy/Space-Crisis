@@ -13,7 +13,9 @@ public class LeverEventTest
     public void Init()
     {
         leverObj = new GameObject();
+        leverObj.name = "lever";
         plateObj = new GameObject();
+        plateObj.name = "plate";
         Lever lever = leverObj.AddComponent<Lever>();
         PlateScript plate = plateObj.AddComponent<PlateScript>();
 
@@ -26,7 +28,6 @@ public class LeverEventTest
         plate.translationAmount = 10;
         lever.timeInFrames = 1;
         plate.translationDirection = Vector3.down;
-        plateObj.transform.position = new Vector3(0, 0, 0);
     }
 
     private void ActivateLever()
@@ -42,6 +43,7 @@ public class LeverEventTest
     [Test]
     public void TestLeverActivateOnce()
     {
+        plateObj.transform.position = new Vector3(0, 0, 0);
         ActivateLever();
 
         // ensure plate moved down 10
@@ -54,6 +56,7 @@ public class LeverEventTest
     [Test]
     public void TestLeverActivateTwice()
     {
+        plateObj.transform.position = new Vector3(0, 0, 0);
         ActivateLever();
         ActivateLever();
 
@@ -68,27 +71,28 @@ public class LeverEventTest
     [Test]
     public void TestLeverActivateTwiceAfterSceneChange()
     {
+        plateObj.transform.position = new Vector3(0, 0, 0);
         ActivateLever();
 
         // Change scene and persist lever components
 
         // instantiate persistence
-        leverObj.name = "lever";
-        GameObject persistenceObj = new GameObject();
-        ScenePersistence persistence = persistenceObj.AddComponent<ScenePersistence>();
+        ScenePersistence persistence = new GameObject().AddComponent<ScenePersistence>();
         persistence.thisScene = testScene;
 
-        // add objects to persist 
-        plateObj.transform.parent = persistenceObj.transform;
-        leverObj.transform.parent = persistenceObj.transform;
+        // add plate to persist 
+        plateObj.transform.parent = persistence.transform;
 
         // attempt to save obj positions
         persistence.FixedUpdate();
-        persistence.Start();
+
+        // Reload the plate and lever
+        Init();
+        plateObj.transform.parent = persistence.transform;
+        plateObj.transform.position = GameController.GetSavedObjectPositons(testScene)[plateObj.name];
 
         // ensure plate is still in moved position
-        Vector3 persistedPlate = GameController.GetSavedObjectPositons(testScene)[plateObj.name];
-        Assert.AreEqual(new Vector3(0, -10, 0), persistedPlate);
+        Assert.AreEqual(new Vector3(0, -10, 0), plateObj.transform.position);
 
         ActivateLever();
 

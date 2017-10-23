@@ -6,14 +6,13 @@ public class GameControllerTest
 {
     private GameController.PlayableScene testScene = GameController.PlayableScene.Level1Room1;
     private ScenePersistence persistence;
-    private GameObject persistenceObj = new GameObject();
     private GameObject persistedObj;
 
     [SetUp]
     public void Init()
     {
         // instantiate persistence
-        persistence = persistenceObj.AddComponent<ScenePersistence>();
+        persistence = new GameObject().AddComponent<ScenePersistence>();
         persistence.thisScene = testScene;
 
         // add some children objects to persist
