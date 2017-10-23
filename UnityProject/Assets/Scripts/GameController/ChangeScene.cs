@@ -9,9 +9,14 @@ public class ChangeScene : MonoBehaviour
     private List<GameObject> colliders;
     public float gracePeriod = 2f;
 
+    private DialogueManager dMan;
+    public GameObject warningBox;
+    private bool warned = false;
+    
     // Use this for initialization
     void Start()
     {
+        dMan = FindObjectOfType<DialogueManager>();
         colliders = new List<GameObject>();
     }
 
@@ -21,9 +26,22 @@ public class ChangeScene : MonoBehaviour
         UpdateGracePeriod();
         SpriteRenderer sprite = GetComponent<SpriteRenderer>();
         sprite.sprite = sprites[2 - colliders.Count];
+
+        bool allDone = dMan.getAllDone();
         if (colliders.Count == 2 && gracePeriod < 1)
         {
-            SceneManager.LoadScene(GameController.GetFileName(sceneToLoad));
+            if (dMan.allDone || (warningBox == null))
+            {
+                SceneManager.LoadScene(GameController.GetFileName(sceneToLoad));
+            }
+            else {
+                // player has not correctly interacted with NPC
+                if (!warned)
+                {
+                    dMan.getActiveNPC().GetComponent<DialogHolder>().setAndShowDialogue(warningBox);
+                    warned = true;
+                }
+            }
         }
     }
 
@@ -41,6 +59,7 @@ public class ChangeScene : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        warned = false;
         if (IsValidCollider(other))
         {
             colliders.Add(other.gameObject);
