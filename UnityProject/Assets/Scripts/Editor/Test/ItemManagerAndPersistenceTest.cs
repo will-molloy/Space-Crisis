@@ -19,13 +19,12 @@ public class ItemManagerAndPersistenceTest
         itemSpawnManager.ThisScene = testScene;
     }
 
-    private Vector3 createItemSpawnPosition(Vector3 vector)
+    private void createItemSpawnPosition(Vector3 vector)
     {
         GameObject gameObject = new GameObject();
         gameObject.tag = "item-spawn";
         gameObject.transform.parent = itemSpawnManager.transform; // Link with itemSpawnManager
         gameObject.transform.position = vector;
-        return vector;
     }
 
     [Test]
