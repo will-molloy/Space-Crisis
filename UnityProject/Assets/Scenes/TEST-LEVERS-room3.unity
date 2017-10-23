@@ -581,6 +581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5f02615354b17e4fa56ab923356dd5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThisScene: 10
   pulledFX: {fileID: 8300000, guid: 3becec1909f194046945d85ac1077772, type: 3}
   timeInFrames: 100
   thingsToControl:
@@ -767,12 +768,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08c210970d4f2a7449123873a8fe683f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: 8
+  sceneToLoad: 9
   sprites:
   - {fileID: 21300000, guid: f1d28c571907c474a9e15c0d300cdc3b, type: 3}
   - {fileID: 21300000, guid: 78f5e6e7ce262a7428861288855ac4be, type: 3}
   - {fileID: 21300000, guid: b6fa2254eb1c04644aa712593f149aad, type: 3}
   gracePeriod: 2
+  warningBox: {fileID: 0}
 --- !u!60 &37559568
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -4001,6 +4003,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 83c518b04b384174a9bf92f47cf5b116, type: 3}
   - {fileID: 21300000, guid: 2e291f9a483cf254887b24f0f6da1d3d, type: 3}
   gracePeriod: 2
+  warningBox: {fileID: 0}
 --- !u!1 &408819812
 GameObject:
   m_ObjectHideFlags: 0
@@ -5935,6 +5938,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5f02615354b17e4fa56ab923356dd5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThisScene: 0
   pulledFX: {fileID: 8300000, guid: 3becec1909f194046945d85ac1077772, type: 3}
   timeInFrames: 100
   thingsToControl:
@@ -8692,6 +8696,7 @@ MonoBehaviour:
   currentLine: 0
   activeNPC: {fileID: 0}
   content: {fileID: 860917175}
+  allDone: 0
 --- !u!1 &941581666 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 178246, guid: d11b50a0533d1374da4ea7565bbed15e, type: 2}
@@ -14202,6 +14207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5f02615354b17e4fa56ab923356dd5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThisScene: 10
   pulledFX: {fileID: 8300000, guid: 3becec1909f194046945d85ac1077772, type: 3}
   timeInFrames: 100
   thingsToControl:
@@ -14979,6 +14985,7 @@ GameObject:
   - 212: {fileID: 1893683695}
   - 58: {fileID: 1893683694}
   - 114: {fileID: 1893683697}
+  - 95: {fileID: 1893683698}
   m_Layer: 0
   m_Name: leverBlack
   m_TagString: Untagged
@@ -15026,7 +15033,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: abbfe6f0b4e1c504c97736e81f7308e4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 33c00dec1d1deeb40a645216927bdff8, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -15054,11 +15061,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5f02615354b17e4fa56ab923356dd5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThisScene: 10
   pulledFX: {fileID: 8300000, guid: 3becec1909f194046945d85ac1077772, type: 3}
   timeInFrames: 100
   thingsToControl:
   - {fileID: 1872407304}
   - {fileID: 1089344603}
+--- !u!95 &1893683698
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1893683693}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3c6a04c3111549b48973f34b83788df5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1910890623
 GameObject:
   m_ObjectHideFlags: 0
@@ -15417,6 +15442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5f02615354b17e4fa56ab923356dd5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThisScene: 10
   pulledFX: {fileID: 8300000, guid: 3becec1909f194046945d85ac1077772, type: 3}
   timeInFrames: 100
   thingsToControl:
@@ -16626,7 +16652,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ThisScene: 2
   UniqueItemSpawnIds: 
-  ItemPickUpSound: {fileID: 0}
+  ItemPickUpSound: {fileID: 8300000, guid: d8d04c6f80a1140db85ede568dab1f51, type: 3}
 --- !u!1 &2097192712
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,6 +16,7 @@ public class LeverEventTest
         leverObj.name = "lever";
         plateObj = new GameObject();
         plateObj.name = "plate";
+        leverObj.AddComponent<Animator>();
         Lever lever = leverObj.AddComponent<Lever>();
         PlateScript plate = plateObj.AddComponent<PlateScript>();
 
@@ -27,13 +28,6 @@ public class LeverEventTest
         plate.translationAmount = 10;
         lever.timeInFrames = 1;
         plate.translationDirection = Vector3.down;
-    }
-
-    private void ActivateLever()
-    {
-        leverObj.GetComponent<Lever>().activate();
-        plateObj.GetComponent<PlateScript>().Update();
-        leverObj.GetComponent<Lever>().Update();
     }
 
     /// <summary>
@@ -85,16 +79,22 @@ public class LeverEventTest
         // attempt to save obj positions
         persistence.FixedUpdate();
 
-        // Reload the plate and lever
+        // Reload the scene
         Init();
-        plateObj.transform.position = GameController.GetSavedObjectPositons(testScene)[plateObj.name];
 
         // ensure plate is still in moved position
+        plateObj.transform.position = testScene.GetSavedObjectPositons()[plateObj.name];
         Assert.AreEqual(new Vector3(0, -10, 0), plateObj.transform.position);
-
         ActivateLever();
 
         // ensure plate moved back to original position
         Assert.AreEqual(new Vector3(0, 0, 0), plateObj.transform.position);
+    }
+
+    private void ActivateLever()
+    {
+        leverObj.GetComponent<Lever>().activate();
+        plateObj.GetComponent<PlateScript>().Update();
+        leverObj.GetComponent<Lever>().Update();
     }
 }

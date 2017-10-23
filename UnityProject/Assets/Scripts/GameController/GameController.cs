@@ -11,9 +11,6 @@ using mattmc3.Common.Collections.Generic;
 /// <author>Will Molloy</author>
 public static class GameController
 {
-    // Set in scene persistence start() or awake()
-    public static PlayableScene CurrentScene;
-
     // Scene.name :: Object.name :: Position, For persisting given scene objects
     private static Dictionary<PlayableScene, Dictionary<string, Vector3>> SavedScenePositions = new Dictionary<PlayableScene, Dictionary<string, Vector3>>();
 
@@ -41,12 +38,16 @@ public static class GameController
         }
     }
 
-    #region SceneAttributes 
+    #region Scenes and Levels
+
     /// <summary>
     /// Scenes the player can access, the scene files must be included in the build path.
     /// </summary>
     public enum PlayableScene
     {
+        [Level(Level.None), FileName("")] // Nullable
+        None,
+
         [Level(Level.Level1), FileName("level1room1")]
         Level1Room1,
         [Level(Level.Level1), FileName("level1room2")]
@@ -75,6 +76,10 @@ public static class GameController
     /// Level attribute for the game scenes.
     /// </summary>
     public enum Level { Level1, Level2, MiniGame, Test, None }
+
+    #endregion
+
+    #region SceneAttributes 
 
     public class LevelAttribute : Attribute
     {
@@ -123,7 +128,7 @@ public static class GameController
     /// <summary>
     /// Gets all the scenes assigned to the given level
     /// </summary>
-    public static List<PlayableScene> GetScenesForLevel(Level levelToRetrieve)
+    public static List<PlayableScene> GetScenes(this Level levelToRetrieve)
     {
         PlayableScene[] scenes = (PlayableScene[])Enum.GetValues(typeof(PlayableScene));
         return scenes.Where(scene => scene.GetAttribute<LevelAttribute>().level.Equals(levelToRetrieve)).ToList();
@@ -135,11 +140,11 @@ public static class GameController
     /// 
     /// Item Spawns are reset.
     /// </summary>
-    public static void ClearScenesForLevel(Level level)
+    public static void ClearScenesIncludingItems(this Level level)
     {
-        GetScenesForLevel(level).ForEach(scene =>
+        level.GetScenes().ForEach(scene =>
         {
-            ClearPersistedDataForScene(scene);
+            scene.ClearPersistedDataForScene();
             GeneratedItemsForScene[scene] = new OrderedDictionary<int, bool>();
             InventoryItemsInPickUpOrder = new List<int>();
         });
@@ -155,7 +160,7 @@ public static class GameController
     /// 
     /// Item spawns ARE NOT reset
     /// </summary>
-    public static void ClearPersistedDataForScene(PlayableScene sceneName)
+    public static void ClearPersistedDataForScene(this PlayableScene sceneName)
     {
         SavedScenePositions[sceneName] = new Dictionary<string, Vector3>();
     }
@@ -163,7 +168,7 @@ public static class GameController
     /// <summary>
     /// Saves the positions of the given objects for the given scene.
     /// </summary>
-    public static void SaveObjectPositions(PlayableScene sceneName, List<GameObject> objects)
+    public static void SaveObjectPositions(this PlayableScene sceneName, List<GameObject> objects)
     {
         foreach (GameObject obj in objects)
         {
@@ -173,22 +178,22 @@ public static class GameController
         }
     }
 
-    public static Dictionary<string, Vector3> GetSavedObjectPositons(PlayableScene sceneName)
+    public static Dictionary<string, Vector3> GetSavedObjectPositons(this PlayableScene sceneName)
     {
         return SavedScenePositions[sceneName];
     }
 
-    public static Dictionary<string, Vector3> GetInitialObjectPositions(PlayableScene sceneName)
+    public static Dictionary<string, Vector3> GetInitialObjectPositions(this PlayableScene sceneName)
     {
         return InitialScenePositions[sceneName];
     }
 
-    public static bool GetShouldBeReset(PlayableScene sceneName)
+    public static bool GetShouldBeReset(this PlayableScene sceneName)
     {
         return SceneShouldBeReset[sceneName];
     }
 
-    public static void SetShouldBeReset(PlayableScene sceneName, bool resetScene)
+    public static void SetShouldBeReset(this PlayableScene sceneName, bool resetScene)
     {
         SceneShouldBeReset[sceneName] = resetScene;
     }
@@ -250,9 +255,9 @@ public static class GameController
 
     #region Lever-Persistence
 
-    public static bool ActivateLever(string leverName)
+    public static bool ActivateLever(this Lever lever)
     {
-        Debug.Log("Adding " + leverName);
+        var leverName = lever.name;
         if (!LeverInFinalPos.ContainsKey(leverName))
             LeverInFinalPos.Add(leverName, true);
         else
@@ -260,8 +265,9 @@ public static class GameController
         return LeverInFinalPos[leverName];
     }
 
-    public static bool GetLeverInFinalPos(string leverName)
+    public static bool GetLeverInFinalPos(this Lever lever)
     {
+        var leverName = lever.name;
         if (!LeverInFinalPos.ContainsKey(leverName))
             return false;
         else

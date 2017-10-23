@@ -7,12 +7,13 @@ public class PickUpItem : MonoBehaviour
     private Inventory inventory;
     private GameObject player1;
     private GameObject player2;
-    private GameController.PlayableScene thisScene;
+    private GameController.PlayableScene ThisScene;
 
     // Use this for initialization
     void Start()
     {
-        thisScene = GameController.CurrentScene;
+        if (ThisScene == GameController.PlayableScene.None)
+            throw new System.Exception("Please set ThisScene");
         foreach (GameObject Obj in GameObject.FindGameObjectsWithTag("Player"))
         {
             if (Obj.name == "Astronaut")
@@ -40,7 +41,7 @@ public class PickUpItem : MonoBehaviour
                 else if (inventory.ItemsInInventory.Count < (inventory.width * inventory.height))
                 {
                     inventory.addItemToInventory(item.itemID, item.itemValue);
-                    GameController.AddItemToPersistedInventory(thisScene, item.itemID);
+                    GameController.AddItemToPersistedInventory(ThisScene, item.itemID);
                     Destroy(this.gameObject);
                     if (pickUpFX != null)
                         AudioSource.PlayClipAtPoint(pickUpFX, transform.position);
