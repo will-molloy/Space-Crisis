@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
-using UnityEditor;
 using NUnit.Framework;
-using System.Collections.Generic;
 using mattmc3.Common.Collections.Generic;
 
-public class ItemManagerAndPersistenceTest
+public class ItemManagerTest
 {
 
     private const GameController.PlayableScene testScene = GameController.PlayableScene.Level1Room1;
