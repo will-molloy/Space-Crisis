@@ -40,6 +40,7 @@ public static class GameController
     // For maintaining levers 
     private static Dictionary<string, bool> LeverInFinalPos = new Dictionary<string, bool>();
     private static Dictionary<string, Vector3> LeverPlateDirection = new Dictionary<string, Vector3>();
+    private static Dictionary<PlayableScene, HashSet<string>> LeversInScene = new Dictionary<PlayableScene, HashSet<string>>();
 
 
     static GameController()
@@ -50,6 +51,7 @@ public static class GameController
             InitialScenePositions[playableScene] = new Dictionary<string, Vector3>();
             SceneShouldBeReset[playableScene] = false;
             GeneratedItemsForScene[playableScene] = new OrderedDictionary<int, bool>();
+            LeversInScene[playableScene] = new HashSet<string>();
         }
     }
 
@@ -175,9 +177,20 @@ public static class GameController
     /// 
     /// Item spawns ARE NOT reset
     /// </summary>
-    public static void ClearPersistedDataForScene(this PlayableScene sceneName)
+    public static void ClearPersistedDataForScene(this PlayableScene scene)
     {
-        SavedScenePositions[sceneName] = new Dictionary<string, Vector3>();
+        SavedScenePositions[scene] = new Dictionary<string, Vector3>();
+        foreach(string leverName in scene.GetLevers())
+        {
+            if (GetLeverInFinalPos(GameObject.Find(leverName).GetComponent<Lever>()))
+            {
+                LeverInFinalPos[leverName] = false;
+                foreach (var x in GameObject.Find(leverName).GetComponent<Lever>().thingsToControl)
+                {
+                    x.GetComponent<PlateScript>().reverseDirection();
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -305,6 +318,17 @@ public static class GameController
             LeverPlateDirection[plate.name] = vector;
     }
 
+    // For resetting levers ===
+    public static void AddLever(this PlayableScene scene, Lever lever)
+    {
+        LeversInScene[scene].Add(lever.name);
+    }
+
+    public static HashSet<string> GetLevers(this PlayableScene scene)
+    {
+        return LeversInScene[scene];
+    }
+    // ====
     #endregion
 }
 

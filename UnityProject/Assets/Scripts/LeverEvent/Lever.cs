@@ -11,11 +11,11 @@ public class Lever : MonoBehaviour
     public AudioClip pulledFX;
     public int timeInFrames;
     public List<GameObject> thingsToControl = new List<GameObject>();
-    private LeverState state = LeverState.RIGHT;
+    public LeverState state = LeverState.INITIAL;
 
-    private enum LeverState
+    public enum LeverState
     {
-        LEFT, RIGHT
+        FINAL, INITIAL
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -46,6 +46,7 @@ public class Lever : MonoBehaviour
     {
         if (ThisScene == GameController.PlayableScene.None)
             throw new System.Exception("Please set ThisScene");
+        ThisScene.AddLever(this);
         if (this.GetLeverInFinalPos())
         {
             Flip();
@@ -76,15 +77,15 @@ public class Lever : MonoBehaviour
         isRunning = true;
 
         var ani = GetComponent<Animator>();
-        if(state == LeverState.LEFT)
+        if(state == LeverState.FINAL)
         {
             ani.SetTrigger("triggerRight");
-            state = LeverState.RIGHT;
+            state = LeverState.INITIAL;
         }
         else
         {
             ani.SetTrigger("triggerLeft");
-            state = LeverState.LEFT;
+            state = LeverState.FINAL;
         }
         remainingFrames = timeInFrames;
 
