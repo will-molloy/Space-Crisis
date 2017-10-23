@@ -29,6 +29,8 @@ public class ItemSpawnManager : MonoBehaviour
     // Use this for initialization
     public void Start()
     {
+        if (ThisScene == GameController.PlayableScene.None)
+            throw new System.Exception("Please set ThisScene");
         // Load item database
         ItemDataBaseList = (ItemDataBaseList)Resources.Load("ItemDatabase");
 
