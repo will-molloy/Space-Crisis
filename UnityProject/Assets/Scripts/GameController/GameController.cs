@@ -41,7 +41,8 @@ public static class GameController
         }
     }
 
-    #region SceneAttributes 
+    #region Scenes and Levels
+
     /// <summary>
     /// Scenes the player can access, the scene files must be included in the build path.
     /// </summary>
@@ -74,6 +75,10 @@ public static class GameController
     /// Level attribute for the game scenes.
     /// </summary>
     public enum Level { Level1, Level2, None, Test }
+
+    #endregion
+
+    #region SceneAttributes 
 
     public class LevelAttribute : Attribute
     {
@@ -122,7 +127,7 @@ public static class GameController
     /// <summary>
     /// Gets all the scenes assigned to the given level
     /// </summary>
-    public static List<PlayableScene> GetScenesForLevel(Level levelToRetrieve)
+    public static List<PlayableScene> GetScenesForLevel(this Level levelToRetrieve)
     {
         PlayableScene[] scenes = (PlayableScene[])Enum.GetValues(typeof(PlayableScene));
         return scenes.Where(scene => scene.GetAttribute<LevelAttribute>().level.Equals(levelToRetrieve)).ToList();
@@ -136,7 +141,7 @@ public static class GameController
     /// </summary>
     public static void ClearScenesForLevel(Level level)
     {
-        GetScenesForLevel(level).ForEach(scene =>
+        level.GetScenesForLevel().ForEach(scene =>
         {
             ClearPersistedDataForScene(scene);
             GeneratedItemsForScene[scene] = new OrderedDictionary<int, bool>();
@@ -251,7 +256,6 @@ public static class GameController
 
     public static bool ActivateLever(string leverName)
     {
-        Debug.Log("Adding " + leverName);
         if (!LeverInFinalPos.ContainsKey(leverName))
             LeverInFinalPos.Add(leverName, true);
         else
