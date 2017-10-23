@@ -1869,7 +1869,7 @@ RectTransform:
   - {fileID: 2102788276}
   - {fileID: 903964724}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -4227,7 +4227,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Pocardo Banado
+  m_Text: Spork Stork
 --- !u!222 &490555776
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6247,7 +6247,7 @@ MonoBehaviour:
   textFile: {fileID: 0}
   textLines:
   - '...'
-  - I still feel like something he said is a bit off...
+  - Seems like my answer did not make sense...
   - Does what Spork Stork said about this city make sense?
   lineToBreak: 0
   autoDialog: 0
@@ -7897,11 +7897,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1776064932}
   m_RootOrder: 1
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 20, y: 30}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 1}
 --- !u!114 &1007018927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9059,6 +9059,10 @@ Prefab:
       propertyPath: sceneToLoad
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 11494638, guid: 2e0f8f0e3806c7a42a742c6af41dc38e, type: 2}
+      propertyPath: warningBox
+      value: 
+      objectReference: {fileID: 1432489457}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2e0f8f0e3806c7a42a742c6af41dc38e, type: 2}
   m_IsPrefabParent: 0
@@ -11569,8 +11573,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d9978c09b46f1b41860434cf8ee94ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textFile: {fileID: 4900000, guid: 49933820b537692429fcd4511a917fbf, type: 3}
-  textLines: []
+  textFile: {fileID: 0}
+  textLines:
+  - '...'
+  - I still feel like something he said is off...
   lineToBreak: 0
   autoDialog: 0
 --- !u!114 &1499998262
@@ -14382,11 +14388,11 @@ RectTransform:
   - {fileID: 1851745474}
   - {fileID: 1550456830}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 482, y: 323}
-  m_SizeDelta: {x: 964, y: 0}
+  m_AnchoredPosition: {x: 605.5, y: 341.5}
+  m_SizeDelta: {x: 1211, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1767989376
 MonoBehaviour:
@@ -14414,7 +14420,7 @@ GameObject:
   - 114: {fileID: 1776064929}
   m_Layer: 0
   m_Name: DecisionCorrectAnswer
-  m_TagString: FinalStatement
+  m_TagString: NPCStatement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14900,6 +14906,7 @@ GameObject:
   - 212: {fileID: 1828219570}
   - 60: {fileID: 1828219569}
   - 114: {fileID: 1828219568}
+  - 114: {fileID: 1828219572}
   m_Layer: 0
   m_Name: DoorToRoom2
   m_TagString: Untagged
@@ -14925,7 +14932,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 83c518b04b384174a9bf92f47cf5b116, type: 3}
   - {fileID: 21300000, guid: 2e291f9a483cf254887b24f0f6da1d3d, type: 3}
   gracePeriod: 2
-  warningBox: {fileID: 0}
+  warningBox: {fileID: 1432489457}
 --- !u!60 &1828219569
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -14993,6 +15000,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 47
+--- !u!114 &1828219572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1828219567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9eb0a38051010646a97e13e205c2443, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dBoxes:
+  - {fileID: 1432489457}
+  boxIndex: 0
+  dialogue: 
+  textLines: []
+  autoDialog: 0
 --- !u!1 &1843874930
 GameObject:
   m_ObjectHideFlags: 0
@@ -15374,7 +15398,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 43049f7b7e6ac374b9339994ef58a70a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 74cee4844e32ce74ca7793fd85933959, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
