@@ -64,7 +64,10 @@ public class DialogueManager : MonoBehaviour
 
             if (diaglogActive && dBox.tag.Equals("NPCStatement"))
             {
-                characterContent.addStatement(activeNPC, dText.text);
+				if(activeNPC != null){
+					characterContent.addStatement(activeNPC, dText.text);
+				}
+                
             }
         }
 
