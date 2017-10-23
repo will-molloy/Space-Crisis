@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
-public class DialogueManager : MonoBehaviour
+public class DialogueManagerCutscene: MonoBehaviour
 {
 
     public GameObject dBox;
@@ -21,11 +21,9 @@ public class DialogueManager : MonoBehaviour
 
     public GameObject activeNPC;
     public GameObject content;
-    private CharacterContent characterContent;
     // Use this for initialization
     void Start()
     {
-        characterContent = content.GetComponent<CharacterContent>();
 
         dText.enabled = false;
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
@@ -34,41 +32,26 @@ public class DialogueManager : MonoBehaviour
         linearBackups = new Vector2[2];
 
         playerBody[0] = players[0].GetComponent<Rigidbody2D>();
-        playerBody[1] = players[1].GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space ) && activeNPC != null) {
-           
-            if (!diaglogActive)
-            {
-                DialogHolder dh = activeNPC.GetComponent<DialogHolder>();
-                dBox = dh.dBoxes[dh.boxIndex];
-                dialogLines = dBox.GetComponent<TextHolder>().getTextLines();
-                currentLine = 0;
-                showDialogue(this.gameObject.name);
-            }
-            else {
-                currentLine++;
-            }
+        if (diaglogActive && Input.GetKeyDown(KeyCode.Space))
+        {
+            //dBox.SetActive(false);
+            //diaglogActive = false;
+
+            currentLine++;
+
         }
-        
         if (dialogLines.Length > 0 && currentLine < dialogLines.Length)
         {
             dText.text = dialogLines[currentLine];
 
-            if (diaglogActive && dBox.tag.Equals("NPCStatement"))
-            {
-				if(activeNPC != null){
-					characterContent.addStatement(activeNPC, dText.text);
-				}
-                
-            }
         }
 
-        if ((currentLine >= dialogLines.Length) && diaglogActive)
+        if (currentLine >= dialogLines.Length)
         {
             closeDialogue();
             //currentLine = 0;
@@ -77,9 +60,21 @@ public class DialogueManager : MonoBehaviour
 
     }
 
+    public void showBox(string source, string dialogue)
+    {
+
+
+        diaglogActive = true;
+        dBox.SetActive(true);
+        //  sText.text = source;
+        dText.text = dialogue;
+        dText.enabled = true;
+
+    }
+
     public void showDialogue(string source)
     {
-        Debug.Log("Show dia");
+        //PlayerUtility.FreezePlayers();
         if (!isFrozen)
         {
             isFrozen = true;
@@ -104,7 +99,6 @@ public class DialogueManager : MonoBehaviour
 
     public void closeDialogue()
     {
-        Debug.Log("close dia");
         dText.enabled = false;
         diaglogActive = false;
         dBox.SetActive(false);
@@ -115,7 +109,7 @@ public class DialogueManager : MonoBehaviour
            // unfreezePlayer();
             PlayerUtility.UnFreezePlayers();
         }
-        // cleanUpDialogue();
+
     }
 
     private void freezePlayer()
@@ -146,19 +140,5 @@ public class DialogueManager : MonoBehaviour
         currentLine = 0;
     }
 
-    public GameObject getActiveNPC() {
-        return activeNPC;
-    }
-
-    private void resetCurrentLine() {
-        DialogHolder dh = activeNPC.GetComponent<DialogHolder>();
-
-        if (!dh.dBoxes.Contains(dBox))
-        {
-            dBox = dh.dBoxes[dh.dBoxes.Count - 1];
-            dialogLines = dh.dBoxes[dh.dBoxes.Count - 1].GetComponent<TextHolder>().getTextLines();
-            currentLine = 0;
-        }
-    }
 
 }
