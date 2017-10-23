@@ -43,7 +43,7 @@ public class DialogueManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space ) && activeNPC != null) {
+        if (Input.GetKeyDown(KeyCode.Space ) && activeNPC != null ) {
            
             if (!diaglogActive)
             {
@@ -163,5 +163,9 @@ public class DialogueManager : MonoBehaviour
 
     public void setAllDone() {
         allDone = true;
+    }
+
+    public bool getAllDone() {
+        return allDone;
     }
 }

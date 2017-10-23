@@ -52,6 +52,14 @@ public class DialogHolder : MonoBehaviour
       
     }
 
+    void OnTriggerExit2D(Collider2D other)
+    {
+        Debug.Log("exit");
+        if (other.gameObject.CompareTag("Player"))
+        {
+            dMan.setActiveNPC(null);
+        }
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
