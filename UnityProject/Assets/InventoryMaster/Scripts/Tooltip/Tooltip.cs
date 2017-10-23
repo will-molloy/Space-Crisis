@@ -119,6 +119,13 @@ public class Tooltip : MonoBehaviour
 
         Text descriptionText = GameObject.FindGameObjectWithTag("DescriptionText").GetComponent<Text>();
         descriptionText.text = tooltipDescText.text;
+
+        Debug.Log("activate");
+        //update the btn of plyaer choice
+        GameObject judgebtn = GameObject.FindGameObjectWithTag("JudgementBtn");
+        judgebtn.GetComponent<JudgementSystem>().setItemID(item.itemID);
+
+
     }
 
     public void deactivateTooltip()             //deactivating the tooltip after you went out of a slot
