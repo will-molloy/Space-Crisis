@@ -26,44 +26,9 @@ public static class GameController
     // For maintaining item pick up order
     private static List<int> InventoryItemsInPickUpOrder = new List<int>();
 
-    // For maintaining levers ===============
+    // For maintaining levers 
     private static Dictionary<string, bool> LeverInFinalPos = new Dictionary<string, bool>();
     private static Dictionary<string, Vector3> LeverPlateDirection = new Dictionary<string, Vector3>();
-
-    public static bool ActivateLever(string leverName)
-    {
-        Debug.Log("Adding " + leverName);
-        if (!LeverInFinalPos.ContainsKey(leverName))
-            LeverInFinalPos.Add(leverName, true);
-        else
-            LeverInFinalPos[leverName] = !LeverInFinalPos[leverName];
-        return LeverInFinalPos[leverName];
-    }
-
-    public static bool GetLeverInFinalPos(string leverName)
-    {
-        if (!LeverInFinalPos.ContainsKey(leverName))
-            return false;
-        else
-            return LeverInFinalPos[leverName];
-    }
-
-    public static void ReversePlateDirection(string plateName)
-    {
-        LeverPlateDirection[plateName] *= -1;
-    }
-
-    public static Vector3 GetLeverPlateDirection(string plateName)
-    {
-        return LeverPlateDirection[plateName];
-    }
-
-    public static void SetLeverPlateDirection(string plateName, Vector3 vector)
-    {
-        if (!LeverPlateDirection.ContainsKey(plateName))
-            LeverPlateDirection[plateName] = vector;
-    }
-    // ===========
 
     static GameController()
     {
@@ -76,6 +41,7 @@ public static class GameController
         }
     }
 
+    #region SceneAttributes 
     /// <summary>
     /// Scenes the player can access, the scene files must be included in the build path.
     /// </summary>
@@ -178,6 +144,10 @@ public static class GameController
         });
     }
 
+    #endregion
+
+    #region SceneObjects
+
     /// <summary>
     /// Clears the persisted data for the given scene.
     /// E.g. use with reset button.
@@ -221,6 +191,10 @@ public static class GameController
     {
         SceneShouldBeReset[sceneName] = resetScene;
     }
+
+    #endregion
+
+    #region SceneItems
 
     /// <summary>
     /// Set the generated the order of item Ids for a scene
@@ -270,5 +244,45 @@ public static class GameController
     {
         return InventoryItemsInPickUpOrder;
     }
+
+    #endregion
+
+    #region Lever-Persistence
+
+    public static bool ActivateLever(string leverName)
+    {
+        Debug.Log("Adding " + leverName);
+        if (!LeverInFinalPos.ContainsKey(leverName))
+            LeverInFinalPos.Add(leverName, true);
+        else
+            LeverInFinalPos[leverName] = !LeverInFinalPos[leverName];
+        return LeverInFinalPos[leverName];
+    }
+
+    public static bool GetLeverInFinalPos(string leverName)
+    {
+        if (!LeverInFinalPos.ContainsKey(leverName))
+            return false;
+        else
+            return LeverInFinalPos[leverName];
+    }
+
+    public static void ReversePlateDirection(string plateName)
+    {
+        LeverPlateDirection[plateName] *= -1;
+    }
+
+    public static Vector3 GetLeverPlateDirection(string plateName)
+    {
+        return LeverPlateDirection[plateName];
+    }
+
+    public static void SetLeverPlateDirection(string plateName, Vector3 vector)
+    {
+        if (!LeverPlateDirection.ContainsKey(plateName))
+            LeverPlateDirection[plateName] = vector;
+    }
+
+    #endregion
 }
 
