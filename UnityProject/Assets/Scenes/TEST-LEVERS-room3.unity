@@ -677,7 +677,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 417340, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -16.68
+      value: -5.3
       objectReference: {fileID: 0}
     - target: {fileID: 417340, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
       propertyPath: m_LocalPosition.y
@@ -705,7 +705,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 417340, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 417340, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
       propertyPath: m_LocalScale.y
@@ -767,7 +767,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08c210970d4f2a7449123873a8fe683f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: 1
+  sceneToLoad: 8
   sprites:
   - {fileID: 21300000, guid: f1d28c571907c474a9e15c0d300cdc3b, type: 3}
   - {fileID: 21300000, guid: 78f5e6e7ce262a7428861288855ac4be, type: 3}
@@ -7561,6 +7561,14 @@ Prefab:
       propertyPath: imgs.Array.data[2]
       value: 
       objectReference: {fileID: 423658474}
+    - target: {fileID: 407272, guid: 8c8680a1f76df6a44972ab5f187f64a6, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -3.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 462414, guid: 8c8680a1f76df6a44972ab5f187f64a6, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -2.99
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8c8680a1f76df6a44972ab5f187f64a6, type: 2}
   m_IsPrefabParent: 0
@@ -8839,8 +8847,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1203828974}
   m_HandleRect: {fileID: 1203828973}
   m_Direction: 2
-  m_Value: 0.9999998
-  m_Size: 0.4870968
+  m_Value: 0.9999999
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -16617,8 +16625,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisScene: 2
-  ItemKeyRange: 060000000700000008000000
-  pickUpFX: {fileID: 0}
+  UniqueItemSpawnIds: 
+  ItemPickUpSound: {fileID: 0}
 --- !u!1 &2097192712
 GameObject:
   m_ObjectHideFlags: 0

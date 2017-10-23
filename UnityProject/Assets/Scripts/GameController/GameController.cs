@@ -55,12 +55,17 @@ public static class GameController
         WelcomeScreen,
         [Level(Level.None), FileName("ExitScene")]
         ExitScene,
+
+        [Level(Level.Test), FileName("TEST-LEVERS-room2")]
+        TestLeverRoom2,
+        [Level(Level.Test), FileName("TEST-LEVERS-room3")]
+        TestLeverRoom3,
     }
 
     /// <summary>
     /// Level attribute for the game scenes.
     /// </summary>
-    public enum Level { Level1, Level2, None }
+    public enum Level { Level1, Level2, None, Test }
 
     public class LevelAttribute : Attribute
     {

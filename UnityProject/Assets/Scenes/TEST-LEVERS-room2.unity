@@ -1833,7 +1833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 621a702951915194b9fcf9f1f4db2282, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisScene: 1
+  thisScene: 8
 --- !u!4 &287266649
 Transform:
   m_ObjectHideFlags: 0
@@ -2644,7 +2644,7 @@ MonoBehaviour:
   m_LeverLayer:
     serializedVersion: 2
     m_Bits: 0
-  jumpAudio: {fileID: 0}
+  jumpAudio: {fileID: 8300000, guid: 20759609d758df945926fd231b58ec0a, type: 3}
   frozen: 0
 --- !u!50 &350478317
 Rigidbody2D:
@@ -5781,7 +5781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a7f0d923e5334f4293c0e635e29857e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damagedAudioClips: {fileID: 0}
+  damagedAudioClips: {fileID: 8300000, guid: dd5ec9d6a1b6c1e44bd7f6c95e5a8ad2, type: 3}
   isDead: 0
   imgs:
   - {fileID: 2084208201}
@@ -5995,7 +5995,9 @@ MonoBehaviour:
   parent: {fileID: 1314535556}
   distToSink: 0.2
   animationTimeInFrames: 10
-  pressuredAudioClips: []
+  pressuredAudioClips:
+  - {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
+  - {fileID: 8300000, guid: 5039414d94a6e4e70a5ab9e8833e992a, type: 3}
 --- !u!212 &817487401
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8159,7 +8161,9 @@ MonoBehaviour:
   parent: {fileID: 1840316393}
   distToSink: 0.2
   animationTimeInFrames: 10
-  pressuredAudioClips: []
+  pressuredAudioClips:
+  - {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
+  - {fileID: 8300000, guid: 5039414d94a6e4e70a5ab9e8833e992a, type: 3}
 --- !u!212 &1175842209
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8340,7 +8344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08c210970d4f2a7449123873a8fe683f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: 2
+  sceneToLoad: 9
   sprites:
   - {fileID: 21300000, guid: 09d59336f6e009946a49ede611e0ec1a, type: 3}
   - {fileID: 21300000, guid: 83c518b04b384174a9bf92f47cf5b116, type: 3}
@@ -9785,7 +9789,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3933f564c5a027242a7f662b88364c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ThisScene: 1
+  ThisScene: 8
   UniqueItemSpawnIds: 060000000400000005000000
   ItemPickUpSound: {fileID: 8300000, guid: d8d04c6f80a1140db85ede568dab1f51, type: 3}
 --- !u!4 &1366826563
@@ -10106,7 +10110,9 @@ MonoBehaviour:
   parent: {fileID: 563254459}
   distToSink: 0.2
   animationTimeInFrames: 10
-  pressuredAudioClips: []
+  pressuredAudioClips:
+  - {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
+  - {fileID: 8300000, guid: 5039414d94a6e4e70a5ab9e8833e992a, type: 3}
 --- !u!212 &1411585422
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10270,144 +10276,6 @@ GameObject:
 GameObject:
   m_PrefabParentObject: {fileID: 196582, guid: d11b50a0533d1374da4ea7565bbed15e, type: 2}
   m_PrefabInternal: {fileID: 1413297142}
---- !u!1001 &1416982829
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 417340, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -17.18
-      objectReference: {fileID: 0}
-    - target: {fileID: 417340, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 10.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 417340, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 1.00001
-      objectReference: {fileID: 0}
-    - target: {fileID: 417340, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 417340, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 417340, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 417340, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 417340, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
-      propertyPath: m_RootOrder
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 112224, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
-      propertyPath: m_Name
-      value: DoorToRoom1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11455370, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
-      propertyPath: sceneToLoad
-      value: level1room1
-      objectReference: {fileID: 0}
-    - target: {fileID: 21286678, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: b6fa2254eb1c04644aa712593f149aad,
-        type: 3}
-    - target: {fileID: 417340, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 417340, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 11455370, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
-      propertyPath: sps.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: f1d28c571907c474a9e15c0d300cdc3b,
-        type: 3}
-    - target: {fileID: 11455370, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
-      propertyPath: sps.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: 78f5e6e7ce262a7428861288855ac4be,
-        type: 3}
-    - target: {fileID: 11455370, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
-      propertyPath: sps.Array.data[2]
-      value: 
-      objectReference: {fileID: 21300000, guid: b6fa2254eb1c04644aa712593f149aad,
-        type: 3}
-    - target: {fileID: 11455370, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
-      propertyPath: sprites.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: f1d28c571907c474a9e15c0d300cdc3b,
-        type: 3}
-    - target: {fileID: 11455370, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
-      propertyPath: sprites.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: 78f5e6e7ce262a7428861288855ac4be,
-        type: 3}
-    - target: {fileID: 11455370, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
-      propertyPath: sprites.Array.data[2]
-      value: 
-      objectReference: {fileID: 21300000, guid: b6fa2254eb1c04644aa712593f149aad,
-        type: 3}
-    m_RemovedComponents:
-    - {fileID: 6147860, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
-    - {fileID: 11455370, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
-  m_ParentPrefab: {fileID: 100100000, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
-  m_IsPrefabParent: 0
---- !u!1 &1416982830 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 112224, guid: 3869373f9049d144a80b09b9f9567fec, type: 2}
-  m_PrefabInternal: {fileID: 1416982829}
---- !u!60 &1416982831
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1416982830}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  m_Points:
-    m_Paths:
-    - - {x: -0.08, y: 0.29999998}
-      - {x: -0.14999999, y: 0.13}
-      - {x: -0.14999999, y: -0.28}
-      - {x: -0.14, y: -0.29999998}
-      - {x: 0.13, y: -0.29999998}
-      - {x: 0.14999999, y: -0.28}
-      - {x: 0.14999999, y: 0.21}
-      - {x: 0.06, y: 0.29999998}
---- !u!114 &1416982832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1416982830}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08c210970d4f2a7449123873a8fe683f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneToLoad: 0
-  sprites:
-  - {fileID: 21300000, guid: f1d28c571907c474a9e15c0d300cdc3b, type: 3}
-  - {fileID: 21300000, guid: 78f5e6e7ce262a7428861288855ac4be, type: 3}
-  - {fileID: 21300000, guid: b6fa2254eb1c04644aa712593f149aad, type: 3}
-  gracePeriod: 3
 --- !u!1 &1441760178
 GameObject:
   m_ObjectHideFlags: 0
@@ -12431,7 +12299,7 @@ MonoBehaviour:
   m_LeverLayer:
     serializedVersion: 2
     m_Bits: 0
-  jumpAudio: {fileID: 0}
+  jumpAudio: {fileID: 8300000, guid: 2a8b22f1832b24d44b81eff0e387dc83, type: 3}
   frozen: 0
 --- !u!50 &1761057385
 Rigidbody2D:
