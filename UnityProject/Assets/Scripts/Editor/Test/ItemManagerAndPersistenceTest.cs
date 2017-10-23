@@ -28,7 +28,7 @@ public class ItemManagerAndPersistenceTest
     }
 
     [Test]
-    public void TestSpawnItemOnlyOnce()
+    public void TestSpawnItemsOnlyOnce()
     {
         // Add item Ids to spawn -- 1 is duplicated and should only be spawned once
         itemSpawnManager.UniqueItemSpawnIds = new int[] { 1, 1, 2, 3, 4 };
@@ -37,7 +37,7 @@ public class ItemManagerAndPersistenceTest
         createItemSpawnPosition(new Vector3(1, 1, 1));
         createItemSpawnPosition(new Vector3(2, 2, 2));
         createItemSpawnPosition(new Vector3(3, 3, 3));
-        // Spawn generate the item spawn order
+        // Generate the item spawn order
         itemSpawnManager.Start();
 
         // Retrive the items 
@@ -47,7 +47,7 @@ public class ItemManagerAndPersistenceTest
     }
 
     [Test]
-    public void SpawItemsInsufficientItemsTest()
+    public void TestSpawnItemsInsufficientItems()
     {
         itemSpawnManager.UniqueItemSpawnIds = new int[] { 1, 1, 4 }; // only two items to spawn
         createItemSpawnPosition(new Vector3(0, 0, 0));

@@ -28,6 +28,7 @@ public class GameControllerTest
         {
             GameController.PlayableScene.Level2Room1,
             GameController.PlayableScene.Level2Room2,
+            GameController.PlayableScene.Level2Room3,
         };
 
         Assert.AreEqual(expectedScenesLevel1, GameController.GetScenesForLevel(GameController.Level.Level1));
