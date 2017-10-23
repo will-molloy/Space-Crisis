@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityStandardAssets._2D;
 using System.Collections.Generic;
@@ -11,13 +11,6 @@ public class Lever : MonoBehaviour
 	public AudioClip pulledFX;
     public int timeInFrames;
     public List<GameObject> thingsToControl = new List<GameObject>();
-    LeverState state = LeverState.RIGHT;
-
-    enum LeverState
-    {
-        LEFT, RIGHT
-    }
-
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -68,17 +61,7 @@ public class Lever : MonoBehaviour
         if (isRunning) return;
         isRunning = true;
 
-        var ani = GetComponent<Animator>();
-        if(state == LeverState.LEFT)
-        {
-            ani.SetTrigger("triggerRight");
-            state = LeverState.RIGHT;
-        }
-        else
-        {
-            ani.SetTrigger("triggerLeft");
-            state = LeverState.LEFT;
-        }
+        Flip();
         remainingFrames = timeInFrames;
 
 		if (pulledFX != null){
