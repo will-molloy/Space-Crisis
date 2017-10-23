@@ -89,6 +89,10 @@ public static class GameController
         TestLeverRoom2,
         [Level(Level.Test), FileName("TEST-LEVERS-room3")]
         TestLeverRoom3,
+		[Level(Level.Opening), FileName("Cutscene")]
+		OpeningCutscene,
+		[Level(Level.Ending), FileName("Ending cutscene")]
+		EndingCutscene,
 
     }
 
@@ -108,7 +112,7 @@ public static class GameController
     /// <summary>
     /// Level attribute for the game scenes.
     /// </summary>
-    public enum Level { Level1, Level2, MiniGame, Test, None }
+    public enum Level { Level1, Level2, MiniGame, Test, None, Opening, Ending }
 
     #endregion
 
