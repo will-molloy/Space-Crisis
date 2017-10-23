@@ -2177,8 +2177,8 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 436.5, y: 212}
-  m_SizeDelta: {x: 873, y: 0}
+  m_AnchoredPosition: {x: 347, y: 184}
+  m_SizeDelta: {x: 694, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &463308740
 MonoBehaviour:
@@ -3767,6 +3767,7 @@ GameObject:
   - 114: {fileID: 1207251607}
   - 114: {fileID: 1207251606}
   - 114: {fileID: 1207251605}
+  - 114: {fileID: 1207251609}
   m_Layer: 5
   m_Name: Level 1
   m_TagString: Untagged
@@ -3847,8 +3848,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1207251605}
-        m_MethodName: LoadScene
+      - m_Target: {fileID: 1207251609}
+        m_MethodName: ResetScenesInLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3895,6 +3896,18 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1207251603}
+--- !u!114 &1207251609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1207251603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 443ecaaee50a2134c977dc93991a80ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ThisLevel: 0
 --- !u!1 &1221305951 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100004, guid: 7461a7b0cf97947fd9b9e4502fd2d07b, type: 2}
@@ -5045,6 +5058,7 @@ GameObject:
   - 114: {fileID: 1923424886}
   - 114: {fileID: 1923424885}
   - 114: {fileID: 1923424884}
+  - 114: {fileID: 1923424888}
   m_Layer: 5
   m_Name: Level 2
   m_TagString: Untagged
@@ -5125,8 +5139,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1923424884}
-        m_MethodName: LoadScene
+      - m_Target: {fileID: 1923424888}
+        m_MethodName: ResetScenesInLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5173,6 +5187,18 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1923424882}
+--- !u!114 &1923424888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1923424882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 443ecaaee50a2134c977dc93991a80ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ThisLevel: 1
 --- !u!1001 &1963906508
 Prefab:
   m_ObjectHideFlags: 0
