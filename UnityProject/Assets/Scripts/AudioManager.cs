@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public static class AudioManager{
 
@@ -14,7 +16,7 @@ public static class AudioManager{
 	{
 		jumpClips = new AudioClip[2];
 		pressureFX = new AudioClip[2];
-
+		#if UNITY_EDITOR
 		leverFX = (AudioClip)AssetDatabase.LoadAssetAtPath("Assets/Audio/CasualGameSounds/DM-CGS-39.wav", typeof(AudioClip));
 		if(leverFX == null){
 			Debug.LogError ("No lever audio");
@@ -29,7 +31,7 @@ public static class AudioManager{
 
 		pressureFX[0] = (AudioClip)AssetDatabase.LoadAssetAtPath("Assets/Audio/CasualGameSounds/DM-CGS-26.wav", typeof(AudioClip));
 		pressureFX[1] = (AudioClip)AssetDatabase.LoadAssetAtPath("Assets/Audio/CasualGameSounds/DM-CGS-27.wav", typeof(AudioClip));
-
+		#endif
 	}
 
 	public static void loadAudio()
