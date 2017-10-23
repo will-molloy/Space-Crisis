@@ -15,13 +15,13 @@ public class PlateScript : MonoBehaviour {
 
     public void reverseDirection()
     {
-        GameController.ReversePlateDirection(this.name);
+        this.ReversePlateDirection();
     }
 
     public void start()
     {
-        GameController.SetLeverPlateDirection(this.name, translationDirection);
-        translationDirection = GameController.GetLeverPlateDirection(this.name);
+        this.SetLeverPlateDirection(translationDirection);
+        translationDirection = this.GetLeverPlateDirection();
         isRunning = true;
     }
 

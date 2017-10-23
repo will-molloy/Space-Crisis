@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour
 {
-    public GameController.PlayableScene sceneToLoad;
+    public GameController.PlayableScene sceneToLoad = GameController.PlayableScene.None;
     public Sprite[] sprites = new Sprite[3];
     private List<GameObject> colliders;
     public float gracePeriod = 2f;
@@ -16,6 +16,8 @@ public class ChangeScene : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        if (sceneToLoad == GameController.PlayableScene.None)
+            throw new System.Exception("Please set ThisScene");
         dMan = FindObjectOfType<DialogueManager>();
         colliders = new List<GameObject>();
     }
@@ -43,6 +45,7 @@ public class ChangeScene : MonoBehaviour
                 }
             }
         }
+
     }
 
     private void UpdateGracePeriod()

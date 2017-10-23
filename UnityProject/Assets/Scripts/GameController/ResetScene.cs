@@ -7,10 +7,11 @@ using UnityEngine.SceneManagement;
 /// <author>Will Molloy</author>
 public class ResetScene : MonoBehaviour {
 
-    public GameController.PlayableScene ThisScene;
+    private GameController.PlayableScene ThisScene;
 	LifeSystem life;
 
 	void Awake () {
+        ThisScene = GameController.GetActivePlayableScene();
 		GameObject team = GameObject.FindGameObjectWithTag("Team");
 		life = team.GetComponent<LifeSystem> ();
 	}
@@ -18,9 +19,9 @@ public class ResetScene : MonoBehaviour {
     public void ResetCurrentScene()
 	{
 		if (!life.isDead) {
-			// Set scenes persistence component to reset the scene when it awakes.
-			GameController.SetShouldBeReset (ThisScene, true);
-			GameController.ClearPersistedDataForScene (ThisScene);
+            // Set scenes persistence component to reset the scene when it awakes.
+            ThisScene.SetShouldBeReset (true);
+            ThisScene.ClearPersistedDataForScene ();
 			// Reload the scene.
 			SceneManager.LoadScene (ThisScene.GetFileName());
 		}

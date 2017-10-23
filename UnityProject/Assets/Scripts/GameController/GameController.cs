@@ -3,16 +3,28 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using mattmc3.Common.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Contains all static data for the game scenes.
+/// All a massive hack.
 /// </summary>
 /// 
 /// <author>Will Molloy</author>
 public static class GameController
 {
-    // Set in scene persistence start() or awake()
-    public static PlayableScene CurrentScene;
+    // For picking up items
+    private static PlayableScene ActiveScene;
+
+    public static void setActiveScene(this PlayableScene scene)
+    {
+        ActiveScene = scene;
+    }
+
+    public static PlayableScene getActiveScene()
+    {
+        return ActiveScene;
+    }
 
     // Scene.name :: Object.name :: Position, For persisting given scene objects
     private static Dictionary<PlayableScene, Dictionary<string, Vector3>> SavedScenePositions = new Dictionary<PlayableScene, Dictionary<string, Vector3>>();
@@ -29,6 +41,8 @@ public static class GameController
     // For maintaining levers 
     private static Dictionary<string, bool> LeverInFinalPos = new Dictionary<string, bool>();
     private static Dictionary<string, Vector3> LeverPlateDirection = new Dictionary<string, Vector3>();
+    private static Dictionary<PlayableScene, HashSet<string>> LeversInScene = new Dictionary<PlayableScene, HashSet<string>>();
+
 
     static GameController()
     {
@@ -38,10 +52,12 @@ public static class GameController
             InitialScenePositions[playableScene] = new Dictionary<string, Vector3>();
             SceneShouldBeReset[playableScene] = false;
             GeneratedItemsForScene[playableScene] = new OrderedDictionary<int, bool>();
+            LeversInScene[playableScene] = new HashSet<string>();
         }
     }
 
-    #region SceneAttributes 
+    #region Scenes and Levels
+
     /// <summary>
     /// Scenes the player can access, the scene files must be included in the build path.
     /// </summary>
@@ -63,17 +79,40 @@ public static class GameController
         WelcomeScreen,
         [Level(Level.None), FileName("ExitScene")]
         ExitScene,
-
+        [Level(Level.MiniGame), FileName("miniGame1exp")]
+        miniGame1exp,
+        // Nullable
+        [Level(Level.None), FileName("")]
+        None,
+        // Tests
         [Level(Level.Test), FileName("TEST-LEVERS-room2")]
         TestLeverRoom2,
         [Level(Level.Test), FileName("TEST-LEVERS-room3")]
         TestLeverRoom3,
+
+    }
+
+    public static PlayableScene GetActivePlayableScene()
+    {
+        var x = SceneManager.GetActiveScene().name;
+        foreach(PlayableScene y in Enum.GetValues(typeof(PlayableScene)))
+        {
+            if (y.GetFileName().Equals(x))
+            {
+                return y;
+            }
+        }
+        return PlayableScene.None;
     }
 
     /// <summary>
     /// Level attribute for the game scenes.
     /// </summary>
-    public enum Level { Level1, Level2, None, Test }
+    public enum Level { Level1, Level2, MiniGame, Test, None }
+
+    #endregion
+
+    #region SceneAttributes 
 
     public class LevelAttribute : Attribute
     {
@@ -122,7 +161,7 @@ public static class GameController
     /// <summary>
     /// Gets all the scenes assigned to the given level
     /// </summary>
-    public static List<PlayableScene> GetScenesForLevel(Level levelToRetrieve)
+    public static List<PlayableScene> GetScenes(this Level levelToRetrieve)
     {
         PlayableScene[] scenes = (PlayableScene[])Enum.GetValues(typeof(PlayableScene));
         return scenes.Where(scene => scene.GetAttribute<LevelAttribute>().level.Equals(levelToRetrieve)).ToList();
@@ -134,11 +173,11 @@ public static class GameController
     /// 
     /// Item Spawns are reset.
     /// </summary>
-    public static void ClearScenesForLevel(Level level)
+    public static void ClearScenesIncludingItems(this Level level)
     {
-        GetScenesForLevel(level).ForEach(scene =>
+        level.GetScenes().ForEach(scene =>
         {
-            ClearPersistedDataForScene(scene);
+            scene.ClearPersistedDataForScene();
             GeneratedItemsForScene[scene] = new OrderedDictionary<int, bool>();
             InventoryItemsInPickUpOrder = new List<int>();
         });
@@ -154,15 +193,26 @@ public static class GameController
     /// 
     /// Item spawns ARE NOT reset
     /// </summary>
-    public static void ClearPersistedDataForScene(PlayableScene sceneName)
+    public static void ClearPersistedDataForScene(this PlayableScene scene)
     {
-        SavedScenePositions[sceneName] = new Dictionary<string, Vector3>();
+        SavedScenePositions[scene] = new Dictionary<string, Vector3>();
+        foreach(string leverName in scene.GetLevers())
+        {
+            if (GetLeverInFinalPos(GameObject.Find(leverName).GetComponent<Lever>()))
+            {
+                LeverInFinalPos[leverName] = false;
+                foreach (var x in GameObject.Find(leverName).GetComponent<Lever>().thingsToControl)
+                {
+                    x.GetComponent<PlateScript>().reverseDirection();
+                }
+            }
+        }
     }
 
     /// <summary>
     /// Saves the positions of the given objects for the given scene.
     /// </summary>
-    public static void SaveObjectPositions(PlayableScene sceneName, List<GameObject> objects)
+    public static void SaveObjectPositions(this PlayableScene sceneName, List<GameObject> objects)
     {
         foreach (GameObject obj in objects)
         {
@@ -172,22 +222,22 @@ public static class GameController
         }
     }
 
-    public static Dictionary<string, Vector3> GetSavedObjectPositons(PlayableScene sceneName)
+    public static Dictionary<string, Vector3> GetSavedObjectPositons(this PlayableScene sceneName)
     {
         return SavedScenePositions[sceneName];
     }
 
-    public static Dictionary<string, Vector3> GetInitialObjectPositions(PlayableScene sceneName)
+    public static Dictionary<string, Vector3> GetInitialObjectPositions(this PlayableScene sceneName)
     {
         return InitialScenePositions[sceneName];
     }
 
-    public static bool GetShouldBeReset(PlayableScene sceneName)
+    public static bool GetShouldBeReset(this PlayableScene sceneName)
     {
         return SceneShouldBeReset[sceneName];
     }
 
-    public static void SetShouldBeReset(PlayableScene sceneName, bool resetScene)
+    public static void SetShouldBeReset(this PlayableScene sceneName, bool resetScene)
     {
         SceneShouldBeReset[sceneName] = resetScene;
     }
@@ -199,7 +249,7 @@ public static class GameController
     /// <summary>
     /// Set the generated the order of item Ids for a scene
     /// </summary>
-    public static void AddGeneratedItems(PlayableScene scene, List<int> itemIds)
+    public static void AddGeneratedItems(this PlayableScene scene, List<int> itemIds)
     {
         itemIds.ForEach(itemId =>
         {
@@ -211,7 +261,7 @@ public static class GameController
     /// <summary>
     /// Returns the generated item Id set for the given scene
     /// </summary>
-    public static OrderedDictionary<int, bool> GetItemsInScene(PlayableScene scene)
+    public static OrderedDictionary<int, bool> GetItemsInScene(this PlayableScene scene)
     {
         return GeneratedItemsForScene[scene];
     }
@@ -221,7 +271,7 @@ public static class GameController
     /// 
     /// If you want duplicates have them in the item database twice with a different key.
     /// </summary>
-    public static void AddItemToPersistedInventory(PlayableScene scene, int itemId)
+    public static void AddItemToPersistedInventory(this PlayableScene scene, int itemId)
     {
         GeneratedItemsForScene[scene].SetValue(itemId, true);
         if (!InventoryItemsInPickUpOrder.Contains(itemId))
@@ -231,7 +281,7 @@ public static class GameController
     /// <summary>
     /// Remove the given item from the given scene from the global inventory.
     /// </summary>
-    public static void RemoveItemFromPersistedInventory(PlayableScene scene, int itemId)
+    public static void RemoveItemFromPersistedInventory(this PlayableScene scene, int itemId)
     {
         GeneratedItemsForScene[scene].SetValue(itemId, false);
         InventoryItemsInPickUpOrder.Remove(itemId);
@@ -249,9 +299,9 @@ public static class GameController
 
     #region Lever-Persistence
 
-    public static bool ActivateLever(string leverName)
+    public static bool ActivateLever(this Lever lever)
     {
-        Debug.Log("Adding " + leverName);
+        var leverName = lever.name;
         if (!LeverInFinalPos.ContainsKey(leverName))
             LeverInFinalPos.Add(leverName, true);
         else
@@ -259,30 +309,42 @@ public static class GameController
         return LeverInFinalPos[leverName];
     }
 
-    public static bool GetLeverInFinalPos(string leverName)
+    public static bool GetLeverInFinalPos(this Lever lever)
     {
+        var leverName = lever.name;
         if (!LeverInFinalPos.ContainsKey(leverName))
             return false;
         else
             return LeverInFinalPos[leverName];
     }
 
-    public static void ReversePlateDirection(string plateName)
+    public static void ReversePlateDirection(this PlateScript plate)
     {
-        LeverPlateDirection[plateName] *= -1;
+        LeverPlateDirection[plate.name] *= -1;
     }
 
-    public static Vector3 GetLeverPlateDirection(string plateName)
+    public static Vector3 GetLeverPlateDirection(this PlateScript plate)
     {
-        return LeverPlateDirection[plateName];
+        return LeverPlateDirection[plate.name];
     }
 
-    public static void SetLeverPlateDirection(string plateName, Vector3 vector)
+    public static void SetLeverPlateDirection(this PlateScript plate, Vector3 vector)
     {
-        if (!LeverPlateDirection.ContainsKey(plateName))
-            LeverPlateDirection[plateName] = vector;
+        if (!LeverPlateDirection.ContainsKey(plate.name))
+            LeverPlateDirection[plate.name] = vector;
     }
 
+    // For resetting levers ===
+    public static void AddLever(this PlayableScene scene, Lever lever)
+    {
+        LeversInScene[scene].Add(lever.name);
+    }
+
+    public static HashSet<string> GetLevers(this PlayableScene scene)
+    {
+        return LeversInScene[scene];
+    }
+    // ====
     #endregion
 }
 

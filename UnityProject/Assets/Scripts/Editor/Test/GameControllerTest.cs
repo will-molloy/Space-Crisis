@@ -28,12 +28,6 @@ public class GameControllerTest
     [Test]
     public void SceneLevelRetrievalTest()
     {
-        List<GameController.PlayableScene> expectedScenesNoLevel = new List<GameController.PlayableScene>
-        {
-            GameController.PlayableScene.WelcomeScreen,
-            GameController.PlayableScene.ExitScene,
-        };
-
         List<GameController.PlayableScene> expectedScenesLevel1 = new List<GameController.PlayableScene>
         {
             GameController.PlayableScene.Level1Room1,
@@ -48,9 +42,8 @@ public class GameControllerTest
             GameController.PlayableScene.Level2Room3,
         };
 
-        Assert.AreEqual(expectedScenesLevel1, GameController.GetScenesForLevel(GameController.Level.Level1));
-        Assert.AreEqual(expectedScenesLevel2, GameController.GetScenesForLevel(GameController.Level.Level2));
-        Assert.AreEqual(expectedScenesNoLevel, GameController.GetScenesForLevel(GameController.Level.None));
+        Assert.AreEqual(expectedScenesLevel1, GameController.Level.Level1.GetScenes());
+        Assert.AreEqual(expectedScenesLevel2, GameController.Level.Level2.GetScenes());
     }
 
     /// <summary>
@@ -66,11 +59,11 @@ public class GameControllerTest
         // ensure gamecontroller has the objects position in both initial and saved dictionaries
         Assert.AreEqual(
             new Vector3(0, 0, 0),
-            GameController.GetInitialObjectPositions(testScene)[persistedObj.name]
+            testScene.GetInitialObjectPositions()[persistedObj.name]
             );
         Assert.AreEqual(
             new Vector3(0, 0, 0),
-            GameController.GetSavedObjectPositons(testScene)[persistedObj.name]
+            testScene.GetSavedObjectPositons()[persistedObj.name]
             );
     }
 
@@ -93,13 +86,13 @@ public class GameControllerTest
         // ensure initial dictionary has only initial position
         Assert.AreEqual(
             new Vector3(0, 0, 0),
-            GameController.GetInitialObjectPositions(testScene)[persistedObj.name]
+            testScene.GetInitialObjectPositions()[persistedObj.name]
             );
 
         // ensure saved dictionary has latest position
         Assert.AreEqual(
             new Vector3(1, 1, 1),
-            GameController.GetSavedObjectPositons(testScene)[persistedObj.name]
+            testScene.GetSavedObjectPositons()[persistedObj.name]
             );
     }
 }
