@@ -81,10 +81,9 @@ public class LeverEventTest
 
         // Reload the scene
         Init();
-        persistence.Start();
 
         // ensure plate is still in moved position
-        plateObj.transform.position = GameController.GetSavedObjectPositons(testScene)[plateObj.name];
+        plateObj.transform.position = testScene.GetSavedObjectPositons()[plateObj.name];
         Assert.AreEqual(new Vector3(0, -10, 0), plateObj.transform.position);
         ActivateLever();
 

@@ -18,11 +18,10 @@ public class ScenePersistence : MonoBehaviour
     /// </summary>
     public void Start()
     {
-        // Set global scene
-        GameController.CurrentScene = thisScene;
-
+        if (thisScene == GameController.PlayableScene.None)
+            throw new System.Exception("Please set ThisScene in inventory panel");
         // Determine if scene should be restored or reset
-        if (GameController.GetShouldBeReset(thisScene))
+        if (thisScene.GetShouldBeReset())
             ResetScene();
         RestoreScene();
 
@@ -44,15 +43,15 @@ public class ScenePersistence : MonoBehaviour
 
     private void ResetScene()
     {
-        MoveObjects(GameController.GetInitialObjectPositions(thisScene)); // move objects to initial, default positions
+        MoveObjects(thisScene.GetInitialObjectPositions()); // move objects to initial, default positions
 		AudioManager.loadAudio();
-        GameController.SetShouldBeReset(thisScene, false); // scene has now been reset, set back to false
+        thisScene.SetShouldBeReset(false); // scene has now been reset, set back to false
     }
 
     private void RestoreScene()
     {
 		AudioManager.loadAudio();
-        MoveObjects(GameController.GetSavedObjectPositons(thisScene)); // move objects to saved, persisted positions
+        MoveObjects(thisScene.GetSavedObjectPositons()); // move objects to saved, persisted positions
     }
 
     private void MoveObjects(Dictionary<string, Vector3> objPositions)
@@ -72,7 +71,7 @@ public class ScenePersistence : MonoBehaviour
 
     private void SaveScene()
     {
-        GameController.SaveObjectPositions(thisScene, getChildObjs(transform));
+        thisScene.SaveObjectPositions(getChildObjs(transform));
     }
 
     private List<GameObject> getChildObjs(Transform transform)

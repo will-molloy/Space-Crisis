@@ -16,6 +16,8 @@ public class ChangeScene : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        if (sceneToLoad == GameController.PlayableScene.None)
+            throw new System.Exception("Please set ThisScene");
         dMan = FindObjectOfType<DialogueManager>();
         colliders = new List<GameObject>();
     }

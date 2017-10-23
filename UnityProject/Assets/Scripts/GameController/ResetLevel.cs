@@ -19,7 +19,7 @@ public class ResetLevel : MonoBehaviour {
             if (!firstSceneInLevel.HasValue)
                 firstSceneInLevel = scene;
             Debug.Log("Resseting: " + ThisLevel.ToString() + " ," + scene.ToString());
-            GameController.SetShouldBeReset(scene, true);
+            scene.SetShouldBeReset(true);
         }
         ThisLevel.ClearScenesIncludingItems();
         // Load the first scene in the level

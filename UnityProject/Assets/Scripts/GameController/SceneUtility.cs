@@ -8,6 +8,8 @@ public class SceneUtility : MonoBehaviour {
 
     public void LoadScene()
     {
+        if (SceneToLoad == GameController.PlayableScene.None)
+            throw new System.Exception("Please set ThisScene");
         SceneManager.LoadScene(GameController.GetFileName(SceneToLoad));
     }
 }
