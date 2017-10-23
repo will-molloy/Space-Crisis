@@ -118,6 +118,12 @@ public class DialogHolderCutscene : MonoBehaviour
 		foreach (Transform child in camera.transform) if (child.CompareTag("Finish")) {
 				child.gameObject.SetActive (true);	
 			}
+
+		GameObject button = GameObject.Find ("Button");
+
+		if(button != null){
+			button.SetActive (false);
+		}
 				
 
 		audiosource = (AudioSource)GetComponent<AudioSource>();
