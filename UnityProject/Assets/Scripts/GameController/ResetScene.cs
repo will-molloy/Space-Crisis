@@ -22,8 +22,7 @@ public class ResetScene : MonoBehaviour {
 			GameController.SetShouldBeReset (ThisScene, true);
 			GameController.ClearPersistedDataForScene (ThisScene);
 			// Reload the scene.
-			SceneManager.LoadScene (ThisScene.ToString ());
-    
+			SceneManager.LoadScene (ThisScene.GetFileName());
 		}
 	}
 }
