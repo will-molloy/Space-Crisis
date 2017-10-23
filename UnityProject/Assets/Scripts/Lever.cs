@@ -7,36 +7,9 @@ public class Lever : MonoBehaviour
 {
     protected int remainingFrames = int.MaxValue;
     protected bool isRunning = false;
-	public AudioClip pulledFX;
+    public AudioClip pulledFX;
     public int timeInFrames;
     public List<GameObject> thingsToControl = new List<GameObject>();
-
-    private static Vector3 InitialScale, FinalScale;
-    private Dictionary<string, Vector3> persistedPlatePositions;
-
-    public void Start()
-    {
-        persistedPlatePositions = GameController.GetPlatePositons();
-
-        if (InitialScale == null)
-        {
-            InitialScale = transform.localScale;
-            Vector3 theScale = transform.localScale;
-            theScale.x *= -1;
-            FinalScale = theScale;
-        }
-
-        foreach(GameObject obj in thingsToControl)
-        {
-            PlateScript ps = obj.GetComponent<PlateScript>();
-            Vector3 currentObjPos = obj.transform.position;
-            if (!persistedPlatePositions.ContainsKey(obj.name)) // Write once
-            {
-                GameController.AddPlatePosition(obj.name, currentObjPos);
-                persistedPlatePositions = GameController.GetPlatePositons();
-            }
-        }
-    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -62,18 +35,18 @@ public class Lever : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        Debug.Log(GameController.GetLeverInFinalPos(this.name));
+        if (GameController.GetLeverInFinalPos(this.name))
+        {
+            Flip();
+        }
+    }
+
     // Update is called once per frame
     virtual public void Update()
     {
-        //if (persistedPlatePositions.Count > 0 && persistedPlatePositions[thingsToControl[0].name] == thingsToControl[0].transform.position)
-        //{
-        //    // Initial position
-        //    transform.localScale = InitialScale; 
-        //} else
-        //{
-        //    transform.localScale = FinalScale;
-        //}
-
         if (isRunning) remainingFrames--;
         if (isRunning && remainingFrames < 1)
         {
@@ -90,24 +63,33 @@ public class Lever : MonoBehaviour
     public virtual void activate()
     {
         if (isRunning) return;
+
+        bool finalPosition = GameController.ActivateLever(this.name);
+        Debug.Log(finalPosition);
         isRunning = true;
 
         Flip();
         remainingFrames = timeInFrames;
 
-		if (pulledFX != null){
-			AudioSource.PlayClipAtPoint(pulledFX, transform.position);
-		}
+        if (pulledFX != null)
+        {
+            AudioSource.PlayClipAtPoint(pulledFX, transform.position);
+        }
 
         foreach (GameObject obj in thingsToControl)
         {
             PlateScript ps = obj.GetComponent<PlateScript>();
-            Vector3 currentObjPos = obj.transform.position;
-            if (currentObjPos != persistedPlatePositions[obj.name])
+            if (!finalPosition)
             {
+                // Move objs to
                 Debug.Log("Reversing");
                 ps.reverseDirection();
+            } else
+            {
+                // Move objs back
             }
+            Vector3 currentObjPos = obj.transform.position;
+
             ps.setAnimationTime(this.timeInFrames);
             ps.start();
         }
@@ -121,7 +103,8 @@ public class Lever : MonoBehaviour
         transform.localScale = theScale;
     }
 
-	public void assignSoundFX(AudioClip clip){
-		pulledFX = clip;
-	}
+    public void assignSoundFX(AudioClip clip)
+    {
+        pulledFX = clip;
+    }
 }

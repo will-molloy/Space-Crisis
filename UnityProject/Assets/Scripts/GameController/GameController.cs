@@ -12,7 +12,7 @@ using mattmc3.Common.Collections.Generic;
 public static class GameController
 {
     // Set in scene persistence start() or awake()
-    public static PlayableScene CurrentScene; 
+    public static PlayableScene CurrentScene;
 
     // Scene.name :: Object.name :: Position, For persisting given scene objects
     private static Dictionary<PlayableScene, Dictionary<string, Vector3>> SavedScenePositions = new Dictionary<PlayableScene, Dictionary<string, Vector3>>();
@@ -26,20 +26,27 @@ public static class GameController
     // For maintaining item pick up order
     private static List<int> InventoryItemsInPickUpOrder = new List<int>();
 
-    // For maintaining levers
-    private static Dictionary<PlayableScene, Dictionary<string, Vector3>> InitialPlatePositions = new Dictionary<PlayableScene, Dictionary<string, Vector3>>();
+    // For maintaining levers ===============
+    private static Dictionary<string, bool> LeverInFinalPos = new Dictionary<string, bool>();
 
-    public static void AddPlatePosition(string plateName, Vector3 position)
+    public static bool ActivateLever(string leverName)
     {
-        Debug.Log("Saving plate positions: " + CurrentScene.GetFileName() + " - " + plateName + " Init: " + position);
-
-        InitialPlatePositions[CurrentScene][plateName] = position;
+        Debug.Log("Adding " + leverName);
+        if (!LeverInFinalPos.ContainsKey(leverName))
+            LeverInFinalPos.Add(leverName, true);
+        else
+            LeverInFinalPos[leverName] = !LeverInFinalPos[leverName];
+        return LeverInFinalPos[leverName];
     }
 
-    public static Dictionary<string, Vector3> GetPlatePositons()
+    public static bool GetLeverInFinalPos(string leverName)
     {
-        return InitialPlatePositions[CurrentScene];
+        if (!LeverInFinalPos.ContainsKey(leverName))
+            return false;
+        else
+            return LeverInFinalPos[leverName];
     }
+    // ===========
 
     static GameController()
     {
@@ -49,7 +56,6 @@ public static class GameController
             InitialScenePositions[playableScene] = new Dictionary<string, Vector3>();
             SceneShouldBeReset[playableScene] = false;
             GeneratedItemsForScene[playableScene] = new OrderedDictionary<int, bool>();
-            InitialPlatePositions[playableScene] = new Dictionary<string, Vector3>();
         }
     }
 
