@@ -82,5 +82,24 @@ public class LifeSystem : MonoBehaviour {
 	public void ResetHearts(){
 		currentHearts = 3;
 	}
-		
+
+    public void TakeDamageWithoutTransform()
+    {
+        currentHearts -= 1;
+        currentHearts = Mathf.Clamp(currentHearts, 0, startHearts * healthPerHeart);
+        UpdateHearts();
+
+        if (damagedAudioClips != null)
+        {
+            // Play a audio clip of the player getting hurt.
+            AudioSource.PlayClipAtPoint(damagedAudioClips, transform.position);
+        }
+
+
+        if (currentHearts == 0)
+        {
+            isDead = true;
+        }
+        // do not transform
+    }
 }
