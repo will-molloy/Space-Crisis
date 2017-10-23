@@ -7,10 +7,11 @@ using UnityEngine.SceneManagement;
 /// <author>Will Molloy</author>
 public class ResetScene : MonoBehaviour {
 
-    public GameController.PlayableScene ThisScene;
+    private GameController.PlayableScene ThisScene;
 	LifeSystem life;
 
 	void Awake () {
+        ThisScene = GameController.GetActivePlayableScene();
 		GameObject team = GameObject.FindGameObjectWithTag("Team");
 		life = team.GetComponent<LifeSystem> ();
 	}

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class Lever : MonoBehaviour
 {
-    public GameController.PlayableScene ThisScene;
+    private GameController.PlayableScene ThisScene;
     protected int remainingFrames = int.MaxValue;
     protected bool isRunning = false;
     public AudioClip pulledFX;
@@ -44,8 +44,7 @@ public class Lever : MonoBehaviour
 
     void Start()
     {
-        if (ThisScene == GameController.PlayableScene.None)
-            throw new System.Exception("Please set ThisScene");
+        ThisScene = GameController.getActiveScene();
         ThisScene.AddLever(this);
         if (this.GetLeverInFinalPos())
         {
