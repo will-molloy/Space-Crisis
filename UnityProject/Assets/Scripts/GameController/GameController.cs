@@ -177,19 +177,19 @@ public static class GameController
     /// 
     /// Item spawns ARE NOT reset
     /// </summary>
-    public static void ClearPersistedDataForScene(this PlayableScene sceneName)
+    public static void ClearPersistedDataForScene(this PlayableScene scene)
     {
-        SavedScenePositions[sceneName] = new Dictionary<string, Vector3>();
-        foreach(string leverName in sceneName.GetLevers())
+        SavedScenePositions[scene] = new Dictionary<string, Vector3>();
+        foreach(string leverName in scene.GetLevers())
         {
-            if (LeverInFinalPos[leverName])
-            LeverInFinalPos[leverName] = false;
-
-        }
-        var keys = LeverPlateDirection.Keys;
-        foreach (var x in keys)
-        {
-            LeverPlateDirection[x] *= -1;
+            if (GetLeverInFinalPos(GameObject.Find(leverName).GetComponent<Lever>()))
+            {
+                LeverInFinalPos[leverName] = false;
+                foreach (var x in GameObject.Find(leverName).GetComponent<Lever>().thingsToControl)
+                {
+                    x.GetComponent<PlateScript>().reverseDirection();
+                }
+            }
         }
     }
 
