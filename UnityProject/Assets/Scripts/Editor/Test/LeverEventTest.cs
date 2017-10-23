@@ -24,10 +24,10 @@ public class LeverEventTest
             plateObj,
         };
 
-        // setup
         plate.translationAmount = 10;
         lever.timeInFrames = 1;
         plate.translationDirection = Vector3.down;
+        lever.Start();
     }
 
     private void ActivateLever()

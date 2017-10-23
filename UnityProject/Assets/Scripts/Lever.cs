@@ -11,6 +11,33 @@ public class Lever : MonoBehaviour
     public int timeInFrames;
     public List<GameObject> thingsToControl = new List<GameObject>();
 
+    private static Vector3 InitialScale, FinalScale;
+    private Dictionary<string, Vector3> persistedPlatePositions;
+
+    public void Start()
+    {
+        persistedPlatePositions = GameController.GetPlatePositons();
+
+        if (InitialScale == null)
+        {
+            InitialScale = transform.localScale;
+            Vector3 theScale = transform.localScale;
+            theScale.x *= -1;
+            FinalScale = theScale;
+        }
+
+        foreach(GameObject obj in thingsToControl)
+        {
+            PlateScript ps = obj.GetComponent<PlateScript>();
+            Vector3 currentObjPos = obj.transform.position;
+            if (!persistedPlatePositions.ContainsKey(obj.name)) // Write once
+            {
+                GameController.AddPlatePosition(obj.name, currentObjPos);
+                persistedPlatePositions = GameController.GetPlatePositons();
+            }
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
@@ -38,6 +65,15 @@ public class Lever : MonoBehaviour
     // Update is called once per frame
     virtual public void Update()
     {
+        //if (persistedPlatePositions.Count > 0 && persistedPlatePositions[thingsToControl[0].name] == thingsToControl[0].transform.position)
+        //{
+        //    // Initial position
+        //    transform.localScale = InitialScale; 
+        //} else
+        //{
+        //    transform.localScale = FinalScale;
+        //}
+
         if (isRunning) remainingFrames--;
         if (isRunning && remainingFrames < 1)
         {
@@ -53,7 +89,6 @@ public class Lever : MonoBehaviour
 
     public virtual void activate()
     {
-        Dictionary<string, Vector3> persistedPlatePositions = GameController.GetPlatePositons();
         if (isRunning) return;
         isRunning = true;
 
@@ -68,12 +103,6 @@ public class Lever : MonoBehaviour
         {
             PlateScript ps = obj.GetComponent<PlateScript>();
             Vector3 currentObjPos = obj.transform.position;
-            if (!persistedPlatePositions.ContainsKey(obj.name)) // Write once
-            {
-                GameController.AddPlatePosition(obj.name, currentObjPos);
-                persistedPlatePositions = GameController.GetPlatePositons();
-            }
-
             if (currentObjPos != persistedPlatePositions[obj.name])
             {
                 Debug.Log("Reversing");
