@@ -16,7 +16,7 @@ public class ScenePersistence : MonoBehaviour
     /// <summary>
     /// Restore or reset the scene.
     /// </summary>
-    void Start()
+    public void Start()
     {
         // Determine if scene should be restored or reset
         if (GameController.GetShouldBeReset(thisScene))
