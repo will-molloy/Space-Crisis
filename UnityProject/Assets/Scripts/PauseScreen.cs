@@ -6,7 +6,6 @@ public class PauseScreen : MonoBehaviour {
 	Timer timer;
 	public bool paused = false;
 	public GameObject pauseScreen;
-	GameObject[] players;
 	bool frozen = false;
 	public GameObject pauseMenu;
 	public GameObject controlPanel;
@@ -14,7 +13,6 @@ public class PauseScreen : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		timer = GameObject.Find("TimerText").GetComponent<Timer>();
-		players = GameObject.FindGameObjectsWithTag ("Player");
 	}
 	
 	// Update is called once per frame

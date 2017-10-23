@@ -25,9 +25,6 @@ public class ShowTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         canvasRectTransform = GameObject.FindGameObjectWithTag("Canvas").GetComponent<RectTransform>() as RectTransform;
     }
 
-
-
-
     public void OnPointerEnter(PointerEventData data)                               //if you hit a item in the slot
     {
         
@@ -45,8 +42,10 @@ public class ShowTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         if (tooltip != null)
         {
             item = GetComponent<ItemOnObject>().item;                   //we get the item
+
             tooltip.item = item;                                        //set the item in the tooltip
             tooltip.activateTooltip();                                  //set all informations of the item in the tooltip
+
             if (canvasRectTransform == null)
                 return;
 
