@@ -1,144 +1,135 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class DialogueManagerCutscene: MonoBehaviour
+public class DialogueManagerCutscene : MonoBehaviour
 {
 
-    public GameObject dBox;
+	public GameObject dBox;
 
-    private Text sText;
-    public Text dText;
-    private bool isFrozen = false;
+	private Text sText;
+	public Text dText;
+	private bool isFrozen = false;
 
-    public bool diaglogActive;
+	public bool diaglogActive;
 
-    public string[] dialogLines;
-    public int currentLine;
+	public string[] dialogLines;
+	public int currentLine;
 
-    private Rigidbody2D[] playerBody;
-    private Vector2[] linearBackups;
+	private Vector2[] linearBackups;
 
-    public GameObject activeNPC;
-    public GameObject content;
-    // Use this for initialization
-    void Start()
-    {
+	public GameObject activeNPC;
+	public GameObject content;
+	// Use this for initialization
+	void Start()
+	{
 
-        dText.enabled = false;
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+		dText.enabled = false;
 
-        playerBody = new Rigidbody2D[2];
-        linearBackups = new Vector2[2];
+		linearBackups = new Vector2[2];
 
-        playerBody[0] = players[0].GetComponent<Rigidbody2D>();
-    }
+	}
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (diaglogActive && Input.GetKeyDown(KeyCode.Space))
-        {
-            //dBox.SetActive(false);
-            //diaglogActive = false;
+	// Update is called once per frame
+	void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Space ) && activeNPC != null) {
 
-            currentLine++;
+			if (!diaglogActive)
+			{
+				DialogHolderCutscene dh = activeNPC.GetComponent<DialogHolderCutscene>();
+				dBox = dh.dBoxes[dh.boxIndex];
+				dialogLines = dBox.GetComponent<TextHolder>().getTextLines();
+				currentLine = 0;
+				showDialogue(this.gameObject.name);
+			}
+			else {
+				currentLine++;
+			}
+		}
 
-        }
-        if (dialogLines.Length > 0 && currentLine < dialogLines.Length)
-        {
-            dText.text = dialogLines[currentLine];
+		if (dialogLines.Length > 0 && currentLine < dialogLines.Length)
+		{
+			dText.text = dialogLines[currentLine];
 
-        }
+			if (diaglogActive && dBox.tag.Equals("NPCStatement"))
+			{
+				if(activeNPC != null){
+				}
 
-        if (currentLine >= dialogLines.Length)
-        {
-            closeDialogue();
-            //currentLine = 0;
-        }
+			}
+		}
+
+		if ((currentLine >= dialogLines.Length) && diaglogActive)
+		{
+			closeDialogue();
+			//currentLine = 0;
+		}
 
 
-    }
+	}
 
-    public void showBox(string source, string dialogue)
-    {
+	public void showDialogue(string source)
+	{
+		Debug.Log("Show dia");
+		if (!isFrozen)
+		{
+			isFrozen = true;
+			//freezePlayer();
+			PlayerUtility.FreezePlayers();
+		}
+		dText.enabled = true;
+		diaglogActive = true;
+		dBox.SetActive(true);
 
+		// enable button if any
+		Button[] btns = dBox.GetComponents<Button>();
+		for (int i = 0; i < btns.Length; i++)
+		{
+			btns[i].enabled = true;
+			btns[i].interactable = true;
+		}
 
-        diaglogActive = true;
-        dBox.SetActive(true);
-        //  sText.text = source;
-        dText.text = dialogue;
-        dText.enabled = true;
+		//  sText.text = source;
 
-    }
+	}
 
-    public void showDialogue(string source)
-    {
-        //PlayerUtility.FreezePlayers();
-        if (!isFrozen)
-        {
-            isFrozen = true;
-            //freezePlayer();
-            PlayerUtility.FreezePlayers();
-        }
-        dText.enabled = true;
-        diaglogActive = true;
-        dBox.SetActive(true);
+	public void closeDialogue()
+	{
+		Debug.Log("close dia");
+		dText.enabled = false;
+		diaglogActive = false;
+		dBox.SetActive(false);
+		//PlayerUtility.UnFreezePlayers();
+		if (isFrozen)
+		{
+			isFrozen = false;
+			// unfreezePlayer();
+			PlayerUtility.UnFreezePlayers();
+		}
+		// cleanUpDialogue();
+	}
 
-        // enable button if any
-        Button[] btns = dBox.GetComponents<Button>();
-        for (int i = 0; i < btns.Length; i++)
-        {
-            btns[i].enabled = true;
-            btns[i].interactable = true;
-        }
+	public void setActiveNPC(GameObject NPC)
+	{
+		activeNPC = NPC;
+		currentLine = 0;
+	}
 
-        //  sText.text = source;
+	public GameObject getActiveNPC() {
+		return activeNPC;
+	}
 
-    }
+	private void resetCurrentLine() {
+		DialogHolderCutscene dh = activeNPC.GetComponent<DialogHolderCutscene>();
 
-    public void closeDialogue()
-    {
-        dText.enabled = false;
-        diaglogActive = false;
-        dBox.SetActive(false);
-        //PlayerUtility.UnFreezePlayers();
-        if (isFrozen)
-        {
-            isFrozen = false;
-           // unfreezePlayer();
-            PlayerUtility.UnFreezePlayers();
-        }
-
-    }
-
-    private void freezePlayer()
-    {
-        linearBackups[0] = playerBody[0].velocity;
-
-        linearBackups[1] = playerBody[1].velocity;
-
-        playerBody[0].velocity = Vector2.zero;
-        playerBody[1].velocity = Vector2.zero;
-
-        playerBody[0].constraints = RigidbodyConstraints2D.FreezeAll;
-        playerBody[1].constraints = RigidbodyConstraints2D.FreezeAll;
-    }
-
-    private void unfreezePlayer()
-    {
-        playerBody[0].constraints = RigidbodyConstraints2D.None;
-        playerBody[0].velocity = linearBackups[0];
-
-        playerBody[1].constraints = RigidbodyConstraints2D.None;
-        playerBody[1].velocity = linearBackups[1];
-    }
-
-    public void setActiveNPC(GameObject NPC)
-    {
-        activeNPC = NPC;
-        currentLine = 0;
-    }
-
+		if (!dh.dBoxes.Contains(dBox))
+		{
+			dBox = dh.dBoxes[dh.dBoxes.Count - 1];
+			dialogLines = dh.dBoxes[dh.dBoxes.Count - 1].GetComponent<TextHolder>().getTextLines();
+			currentLine = 0;
+		}
+	}
 
 }

@@ -65,6 +65,9 @@ public class DialogHolder : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+
+
+
             dMan.setActiveNPC(this.gameObject);
             if (autoDialog)
             {
@@ -102,6 +105,8 @@ public class DialogHolder : MonoBehaviour
         }
 
     }
+
+
 
 
 }
