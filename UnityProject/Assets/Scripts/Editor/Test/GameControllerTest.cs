@@ -19,7 +19,6 @@ public class GameControllerTest
         // add some children objects to persist
         persistedObj = new GameObject();
         persistedObj.name = "persisted-object";
-        persistedObj.AddComponent<Transform>();
         persistedObj.transform.parent = persistence.transform;
         persistedObj.transform.position = new Vector3(0, 0, 0);
     }
