@@ -8,11 +8,13 @@ public class TextInput : MonoBehaviour {
     public Text FinalScoreText;
     public Button SubmitButton;
 
+    public Text levelComplete;
+
     ScoreManager sm;
 
     //persisting fields
-    public string TeamName;
-    public string HighScore;
+    private string TeamName;
+    private string HighScore;
     private int levelType;
 
     void Start()
@@ -43,12 +45,14 @@ public class TextInput : MonoBehaviour {
             levelType = 1;
         }
 
-        Debug.Log("Team: " + TeamName);
-        Debug.Log("Score: " + HighScore);
-        Debug.Log("level " + levelType);
+        //Debug.Log("Team: " + TeamName);
+        //Debug.Log("Score: " + HighScore);
+        //Debug.Log("level " + levelType);
 
         sm.SetScore(TeamName, levelType, HighScore);
 
+        //for the user to know that their score has been stored in the board
+        levelComplete.text = TeamName + "'s Score is " + HighScore;
 
     }
 
