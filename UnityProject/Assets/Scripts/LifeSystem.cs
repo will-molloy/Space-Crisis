@@ -9,8 +9,8 @@ using UnityEngine.UI;
 public class LifeSystem : MonoBehaviour {
 
 
-	int startHearts = 3;
-	public static int currentHearts = 3;
+	int startHearts = 7;
+	public static int currentHearts = 7;
 
 	GameObject[] players;
 	GameObject[] spawnPoints;
@@ -109,7 +109,7 @@ public class LifeSystem : MonoBehaviour {
 	 * Resets the persisted current hearts ammount
 	 */
 	public void ResetHearts(){
-		currentHearts = 3;
+		currentHearts = 7;
 	}
 		
 	/**
