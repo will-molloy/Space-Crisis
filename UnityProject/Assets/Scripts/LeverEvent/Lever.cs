@@ -10,9 +10,9 @@ public class Lever : MonoBehaviour
     public AudioClip pulledFX;
     public int timeInFrames;
     public List<GameObject> thingsToControl = new List<GameObject>();
-    LeverState state = LeverState.RIGHT;
+    private LeverState state = LeverState.RIGHT;
 
-    enum LeverState
+    private enum LeverState
     {
         LEFT, RIGHT
     }
@@ -22,7 +22,7 @@ public class Lever : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Platformer2DUserControl p1 = other.gameObject.GetComponent<Platformer2DUserControl>();
+            var p1 = other.gameObject.GetComponent<Platformer2DUserControl>();
             if (p1 != null)
             {
                 p1.lever = this;
@@ -70,8 +70,7 @@ public class Lever : MonoBehaviour
     {
         if (isRunning) return;
 
-        bool finalPosition = GameController.ActivateLever(this.name);
-        Debug.Log(finalPosition);
+        GameController.ActivateLever(this.name);
         isRunning = true;
 
         var ani = GetComponent<Animator>();
