@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class EndCutscene : MonoBehaviour {
 
@@ -9,11 +10,7 @@ public class EndCutscene : MonoBehaviour {
 	void Update () {
 
 		if (time <= 0) {
-			#if UNITY_EDITOR
-			UnityEditor.EditorApplication.isPlaying = false;
-			#else
-			Application.Quit();
-			#endif
+			SceneManager.LoadScene("ExitScene2");
 		} else if(time > 0){
 			time -= Time.deltaTime;
 		}

@@ -79,6 +79,8 @@ public static class GameController
         WelcomeScreen,
         [Level(Level.None), FileName("ExitScene")]
         ExitScene,
+		[Level(Level.None), FileName("ExitScene2")]
+		ExitScene2,
         [Level(Level.MiniGame), FileName("miniGame1exp")]
         miniGame1exp,
         // Nullable
