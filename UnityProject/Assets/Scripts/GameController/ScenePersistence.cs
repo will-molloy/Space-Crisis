@@ -20,6 +20,7 @@ public class ScenePersistence : MonoBehaviour
     {
         if (thisScene == GameController.PlayableScene.None)
             throw new System.Exception("Please set ThisScene in inventory panel");
+        thisScene.setActiveScene();
         // Determine if scene should be restored or reset
         if (thisScene.GetShouldBeReset())
             ResetScene();

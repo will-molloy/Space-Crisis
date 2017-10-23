@@ -6,11 +6,25 @@ using mattmc3.Common.Collections.Generic;
 
 /// <summary>
 /// Contains all static data for the game scenes.
+/// All a massive hack.
 /// </summary>
 /// 
 /// <author>Will Molloy</author>
 public static class GameController
 {
+    // For picking up items
+    private static PlayableScene ActiveScene;
+
+    public static void setActiveScene(this PlayableScene scene)
+    {
+        ActiveScene = scene;
+    }
+
+    public static PlayableScene getActiveScene()
+    {
+        return ActiveScene;
+    }
+
     // Scene.name :: Object.name :: Position, For persisting given scene objects
     private static Dictionary<PlayableScene, Dictionary<string, Vector3>> SavedScenePositions = new Dictionary<PlayableScene, Dictionary<string, Vector3>>();
 
@@ -26,6 +40,7 @@ public static class GameController
     // For maintaining levers 
     private static Dictionary<string, bool> LeverInFinalPos = new Dictionary<string, bool>();
     private static Dictionary<string, Vector3> LeverPlateDirection = new Dictionary<string, Vector3>();
+
 
     static GameController()
     {
