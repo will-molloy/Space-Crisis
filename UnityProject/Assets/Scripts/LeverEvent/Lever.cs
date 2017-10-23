@@ -17,7 +17,6 @@ public class Lever : MonoBehaviour
         LEFT, RIGHT
     }
 
-
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
