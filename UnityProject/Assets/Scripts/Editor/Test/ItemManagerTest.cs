@@ -39,7 +39,7 @@ public class ItemManagerTest
         itemSpawnManager.Start();
 
         // Retrive the items 
-        OrderedDictionary<int, bool> itemsInScene = GameController.GetItemsInScene(testScene);
+        OrderedDictionary<int, bool> itemsInScene = testScene.GetItemsInScene();
 
         Assert.AreEqual(4, itemsInScene.Count);
     }
