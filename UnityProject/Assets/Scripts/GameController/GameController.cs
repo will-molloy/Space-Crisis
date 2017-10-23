@@ -26,6 +26,7 @@ public static class GameController
     // For maintaining levers 
     private static Dictionary<string, bool> LeverInFinalPos = new Dictionary<string, bool>();
     private static Dictionary<string, Vector3> LeverPlateDirection = new Dictionary<string, Vector3>();
+    private static Dictionary<PlayableScene, HashSet<string>> LeversInScene = new Dictionary<PlayableScene, HashSet<string>>();
 
     static GameController()
     {
@@ -35,6 +36,7 @@ public static class GameController
             InitialScenePositions[playableScene] = new Dictionary<string, Vector3>();
             SceneShouldBeReset[playableScene] = false;
             GeneratedItemsForScene[playableScene] = new OrderedDictionary<int, bool>();
+            LeversInScene[playableScene] = new HashSet<string>();
         }
     }
 
@@ -163,6 +165,17 @@ public static class GameController
     public static void ClearPersistedDataForScene(this PlayableScene sceneName)
     {
         SavedScenePositions[sceneName] = new Dictionary<string, Vector3>();
+        foreach(string leverName in sceneName.GetLevers())
+        {
+            if (LeverInFinalPos[leverName])
+            LeverInFinalPos[leverName] = false;
+
+        }
+        var keys = LeverPlateDirection.Keys;
+        foreach (var x in keys)
+        {
+            LeverPlateDirection[x] *= -1;
+        }
     }
 
     /// <summary>
@@ -290,6 +303,17 @@ public static class GameController
             LeverPlateDirection[plate.name] = vector;
     }
 
+    // For resetting levers ===
+    public static void AddLever(this PlayableScene scene, Lever lever)
+    {
+        LeversInScene[scene].Add(lever.name);
+    }
+
+    public static HashSet<string> GetLevers(this PlayableScene scene)
+    {
+        return LeversInScene[scene];
+    }
+    // ====
     #endregion
 }
 
