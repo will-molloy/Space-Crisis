@@ -40,14 +40,21 @@ public class DialogueManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (diaglogActive && Input.GetKeyDown(KeyCode.Space))
-        {
-            //dBox.SetActive(false);
-            //diaglogActive = false;
-
-            currentLine++;
-
+        if (Input.GetKeyDown(KeyCode.Space ) && activeNPC != null) {
+           
+            if (!diaglogActive)
+            {
+                DialogHolder dh = activeNPC.GetComponent<DialogHolder>();
+                dBox = dh.dBoxes[dh.boxIndex];
+                dialogLines = dBox.GetComponent<TextHolder>().getTextLines();
+                currentLine = 0;
+                showDialogue(this.gameObject.name);
+            }
+            else {
+                currentLine++;
+            }
         }
+        
         if (dialogLines.Length > 0 && currentLine < dialogLines.Length)
         {
             dText.text = dialogLines[currentLine];
@@ -58,7 +65,7 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
-        if (currentLine >= dialogLines.Length)
+        if ((currentLine >= dialogLines.Length) && diaglogActive)
         {
             closeDialogue();
             //currentLine = 0;
@@ -67,21 +74,9 @@ public class DialogueManager : MonoBehaviour
 
     }
 
-    public void showBox(string source, string dialogue)
-    {
-
-
-        diaglogActive = true;
-        dBox.SetActive(true);
-        //  sText.text = source;
-        dText.text = dialogue;
-        dText.enabled = true;
-
-    }
-
     public void showDialogue(string source)
     {
-        //PlayerUtility.FreezePlayers();
+        Debug.Log("Show dia");
         if (!isFrozen)
         {
             isFrozen = true;
@@ -106,6 +101,7 @@ public class DialogueManager : MonoBehaviour
 
     public void closeDialogue()
     {
+        Debug.Log("close dia");
         dText.enabled = false;
         diaglogActive = false;
         dBox.SetActive(false);
@@ -116,7 +112,7 @@ public class DialogueManager : MonoBehaviour
            // unfreezePlayer();
             PlayerUtility.UnFreezePlayers();
         }
-
+        // cleanUpDialogue();
     }
 
     private void freezePlayer()
@@ -147,5 +143,19 @@ public class DialogueManager : MonoBehaviour
         currentLine = 0;
     }
 
+    public GameObject getActiveNPC() {
+        return activeNPC;
+    }
+
+    private void resetCurrentLine() {
+        DialogHolder dh = activeNPC.GetComponent<DialogHolder>();
+
+        if (!dh.dBoxes.Contains(dBox))
+        {
+            dBox = dh.dBoxes[dh.dBoxes.Count - 1];
+            dialogLines = dh.dBoxes[dh.dBoxes.Count - 1].GetComponent<TextHolder>().getTextLines();
+            currentLine = 0;
+        }
+    }
 
 }
