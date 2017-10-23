@@ -7,6 +7,7 @@ public class LeverEventTest
 {
     private GameObject leverObj = new GameObject();
     private GameObject plateObj = new GameObject();
+    // Only for init, components change in lever script
     private Lever lever;
     private PlateScript plate;
 
@@ -14,14 +15,19 @@ public class LeverEventTest
     public void Init()
     {
         lever = leverObj.AddComponent<Lever>();
-        leverObj.AddComponent<Transform>();
         plate = plateObj.AddComponent<PlateScript>();
-        plateObj.AddComponent<Transform>();
 
         leverObj.GetComponent<Lever>().thingsToControl = new List<GameObject>
         {
             plateObj,
         };
+    }
+
+    private void ActivateLever()
+    {
+        leverObj.GetComponent<Lever>().activate();
+        plateObj.GetComponent<PlateScript>().Update();
+        leverObj.GetComponent<Lever>().Update();
     }
 
     [Test]
@@ -32,10 +38,8 @@ public class LeverEventTest
         lever.timeInFrames = 1;
         plate.translationDirection = Vector3.down;
         plateObj.transform.position = new Vector3(0, 0, 0);
-        
-        // activate lever
-        leverObj.GetComponent<Lever>().activate();
-        plateObj.GetComponent<PlateScript>().Update();
+
+        ActivateLever();
 
         // ensure plate moved down 10
         Assert.AreEqual(new Vector3(0,-10,0), plateObj.transform.position);
@@ -50,14 +54,8 @@ public class LeverEventTest
         plate.translationDirection = Vector3.down;
         plateObj.transform.position = new Vector3(0, 0, 0);
 
-        // activate lever
-        leverObj.GetComponent<Lever>().activate();
-        plateObj.GetComponent<PlateScript>().Update();
-
-        Assert.AreEqual(new Vector3(0, -10, 0), plateObj.transform.position);
-
-        leverObj.GetComponent<Lever>().activate();
-        plateObj.GetComponent<PlateScript>().Update();
+        ActivateLever();
+        ActivateLever();
 
         // ensure plate moved back to original position
         Assert.AreEqual(new Vector3(0, 0, 0), plateObj.transform.position);
