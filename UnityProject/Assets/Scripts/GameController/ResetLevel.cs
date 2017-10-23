@@ -14,14 +14,14 @@ public class ResetLevel : MonoBehaviour {
         GameController.PlayableScene? firstSceneInLevel = null;
 
         // Set all scenes in the level to reset when their scene persistance component awakes
-        foreach (GameController.PlayableScene scene in ThisLevel.GetScenesForLevel())
+        foreach (GameController.PlayableScene scene in ThisLevel.GetScenes())
         {
             if (!firstSceneInLevel.HasValue)
                 firstSceneInLevel = scene;
             Debug.Log("Resseting: " + ThisLevel.ToString() + " ," + scene.ToString());
             GameController.SetShouldBeReset(scene, true);
         }
-        GameController.ClearScenesForLevel(ThisLevel);
+        ThisLevel.ClearScenesIncludingItems();
         // Load the first scene in the level
         if (firstSceneInLevel.HasValue)
         {

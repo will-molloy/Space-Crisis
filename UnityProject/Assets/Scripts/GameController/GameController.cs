@@ -127,7 +127,7 @@ public static class GameController
     /// <summary>
     /// Gets all the scenes assigned to the given level
     /// </summary>
-    public static List<PlayableScene> GetScenesForLevel(this Level levelToRetrieve)
+    public static List<PlayableScene> GetScenes(this Level levelToRetrieve)
     {
         PlayableScene[] scenes = (PlayableScene[])Enum.GetValues(typeof(PlayableScene));
         return scenes.Where(scene => scene.GetAttribute<LevelAttribute>().level.Equals(levelToRetrieve)).ToList();
@@ -139,9 +139,9 @@ public static class GameController
     /// 
     /// Item Spawns are reset.
     /// </summary>
-    public static void ClearScenesForLevel(Level level)
+    public static void ClearScenesIncludingItems(this Level level)
     {
-        level.GetScenesForLevel().ForEach(scene =>
+        level.GetScenes().ForEach(scene =>
         {
             ClearPersistedDataForScene(scene);
             GeneratedItemsForScene[scene] = new OrderedDictionary<int, bool>();
