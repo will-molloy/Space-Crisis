@@ -88,6 +88,8 @@ public class LeverEventTest
 
         // Reload the scene
         InitObjs();
+        leverObj.name = "lever-" + (leverId - 1);
+        plateObj.name = "plate-" + (leverId - 1);
 
         // ensure plate is still in moved position
         plateObj.transform.position = testScene.GetSavedObjectPositons()[plateObj.name];
