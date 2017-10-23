@@ -10,6 +10,13 @@ public class Lever : MonoBehaviour
     public AudioClip pulledFX;
     public int timeInFrames;
     public List<GameObject> thingsToControl = new List<GameObject>();
+    LeverState state = LeverState.RIGHT;
+
+    enum LeverState
+    {
+        LEFT, RIGHT
+    }
+
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -67,7 +74,17 @@ public class Lever : MonoBehaviour
         Debug.Log(finalPosition);
         isRunning = true;
 
-        Flip();
+        var ani = GetComponent<Animator>();
+        if(state == LeverState.LEFT)
+        {
+            ani.SetTrigger("triggerRight");
+            state = LeverState.RIGHT;
+        }
+        else
+        {
+            ani.SetTrigger("triggerLeft");
+            state = LeverState.LEFT;
+        }
         remainingFrames = timeInFrames;
 
         if (pulledFX != null)
