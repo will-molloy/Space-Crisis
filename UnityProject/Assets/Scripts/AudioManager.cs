@@ -16,22 +16,21 @@ public static class AudioManager{
 	{
 		jumpClips = new AudioClip[2];
 		pressureFX = new AudioClip[2];
-		#if UNITY_EDITOR
-		leverFX = (AudioClip)AssetDatabase.LoadAssetAtPath("Assets/Audio/CasualGameSounds/DM-CGS-39.wav", typeof(AudioClip));
+		leverFX = Resources.Load<AudioClip>("DM-CGS-39");
+
 		if(leverFX == null){
 			Debug.LogError ("No lever audio");
 		}
 
-		pickUpFX = (AudioClip)AssetDatabase.LoadAssetAtPath("Assets/Audio/CasualGameSounds/DM-CGS-22.wav", typeof(AudioClip));
+		pickUpFX = Resources.Load<AudioClip>("DM-CGS-22");
 
-		jumpClips[0] = (AudioClip)AssetDatabase.LoadAssetAtPath("Assets/Audio/Player/Jumps/Jump1.wav", typeof(AudioClip));
-		jumpClips[1] = (AudioClip)AssetDatabase.LoadAssetAtPath("Assets/Audio/Player/Jumps/Jump2.wav", typeof(AudioClip));
+		jumpClips[0] = Resources.Load<AudioClip>("Jump1");
+		jumpClips[1] = Resources.Load<AudioClip>("Jump2");
 
-		damagedAudioClips = (AudioClip)AssetDatabase.LoadAssetAtPath("Assets/Audio/Player/Ouch/Damaged.wav", typeof(AudioClip));
+		damagedAudioClips = Resources.Load<AudioClip>("Damaged");
 
-		pressureFX[0] = (AudioClip)AssetDatabase.LoadAssetAtPath("Assets/Audio/CasualGameSounds/DM-CGS-26.wav", typeof(AudioClip));
-		pressureFX[1] = (AudioClip)AssetDatabase.LoadAssetAtPath("Assets/Audio/CasualGameSounds/DM-CGS-27.wav", typeof(AudioClip));
-		#endif
+		pressureFX[0] = Resources.Load<AudioClip>("DM-CGS-26");
+		pressureFX[1] = Resources.Load<AudioClip>("DM-CGS-27");
 	}
 
 	public static void loadAudio()
