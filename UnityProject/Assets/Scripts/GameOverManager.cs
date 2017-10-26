@@ -18,6 +18,11 @@ public class GameOverManager : MonoBehaviour {
 		timer = GameObject.Find("TimerText").GetComponent<Timer>();
 	}
 
+	/**
+	 * When the life of player reaches 0, indicated by boolean in LifeSystem,
+	 * It sets the trigger to activate new animation which brings up the game
+	 * over screen. It also stop and resets the timer.
+	 */
 	void Update () {
 		if (life.isDead) {
 			anim.SetTrigger ("GameOver");

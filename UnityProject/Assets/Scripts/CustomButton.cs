@@ -7,14 +7,13 @@ public class CustomButton : MonoBehaviour {
 	public Button button;
 	Timer timer;
 
-	// Use this for initialization
 	void Start () {
 		Button btn = GameObject.Find("Resume").GetComponent<Button> (); 
 		btn.onClick.AddListener (TaskOnClick);
 		timer = GameObject.Find("TimerText").GetComponent<Timer>();
 	}
 	
-	// Update is called once per frame
+	//Stops the button is clicked the timer starts to run again.
 	void TaskOnClick () {
 		timer.Resume ();
 	}
