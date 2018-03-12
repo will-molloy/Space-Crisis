@@ -16,7 +16,9 @@ public class levelComplete : MonoBehaviour
         time = GameObject.FindGameObjectWithTag("TimerTag").GetComponent<Text>();
     }
 
-    // Update is called once per frame
+    // Update is called once per frame, it pauses the timer and gets the score/time
+	// from the timer script in string form.
+	// After getting the score, the timer is reseted. 
     void Update()
     {
         timer.Pause();
