@@ -1,4 +1,4 @@
-## Space-Crisis [![Build Status](https://travis-ci.com/wilmol/SE306_Project2.svg?token=Fxpxpqr26vp9edeBzyVz&branch=master)](https://travis-ci.com/wilmol/SE306_Project2)
+## Space-Crisis [![Build Status](https://travis-ci.com/wilmol/Space-Crisis.svg?branch=master)](https://travis-ci.com/wilmol/Space-Crisis)
 Serious game developed in Unity. SOFTENG306 - University of Auckland
 
 <p align="center"> <img src = UnityProject/Assets/Welcome-Screen/main-screen.png/></p>
