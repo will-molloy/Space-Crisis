@@ -1,6 +1,6 @@
 ### Space-Crisis 
 
-## Play now: https://wilmol.github.io/Space-Crisis/
+## Play now: https://will-molloy.github.io/Space-Crisis/
 
 Serious game developed in Unity. SOFTENG306 - University of Auckland
 
